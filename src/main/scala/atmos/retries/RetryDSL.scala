@@ -21,6 +21,7 @@ import java.util.logging.Logger
 import scala.concurrent.{ ExecutionContext, Future }
 import scala.concurrent.duration._
 import scala.language.implicitConversions
+import org.slf4j.{ Logger => Slf4jLogger }
 
 /**
  * Defines a domain specific language for constructing and using retry policies.
@@ -107,13 +108,18 @@ import scala.language.implicitConversions
  * Event monitors are notified when retry attempts fail and are configured on a retry policy using `monitorWith`. See
  * [[atmos.retries.EventMonitor]] for more information.
  *
- * This DSL provides support for monitoring retry attempts with print streams and loggers (or any custom monitor):
+ * This DSL provides support for monitoring retry attempts with print streams, standard Java loggers and SLF4J loggers
+ * (or any custom monitor):
  * {{{
  * // Write information about failed attempts to stderr.
  * implicit val retryPolicy = retryForever monitorWith System.err
  *
  * // Write information about failed attempts to the specified instance of java.util.logging.Logger.
  * implicit val retryPolicy = retryForever monitorWith Logger.getLogger("MyLoggerName")
+ *
+ * // Write information about failed attempts to the specified instance of org.slf4j.Logger.
+ * import Slf4jSupport._
+ * implicit val retryPolicy = retryForever monitorWith LoggerFactory.getLogger("MyLoggerName")
  * }}}
  *
  * ==Error Classification==
@@ -302,6 +308,21 @@ object RetryDSL {
    */
   implicit def loggerToEventMonitor(logger: Logger): EventMonitor =
     EventMonitor.LogEvents(logger)
+
+  /**
+   * Separate namespace for optional SLF4J support.
+   */
+  object Slf4jSupport {
+
+    /**
+     * Creates a new event monitor that submits events to a SLF4J logger.
+     *
+     * @param logger The SLF4J logger to supply with event messages.
+     */
+    implicit def slf4jLoggerToEventMonitor(logger: Slf4jLogger): EventMonitor =
+      EventMonitor.LogEventsToSlf4j(logger)
+
+  }
 
   //
   // Classification factories.

@@ -22,6 +22,7 @@ package atmos.retries
 import java.io.PrintStream
 import java.util.logging.{ Level, Logger }
 import scala.concurrent.duration._
+import org.slf4j.{ Logger => Slf4jLogger }
 
 /**
  * A monitor that is notified of events that occur while a retry operation is in progress.
@@ -154,7 +155,7 @@ object EventMonitor {
   }
 
   /**
-   * Factory for event monitors that submits events to a logger.
+   * Factory for event monitors that submit events to a logger.
    */
   object LogEvents {
 
@@ -166,6 +167,112 @@ object EventMonitor {
 
     /** The default level to log aborted events at. */
     val defaultAbortedLevel = Level.SEVERE
+
+  }
+
+  /**
+   * An event monitor that formats and logs events using SLF4J.
+   */
+  case class LogEventsToSlf4j(
+    logger: Slf4jLogger,
+    retryingLevel: LogEventsToSlf4j.Slf4jLevel = LogEventsToSlf4j.defaultRetryingLevel,
+    interruptedLevel: LogEventsToSlf4j.Slf4jLevel = LogEventsToSlf4j.defaultInterruptedLevel,
+    abortedLevel: LogEventsToSlf4j.Slf4jLevel = LogEventsToSlf4j.defaultAbortedLevel)
+    extends EventMonitor with FormatEvents {
+
+    import LogEventsToSlf4j._
+
+    /** @inheritdoc */
+    override def retrying //
+    (name: Option[String], thrown: Throwable, attempts: Int, backoff: FiniteDuration, silent: Boolean) =
+      if (!silent && isLoggable(retryingLevel))
+        log(retryingLevel, formatRetrying(name, thrown, attempts, backoff), thrown)
+
+    /** @inheritdoc */
+    override def interrupted(name: Option[String], thrown: Throwable, attempts: Int) =
+      if (isLoggable(interruptedLevel))
+        log(interruptedLevel, formatInterrupted(name, thrown, attempts), thrown)
+
+    /** @inheritdoc */
+    override def aborted(name: Option[String], thrown: Throwable, attempts: Int) =
+      if (isLoggable(abortedLevel))
+        log(abortedLevel, formatAborted(name, thrown, attempts), thrown)
+
+    /**
+     * Returns true if the specified SLF4J level is enabled.
+     *
+     * @param level The SLF4J level to test.
+     */
+    private def isLoggable(level: Slf4jLevel) = level match {
+      case Slf4jLevel.Error => logger.isErrorEnabled()
+      case Slf4jLevel.Warn => logger.isWarnEnabled()
+      case Slf4jLevel.Info => logger.isInfoEnabled()
+      case Slf4jLevel.Debug => logger.isDebugEnabled()
+      case Slf4jLevel.Trace => logger.isTraceEnabled()
+      case Slf4jLevel.Off => false
+    }
+
+    /**
+     * Submits a log entry at the specified level.
+     *
+     * @param level The SLF4J level to log at.
+     * @param message The message to log.
+     * @param thrown The exception to log.
+     */
+    private def log(level: Slf4jLevel, message: String, thrown: Throwable) = level match {
+      case Slf4jLevel.Error => logger.error(message, thrown)
+      case Slf4jLevel.Warn => logger.warn(message, thrown)
+      case Slf4jLevel.Info => logger.info(message, thrown)
+      case Slf4jLevel.Debug => logger.debug(message, thrown)
+      case Slf4jLevel.Trace => logger.trace(message, thrown)
+      case Slf4jLevel.Off =>
+    }
+
+  }
+
+  /**
+   * Factory for event monitors that submit events to a SLF4J logger.
+   */
+  object LogEventsToSlf4j {
+
+    /** The default level to log retrying events at. */
+    val defaultRetryingLevel = Slf4jLevel.Info
+
+    /** The default level to log interrupted events at. */
+    val defaultInterruptedLevel = Slf4jLevel.Warn
+
+    /** The default level to log aborted events at. */
+    val defaultAbortedLevel = Slf4jLevel.Error
+
+    /**
+     * Base class of the available SLF4J logging levels.
+     */
+    sealed trait Slf4jLevel
+
+    /**
+     * Declarations of the available SLF4J logging levels.
+     */
+    object Slf4jLevel {
+      
+      /** The SLF4J error logging level. */
+      case object Error extends Slf4jLevel
+      
+      /** The SLF4J warn logging level. */
+      case object Warn extends Slf4jLevel
+      
+      /** The SLF4J info logging level. */
+      case object Info extends Slf4jLevel
+      
+      /** The SLF4J debug logging level. */
+      case object Debug extends Slf4jLevel
+      
+      /** The SLF4J trace logging level. */
+      case object Trace extends Slf4jLevel
+      
+      /** The SLF4J logging level that disables logging. */
+      case object Off extends Slf4jLevel
+      
+    }
 
   }
 
