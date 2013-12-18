@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>EventMonitor - atmos.retries.EventMonitor</title>
-          <meta name="description" content="EventMonitor - atmos.retries.EventMonitor" />
-          <meta name="keywords" content="EventMonitor atmos.retries.EventMonitor" />
+          <title>Slf4jLevel - atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel</title>
+          <meta name="description" content="Slf4jLevel - atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel" />
+          <meta name="keywords" content="Slf4jLevel atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -12,7 +12,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../index.html';
-            var hash = 'atmos.retries.EventMonitor';
+            var hash = 'atmos.retries.EventMonitor$$LogEventsToSlf4j$$Slf4jLevel$';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -22,30 +22,27 @@
    	  </script>
     
         </head>
-        <body class="type">
+        <body class="value">
       <div id="definition">
-        <a href="EventMonitor$.html" title="Go to companion"><img src="../../lib/trait_to_object_big.png" /></a>
-        <p id="owner"><a href="../package.html" class="extype" name="atmos">atmos</a>.<a href="package.html" class="extype" name="atmos.retries">retries</a></p>
-        <h1><a href="EventMonitor$.html" title="Go to companion">EventMonitor</a></h1>
+        <a href="EventMonitor$$LogEventsToSlf4j$$Slf4jLevel.html" title="Go to companion"><img src="../../lib/object_to_trait_big.png" /></a>
+        <p id="owner"><a href="../package.html" class="extype" name="atmos">atmos</a>.<a href="package.html" class="extype" name="atmos.retries">retries</a>.<a href="EventMonitor$.html" class="extype" name="atmos.retries.EventMonitor">EventMonitor</a>.<a href="EventMonitor$$LogEventsToSlf4j$.html" class="extype" name="atmos.retries.EventMonitor.LogEventsToSlf4j">LogEventsToSlf4j</a></p>
+        <h1><a href="EventMonitor$$LogEventsToSlf4j$$Slf4jLevel.html" title="Go to companion">Slf4jLevel</a></h1>
       </div>
 
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">trait</span>
+        <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">EventMonitor</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <span class="name">Slf4jLevel</span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A monitor that is notified of events that occur while a retry operation is in progress.
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Declarations of the available SLF4J logging levels.
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
-        </div><div class="toggleContainer block">
-          <span class="toggle">Known Subclasses</span>
-          <div class="subClasses hiddenContent"><a href="EventMonitor$$IgnoreEvents$.html" class="extype" name="atmos.retries.EventMonitor.IgnoreEvents">IgnoreEvents</a>, <a href="EventMonitor$$LogEvents.html" class="extype" name="atmos.retries.EventMonitor.LogEvents">LogEvents</a>, <a href="EventMonitor$$LogEventsToSlf4j.html" class="extype" name="atmos.retries.EventMonitor.LogEventsToSlf4j">LogEventsToSlf4j</a>, <a href="EventMonitor$$PrintEvents.html" class="extype" name="atmos.retries.EventMonitor.PrintEvents">PrintEvents</a></div>
         </div></div>
         
 
@@ -63,7 +60,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="atmos.retries.EventMonitor"><span>EventMonitor</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel"><span>Slf4jLevel</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -85,58 +82,10 @@
 
         
 
-        <div id="values" class="values members">
-              <h3>Abstract Value Members</h3>
-              <ol><li name="atmos.retries.EventMonitor#aborted" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="aborted(name:Option[String],thrown:Throwable,attempts:Int):Unit"></a>
-      <a id="aborted(Option[String],Throwable,Int):Unit"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">aborted</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="thrown">thrown: <span class="extype" name="scala.Throwable">Throwable</span></span>, <span name="attempts">attempts: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Called when an operation has failed too many times and will not be retried.</p><div class="fullcomment"><div class="comment cmt"><p>Called when an operation has failed too many times and will not be retried.
-</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation that failed if one was provided.</p></dd><dt class="param">thrown</dt><dd class="cmt"><p>The exception that was thrown.</p></dd><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that were made.
-</p></dd></dl></div>
-    </li><li name="atmos.retries.EventMonitor#interrupted" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="interrupted(name:Option[String],thrown:Throwable,attempts:Int):Unit"></a>
-      <a id="interrupted(Option[String],Throwable,Int):Unit"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">interrupted</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="thrown">thrown: <span class="extype" name="scala.Throwable">Throwable</span></span>, <span name="attempts">attempts: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Called when an operation has failed with a fatal error and will not be retried.</p><div class="fullcomment"><div class="comment cmt"><p>Called when an operation has failed with a fatal error and will not be retried.
-</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation that failed if one was provided.</p></dd><dt class="param">thrown</dt><dd class="cmt"><p>The exception that was thrown.</p></dd><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that were made.
-</p></dd></dl></div>
-    </li><li name="atmos.retries.EventMonitor#retrying" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="retrying(name:Option[String],thrown:Throwable,attempts:Int,backoff:scala.concurrent.duration.FiniteDuration,silent:Boolean):Unit"></a>
-      <a id="retrying(Option[String],Throwable,Int,FiniteDuration,Boolean):Unit"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">retrying</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="thrown">thrown: <span class="extype" name="scala.Throwable">Throwable</span></span>, <span name="attempts">attempts: <span class="extype" name="scala.Int">Int</span></span>, <span name="backoff">backoff: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>, <span name="silent">silent: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Called when an operation has failed with a non-fatal error and will be retried.</p><div class="fullcomment"><div class="comment cmt"><p>Called when an operation has failed with a non-fatal error and will be retried.
-</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation that failed if one was provided.</p></dd><dt class="param">thrown</dt><dd class="cmt"><p>The exception that was thrown.</p></dd><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that have been made so far.</p></dd><dt class="param">backoff</dt><dd class="cmt"><p>The amount of time that will pass before another attempt is made.</p></dd><dt class="param">silent</dt><dd class="cmt"><p>True if the exception was classified as silent.
-</p></dd></dl></div>
-    </li></ol>
-            </div>
+        
 
         <div id="values" class="values members">
-              <h3>Concrete Value Members</h3>
+              <h3>Value Members</h3>
               <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="!=(x$1:AnyRef):Boolean"></a>
       <a id="!=(AnyRef):Boolean"></a>
@@ -202,6 +151,84 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel.Debug" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Debug"></a>
+      <a id="Debug:Debug"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="EventMonitor$$LogEventsToSlf4j$$Slf4jLevel$$Debug$.html"><span class="name">Debug</span></a><span class="result"> extends <a href="EventMonitor$$LogEventsToSlf4j$$Slf4jLevel.html" class="extype" name="atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel">Slf4jLevel</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The SLF4J debug logging level.</p>
+    </li><li name="atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel.Error" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Error"></a>
+      <a id="Error:Error"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="EventMonitor$$LogEventsToSlf4j$$Slf4jLevel$$Error$.html"><span class="name">Error</span></a><span class="result"> extends <a href="EventMonitor$$LogEventsToSlf4j$$Slf4jLevel.html" class="extype" name="atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel">Slf4jLevel</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The SLF4J error logging level.</p>
+    </li><li name="atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel.Info" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Info"></a>
+      <a id="Info:Info"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="EventMonitor$$LogEventsToSlf4j$$Slf4jLevel$$Info$.html"><span class="name">Info</span></a><span class="result"> extends <a href="EventMonitor$$LogEventsToSlf4j$$Slf4jLevel.html" class="extype" name="atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel">Slf4jLevel</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The SLF4J info logging level.</p>
+    </li><li name="atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel.Off" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Off"></a>
+      <a id="Off:Off"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="EventMonitor$$LogEventsToSlf4j$$Slf4jLevel$$Off$.html"><span class="name">Off</span></a><span class="result"> extends <a href="EventMonitor$$LogEventsToSlf4j$$Slf4jLevel.html" class="extype" name="atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel">Slf4jLevel</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The SLF4J logging level that disables logging.</p>
+    </li><li name="atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel.Trace" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Trace"></a>
+      <a id="Trace:Trace"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="EventMonitor$$LogEventsToSlf4j$$Slf4jLevel$$Trace$.html"><span class="name">Trace</span></a><span class="result"> extends <a href="EventMonitor$$LogEventsToSlf4j$$Slf4jLevel.html" class="extype" name="atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel">Slf4jLevel</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The SLF4J trace logging level.</p>
+    </li><li name="atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel.Warn" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Warn"></a>
+      <a id="Warn:Warn"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="EventMonitor$$LogEventsToSlf4j$$Slf4jLevel$$Warn$.html"><span class="name">Warn</span></a><span class="result"> extends <a href="EventMonitor$$LogEventsToSlf4j$$Slf4jLevel.html" class="extype" name="atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel">Slf4jLevel</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The SLF4J warn logging level.</p>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>

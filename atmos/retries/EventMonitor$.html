@@ -108,6 +108,19 @@
       </span>
       </h4>
       <p class="comment cmt">An event monitor that formats and logs events.</p>
+    </li><li name="atmos.retries.EventMonitor.LogEventsToSlf4j" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LogEventsToSlf4jextendsEventMonitorwithEventMonitor.FormatEventswithProductwithSerializable"></a>
+      <a id="LogEventsToSlf4j:LogEventsToSlf4j"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="EventMonitor$$LogEventsToSlf4j.html"><span class="name">LogEventsToSlf4j</span></a><span class="params">(<span name="logger">logger: <span class="extype" name="org.slf4j.Logger">Logger</span></span>, <span name="retryingLevel">retryingLevel: <a href="EventMonitor$$LogEventsToSlf4j$$Slf4jLevel.html" class="extype" name="atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel">Slf4jLevel</a> = <span class="defval" name="EventMonitor.this.LogEventsToSlf4j.defaultRetryingLevel">...</span></span>, <span name="interruptedLevel">interruptedLevel: <a href="EventMonitor$$LogEventsToSlf4j$$Slf4jLevel.html" class="extype" name="atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel">Slf4jLevel</a> = <span class="defval" name="EventMonitor.this.LogEventsToSlf4j.defaultInterruptedLevel">...</span></span>, <span name="abortedLevel">abortedLevel: <a href="EventMonitor$$LogEventsToSlf4j$$Slf4jLevel.html" class="extype" name="atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel">Slf4jLevel</a> = <span class="defval" name="EventMonitor.this.LogEventsToSlf4j.defaultAbortedLevel">...</span></span>)</span><span class="result"> extends <a href="EventMonitor.html" class="extype" name="atmos.retries.EventMonitor">EventMonitor</a> with <a href="EventMonitor$$FormatEvents.html" class="extype" name="atmos.retries.EventMonitor.FormatEvents">FormatEvents</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">An event monitor that formats and logs events using SLF4J.</p>
     </li><li name="atmos.retries.EventMonitor.PrintEvents" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="PrintEventsextendsEventMonitorwithEventMonitor.FormatEventswithProductwithSerializable"></a>
       <a id="PrintEvents:PrintEvents"></a>
@@ -218,7 +231,20 @@
         <a href="EventMonitor$$LogEvents$.html"><span class="name">LogEvents</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
-      <p class="comment cmt">Factory for event monitors that submits events to a logger.</p>
+      <p class="comment cmt">Factory for event monitors that submit events to a logger.</p>
+    </li><li name="atmos.retries.EventMonitor.LogEventsToSlf4j" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LogEventsToSlf4j"></a>
+      <a id="LogEventsToSlf4j:LogEventsToSlf4j"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="EventMonitor$$LogEventsToSlf4j$.html"><span class="name">LogEventsToSlf4j</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Factory for event monitors that submit events to a SLF4J logger.</p>
     </li><li name="atmos.retries.EventMonitor.PrintEvents" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="PrintEvents"></a>
       <a id="PrintEvents:PrintEvents"></a>

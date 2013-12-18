@@ -69,11 +69,16 @@ instance of this class may be used as a policy in <code>retryFor</code>.</p><p>F
 
 <span class="cmt">// Uses the default backoff duration (100 milliseconds) when the parameter is omitted.</span>
 <span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever using fibonacciBackoff()</pre><h4>Monitor Configuration</h4><p>Event monitors are notified when retry attempts fail and are configured on a retry policy using <code>monitorWith</code>. See
-<a href="EventMonitor.html" class="extype" name="atmos.retries.EventMonitor">atmos.retries.EventMonitor</a> for more information.</p><p>This DSL provides support for monitoring retry attempts with print streams and loggers (or any custom monitor):</p><pre><span class="cmt">// Write information about failed attempts to stderr.</span>
+<a href="EventMonitor.html" class="extype" name="atmos.retries.EventMonitor">atmos.retries.EventMonitor</a> for more information.</p><p>This DSL provides support for monitoring retry attempts with print streams, standard Java loggers and SLF4J loggers
+(or any custom monitor):</p><pre><span class="cmt">// Write information about failed attempts to stderr.</span>
 <span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever monitorWith System.err
 
 <span class="cmt">// Write information about failed attempts to the specified instance of java.util.logging.Logger.</span>
-<span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever monitorWith Logger.getLogger(<span class="lit">"MyLoggerName"</span>)</pre><h4>Error Classification</h4><p>Errors that occur during a retry attempt can be classified as <code>Fatal</code>, <code>Recoverable</code> or <code>SilentlyRecoverable</code>.
+<span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever monitorWith Logger.getLogger(<span class="lit">"MyLoggerName"</span>)
+
+<span class="cmt">// Write information about failed attempts to the specified instance of org.slf4j.Logger.</span>
+<span class="kw">import</span> Slf4jSupport._
+<span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever monitorWith LoggerFactory.getLogger(<span class="lit">"MyLoggerName"</span>)</pre><h4>Error Classification</h4><p>Errors that occur during a retry attempt can be classified as <code>Fatal</code>, <code>Recoverable</code> or <code>SilentlyRecoverable</code>.
 Retry policies can be configured with error classification functions using <code>onError</code>. See
 <a href="ErrorClassification.html" class="extype" name="atmos.retries.ErrorClassification">atmos.retries.ErrorClassification</a> for more information.</p><p>This DSL provides support for the three provided error classifications:</p><pre><span class="cmt">// Stop retrying after any runtime exception.</span>
 <span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever onError { <span class="kw">case</span> _: RuntimeException <span class="kw">=&gt;</span> stopRetrying }
@@ -236,6 +241,19 @@ Retry policies can be configured with error classification functions using <code
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="atmos.retries.RetryDSL.Slf4jSupport" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Slf4jSupport"></a>
+      <a id="Slf4jSupport:Slf4jSupport"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="RetryDSL$$Slf4jSupport$.html"><span class="name">Slf4jSupport</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">Separate namespace for optional SLF4J support.</p>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
