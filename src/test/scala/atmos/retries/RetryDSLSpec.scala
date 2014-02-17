@@ -26,7 +26,7 @@ import org.scalatest._
 /**
  * Test suite for [[atmos.retries.RetryDSL]].
  */
-class RetryDSLSpec extends FunSpec with Matchers {
+class RetryDSLSpec extends FlatSpec with Matchers {
 
   import RetryDSL._
   import BackoffPolicy._
@@ -34,42 +34,38 @@ class RetryDSLSpec extends FunSpec with Matchers {
   import EventMonitor._
   import TerminationPolicy._
 
-  describe("RetryDSL") {
+  "RetryDSL" should "create retry policies by describing termination policies" in {
+    retrying shouldEqual RetryPolicy()
+    retryFor { 5.attempts } shouldEqual RetryPolicy(LimitNumberOfAttempts(5))
+    retryFor { 5.minutes } shouldEqual RetryPolicy(LimitAmountOfTimeSpent(5.minutes))
+    retryFor { 5.attempts && 5.minutes } shouldEqual
+      RetryPolicy(TerminateAfterBoth(LimitNumberOfAttempts(5), LimitAmountOfTimeSpent(5.minutes)))
+    retryFor { 5.attempts || 5.minutes } shouldEqual
+      RetryPolicy(TerminateAfterEither(LimitNumberOfAttempts(5), LimitAmountOfTimeSpent(5.minutes)))
+    retryForever shouldEqual RetryPolicy(TerminationPolicy.NeverTerminate)
+  }
 
-    it("should create retry policies by describing termination policies") {
-      retrying shouldEqual RetryPolicy()
-      retryFor { 5.attempts } shouldEqual RetryPolicy(LimitNumberOfAttempts(5))
-      retryFor { 5.minutes } shouldEqual RetryPolicy(LimitAmountOfTimeSpent(5.minutes))
-      retryFor { 5.attempts && 5.minutes } shouldEqual
-        RetryPolicy(TerminateAfterBoth(LimitNumberOfAttempts(5), LimitAmountOfTimeSpent(5.minutes)))
-      retryFor { 5.attempts || 5.minutes } shouldEqual
-        RetryPolicy(TerminateAfterEither(LimitNumberOfAttempts(5), LimitAmountOfTimeSpent(5.minutes)))
-      retryForever shouldEqual RetryPolicy(TerminationPolicy.NeverTerminate)
+  it should "configure retry policies with backoff policies" in {
+    retrying using constantBackoff(1.second) shouldEqual RetryPolicy(backoff = Constant(1.second))
+    retrying using linearBackoff(1.second) shouldEqual RetryPolicy(backoff = Linear(1.second))
+    retrying using exponentialBackoff(1.second) shouldEqual RetryPolicy(backoff = Exponential(1.second))
+    retrying using fibonacciBackoff(1.second) shouldEqual RetryPolicy(backoff = Fibonacci(1.second))
+  }
+
+  it should "configure retry policies with event monitors" in {
+    val logger = Logger.getLogger(getClass.getName)
+    retrying monitorWith logger shouldEqual RetryPolicy(monitor = LogEvents(logger))
+    retrying monitorWith System.out shouldEqual RetryPolicy(monitor = PrintEvents(System.out))
+  }
+
+  it should "configure retry policies with error classifiers" in {
+    stopRetrying shouldEqual Fatal
+    keepRetrying shouldEqual Recoverable
+    keepRetryingSilently shouldEqual SilentlyRecoverable
+    val classifier = ErrorClassifier {
+      case _: RuntimeException => stopRetrying
     }
-
-    it("should configure retry policies with backoff policies") {
-      retrying using constantBackoff(1.second) shouldEqual RetryPolicy(backoff = Constant(1.second))
-      retrying using linearBackoff(1.second) shouldEqual RetryPolicy(backoff = Linear(1.second))
-      retrying using exponentialBackoff(1.second) shouldEqual RetryPolicy(backoff = Exponential(1.second))
-      retrying using fibonacciBackoff(1.second) shouldEqual RetryPolicy(backoff = Fibonacci(1.second))
-    }
-
-    it("should configure retry policies with event monitors") {
-      val logger = Logger.getLogger(getClass.getName)
-      retrying monitorWith logger shouldEqual RetryPolicy(monitor = LogEvents(logger))
-      retrying monitorWith System.out shouldEqual RetryPolicy(monitor = PrintEvents(System.out))
-    }
-
-    it("should configure retry policies with error classifiers") {
-      stopRetrying shouldEqual Fatal
-      keepRetrying shouldEqual Recoverable
-      keepRetryingSilently shouldEqual SilentlyRecoverable
-      val classifier = ErrorClassifier {
-        case _: RuntimeException => stopRetrying
-      }
-      retrying onError classifier shouldEqual RetryPolicy(classifier = classifier)
-    }
-
+    retrying onError classifier shouldEqual RetryPolicy(classifier = classifier)
   }
 
 }

@@ -26,129 +26,125 @@ import org.scalatest._
 /**
  * Test suite for [[atmos.retries.RetryPolicy]].
  */
-class RetryPolicySpec extends FunSpec with Matchers {
+class RetryPolicySpec extends FlatSpec with Matchers {
 
   import ExecutionContext.Implicits._
   import TerminationPolicy._
 
-  describe("RetryPolicy") {
+  "RetryPolicy" should "synchronously retry until complete" in {
+    val policy = RetryPolicy(LimitNumberOfAttempts(2))
+    var counter = 0
+    policy.retry() {
+      counter += 1
+      if (counter < 2) throw new TestException
+      counter
+    } shouldEqual 2
+    counter shouldEqual 2
+  }
 
-    it("should synchronously retry until complete") {
-      val policy = RetryPolicy(LimitNumberOfAttempts(2))
-      var counter = 0
+  it should "synchronously retry until signaled to terminate" in {
+    val policy = RetryPolicy(LimitNumberOfAttempts(2))
+    var counter = 0
+    evaluating {
+      policy.retry() {
+        counter += 1
+        if (counter <= 2) throw new TestException
+        counter
+      }
+    } should produce[TestException]
+    counter shouldEqual 2
+  }
+
+  it should "synchronously retry until encountering a fatal error" in {
+    val policy = RetryPolicy(LimitNumberOfAttempts(2), classifier = {
+      case _: TestException => ErrorClassification.Fatal
+    })
+    var counter = 0
+    evaluating {
       policy.retry() {
         counter += 1
         if (counter < 2) throw new TestException
         counter
-      } shouldEqual 2
-      counter shouldEqual 2
-    }
+      }
+    } should produce[TestException]
+    counter shouldEqual 1
+  }
 
-    it("should synchronously retry until signaled to terminate") {
-      val policy = RetryPolicy(LimitNumberOfAttempts(2))
-      var counter = 0
-      evaluating {
-        policy.retry() {
-          counter += 1
-          if (counter <= 2) throw new TestException
-          counter
-        }
-      } should produce[TestException]
-      counter shouldEqual 2
-    }
+  it should "synchronously block between retry attempts" in {
+    val policy = RetryPolicy(LimitNumberOfAttempts(2), BackoffPolicy.Constant(1.second))
+    val startAt = System.currentTimeMillis
+    var counter = 0
+    policy.retry() {
+      counter += 1
+      if (counter < 2) throw new TestException
+      counter
+    } shouldEqual 2
+    counter shouldEqual 2
+    (System.currentTimeMillis - startAt).millis should be >= 1.second
+  }
 
-    it("should synchronously retry until encountering a fatal error") {
-      val policy = RetryPolicy(LimitNumberOfAttempts(2), classifier = {
-        case _: TestException => ErrorClassification.Fatal
-      })
-      var counter = 0
-      evaluating {
-        policy.retry() {
-          counter += 1
-          if (counter < 2) throw new TestException
-          counter
-        }
-      } should produce[TestException]
-      counter shouldEqual 1
+  it should "asynchronously retry until complete" in {
+    val policy = RetryPolicy(LimitNumberOfAttempts(3))
+    @volatile var counter = 0
+    val future = policy.retryAsync() {
+      if (counter == 0) {
+        counter += 1
+        throw new TestException
+      }
+      Future {
+        counter += 1
+        if (counter < 3) throw new TestException
+        counter
+      }
     }
+    Await.result(future, Duration.Inf) shouldEqual 3
+    counter shouldEqual 3
+  }
 
-    it("should synchronously block between retry attempts") {
-      val policy = RetryPolicy(LimitNumberOfAttempts(2), BackoffPolicy.Constant(1.second))
-      val startAt = System.currentTimeMillis
-      var counter = 0
-      policy.retry() {
+  it should "asynchronously retry until signaled to terminate" in {
+    val policy = RetryPolicy(LimitNumberOfAttempts(2))
+    @volatile var counter = 0
+    val future = policy.retryAsync() {
+      Future {
+        counter += 1
+        if (counter <= 2) throw new TestException
+        counter
+      }
+    }
+    evaluating { Await.result(future, Duration.Inf) } should produce[TestException]
+    counter shouldEqual 2
+  }
+
+  it should "asynchronously retry until encountering a fatal error" in {
+    val policy = RetryPolicy(LimitNumberOfAttempts(2), classifier = {
+      case _: TestException => ErrorClassification.Fatal
+    })
+    @volatile var counter = 0
+    val future = policy.retryAsync() {
+      Future {
         counter += 1
         if (counter < 2) throw new TestException
         counter
-      } shouldEqual 2
-      counter shouldEqual 2
-      (System.currentTimeMillis - startAt).millis should be >= 1.second
-    }
-
-    it("should asynchronously retry until complete") {
-      val policy = RetryPolicy(LimitNumberOfAttempts(3))
-      @volatile var counter = 0
-      val future = policy.retryAsync() {
-        if (counter == 0) {
-          counter += 1
-          throw new TestException
-        }
-        Future {
-          counter += 1
-          if (counter < 3) throw new TestException
-          counter
-        }
       }
-      Await.result(future, Duration.Inf) shouldEqual 3
-      counter shouldEqual 3
     }
+    evaluating { Await.result(future, Duration.Inf) } should produce[TestException]
+    counter shouldEqual 1
+  }
 
-    it("should asynchronously retry until signaled to terminate") {
-      val policy = RetryPolicy(LimitNumberOfAttempts(2))
-      @volatile var counter = 0
-      val future = policy.retryAsync() {
-        Future {
-          counter += 1
-          if (counter <= 2) throw new TestException
-          counter
-        }
+  it should "asynchronously block between retry attempts" in {
+    val policy = RetryPolicy(LimitNumberOfAttempts(2), BackoffPolicy.Constant(1.second))
+    val startAt = System.currentTimeMillis
+    @volatile var counter = 0
+    val future = policy.retryAsync() {
+      Future {
+        counter += 1
+        if (counter < 2) throw new TestException
+        counter
       }
-      evaluating { Await.result(future, Duration.Inf) } should produce[TestException]
-      counter shouldEqual 2
     }
-
-    it("should asynchronously retry until encountering a fatal error") {
-      val policy = RetryPolicy(LimitNumberOfAttempts(2), classifier = {
-        case _: TestException => ErrorClassification.Fatal
-      })
-      @volatile var counter = 0
-      val future = policy.retryAsync() {
-        Future {
-          counter += 1
-          if (counter < 2) throw new TestException
-          counter
-        }
-      }
-      evaluating { Await.result(future, Duration.Inf) } should produce[TestException]
-      counter shouldEqual 1
-    }
-
-    it("should asynchronously block between retry attempts") {
-      val policy = RetryPolicy(LimitNumberOfAttempts(2), BackoffPolicy.Constant(1.second))
-      val startAt = System.currentTimeMillis
-      @volatile var counter = 0
-      val future = policy.retryAsync() {
-        Future {
-          counter += 1
-          if (counter < 2) throw new TestException
-          counter
-        }
-      }
-      Await.result(future, Duration.Inf) shouldEqual 2
-      counter shouldEqual 2
-      (System.currentTimeMillis - startAt).millis should be >= 1.second
-    }
-
+    Await.result(future, Duration.Inf) shouldEqual 2
+    counter shouldEqual 2
+    (System.currentTimeMillis - startAt).millis should be >= 1.second
   }
 
   private class TestException extends RuntimeException

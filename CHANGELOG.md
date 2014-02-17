@@ -5,6 +5,8 @@ Internal project changes:
 
   - Removed obsolete JUnit dependency.
 
+  - Changed to FlatSpec as opposed to using FunSpec.
+
 1.1 (2013-12-17)
 ================
 Added support for SLF4J monitoring to `atmos.retries`.

@@ -25,44 +25,36 @@ import org.scalatest._
 /**
  * Test suite for [[atmos.retries.BackoffPolicy]].
  */
-class BackoffPolicySpec extends FunSpec with Matchers {
-  
+class BackoffPolicySpec extends FlatSpec with Matchers {
+
   val backoff = 1.second
-  
-  describe("BackoffPolicy.Constant") {
-    it("should always return the initial backoff") {
-      val policy = BackoffPolicy.Constant(backoff)
-      policy.nextBackoff(1, Duration.Zero) shouldEqual backoff
-      policy.nextBackoff(2, backoff) shouldEqual backoff
-      policy.nextBackoff(3, backoff) shouldEqual backoff
-    }
+
+  "BackoffPolicy.Constant" should "always return the initial backoff" in {
+    val policy = BackoffPolicy.Constant(backoff)
+    policy.nextBackoff(1, Duration.Zero) shouldEqual backoff
+    policy.nextBackoff(2, backoff) shouldEqual backoff
+    policy.nextBackoff(3, backoff) shouldEqual backoff
   }
-  
-  describe("BackoffPolicy.Linear") {
-    it("should increase the backoff by the initial backoff after every attempt") {
-      val policy = BackoffPolicy.Linear(backoff)
-      policy.nextBackoff(1, Duration.Zero) shouldEqual backoff
-      policy.nextBackoff(2, backoff) shouldEqual backoff * 2
-      policy.nextBackoff(3, backoff * 2) shouldEqual backoff * 3
-    }
+
+  "BackoffPolicy.Linear" should "increase the backoff by the initial backoff after every attempt" in {
+    val policy = BackoffPolicy.Linear(backoff)
+    policy.nextBackoff(1, Duration.Zero) shouldEqual backoff
+    policy.nextBackoff(2, backoff) shouldEqual backoff * 2
+    policy.nextBackoff(3, backoff * 2) shouldEqual backoff * 3
   }
-  
-  describe("BackoffPolicy.Exponential") {
-    it("should increase the backoff by doubling the previous backoff after every attempt") {
-      val policy = BackoffPolicy.Exponential(backoff)
-      policy.nextBackoff(1, Duration.Zero) shouldEqual backoff
-      policy.nextBackoff(2, backoff) shouldEqual backoff * 2
-      policy.nextBackoff(3, backoff * 2) shouldEqual backoff * 4
-    }
+
+  "BackoffPolicy.Exponential" should "increase the backoff by doubling the previous backoff after every attempt" in {
+    val policy = BackoffPolicy.Exponential(backoff)
+    policy.nextBackoff(1, Duration.Zero) shouldEqual backoff
+    policy.nextBackoff(2, backoff) shouldEqual backoff * 2
+    policy.nextBackoff(3, backoff * 2) shouldEqual backoff * 4
   }
-  
-  describe("BackoffPolicy.Fibonacci") {
-    it("should increase the backoff by multiplying the previous backoff by the golden ratio after every attempt") {
-      val policy = BackoffPolicy.Fibonacci(backoff)
-      policy.nextBackoff(1, Duration.Zero) shouldEqual backoff
-      policy.nextBackoff(2, backoff) shouldEqual backoff * 8 / 5
-      policy.nextBackoff(3, backoff * 8 / 5) shouldEqual (backoff * 8 / 5) * 8 / 5
-    }
+
+  "BackoffPolicy.Fibonacci" should "multiply the previous backoff by the golden ratio after every attempt" in {
+    val policy = BackoffPolicy.Fibonacci(backoff)
+    policy.nextBackoff(1, Duration.Zero) shouldEqual backoff
+    policy.nextBackoff(2, backoff) shouldEqual backoff * 8 / 5
+    policy.nextBackoff(3, backoff * 8 / 5) shouldEqual (backoff * 8 / 5) * 8 / 5
   }
 
 }

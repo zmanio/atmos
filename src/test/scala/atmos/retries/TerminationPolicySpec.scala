@@ -25,68 +25,58 @@ import org.scalatest._
 /**
  * Test suite for [[atmos.retries.TerminationPolicy]].
  */
-class TerminationPolicySpec extends FunSpec with Matchers {
-  
+class TerminationPolicySpec extends FlatSpec with Matchers {
+
   import TerminationPolicy._
-  
+
   val attempts = 6
   val timeout = 6.seconds
-  
-  describe("TerminationPolicy.NeverTerminate") {
-    it("should never signal for termination") {
-      val policy = NeverTerminate
-      policy.shouldTerminate(attempts / 2, timeout / 2) shouldEqual false
-      policy.shouldTerminate(attempts, timeout) shouldEqual false
-      policy.shouldTerminate(attempts * 2, timeout * 2) shouldEqual false
-    }
+
+  "TerminationPolicy.NeverTerminate" should "never signal for termination" in {
+    val policy = NeverTerminate
+    policy.shouldTerminate(attempts / 2, timeout / 2) shouldEqual false
+    policy.shouldTerminate(attempts, timeout) shouldEqual false
+    policy.shouldTerminate(attempts * 2, timeout * 2) shouldEqual false
   }
-  
-  describe("TerminationPolicy.LimitNumberOfAttempts") {
-    it("should terminate after a specific number of attempts") {
-      val policy = LimitNumberOfAttempts(attempts)
-      policy.shouldTerminate(attempts / 2, timeout * 2) shouldEqual false
-      policy.shouldTerminate(attempts, timeout * 2) shouldEqual true
-      policy.shouldTerminate(attempts * 2, timeout * 2) shouldEqual true
-    }
+
+  "TerminationPolicy.LimitNumberOfAttempts" should "terminate after a specific number of attempts" in {
+    val policy = LimitNumberOfAttempts(attempts)
+    policy.shouldTerminate(attempts / 2, timeout * 2) shouldEqual false
+    policy.shouldTerminate(attempts, timeout * 2) shouldEqual true
+    policy.shouldTerminate(attempts * 2, timeout * 2) shouldEqual true
   }
-  
-  describe("TerminationPolicy.LimitAmountOfTimeSpent") {
-    it("should terminate after a specific duration") {
-      val policy = LimitAmountOfTimeSpent(timeout)
-      policy.shouldTerminate(attempts * 2, timeout / 2) shouldEqual false
-      policy.shouldTerminate(attempts * 2, timeout) shouldEqual true
-      policy.shouldTerminate(attempts * 2, timeout * 2) shouldEqual true
-    }
+
+  "TerminationPolicy.LimitAmountOfTimeSpent" should "terminate after a specific duration" in {
+    val policy = LimitAmountOfTimeSpent(timeout)
+    policy.shouldTerminate(attempts * 2, timeout / 2) shouldEqual false
+    policy.shouldTerminate(attempts * 2, timeout) shouldEqual true
+    policy.shouldTerminate(attempts * 2, timeout * 2) shouldEqual true
   }
-  
-  describe("TerminationPolicy.TerminateAfterBoth") {
-    it("should terminate only when both the specified policies terminate") {
-      val policy = TerminateAfterBoth(LimitNumberOfAttempts(attempts), LimitAmountOfTimeSpent(timeout))
-      policy.shouldTerminate(attempts / 2, timeout / 2) shouldEqual false
-      policy.shouldTerminate(attempts / 2, timeout) shouldEqual false
-      policy.shouldTerminate(attempts / 2, timeout * 2) shouldEqual false
-      policy.shouldTerminate(attempts, timeout / 2) shouldEqual false
-      policy.shouldTerminate(attempts, timeout) shouldEqual true
-      policy.shouldTerminate(attempts, timeout * 2) shouldEqual true
-      policy.shouldTerminate(attempts * 2, timeout / 2) shouldEqual false
-      policy.shouldTerminate(attempts * 2, timeout) shouldEqual true
-      policy.shouldTerminate(attempts * 2, timeout * 2) shouldEqual true
-    }
+
+  "TerminationPolicy.TerminateAfterBoth" should "terminate only when both the specified policies terminate" in {
+    val policy = TerminateAfterBoth(LimitNumberOfAttempts(attempts), LimitAmountOfTimeSpent(timeout))
+    policy.shouldTerminate(attempts / 2, timeout / 2) shouldEqual false
+    policy.shouldTerminate(attempts / 2, timeout) shouldEqual false
+    policy.shouldTerminate(attempts / 2, timeout * 2) shouldEqual false
+    policy.shouldTerminate(attempts, timeout / 2) shouldEqual false
+    policy.shouldTerminate(attempts, timeout) shouldEqual true
+    policy.shouldTerminate(attempts, timeout * 2) shouldEqual true
+    policy.shouldTerminate(attempts * 2, timeout / 2) shouldEqual false
+    policy.shouldTerminate(attempts * 2, timeout) shouldEqual true
+    policy.shouldTerminate(attempts * 2, timeout * 2) shouldEqual true
   }
-  
-  describe("TerminationPolicy.TerminateAfterEither") {
-    it("should terminate when either of the specified policies terminate") {
-      val policy = TerminateAfterEither(LimitNumberOfAttempts(attempts), LimitAmountOfTimeSpent(timeout))
-      policy.shouldTerminate(attempts / 2, timeout / 2) shouldEqual false
-      policy.shouldTerminate(attempts / 2, timeout) shouldEqual true
-      policy.shouldTerminate(attempts / 2, timeout * 2) shouldEqual true
-      policy.shouldTerminate(attempts, timeout / 2) shouldEqual true
-      policy.shouldTerminate(attempts, timeout) shouldEqual true
-      policy.shouldTerminate(attempts, timeout * 2) shouldEqual true
-      policy.shouldTerminate(attempts * 2, timeout / 2) shouldEqual true
-      policy.shouldTerminate(attempts * 2, timeout) shouldEqual true
-      policy.shouldTerminate(attempts * 2, timeout * 2) shouldEqual true
-    }
+
+  "TerminationPolicy.TerminateAfterEither" should "terminate when either of the specified policies terminate" in {
+    val policy = TerminateAfterEither(LimitNumberOfAttempts(attempts), LimitAmountOfTimeSpent(timeout))
+    policy.shouldTerminate(attempts / 2, timeout / 2) shouldEqual false
+    policy.shouldTerminate(attempts / 2, timeout) shouldEqual true
+    policy.shouldTerminate(attempts / 2, timeout * 2) shouldEqual true
+    policy.shouldTerminate(attempts, timeout / 2) shouldEqual true
+    policy.shouldTerminate(attempts, timeout) shouldEqual true
+    policy.shouldTerminate(attempts, timeout * 2) shouldEqual true
+    policy.shouldTerminate(attempts * 2, timeout / 2) shouldEqual true
+    policy.shouldTerminate(attempts * 2, timeout) shouldEqual true
+    policy.shouldTerminate(attempts * 2, timeout * 2) shouldEqual true
   }
 
 }
