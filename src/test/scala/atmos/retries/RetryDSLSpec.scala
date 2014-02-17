@@ -26,7 +26,6 @@ import org.scalatest._
 /**
  * Test suite for [[atmos.retries.RetryDSL]].
  */
-@org.junit.runner.RunWith(classOf[org.scalatest.junit.JUnitRunner])
 class RetryDSLSpec extends FunSpec with Matchers {
 
   import RetryDSL._

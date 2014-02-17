@@ -1,6 +1,9 @@
 1.2 (2014-02-??)
 ================
 
+Internal project changes:
+
+  - Removed obsolete JUnit dependency.
 
 1.1 (2013-12-17)
 ================

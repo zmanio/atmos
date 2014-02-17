@@ -26,7 +26,6 @@ import org.scalatest._
 /**
  * Test suite for [[atmos.retries.RetryPolicy]].
  */
-@org.junit.runner.RunWith(classOf[org.scalatest.junit.JUnitRunner])
 class RetryPolicySpec extends FunSpec with Matchers {
 
   import ExecutionContext.Implicits._

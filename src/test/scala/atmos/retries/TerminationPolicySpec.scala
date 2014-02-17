@@ -25,7 +25,6 @@ import org.scalatest._
 /**
  * Test suite for [[atmos.retries.TerminationPolicy]].
  */
-@org.junit.runner.RunWith(classOf[org.scalatest.junit.JUnitRunner])
 class TerminationPolicySpec extends FunSpec with Matchers {
   
   import TerminationPolicy._

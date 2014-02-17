@@ -25,7 +25,6 @@ import org.scalatest._
 /**
  * Test suite for [[atmos.retries.BackoffPolicy]].
  */
-@org.junit.runner.RunWith(classOf[org.scalatest.junit.JUnitRunner])
 class BackoffPolicySpec extends FunSpec with Matchers {
   
   val backoff = 1.second
