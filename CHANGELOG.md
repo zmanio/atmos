@@ -1,3 +1,7 @@
+1.2 (2014-02-??)
+================
+
+
 1.1 (2013-12-17)
 ================
 Added support for SLF4J monitoring to `atmos.retries`.

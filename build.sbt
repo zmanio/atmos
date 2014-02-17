@@ -6,12 +6,12 @@ organization := "atmos"
 
 name := "atmos"
 
-version := "1.1"
+version := "1.2-SNAPSHOT"
 
 scalaVersion := "2.10.3"
 
 libraryDependencies ++= Seq(
-  "com.typesafe.akka" %% "akka-actor" % "2.2.0",
+  "com.typesafe.akka" %% "akka-actor" % "2.2.3",
   "org.slf4j" % "slf4j-api" % "1.7.5" % "provided",
   "junit" % "junit" % "4.11" % "test",
   "org.scalatest" %% "scalatest" % "2.0" % "test"
