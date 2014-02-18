@@ -93,7 +93,7 @@ import org.slf4j.{ Logger => Slf4jLogger }
  * Backoff policies specify the delay between subsequent retry attempts and are configured on a retry policy with
  * `using`. See [[atmos.retries.BackoffPolicy]] for more information.
  *
- * This DSL provides support for the five provided backoff policies (or any custom policy):
+ * This DSL provides support for the six provided backoff policies (or any custom policy):
  * {{{
  * implicit val retryPolicy = retryForever using constantBackoff { 5.millis }
  *
@@ -109,6 +109,12 @@ import org.slf4j.{ Logger => Slf4jLogger }
  *   case e: WaitException => constantBackoff { e.waitDuration }
  *   case _ => linearBackoff()
  * }
+ *
+ * // Randomizing the result of a backoff duration by adding a random duration.
+ * implicit val retryPolicy = retryForever using { linearBackoff { 1.second } randomized 100.millis }
+ *
+ * // Randomizing the result of a backoff duration by adding a random duration from a range.
+ * implicit val retryPolicy = retryForever using { linearBackoff { 1.second } randomized -50.millis -> 50.millis }
  * }}}
  *
  * ==Monitor Configuration==
@@ -264,7 +270,7 @@ object RetryDSL {
   }
 
   //
-  // Backoff factories.
+  // Backoff factories and extensions.
   //
 
   /**
@@ -306,6 +312,29 @@ object RetryDSL {
    * @param f The function that maps from exceptions to backoff policies.
    */
   def selectedBackoff(f: Throwable => BackoffPolicy): BackoffPolicy = BackoffPolicy.Selected(f)
+
+  /**
+   * Adds support for randomization to all backoff policies.
+   *
+   * @param self The backoff policy to add the extension methods to.
+   */
+  implicit final class BackoffPolicyExtensions(val self: BackoffPolicy) extends AnyVal {
+
+    /**
+     * Creates a backoff policy that randomizes the result of `self`.
+     *
+     * @param bound The minimum or maximum value in the range that may be used to modify the result of `self`.
+     */
+    def randomized(bound: FiniteDuration): BackoffPolicy = BackoffPolicy.Randomized(self, Duration.Zero -> bound)
+
+    /**
+     * Creates a backoff policy that randomizes the result of `self`.
+     *
+     * @param range The range of values that may be used to modify the result of `self`.
+     */
+    def randomized(range: (FiniteDuration, FiniteDuration)): BackoffPolicy = BackoffPolicy.Randomized(self, range)
+
+  }
 
   //
   // Monitor factories.

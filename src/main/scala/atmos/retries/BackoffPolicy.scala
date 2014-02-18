@@ -20,6 +20,7 @@
 package atmos.retries
 
 import scala.concurrent.duration._
+import scala.util.Random
 
 /**
  * A strategy for computing a sequence of wait durations for use between retry attempts.
@@ -112,6 +113,21 @@ object BackoffPolicy {
   case class Selected(f: Throwable => BackoffPolicy) extends BackoffPolicy {
     override def nextBackoff(attempts: Int, previousError: Throwable) =
       f(previousError).nextBackoff(attempts, previousError)
+  }
+
+  /**
+   * A policy that randomizes the result of another policy by adding a random duration in the specified range.
+   *
+   * @param policy The policy to randomize the result of.
+   * @param range The range of values that may be used to modify the result of the base policy.
+   */
+  case class Randomized(policy: BackoffPolicy, range: (FiniteDuration, FiniteDuration)) extends BackoffPolicy {
+    private val (offset, scale) = {
+      val (low, high) = if (range._1 <= range._2) range._1 -> range._2 else range._2 -> range._1
+      low -> (high - low).toNanos
+    }
+    override def nextBackoff(attempts: Int, previousError: Throwable) =
+      policy.nextBackoff(attempts, previousError) + offset + (Random.nextDouble() * scale).toLong.nanos
   }
 
 }

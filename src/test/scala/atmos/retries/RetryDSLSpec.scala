@@ -53,6 +53,11 @@ class RetryDSLSpec extends FlatSpec with Matchers {
     retrying using fibonacciBackoff(1.second) shouldEqual RetryPolicy(backoff = Fibonacci(1.second))
     val selector: Throwable => BackoffPolicy = { case _ => Linear() }
     retrying using selectedBackoff(selector) shouldEqual RetryPolicy(backoff = Selected(selector))
+    val zero = Duration.Zero
+    val min = -10.millis
+    val max = 10.millis
+    retrying using Linear().randomized(max) shouldEqual RetryPolicy(backoff = Randomized(Linear(), zero -> max))
+    retrying using Linear().randomized(min -> max) shouldEqual RetryPolicy(backoff = Randomized(Linear(), min -> max))
   }
 
   it should "configure retry policies with event monitors" in {

@@ -72,6 +72,17 @@ class BackoffPolicySpec extends FlatSpec with Matchers {
     policy.nextBackoff(5, error) shouldEqual one * 5
   }
 
+  "BackoffPolicy.Randomized" should "incorporate a random number into a backoff duration" in {
+    val min = -10.millis
+    val max = 10.millis
+    val policy = BackoffPolicy.Randomized(BackoffPolicy.Constant(Duration.Zero), min -> max)
+    for (attempt <- 1 to 10) {
+      val backoff = policy.nextBackoff(attempt, error)
+      backoff should be <= max
+      backoff should be >= min
+    }
+  }
+
   private class TestError extends RuntimeException
 
 }
