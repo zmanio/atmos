@@ -93,7 +93,7 @@ import org.slf4j.{ Logger => Slf4jLogger }
  * Backoff policies specify the delay between subsequent retry attempts and are configured on a retry policy with
  * `using`. See [[atmos.retries.BackoffPolicy]] for more information.
  *
- * This DSL provides support for the four provided backoff policies (or any custom policy):
+ * This DSL provides support for the five provided backoff policies (or any custom policy):
  * {{{
  * implicit val retryPolicy = retryForever using constantBackoff { 5.millis }
  *
@@ -103,6 +103,12 @@ import org.slf4j.{ Logger => Slf4jLogger }
  *
  * // Uses the default backoff duration (100 milliseconds) when the parameter is omitted.
  * implicit val retryPolicy = retryForever using fibonacciBackoff()
+ *
+ * // Selecting another backoff policy based on the type of exception thrown.
+ * implicit val retryPolicy = retryForever using selectedBackoff {
+ *   case e: WaitException => constantBackoff { e.waitDuration }
+ *   case _ => linearBackoff()
+ * }
  * }}}
  *
  * ==Monitor Configuration==
@@ -293,6 +299,13 @@ object RetryDSL {
    */
   def fibonacciBackoff(backoff: FiniteDuration = BackoffPolicy.defaultBackoff): BackoffPolicy =
     BackoffPolicy.Fibonacci(backoff)
+
+  /**
+   * Creates a backoff policy selects another policy based on the most recently thrown exception.
+   *
+   * @param f The function that maps from exceptions to backoff policies.
+   */
+  def selectedBackoff(f: Throwable => BackoffPolicy): BackoffPolicy = BackoffPolicy.Selected(f)
 
   //
   // Monitor factories.

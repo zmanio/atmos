@@ -104,4 +104,14 @@ object BackoffPolicy {
       (backoff.toNanos * math.pow(8.0 / 5.0, attempts - 1)).round.nanos
   }
 
+  /**
+   * A policy that selects the actual target policy based on the most recently thrown exception.
+   *
+   * @param f The function that maps from exceptions to backoff policies.
+   */
+  case class Selected(f: Throwable => BackoffPolicy) extends BackoffPolicy {
+    override def nextBackoff(attempts: Int, previousError: Throwable) =
+      f(previousError).nextBackoff(attempts, previousError)
+  }
+
 }

@@ -2,6 +2,8 @@
 ================
 Enhancements to the backoff policies in `atmos.retries`:
 
+ - Added `BackoffPolicy.Selected`, a policy that selects another backoff policy based on the most recent exception.
+
  - Removed the previous backoff value from the list of items provided to a `BackoffPolicy` when calculating a backoff and replaced it with the most recently thrown exception.
  
 Enhancements to the termination policies in `atmos.retries`:

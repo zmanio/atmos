@@ -58,4 +58,20 @@ class BackoffPolicySpec extends FlatSpec with Matchers {
     policy.nextBackoff(3, error) shouldEqual backoff * 8 / 5 * 8 / 5
   }
 
+  "BackoffPolicy.Selected" should "select a backoff policy based on the most recent exception" in {
+    val one = 1.second
+    val ten = 10.seconds
+    val policy = BackoffPolicy.Selected {
+      case _: TestError => BackoffPolicy.Constant(ten)
+      case _ => BackoffPolicy.Linear(one)
+    }
+    policy.nextBackoff(1, error) shouldEqual one
+    policy.nextBackoff(2, new TestError) shouldEqual ten
+    policy.nextBackoff(3, error) shouldEqual one * 3
+    policy.nextBackoff(4, new TestError) shouldEqual ten
+    policy.nextBackoff(5, error) shouldEqual one * 5
+  }
+
+  private class TestError extends RuntimeException
+
 }
