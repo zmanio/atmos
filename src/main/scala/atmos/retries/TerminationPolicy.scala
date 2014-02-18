@@ -48,6 +48,13 @@ object TerminationPolicy {
   val defaultMaxDuration = 10.seconds
 
   /**
+   * A termination strategy that immediately signals for termination.
+   */
+  case object ImmediatelyTerminate extends TerminationPolicy {
+    override def shouldTerminate(attempts: Int, nextAttemptAt: FiniteDuration) = true
+  }
+
+  /**
    * A termination strategy that never signals for termination.
    */
   case object NeverTerminate extends TerminationPolicy {

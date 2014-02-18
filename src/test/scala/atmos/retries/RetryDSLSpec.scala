@@ -35,6 +35,7 @@ class RetryDSLSpec extends FlatSpec with Matchers {
   import TerminationPolicy._
 
   "RetryDSL" should "create retry policies by describing termination policies" in {
+    neverRetry shouldEqual RetryPolicy(ImmediatelyTerminate)
     retrying shouldEqual RetryPolicy()
     retryFor { 5.attempts } shouldEqual RetryPolicy(LimitNumberOfAttempts(5))
     retryFor { 5.minutes } shouldEqual RetryPolicy(LimitAmountOfTimeSpent(5.minutes))

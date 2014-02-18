@@ -1,5 +1,8 @@
 1.2 (2014-02-??)
 ================
+Enhancements to the termination policies in `atmos.retries`:
+
+ - Added `TerminationPolicy.ImmediatelyTerminate`, a policy that never retries.
 
 Internal project changes:
 

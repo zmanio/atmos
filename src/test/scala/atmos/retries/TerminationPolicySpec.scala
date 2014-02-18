@@ -32,6 +32,13 @@ class TerminationPolicySpec extends FlatSpec with Matchers {
   val attempts = 6
   val timeout = 6.seconds
 
+  "TerminationPolicy.ImmediatelyTerminate" should "immediately signal for termination" in {
+    val policy = ImmediatelyTerminate
+    policy.shouldTerminate(attempts / 2, timeout / 2) shouldEqual true
+    policy.shouldTerminate(attempts, timeout) shouldEqual true
+    policy.shouldTerminate(attempts * 2, timeout * 2) shouldEqual true
+  }
+
   "TerminationPolicy.NeverTerminate" should "never signal for termination" in {
     val policy = NeverTerminate
     policy.shouldTerminate(attempts / 2, timeout / 2) shouldEqual false
