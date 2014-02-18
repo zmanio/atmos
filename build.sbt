@@ -6,7 +6,7 @@ organization := "atmos"
 
 name := "atmos"
 
-version := "1.2"
+version := "1.3-SNAPSHOT"
 
 scalaVersion := "2.10.3"
 
