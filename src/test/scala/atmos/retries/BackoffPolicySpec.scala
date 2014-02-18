@@ -28,33 +28,34 @@ import org.scalatest._
 class BackoffPolicySpec extends FlatSpec with Matchers {
 
   val backoff = 1.second
+  val error = new RuntimeException
 
   "BackoffPolicy.Constant" should "always return the initial backoff" in {
     val policy = BackoffPolicy.Constant(backoff)
-    policy.nextBackoff(1, Duration.Zero) shouldEqual backoff
-    policy.nextBackoff(2, backoff) shouldEqual backoff
-    policy.nextBackoff(3, backoff) shouldEqual backoff
+    policy.nextBackoff(1, error) shouldEqual backoff
+    policy.nextBackoff(2, error) shouldEqual backoff
+    policy.nextBackoff(3, error) shouldEqual backoff
   }
 
   "BackoffPolicy.Linear" should "increase the backoff by the initial backoff after every attempt" in {
     val policy = BackoffPolicy.Linear(backoff)
-    policy.nextBackoff(1, Duration.Zero) shouldEqual backoff
-    policy.nextBackoff(2, backoff) shouldEqual backoff * 2
-    policy.nextBackoff(3, backoff * 2) shouldEqual backoff * 3
+    policy.nextBackoff(1, error) shouldEqual backoff
+    policy.nextBackoff(2, error) shouldEqual backoff * 2
+    policy.nextBackoff(3, error) shouldEqual backoff * 3
   }
 
   "BackoffPolicy.Exponential" should "increase the backoff by doubling the previous backoff after every attempt" in {
     val policy = BackoffPolicy.Exponential(backoff)
-    policy.nextBackoff(1, Duration.Zero) shouldEqual backoff
-    policy.nextBackoff(2, backoff) shouldEqual backoff * 2
-    policy.nextBackoff(3, backoff * 2) shouldEqual backoff * 4
+    policy.nextBackoff(1, error) shouldEqual backoff
+    policy.nextBackoff(2, error) shouldEqual backoff * 2
+    policy.nextBackoff(3, error) shouldEqual backoff * 4
   }
 
   "BackoffPolicy.Fibonacci" should "multiply the previous backoff by the golden ratio after every attempt" in {
     val policy = BackoffPolicy.Fibonacci(backoff)
-    policy.nextBackoff(1, Duration.Zero) shouldEqual backoff
-    policy.nextBackoff(2, backoff) shouldEqual backoff * 8 / 5
-    policy.nextBackoff(3, backoff * 8 / 5) shouldEqual (backoff * 8 / 5) * 8 / 5
+    policy.nextBackoff(1, error) shouldEqual backoff
+    policy.nextBackoff(2, error) shouldEqual backoff * 8 / 5
+    policy.nextBackoff(3, error) shouldEqual backoff * 8 / 5 * 8 / 5
   }
 
 }

@@ -118,7 +118,7 @@ case class RetryPolicy(
       if (classification.isFatal) {
         try monitor.interrupted(name, e, failedAttempts) finally reportError(e)
       } else {
-        mostRecentBackoff = backoff.nextBackoff(failedAttempts, mostRecentBackoff)
+        mostRecentBackoff = backoff.nextBackoff(failedAttempts, e)
         val nextAttemptAt = (System.currentTimeMillis - startAt).millis + mostRecentBackoff
         if (termination.shouldTerminate(failedAttempts, nextAttemptAt)) {
           try monitor.aborted(name, e, failedAttempts) finally reportError(e)
