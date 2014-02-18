@@ -94,7 +94,7 @@
         <a href="BackoffPolicy$$Constant.html"><span class="name">Constant</span></a><span class="params">(<span name="backoff">backoff: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span> = <span class="symbol">BackoffPolicy.this.defaultBackoff</span></span>)</span><span class="result"> extends <a href="BackoffPolicy.html" class="extype" name="atmos.retries.BackoffPolicy">BackoffPolicy</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
-      <p class="comment cmt">A strategy that uses the same backoff after every attempt.</p>
+      <p class="comment cmt">A policy that uses the same backoff after every attempt.</p>
     </li><li name="atmos.retries.BackoffPolicy.Exponential" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="ExponentialextendsBackoffPolicywithProductwithSerializable"></a>
       <a id="Exponential:Exponential"></a>
@@ -107,7 +107,7 @@
         <a href="BackoffPolicy$$Exponential.html"><span class="name">Exponential</span></a><span class="params">(<span name="backoff">backoff: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span> = <span class="symbol">BackoffPolicy.this.defaultBackoff</span></span>)</span><span class="result"> extends <a href="BackoffPolicy.html" class="extype" name="atmos.retries.BackoffPolicy">BackoffPolicy</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
-      <p class="comment cmt">A strategy that increases the backoff duration exponentially after every attempt.</p>
+      <p class="comment cmt">A policy that doubles the backoff duration after every attempt.</p>
     </li><li name="atmos.retries.BackoffPolicy.Fibonacci" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="FibonacciextendsBackoffPolicywithProductwithSerializable"></a>
       <a id="Fibonacci:Fibonacci"></a>
@@ -120,7 +120,7 @@
         <a href="BackoffPolicy$$Fibonacci.html"><span class="name">Fibonacci</span></a><span class="params">(<span name="backoff">backoff: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span> = <span class="symbol">BackoffPolicy.this.defaultBackoff</span></span>)</span><span class="result"> extends <a href="BackoffPolicy.html" class="extype" name="atmos.retries.BackoffPolicy">BackoffPolicy</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
-      <p class="comment cmt">A strategy that increases the backoff duration by repeatedly multiplying by the an approximation of the golden
+      <p class="comment cmt">A policy that increases the backoff duration by repeatedly multiplying by the an approximation of the golden
 ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
     </li><li name="atmos.retries.BackoffPolicy.Linear" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="LinearextendsBackoffPolicywithProductwithSerializable"></a>
@@ -134,7 +134,33 @@ ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
         <a href="BackoffPolicy$$Linear.html"><span class="name">Linear</span></a><span class="params">(<span name="backoff">backoff: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span> = <span class="symbol">BackoffPolicy.this.defaultBackoff</span></span>)</span><span class="result"> extends <a href="BackoffPolicy.html" class="extype" name="atmos.retries.BackoffPolicy">BackoffPolicy</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
-      <p class="comment cmt">A strategy that increases the backoff duration linearly after every attempt.</p>
+      <p class="comment cmt">A policy that increases the backoff duration linearly after every attempt.</p>
+    </li><li name="atmos.retries.BackoffPolicy.Randomized" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RandomizedextendsBackoffPolicywithProductwithSerializable"></a>
+      <a id="Randomized:Randomized"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="BackoffPolicy$$Randomized.html"><span class="name">Randomized</span></a><span class="params">(<span name="policy">policy: <a href="BackoffPolicy.html" class="extype" name="atmos.retries.BackoffPolicy">BackoffPolicy</a></span>, <span name="range">range: (<span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span>, <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span>)</span>)</span><span class="result"> extends <a href="BackoffPolicy.html" class="extype" name="atmos.retries.BackoffPolicy">BackoffPolicy</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">A policy that randomizes the result of another policy by adding a random duration in the specified range.</p>
+    </li><li name="atmos.retries.BackoffPolicy.Selected" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SelectedextendsBackoffPolicywithProductwithSerializable"></a>
+      <a id="Selected:Selected"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="BackoffPolicy$$Selected.html"><span class="name">Selected</span></a><span class="params">(<span name="f">f: (<span class="extype" name="scala.Throwable">Throwable</span>) ⇒ <a href="BackoffPolicy.html" class="extype" name="atmos.retries.BackoffPolicy">BackoffPolicy</a></span>)</span><span class="result"> extends <a href="BackoffPolicy.html" class="extype" name="atmos.retries.BackoffPolicy">BackoffPolicy</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">A policy that selects the actual target policy based on the most recently thrown exception.</p>
     </li></ol>
             </div>
 

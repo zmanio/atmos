@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A strategy that increases the backoff duration linearly after every attempt.
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A policy that increases the backoff duration linearly after every attempt.
 </p></div><dl class="paramcmts block"><dt class="param">backoff</dt><dd class="cmt"><p>The duration to add to the backoff after every attempt.
 </p></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
@@ -286,19 +286,24 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="atmos.retries.BackoffPolicy.Linear#nextBackoff" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="nextBackoff(attempts:Int,previousBackoff:scala.concurrent.duration.FiniteDuration):scala.concurrent.duration.FiniteDuration"></a>
-      <a id="nextBackoff(Int,FiniteDuration):FiniteDuration"></a>
+      <a id="nextBackoff(attempts:Int,previousError:Throwable):scala.concurrent.duration.FiniteDuration"></a>
+      <a id="nextBackoff(Int,Throwable):FiniteDuration"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">nextBackoff</span><span class="params">(<span name="attempts">attempts: <span class="extype" name="scala.Int">Int</span></span>, <span name="previousBackoff">previousBackoff: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>
+        <span class="name">nextBackoff</span><span class="params">(<span name="attempts">attempts: <span class="extype" name="scala.Int">Int</span></span>, <span name="previousError">previousError: <span class="extype" name="scala.Throwable">Throwable</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Computes the next backoff duration using the specified number of attempts and/or the previous backoff duration.</p><div class="fullcomment"><div class="comment cmt"><p>Computes the next backoff duration using the specified number of attempts and/or the previous backoff duration.
-</p></div><dl class="paramcmts block"><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that have been made so far.</p></dd><dt class="param">previousBackoff</dt><dd class="cmt"><p>The previous backoff duration or <code>Duration.Zero</code> when computing the initial backoff.
+      <p class="shortcomment cmt">Computes the next backoff duration using the specified number of attempts and the error that caused this retry
+event to happen.</p><div class="fullcomment"><div class="comment cmt"><p>Computes the next backoff duration using the specified number of attempts and the error that caused this retry
+event to happen.</p><p>NOTE: in Atmos 1.x this method will, by default, call <code>nextBackoff(Int, FiniteDuration)</code> in order to preserve
+source compatibility with previous versions. To support this behavior this method will recursively reconstruct
+the value for the <code>previousBackoff</code> parameter. As of Atmos 2.0, this method will become abstract and the
+deprecated variation will be removed.
+</p></div><dl class="paramcmts block"><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that have been made so far.</p></dd><dt class="param">previousError</dt><dd class="cmt"><p>The error that caused this retry event to happen.
 </p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.retries.BackoffPolicy.Linear">Linear</a> → <a href="BackoffPolicy.html" class="extype" name="atmos.retries.BackoffPolicy">BackoffPolicy</a></dd></dl></div>
     </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notify():Unit"></a>
@@ -401,7 +406,28 @@
 
         
 
-        
+        <div id="values" class="values members">
+              <h3>Deprecated Value Members</h3>
+              <ol><li name="atmos.retries.BackoffPolicy#nextBackoff" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="nextBackoff(attempts:Int,previousBackoff:scala.concurrent.duration.FiniteDuration):scala.concurrent.duration.FiniteDuration"></a>
+      <a id="nextBackoff(Int,FiniteDuration):FiniteDuration"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: (Since version 1.2) Use nextBackoff(Int, Throwable)">nextBackoff</span><span class="params">(<span name="attempts">attempts: <span class="extype" name="scala.Int">Int</span></span>, <span name="previousBackoff">previousBackoff: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Computes the next backoff duration using the specified number of attempts and/or the previous backoff duration.</p><div class="fullcomment"><div class="comment cmt"><p>Computes the next backoff duration using the specified number of attempts and/or the previous backoff duration.</p><p>NOTE: this method will be removed in Atmos 2.0, users should migrate to <code>nextBackoff(Int, Throwable)</code>.
+</p></div><dl class="paramcmts block"><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that have been made so far.</p></dd><dt class="param">previousBackoff</dt><dd class="cmt"><p>The previous backoff duration or <code>Duration.Zero</code> when computing the initial backoff.
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="BackoffPolicy.html" class="extype" name="atmos.retries.BackoffPolicy">BackoffPolicy</a></dd><dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.2)</i> Use nextBackoff(Int, Throwable)</p></dd></dl></div>
+    </li></ol>
+            </div>
         </div>
 
         <div id="inheritedMembers">

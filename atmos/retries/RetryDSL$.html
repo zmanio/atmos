@@ -59,16 +59,30 @@ defined for a retry policy. See <a href="TerminationPolicy.html" class="extype" 
 
 <span class="cmt">// Terminate after at least 5 failed attempts but not before retrying for at least 5 minutes.</span>
 <span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryFor { <span class="num">5.</span>attempts &amp;&amp; <span class="num">5.</span>minutes }</pre><p>Note that the <code>5.minutes</code> parameter is an instance of <code>scala.concurrent.duration.FiniteDuration</code> and that any
-instance of this class may be used as a policy in <code>retryFor</code>.</p><p>Finally, a retry policy that never terminates (unless directed to by an error classifier) can be created with
-<code>retryForever</code>:</p><pre><span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever</pre><h4>Backoff Policies</h4><p>Backoff policies specify the delay between subsequent retry attempts and are configured on a retry policy with
-<code>using</code>. See <a href="BackoffPolicy.html" class="extype" name="atmos.retries.BackoffPolicy">atmos.retries.BackoffPolicy</a> for more information.</p><p>This DSL provides support for the four provided backoff policies (or any custom policy):</p><pre><span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever using constantBackoff { <span class="num">5.</span>millis }
+instance of this class may be used as a policy in <code>retryFor</code>.</p><p>Finally, a retry policy that immediately terminates can be created with <code>neverRetry</code> and a retry policy that never
+terminates (unless directed to by an error classifier) can be created with <code>retryForever</code>:</p><pre><span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = neverRetry
+
+<span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever</pre><h4>Backoff Policies</h4><p>Backoff policies specify the delay between subsequent retry attempts and are configured on a retry policy with
+<code>using</code>. See <a href="BackoffPolicy.html" class="extype" name="atmos.retries.BackoffPolicy">atmos.retries.BackoffPolicy</a> for more information.</p><p>This DSL provides support for the six provided backoff policies (or any custom policy):</p><pre><span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever using constantBackoff { <span class="num">5.</span>millis }
 
 <span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever using linearBackoff { <span class="num">5.</span>seconds }
 
 <span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever using exponentialBackoff { <span class="num">5.</span>minutes }
 
 <span class="cmt">// Uses the default backoff duration (100 milliseconds) when the parameter is omitted.</span>
-<span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever using fibonacciBackoff()</pre><h4>Monitor Configuration</h4><p>Event monitors are notified when retry attempts fail and are configured on a retry policy using <code>monitorWith</code>. See
+<span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever using fibonacciBackoff()
+
+<span class="cmt">// Selecting another backoff policy based on the type of exception thrown.</span>
+<span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever using selectedBackoff {
+  <span class="kw">case</span> e: WaitException <span class="kw">=&gt;</span> constantBackoff { e.waitDuration }
+  <span class="kw">case</span> _ <span class="kw">=&gt;</span> linearBackoff()
+}
+
+<span class="cmt">// Randomizing the result of a backoff duration by adding a random duration.</span>
+<span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever using { linearBackoff { <span class="num">1.</span>second } randomized <span class="num">100.</span>millis }
+
+<span class="cmt">// Randomizing the result of a backoff duration by adding a random duration from a range.</span>
+<span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever using { linearBackoff { <span class="num">1.</span>second } randomized -<span class="num">50.</span>millis -&gt; <span class="num">50.</span>millis }</pre><h4>Monitor Configuration</h4><p>Event monitors are notified when retry attempts fail and are configured on a retry policy using <code>monitorWith</code>. See
 <a href="EventMonitor.html" class="extype" name="atmos.retries.EventMonitor">atmos.retries.EventMonitor</a> for more information.</p><p>This DSL provides support for monitoring retry attempts with print streams, standard Java loggers and SLF4J loggers
 (or any custom monitor):</p><pre><span class="cmt">// Write information about failed attempts to stderr.</span>
 <span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever monitorWith System.err
@@ -129,7 +143,20 @@ Retry policies can be configured with error classification functions using <code
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="atmos.retries.RetryDSL.LimitAttemptsTerminationPolicyFactory" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="atmos.retries.RetryDSL.BackoffPolicyExtensions" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="BackoffPolicyExtensionsextendsAnyVal"></a>
+      <a id="BackoffPolicyExtensions:BackoffPolicyExtensions"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit final </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="RetryDSL$$BackoffPolicyExtensions.html"><span class="name">BackoffPolicyExtensions</span></a><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Adds support for randomization to all backoff policies.</p>
+    </li><li name="atmos.retries.RetryDSL.LimitAttemptsTerminationPolicyFactory" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="LimitAttemptsTerminationPolicyFactoryextendsAnyVal"></a>
       <a id="LimitAttemptsTerminationPolicyFactory:LimitAttemptsTerminationPolicyFactory"></a>
       <h4 class="signature">
@@ -516,6 +543,19 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="atmos.retries.RetryDSL#neverRetry" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="neverRetry:atmos.retries.RetryPolicy"></a>
+      <a id="neverRetry:RetryPolicy"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">neverRetry</span><span class="result">: <a href="RetryPolicy.html" class="extype" name="atmos.retries.RetryPolicy">RetryPolicy</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Creates a new retry policy that immediately terminates.</p>
     </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notify():Unit"></a>
       <a id="notify():Unit"></a>
@@ -674,7 +714,7 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).
         <span class="name">retryForever</span><span class="result">: <a href="RetryPolicy.html" class="extype" name="atmos.retries.RetryPolicy">RetryPolicy</a></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Creates a new default retry policy.</p>
+      <p class="shortcomment cmt">Creates a new retry policy that never terminates.</p>
     </li><li name="atmos.retries.RetryDSL#retrying" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="retrying:atmos.retries.RetryPolicy"></a>
       <a id="retrying:RetryPolicy"></a>
@@ -688,6 +728,21 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).
       </span>
       </h4>
       <p class="shortcomment cmt">Creates a new default retry policy.</p>
+    </li><li name="atmos.retries.RetryDSL#selectedBackoff" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="selectedBackoff(f:Throwable=&gt;atmos.retries.BackoffPolicy):atmos.retries.BackoffPolicy"></a>
+      <a id="selectedBackoff((Throwable)⇒BackoffPolicy):BackoffPolicy"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">selectedBackoff</span><span class="params">(<span name="f">f: (<span class="extype" name="scala.Throwable">Throwable</span>) ⇒ <a href="BackoffPolicy.html" class="extype" name="atmos.retries.BackoffPolicy">BackoffPolicy</a></span>)</span><span class="result">: <a href="BackoffPolicy.html" class="extype" name="atmos.retries.BackoffPolicy">BackoffPolicy</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Creates a backoff policy selects another policy based on the most recently thrown exception.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a backoff policy selects another policy based on the most recently thrown exception.
+</p></div><dl class="paramcmts block"><dt class="param">f</dt><dd class="cmt"><p>The function that maps from exceptions to backoff policies.
+</p></dd></dl></div>
     </li><li name="atmos.retries.RetryDSL#stopRetrying" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="stopRetrying:atmos.retries.ErrorClassification"></a>
       <a id="stopRetrying:ErrorClassification"></a>

@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>Exponential - atmos.retries.BackoffPolicy.Exponential</title>
-          <meta name="description" content="Exponential - atmos.retries.BackoffPolicy.Exponential" />
-          <meta name="keywords" content="Exponential atmos.retries.BackoffPolicy.Exponential" />
+          <title>ImmediatelyTerminate - atmos.retries.TerminationPolicy.ImmediatelyTerminate</title>
+          <meta name="description" content="ImmediatelyTerminate - atmos.retries.TerminationPolicy.ImmediatelyTerminate" />
+          <meta name="keywords" content="ImmediatelyTerminate atmos.retries.TerminationPolicy.ImmediatelyTerminate" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -12,7 +12,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../index.html';
-            var hash = 'atmos.retries.BackoffPolicy$$Exponential';
+            var hash = 'atmos.retries.TerminationPolicy$$ImmediatelyTerminate$';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -22,28 +22,27 @@
    	  </script>
     
         </head>
-        <body class="type">
+        <body class="value">
       <div id="definition">
-        <img src="../../lib/class_big.png" />
-        <p id="owner"><a href="../package.html" class="extype" name="atmos">atmos</a>.<a href="package.html" class="extype" name="atmos.retries">retries</a>.<a href="BackoffPolicy$.html" class="extype" name="atmos.retries.BackoffPolicy">BackoffPolicy</a></p>
-        <h1>Exponential</h1>
+        <img src="../../lib/object_big.png" />
+        <p id="owner"><a href="../package.html" class="extype" name="atmos">atmos</a>.<a href="package.html" class="extype" name="atmos.retries">retries</a>.<a href="TerminationPolicy$.html" class="extype" name="atmos.retries.TerminationPolicy">TerminationPolicy</a></p>
+        <h1>ImmediatelyTerminate</h1>
       </div>
 
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">case class</span>
+        <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">Exponential</span><span class="params">(<span name="backoff">backoff: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span> = <span class="symbol">BackoffPolicy.this.defaultBackoff</span></span>)</span><span class="result"> extends <a href="BackoffPolicy.html" class="extype" name="atmos.retries.BackoffPolicy">BackoffPolicy</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <span class="name">ImmediatelyTerminate</span><span class="result"> extends <a href="TerminationPolicy.html" class="extype" name="atmos.retries.TerminationPolicy">TerminationPolicy</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A policy that doubles the backoff duration after every attempt.
-</p></div><dl class="paramcmts block"><dt class="param">backoff</dt><dd class="cmt"><p>The backoff used for the first retry and used as the base for all subsequent attempts.
-</p></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A termination strategy that immediately signals for termination.
+</p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <a href="BackoffPolicy.html" class="extype" name="atmos.retries.BackoffPolicy">BackoffPolicy</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <a href="TerminationPolicy.html" class="extype" name="atmos.retries.TerminationPolicy">TerminationPolicy</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -61,7 +60,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="atmos.retries.BackoffPolicy.Exponential"><span>Exponential</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="atmos.retries.BackoffPolicy"><span>BackoffPolicy</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="atmos.retries.TerminationPolicy.ImmediatelyTerminate"><span>ImmediatelyTerminate</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="atmos.retries.TerminationPolicy"><span>TerminationPolicy</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -79,24 +78,7 @@
 
       <div id="template">
         <div id="allMembers">
-        <div id="constructors" class="members">
-              <h3>Instance Constructors</h3>
-              <ol><li name="atmos.retries.BackoffPolicy.Exponential#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="&lt;init&gt;(backoff:scala.concurrent.duration.FiniteDuration):atmos.retries.BackoffPolicy.Exponential"></a>
-      <a id="&lt;init&gt;:Exponential"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">new</span>
-      </span>
-      <span class="symbol">
-        <span class="name">Exponential</span><span class="params">(<span name="backoff">backoff: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span> = <span class="symbol">BackoffPolicy.this.defaultBackoff</span></span>)</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">backoff</dt><dd class="cmt"><p>The backoff used for the first retry and used as the base for all subsequent attempts.
-</p></dd></dl></div>
-    </li></ol>
-            </div>
+        
 
         
 
@@ -182,19 +164,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="atmos.retries.BackoffPolicy.Exponential#backoff" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="backoff:scala.concurrent.duration.FiniteDuration"></a>
-      <a id="backoff:FiniteDuration"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">backoff</span><span class="result">: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The backoff used for the first retry and used as the base for all subsequent attempts.</p>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
@@ -227,6 +196,19 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(x$1:Any):Boolean"></a>
+      <a id="equals(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
@@ -285,26 +267,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="atmos.retries.BackoffPolicy.Exponential#nextBackoff" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="nextBackoff(attempts:Int,previousError:Throwable):scala.concurrent.duration.FiniteDuration"></a>
-      <a id="nextBackoff(Int,Throwable):FiniteDuration"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">nextBackoff</span><span class="params">(<span name="attempts">attempts: <span class="extype" name="scala.Int">Int</span></span>, <span name="previousError">previousError: <span class="extype" name="scala.Throwable">Throwable</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Computes the next backoff duration using the specified number of attempts and the error that caused this retry
-event to happen.</p><div class="fullcomment"><div class="comment cmt"><p>Computes the next backoff duration using the specified number of attempts and the error that caused this retry
-event to happen.</p><p>NOTE: in Atmos 1.x this method will, by default, call <code>nextBackoff(Int, FiniteDuration)</code> in order to preserve
-source compatibility with previous versions. To support this behavior this method will recursively reconstruct
-the value for the <code>previousBackoff</code> parameter. As of Atmos 2.0, this method will become abstract and the
-deprecated variation will be removed.
-</p></div><dl class="paramcmts block"><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that have been made so far.</p></dd><dt class="param">previousError</dt><dd class="cmt"><p>The error that caused this retry event to happen.
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.retries.BackoffPolicy.Exponential">Exponential</a> → <a href="BackoffPolicy.html" class="extype" name="atmos.retries.BackoffPolicy">BackoffPolicy</a></dd></dl></div>
     </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notify():Unit"></a>
       <a id="notify():Unit"></a>
@@ -331,6 +293,21 @@ deprecated variation will be removed.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="atmos.retries.TerminationPolicy.ImmediatelyTerminate#shouldTerminate" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="shouldTerminate(attempts:Int,nextAttemptAt:scala.concurrent.duration.FiniteDuration):Boolean"></a>
+      <a id="shouldTerminate(Int,FiniteDuration):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">shouldTerminate</span><span class="params">(<span name="attempts">attempts: <span class="extype" name="scala.Int">Int</span></span>, <span name="nextAttemptAt">nextAttemptAt: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns true if the retry operation with the specified properties should terminate.</p><div class="fullcomment"><div class="comment cmt"><p>Returns true if the retry operation with the specified properties should terminate.
+</p></div><dl class="paramcmts block"><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that have been made so far.</p></dd><dt class="param">nextAttemptAt</dt><dd class="cmt"><p>The amount of time between when the retry operation began and the next attempt will occur.
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.retries.TerminationPolicy.ImmediatelyTerminate">ImmediatelyTerminate</a> → <a href="TerminationPolicy.html" class="extype" name="atmos.retries.TerminationPolicy">TerminationPolicy</a></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -406,28 +383,7 @@ deprecated variation will be removed.
 
         
 
-        <div id="values" class="values members">
-              <h3>Deprecated Value Members</h3>
-              <ol><li name="atmos.retries.BackoffPolicy#nextBackoff" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="nextBackoff(attempts:Int,previousBackoff:scala.concurrent.duration.FiniteDuration):scala.concurrent.duration.FiniteDuration"></a>
-      <a id="nextBackoff(Int,FiniteDuration):FiniteDuration"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name deprecated" title="Deprecated: (Since version 1.2) Use nextBackoff(Int, Throwable)">nextBackoff</span><span class="params">(<span name="attempts">attempts: <span class="extype" name="scala.Int">Int</span></span>, <span name="previousBackoff">previousBackoff: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Computes the next backoff duration using the specified number of attempts and/or the previous backoff duration.</p><div class="fullcomment"><div class="comment cmt"><p>Computes the next backoff duration using the specified number of attempts and/or the previous backoff duration.</p><p>NOTE: this method will be removed in Atmos 2.0, users should migrate to <code>nextBackoff(Int, Throwable)</code>.
-</p></div><dl class="paramcmts block"><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that have been made so far.</p></dd><dt class="param">previousBackoff</dt><dd class="cmt"><p>The previous backoff duration or <code>Duration.Zero</code> when computing the initial backoff.
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="BackoffPolicy.html" class="extype" name="atmos.retries.BackoffPolicy">BackoffPolicy</a></dd><dt>Annotations</dt><dd>
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.2)</i> Use nextBackoff(Int, Throwable)</p></dd></dl></div>
-    </li></ol>
-            </div>
+        
         </div>
 
         <div id="inheritedMembers">
@@ -439,8 +395,8 @@ deprecated variation will be removed.
               <h3>Inherited from <span class="extype" name="scala.Product">Product</span></h3>
             </div><div class="parent" name="scala.Equals">
               <h3>Inherited from <span class="extype" name="scala.Equals">Equals</span></h3>
-            </div><div class="parent" name="atmos.retries.BackoffPolicy">
-              <h3>Inherited from <a href="BackoffPolicy.html" class="extype" name="atmos.retries.BackoffPolicy">BackoffPolicy</a></h3>
+            </div><div class="parent" name="atmos.retries.TerminationPolicy">
+              <h3>Inherited from <a href="TerminationPolicy.html" class="extype" name="atmos.retries.TerminationPolicy">TerminationPolicy</a></h3>
             </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
