@@ -1,4 +1,4 @@
-1.2 (2014-02-??)
+1.2 (2014-02-18)
 ================
 Enhancements to the backoff policies in `atmos.retries`:
 
