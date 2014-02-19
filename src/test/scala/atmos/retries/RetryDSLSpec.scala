@@ -19,6 +19,7 @@
  */
 package atmos.retries
 
+import java.io.{ PrintWriter, StringWriter }
 import java.util.logging.Logger
 import scala.concurrent.duration._
 import org.scalatest._
@@ -61,9 +62,11 @@ class RetryDSLSpec extends FlatSpec with Matchers {
   }
 
   it should "configure retry policies with event monitors" in {
+    retrying monitorWith System.out shouldEqual RetryPolicy(monitor = PrintEventsWithStream(System.out))
+    val writer = new PrintWriter(new StringWriter)
+    retrying monitorWith writer shouldEqual RetryPolicy(monitor = PrintEventsWithWriter(writer))
     val logger = Logger.getLogger(getClass.getName)
     retrying monitorWith logger shouldEqual RetryPolicy(monitor = LogEvents(logger))
-    retrying monitorWith System.out shouldEqual RetryPolicy(monitor = PrintEvents(System.out))
   }
 
   it should "configure retry policies with error classifiers" in {

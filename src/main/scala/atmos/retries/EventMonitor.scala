@@ -19,7 +19,7 @@
  */
 package atmos.retries
 
-import java.io.PrintStream
+import java.io.{ PrintStream, PrintWriter }
 import java.util.logging.{ Level, Logger }
 import scala.concurrent.duration._
 import org.slf4j.{ Logger => Slf4jLogger }
@@ -124,6 +124,229 @@ object EventMonitor {
       s"Too many exceptions after attempt $attempts of $op... aborting: $tpe: $msg"
     }
 
+  }
+
+  //
+  // Monitors that print information about retry events as text.
+  //
+
+  /**
+   * Base type for event monitors that print information about retry events as text.
+   */
+  trait PrintEvents extends EventMonitor with FormatEvents {
+
+    import PrintEvents.PrintAction
+
+    /** The type of object that this event monitor prints to. */
+    type TargetType <: AnyRef
+
+    /** The object that this event monitor prints to. */
+    def target: TargetType
+
+    /** The action that is performed when a retrying event is received. */
+    def retryingAction: PrintAction
+
+    /** The action that is performed when an interrupted event is received. */
+    def interruptedAction: PrintAction
+
+    /** The action that is performed when an aborted event is received. */
+    def abortedAction: PrintAction
+
+    /**
+     * The object that this event monitor prints to.
+     *
+     * NOTE: This method is simply an alias for `target` and exists only to preserve source compatibility with previous
+     * versions. This method will be removed in Atmos 2.0, users should migrate to `target`.
+     */
+    @deprecated("Use target", "1.3")
+    def stream: TargetType = target
+
+    /**
+     * True if this event monitor will print the stack trace for retrying events.
+     *
+     * NOTE: This method uses `retryingAction` to calculate its value and exists only to preserve source compatibility
+     * with previous versions. This method will be removed in Atmos 2.0, users should migrate to `retryingAction`.
+     */
+    @deprecated("Use retryingAction", "1.3")
+    def printRetryingStackTrace: Boolean = retryingAction == PrintAction.PrintMessageAndStackTrace
+
+    /**
+     * True if this event monitor will print the stack trace for interrupted events.
+     *
+     * NOTE: This method uses `interruptedAction` to calculate its value and exists only to preserve source
+     * compatibility with previous versions. This method will be removed in Atmos 2.0, users should migrate to
+     * `interruptedAction`.
+     */
+    @deprecated("Use interruptedAction", "1.3")
+    def printInterruptedStackTrace: Boolean = interruptedAction == PrintAction.PrintMessageAndStackTrace
+
+    /**
+     * True if this event monitor will print the stack trace for aborted events.
+     *
+     * NOTE: This method uses `abortedAction` to calculate its value and exists only to preserve source compatibility
+     * with previous versions. This method will be removed in Atmos 2.0, users should migrate to `abortedAction`.
+     */
+    @deprecated("Use abortedAction", "1.3")
+    def printAbortedStackTrace: Boolean = abortedAction == PrintAction.PrintMessageAndStackTrace
+
+    /** @inheritdoc */
+    override def retrying //
+    (name: Option[String], thrown: Throwable, attempts: Int, backoff: FiniteDuration, silent: Boolean) =
+      if (!silent && retryingAction != PrintAction.PrintNothing)
+        printEvent(formatRetrying(name, thrown, attempts, backoff), thrown, retryingAction == PrintAction.PrintMessage)
+
+    /** @inheritdoc */
+    override def interrupted(name: Option[String], thrown: Throwable, attempts: Int) =
+      if (interruptedAction != PrintAction.PrintNothing)
+        printEvent(formatInterrupted(name, thrown, attempts), thrown, interruptedAction == PrintAction.PrintMessage)
+
+    /** @inheritdoc */
+    override def aborted(name: Option[String], thrown: Throwable, attempts: Int) =
+      if (abortedAction != PrintAction.PrintNothing)
+        printEvent(formatAborted(name, thrown, attempts), thrown, abortedAction == PrintAction.PrintMessage)
+
+    /** Utility method that handles locking on the target object when printing both a message and a stack trace. */
+    private def printEvent(message: String, thrown: Throwable, noStackTrace: Boolean): Unit =
+      if (noStackTrace) printMessage(message)
+      else target synchronized {
+        printMessage(message)
+        printStackTrace(thrown)
+      }
+
+    /** Prints a message the to underlying target object. */
+    protected def printMessage(message: String): Unit
+
+    /** Prints a stack trace to the underlying target object. */
+    protected def printStackTrace(thrown: Throwable): Unit
+
+  }
+
+  /**
+   * Definitions associated with event monitors that print information about retry events as text.
+   */
+  object PrintEvents {
+
+    /** The action that is performed by default when a retrying event is received. */
+    val defaultRetryingAction: PrintAction = PrintAction.PrintMessage
+
+    /** The action that is performed by default when an interrupted event is received. */
+    val defaultInterruptedAction: PrintAction = PrintAction.PrintMessageAndStackTrace
+
+    /** The action that is performed by default when an aborted event is received. */
+    val defaultAbortedAction: PrintAction = PrintAction.PrintMessageAndStackTrace
+
+    /**
+     * True if the stack trace from retrying events should be printed by default.
+     *
+     * NOTE: This field uses `defaultRetryingAction` to calculate its value and exists only to preserve source
+     * compatibility with previous versions. This method will be removed in Atmos 2.0, users should migrate to
+     * `defaultRetryingAction`.
+     */
+    @deprecated("Use defaultRetryingAction", "1.3")
+    val defaultPrintRetryingStackTrace = defaultRetryingAction == PrintAction.PrintMessageAndStackTrace
+
+    /**
+     * True if the stack trace from interrupted events should be printed by default.
+     *
+     * NOTE: This field uses `defaultInterruptedAction` to calculate its value and exists only to preserve source
+     * compatibility with previous versions. This method will be removed in Atmos 2.0, users should migrate to
+     * `defaultInterruptedAction`.
+     */
+    @deprecated("Use defaultInterruptedAction", "1.3")
+    val defaultPrintInterruptedStackTrace = defaultInterruptedAction == PrintAction.PrintMessageAndStackTrace
+
+    /**
+     * True if the stack trace from aborted events should be printed by default.
+     *
+     * NOTE: This field uses `defaultAbortedAction` to calculate its value and exists only to preserve source
+     * compatibility with previous versions. This method will be removed in Atmos 2.0, users should migrate to
+     * `defaultAbortedAction`.
+     */
+    @deprecated("Use defaultAbortedAction", "1.3")
+    val defaultPrintAbortedStackTrace = defaultAbortedAction == PrintAction.PrintMessageAndStackTrace
+
+    /**
+     * Creates a new event monitor that prints information about retry events as text.
+     *
+     * NOTE: This method simply creates a `PrintEventsWithStream` and exists only to preserve source compatibility with
+     * previous versions. This method will be removed in Atmos 2.0, users should migrate to
+     * `PrintEventsWithStream.apply(PrintStream, PrintAction, PrintAction, PrintAction)`.
+     *
+     * @param stream The object that the event monitor will print to.
+     * @param printRetryingStackTrace True if the event monitor will print the stack trace for retrying events.
+     * @param printInterruptedStackTrace True if the event monitor will print the stack trace for interrupted events.
+     * @param printAbortedStackTrace True if the event monitor will print the stack trace for aborted events.
+     */
+    @deprecated("Use PrintEventsWithStream.apply(PrintStream, PrintAction, PrintAction, PrintAction)", "1.3")
+    def apply(
+      stream: PrintStream,
+      printRetryingStackTrace: Boolean = defaultPrintRetryingStackTrace,
+      printInterruptedStackTrace: Boolean = defaultPrintInterruptedStackTrace,
+      printAbortedStackTrace: Boolean = defaultPrintAbortedStackTrace): PrintEventsWithStream =
+      PrintEventsWithStream(stream,
+        if (printRetryingStackTrace) PrintAction.PrintMessageAndStackTrace else PrintAction.PrintMessage,
+        if (printInterruptedStackTrace) PrintAction.PrintMessageAndStackTrace else PrintAction.PrintMessage,
+        if (printAbortedStackTrace) PrintAction.PrintMessageAndStackTrace else PrintAction.PrintMessage)
+
+    /**
+     * Base type for printing-related actions that can be performed when a retry event is received.
+     */
+    sealed trait PrintAction
+
+    /**
+     * Definition of the printing-related actions that can be performed when a retry event is received.
+     */
+    object PrintAction {
+
+      /** A print action that will not print anything. */
+      case object PrintNothing extends PrintAction
+
+      /** A print action that will only print the formatted event message. */
+      case object PrintMessage extends PrintAction
+
+      /** A print action that will print the formatted event message and the most recent exception's stack trace. */
+      case object PrintMessageAndStackTrace extends PrintAction
+
+    }
+
+  }
+
+  /**
+   * An event monitor that prints information about retry events to a stream.
+   *
+   * @param target The stream that this event monitor prints to.
+   * @param retryingAction The action that is performed when a retrying event is received.
+   * @param interruptedAction The action that is performed when an interrupted event is received.
+   * @param abortedAction The action that is performed when an aborted event is received.
+   */
+  case class PrintEventsWithStream(
+    override val target: PrintStream,
+    override val retryingAction: PrintEvents.PrintAction = PrintEvents.defaultRetryingAction,
+    override val interruptedAction: PrintEvents.PrintAction = PrintEvents.defaultInterruptedAction,
+    override val abortedAction: PrintEvents.PrintAction = PrintEvents.defaultAbortedAction)
+    extends PrintEvents {
+    override type TargetType = PrintStream
+    override protected def printMessage(message: String) = target.println(message)
+    override protected def printStackTrace(thrown: Throwable) = thrown.printStackTrace(target)
+  }
+
+  /**
+   * An event monitor that prints information about retry events to a writer.
+   *
+   * @param target The writer that this event monitor prints to.
+   * @param retryingAction The action that is performed when a retrying event is received.
+   * @param interruptedAction The action that is performed when an interrupted event is received.
+   * @param abortedAction The action that is performed when an aborted event is received.
+   */
+  case class PrintEventsWithWriter(
+    override val target: PrintWriter,
+    override val retryingAction: PrintEvents.PrintAction = PrintEvents.defaultRetryingAction,
+    override val interruptedAction: PrintEvents.PrintAction = PrintEvents.defaultInterruptedAction,
+    override val abortedAction: PrintEvents.PrintAction = PrintEvents.defaultAbortedAction)
+    extends PrintEvents {
+    override type TargetType = PrintWriter
+    override protected def printMessage(message: String) = target.println(message)
+    override protected def printStackTrace(thrown: Throwable) = thrown.printStackTrace(target)
   }
 
   /**
@@ -253,74 +476,26 @@ object EventMonitor {
      * Declarations of the available SLF4J logging levels.
      */
     object Slf4jLevel {
-      
+
       /** The SLF4J error logging level. */
       case object Error extends Slf4jLevel
-      
+
       /** The SLF4J warn logging level. */
       case object Warn extends Slf4jLevel
-      
+
       /** The SLF4J info logging level. */
       case object Info extends Slf4jLevel
-      
+
       /** The SLF4J debug logging level. */
       case object Debug extends Slf4jLevel
-      
+
       /** The SLF4J trace logging level. */
       case object Trace extends Slf4jLevel
-      
+
       /** The SLF4J logging level that disables logging. */
       case object Off extends Slf4jLevel
-      
+
     }
-
-  }
-
-  /**
-   * An event monitor that formats and prints events to a stream.
-   */
-  case class PrintEvents(
-    stream: PrintStream,
-    printRetryingStackTrace: Boolean = PrintEvents.defaultPrintRetryingStackTrace,
-    printInterruptedStackTrace: Boolean = PrintEvents.defaultPrintInterruptedStackTrace,
-    printAbortedStackTrace: Boolean = PrintEvents.defaultPrintAbortedStackTrace)
-    extends EventMonitor with FormatEvents {
-
-    /** @inheritdoc */
-    override def retrying //
-    (name: Option[String], thrown: Throwable, attempts: Int, backoff: FiniteDuration, silent: Boolean) =
-      if (!silent) {
-        stream.println(formatRetrying(name, thrown, attempts, backoff))
-        if (printRetryingStackTrace) thrown.printStackTrace(stream)
-      }
-
-    /** @inheritdoc */
-    override def interrupted(name: Option[String], thrown: Throwable, attempts: Int) = {
-      stream.println(formatInterrupted(name, thrown, attempts))
-      if (printInterruptedStackTrace) thrown.printStackTrace(stream)
-    }
-
-    /** @inheritdoc */
-    override def aborted(name: Option[String], thrown: Throwable, attempts: Int) = {
-      stream.println(formatAborted(name, thrown, attempts))
-      if (printAbortedStackTrace) thrown.printStackTrace(stream)
-    }
-
-  }
-
-  /**
-   * Factory for event monitors that prints messages to a stream.
-   */
-  object PrintEvents {
-
-    /** True if the stack trace from retrying events should be printed by default. */
-    val defaultPrintRetryingStackTrace = false
-
-    /** True if the stack trace from interrupted events should be printed by default. */
-    val defaultPrintInterruptedStackTrace = true
-
-    /** True if the stack trace from aborted events should be printed by default. */
-    val defaultPrintAbortedStackTrace = true
 
   }
 

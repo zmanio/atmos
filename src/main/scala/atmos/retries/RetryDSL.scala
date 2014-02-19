@@ -16,7 +16,7 @@
  */
 package atmos.retries
 
-import java.io.PrintStream
+import java.io.{ PrintStream, PrintWriter }
 import java.util.logging.Logger
 import scala.concurrent.{ ExecutionContext, Future }
 import scala.concurrent.duration._
@@ -84,7 +84,7 @@ import org.slf4j.{ Logger => Slf4jLogger }
  * terminates (unless directed to by an error classifier) can be created with `retryForever`:
  * {{{
  * implicit val retryPolicy = neverRetry
- * 
+ *
  * implicit val retryPolicy = retryForever
  * }}}
  *
@@ -122,11 +122,14 @@ import org.slf4j.{ Logger => Slf4jLogger }
  * Event monitors are notified when retry attempts fail and are configured on a retry policy using `monitorWith`. See
  * [[atmos.retries.EventMonitor]] for more information.
  *
- * This DSL provides support for monitoring retry attempts with print streams, standard Java loggers and SLF4J loggers
- * (or any custom monitor):
+ * This DSL provides support for monitoring retry attempts with print streams, print writers, standard Java loggers and
+ * SLF4J loggers (or any custom monitor):
  * {{{
  * // Write information about failed attempts to stderr.
  * implicit val retryPolicy = retryForever monitorWith System.err
+ * 
+ * // Write information about failed attempts to a file.
+ * implicit val retryPolicy = retryForever monitorWith new PrintWriter("/some/file")
  *
  * // Write information about failed attempts to the specified instance of java.util.logging.Logger.
  * implicit val retryPolicy = retryForever monitorWith Logger.getLogger("MyLoggerName")
@@ -345,8 +348,16 @@ object RetryDSL {
    *
    * @param stream The stream to print events to.
    */
-  implicit def printStreamToEventMonitor(stream: PrintStream): EventMonitor =
-    EventMonitor.PrintEvents(stream)
+  implicit def printStreamToEventMonitor(stream: PrintStream): EventMonitor.PrintEventsWithStream =
+    EventMonitor.PrintEventsWithStream(stream)
+
+  /**
+   * Creates a new event monitor that prints messages to a writer.
+   *
+   * @param writer The writer to print events to.
+   */
+  implicit def printWriterToEventMonitor(writer: PrintWriter): EventMonitor.PrintEventsWithWriter =
+    EventMonitor.PrintEventsWithWriter(writer)
 
   /**
    * Creates a new event monitor that submits events to a logger.
