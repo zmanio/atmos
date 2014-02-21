@@ -93,7 +93,7 @@ import org.slf4j.{ Logger => Slf4jLogger }
  * Backoff policies specify the delay between subsequent retry attempts and are configured on a retry policy with
  * `using`. See [[atmos.retries.BackoffPolicy]] for more information.
  *
- * This DSL provides support for the six provided backoff policies (or any custom policy):
+ * This DSL provides support for the six provided backoff policies:
  * {{{
  * implicit val retryPolicy = retryForever using constantBackoff { 5.millis }
  *
@@ -123,13 +123,15 @@ import org.slf4j.{ Logger => Slf4jLogger }
  * [[atmos.retries.EventMonitor]] for more information.
  *
  * This DSL provides support for monitoring retry attempts with print streams, print writers, standard Java loggers and
- * SLF4J loggers (or any custom monitor):
+ * SLF4J loggers:
  * {{{
- * // Write information about failed attempts to stderr.
+ * // Print information about failed attempts to stderr using the default printing strategies.
  * implicit val retryPolicy = retryForever monitorWith System.err
- * 
- * // Write information about failed attempts to a file.
- * implicit val retryPolicy = retryForever monitorWith new PrintWriter("/some/file")
+ *
+ * // Print information about failed attempts to a file, customizing what events get printed and how.
+ * implicit val retryPolicy = retryForever monitorWith {
+ *   new PrintWriter("/path") onRetrying printNothing onInterrupted printMessage onAborted printMessageAndStackTrace
+ * }
  *
  * // Write information about failed attempts to the specified instance of java.util.logging.Logger.
  * implicit val retryPolicy = retryForever monitorWith Logger.getLogger("MyLoggerName")
@@ -340,7 +342,7 @@ object RetryDSL {
   }
 
   //
-  // Monitor factories.
+  // Monitor factories and extensions.
   //
 
   /**
@@ -352,12 +354,73 @@ object RetryDSL {
     EventMonitor.PrintEventsWithStream(stream)
 
   /**
+   * Creates a new event monitor extension interface for a print stream.
+   *
+   * @param stream The print stream to create a new event monitor extension interface for.
+   */
+  implicit def printStreamToEventMonitorExtensions(stream: PrintStream): PrintEventsWithStreamExtensions =
+    new PrintEventsWithStreamExtensions(stream)
+
+  /**
+   * Exposes extensions on any instance of `EventMonitor.PrintEventsWithStream`.
+   */
+  implicit final class PrintEventsWithStreamExtensions(val self: EventMonitor.PrintEventsWithStream) extends AnyVal {
+
+    import EventMonitor.PrintEvents.PrintAction
+
+    /** Returns a copy of the underlying monitor that prints events with the specified retrying strategy. */
+    def onRetrying(action: PrintAction) = self.copy(retryingAction = action)
+
+    /** Returns a copy of the underlying monitor that prints events with the specified interrupted strategy. */
+    def onInterrupted(action: PrintAction) = self.copy(interruptedAction = action)
+
+    /** Returns a copy of the underlying monitor that prints events with the specified aborting strategy. */
+    def onAborted(action: PrintAction) = self.copy(abortedAction = action)
+
+  }
+
+  /**
    * Creates a new event monitor that prints messages to a writer.
    *
    * @param writer The writer to print events to.
    */
   implicit def printWriterToEventMonitor(writer: PrintWriter): EventMonitor.PrintEventsWithWriter =
     EventMonitor.PrintEventsWithWriter(writer)
+
+  /**
+   * Creates a new event monitor extension interface for a print writer.
+   *
+   * @param writer The print writer to create a new event monitor extension interface for.
+   */
+  implicit def printWriterToEventMonitorExtensions(writer: PrintWriter): PrintEventsWithWriterExtensions =
+    new PrintEventsWithWriterExtensions(writer)
+
+  /**
+   * Exposes extensions on any instance of `EventMonitor.PrintEventsWithWriter`.
+   */
+  implicit final class PrintEventsWithWriterExtensions(val self: EventMonitor.PrintEventsWithWriter) extends AnyVal {
+
+    import EventMonitor.PrintEvents.PrintAction
+
+    /** Returns a copy of the underlying monitor that prints events with the specified retrying strategy. */
+    def onRetrying(action: PrintAction) = self.copy(retryingAction = action)
+
+    /** Returns a copy of the underlying monitor that prints events with the specified interrupted strategy. */
+    def onInterrupted(action: PrintAction) = self.copy(interruptedAction = action)
+
+    /** Returns a copy of the underlying monitor that prints events with the specified aborting strategy. */
+    def onAborted(action: PrintAction) = self.copy(abortedAction = action)
+
+  }
+
+  /** Returns a print action that will print no text. */
+  def printNothing = EventMonitor.PrintEvents.PrintAction.PrintNothing
+
+  /** Returns a print action that will print only an event message. */
+  def printMessage = EventMonitor.PrintEvents.PrintAction.PrintMessage
+
+  /** Returns a print action that will print an event message and stack trace. */
+  def printMessageAndStackTrace = EventMonitor.PrintEvents.PrintAction.PrintMessageAndStackTrace
 
   /**
    * Creates a new event monitor that submits events to a logger.

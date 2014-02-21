@@ -62,9 +62,16 @@ class RetryDSLSpec extends FlatSpec with Matchers {
   }
 
   it should "configure retry policies with event monitors" in {
-    retrying monitorWith System.out shouldEqual RetryPolicy(monitor = PrintEventsWithStream(System.out))
+    import PrintEvents.PrintAction
+    retrying monitorWith {
+      System.out onRetrying printMessageAndStackTrace onInterrupted printNothing onAborted printMessage
+    } shouldEqual RetryPolicy(monitor = PrintEventsWithStream(
+      System.out, PrintAction.PrintMessageAndStackTrace, PrintAction.PrintNothing, PrintAction.PrintMessage))
     val writer = new PrintWriter(new StringWriter)
-    retrying monitorWith writer shouldEqual RetryPolicy(monitor = PrintEventsWithWriter(writer))
+    retrying monitorWith {
+      writer onRetrying printMessageAndStackTrace onInterrupted printNothing onAborted printMessage
+    } shouldEqual RetryPolicy(monitor = PrintEventsWithWriter(
+      writer, PrintAction.PrintMessageAndStackTrace, PrintAction.PrintNothing, PrintAction.PrintMessage))
     val logger = Logger.getLogger(getClass.getName)
     retrying monitorWith logger shouldEqual RetryPolicy(monitor = LogEvents(logger))
   }

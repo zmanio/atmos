@@ -5,6 +5,8 @@ Reworked `atmos.retries.EventMonitor.PrintEvents`:
  - Converted `PrintEvents` into a trait and extracted two concrete subtypes, `PrintEventsWithStream` and `PrintEventsWithWriter`.
  
  - Deprecated the use of booleans to signal whether a stack trace should be printed for a particular event. The booleans are replaced by `PrintEvents.PrintAction`, a `sealed trait` / `case object` enumeration capable of representing any number of printing strategies.
+ 
+ - Modified the retry DSL to support concise configuration of print actions on event monitors derived from print streams and print writers.
 
 1.2 (2014-02-18)
 ================
