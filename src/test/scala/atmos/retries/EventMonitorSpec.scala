@@ -20,13 +20,15 @@
 package atmos.retries
 
 import java.io.{ ByteArrayOutputStream, PrintStream, PrintWriter }
+import java.util.logging.{ Logger, Level }
 import scala.concurrent.duration._
 import org.scalatest._
+import org.scalamock.scalatest.MockFactory
 
 /**
  * Test suite for [[atmos.retries.EventMonitor]].
  */
-class EventMonitorSpec extends FlatSpec with Matchers {
+class EventMonitorSpec extends FlatSpec with Matchers with MockFactory {
 
   import EventMonitor._
 
@@ -72,6 +74,35 @@ class EventMonitorSpec extends FlatSpec with Matchers {
     }
   }
 
+  "EventMonitor.LogEventsWithJava" should "format and submit log entries to java.util.logging loggers" in {
+    import LogEvents.LogAction._
+    val logger = new LogEventsWithJavaLogger
+    for (action <- Seq(LogAt(Level.SEVERE), LogAt(Level.WARNING), LogAt(Level.INFO), LogAt(Level.CONFIG))) {
+      val monitor = LogEventsWithJava(logger, action, action, action)
+      monitor.retrying(None, thrown, 1, 1.second, true)
+      (logger.target.isLoggable _).expects(action.level).returns(true).once
+      (logger.target.log _).expects(action.level, *, thrown).once
+      monitor.retrying(Some("test"), thrown, 2, 1.second, false)
+      (logger.target.isLoggable _).expects(action.level).returns(false).once
+      monitor.interrupted(None, thrown, 3)
+      (logger.target.isLoggable _).expects(action.level).returns(false).once
+      monitor.interrupted(Some("test"), thrown, 4)
+      (logger.target.isLoggable _).expects(action.level).returns(true).once
+      (logger.target.log _).expects(action.level, *, thrown).once
+      monitor.aborted(None, thrown, 5)
+      (logger.target.isLoggable _).expects(action.level).returns(true).once
+      (logger.target.log _).expects(action.level, *, thrown).once
+      monitor.aborted(Some("test"), thrown, 6)
+    }
+    val monitor = LogEventsWithJava(logger, LogNothing, LogNothing, LogNothing)
+    monitor.retrying(None, thrown, 1, 1.second, true)
+    monitor.retrying(Some("test"), thrown, 2, 1.second, false)
+    monitor.interrupted(None, thrown, 3)
+    monitor.interrupted(Some("test"), thrown, 4)
+    monitor.aborted(None, thrown, 5)
+    monitor.aborted(Some("test"), thrown, 6)
+  }
+
   /**
    * A subclass of `ByteArrayOutputStream` that can infer a `PrintAction` from the text it is given.
    */
@@ -87,6 +118,20 @@ class EventMonitorSpec extends FlatSpec with Matchers {
       else PrintMessageAndStackTrace
     }
 
+  }
+
+  /**
+   * A subclass of `Logger` that forwards to a mock `LogEventsWithJavaTarget`.
+   */
+  class LogEventsWithJavaLogger extends Logger(null, null) {
+    val target = mock[LogEventsWithJavaTarget]
+    override def isLoggable(level: Level) = target.isLoggable(level)
+    override def log(level: Level, msg: String, thrown: Throwable) = target.log(level, msg, thrown)
+  }
+
+  trait LogEventsWithJavaTarget {
+    def isLoggable(level: Level): Boolean
+    def log(level: Level, msg: String, thrown: Throwable): Unit
   }
 
 }

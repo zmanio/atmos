@@ -349,31 +349,107 @@ object EventMonitor {
     override protected def printStackTrace(thrown: Throwable) = thrown.printStackTrace(target)
   }
 
+  //
+  // Monitors that submit log entries about retry events.
+  //
+
   /**
-   * An event monitor that formats and logs events.
+   * Base type for event monitors that formats and logs events.
    */
-  case class LogEvents(
-    logger: Logger,
-    retryingLevel: Level = LogEvents.defaultRetryingLevel,
-    interruptedLevel: Level = LogEvents.defaultInterruptedLevel,
-    abortedLevel: Level = LogEvents.defaultAbortedLevel)
-    extends EventMonitor with FormatEvents {
+  trait LogEvents extends EventMonitor with FormatEvents {
+
+    import LogEvents.LogAction
+
+    /** The type of object that this event monitor submits log entries to. */
+    type LoggerType
+
+    /** The type of level that this event monitor submits log entries with. */
+    type LevelType
+
+    /** The object that this event monitor prints to. */
+    def logger: LoggerType
+
+    /** The action that is performed when a retrying event is received. */
+    def retryingAction: LogAction[LevelType]
+
+    /** The action that is performed when an interrupted event is received. */
+    def interruptedAction: LogAction[LevelType]
+
+    /** The action that is performed when an aborted event is received. */
+    def abortedAction: LogAction[LevelType]
+
+    /**
+     * The level to log retrying events at.
+     *
+     * NOTE: This method is deprecated and will be removed in Atmos 2.0. Users should migrate to `retryingAction`.
+     */
+    @deprecated("Use retryingAction", "1.3")
+    def retryingLevel: LevelType = retryingAction match {
+      case LogAction.LogAt(level) => level
+      case _ => offLevel
+    }
+
+    /**
+     * The level to log interrupted events at.
+     *
+     * NOTE: This method is deprecated and will be removed in Atmos 2.0. Users should migrate to `interruptedAction`.
+     */
+    @deprecated("Use interruptedAction", "1.3")
+    def interruptedLevel: LevelType = interruptedAction match {
+      case LogAction.LogAt(level) => level
+      case _ => offLevel
+    }
+
+    /**
+     * The level to log aborted events at.
+     *
+     * NOTE: This method is deprecated and will be removed in Atmos 2.0. Users should migrate to `abortedAction`.
+     */
+    @deprecated("Use abortedAction", "1.3")
+    def abortedLevel: LevelType = abortedAction match {
+      case LogAction.LogAt(level) => level
+      case _ => offLevel
+    }
+
+    /**
+     * The level that will never submit a log entry.
+     *
+     * NOTE: This method is deprecated and is only used by other deprecated methods. This method will be removed in
+     * Atmos 2.0, users should instead use `EventMonitor.LogEvents.LogAction.LogNothing`.
+     */
+    @deprecated("Use LogEvents.LogAction.LogNothing", "1.3")
+    protected def offLevel: LevelType
 
     /** @inheritdoc */
     override def retrying //
     (name: Option[String], thrown: Throwable, attempts: Int, backoff: FiniteDuration, silent: Boolean) =
-      if (!silent && retryingLevel != Level.OFF && logger.isLoggable(retryingLevel))
-        logger.log(retryingLevel, formatRetrying(name, thrown, attempts, backoff), thrown)
+      retryingAction match {
+        case LogAction.LogAt(level) if !silent && isLoggable(level) =>
+          log(level, formatRetrying(name, thrown, attempts, backoff), thrown)
+        case _ =>
+      }
 
     /** @inheritdoc */
     override def interrupted(name: Option[String], thrown: Throwable, attempts: Int) =
-      if (interruptedLevel != Level.OFF && logger.isLoggable(interruptedLevel))
-        logger.log(interruptedLevel, formatInterrupted(name, thrown, attempts), thrown)
+      interruptedAction match {
+        case LogAction.LogAt(level) if isLoggable(level) =>
+          log(level, formatInterrupted(name, thrown, attempts), thrown)
+        case _ =>
+      }
 
     /** @inheritdoc */
     override def aborted(name: Option[String], thrown: Throwable, attempts: Int) =
-      if (abortedLevel != Level.OFF && logger.isLoggable(abortedLevel))
-        logger.log(abortedLevel, formatAborted(name, thrown, attempts), thrown)
+      abortedAction match {
+        case LogAction.LogAt(level) if isLoggable(level) =>
+          log(level, formatAborted(name, thrown, attempts), thrown)
+        case _ =>
+      }
+
+    /** Returns true if the specified level is currently loggable by the underlying logger. */
+    protected def isLoggable(level: LevelType): Boolean
+
+    /** Logs information about an event to the underlying logger. */
+    protected def log(level: LevelType, message: String, thrown: Throwable): Unit
 
   }
 
@@ -382,14 +458,110 @@ object EventMonitor {
    */
   object LogEvents {
 
-    /** The default level to log retrying events at. */
-    val defaultRetryingLevel = Level.INFO
+    /**
+     * The default `java.util.logging` level to log retrying events at.
+     *
+     * NOTE: This method is deprecated and will be removed in Atmos 2.0. Users should migrate to
+     * `defaultRetryingAction`.
+     */
+    @deprecated("Use defaultRetryingAction", "1.3")
+    def defaultRetryingLevel: Level = LogEventsWithJava.defaultRetryingAction match {
+      case LogAction.LogAt(level) => level
+      case _ => Level.OFF
+    }
 
-    /** The default level to log interrupted events at. */
-    val defaultInterruptedLevel = Level.WARNING
+    /**
+     * The default `java.util.logging` level to log interrupted events at.
+     *
+     * NOTE: This method is deprecated and will be removed in Atmos 2.0. Users should migrate to
+     * `defaultInterruptedAction`.
+     */
+    @deprecated("Use defaultInterruptedAction", "1.3")
+    def defaultInterruptedLevel: Level = LogEventsWithJava.defaultInterruptedAction match {
+      case LogAction.LogAt(level) => level
+      case _ => Level.OFF
+    }
 
-    /** The default level to log aborted events at. */
-    val defaultAbortedLevel = Level.SEVERE
+    /**
+     * The default `java.util.logging` level to log aborted events at.
+     *
+     * NOTE: This method is deprecated and will be removed in Atmos 2.0. Users should migrate to
+     * `defaultAbortedAction`.
+     */
+    @deprecated("Use defaultAbortedAction", "1.3")
+    def defaultAbortedLevel: Level = LogEventsWithJava.defaultAbortedAction match {
+      case LogAction.LogAt(level) => level
+      case _ => Level.OFF
+    }
+
+    /**
+     * Creates an event monitor that formats and logs events using the `java.util.logging` framework.
+     *
+     * NOTE: This method is deprecated and will be removed in Atmos 2.0. Users should migrate to
+     * `LogEventsWithJava.apply(Logger, LogAction, LogAction, LogAction)`.
+     */
+    @deprecated("Use LogEventsWithJava.apply(Logger, LogAction, LogAction, LogAction)", "1.3")
+    def apply(
+      logger: Logger,
+      retryingLevel: Level = defaultRetryingLevel,
+      interruptedLevel: Level = defaultInterruptedLevel,
+      abortedLevel: Level = defaultAbortedLevel): LogEventsWithJava =
+      LogEventsWithJava(logger,
+        if (retryingLevel == Level.OFF) LogAction.LogNothing else LogAction.LogAt(retryingLevel),
+        if (interruptedLevel == Level.OFF) LogAction.LogNothing else LogAction.LogAt(interruptedLevel),
+        if (abortedLevel == Level.OFF) LogAction.LogNothing else LogAction.LogAt(abortedLevel))
+
+    /**
+     * Base type for logging-related actions that can be performed when a retry event is received.
+     */
+    sealed trait LogAction[+T]
+
+    /**
+     * Definition of the logging-related actions that can be performed when a retry event is received.
+     */
+    object LogAction {
+
+      /** A log action that will not log anything. */
+      case object LogNothing extends LogAction[Nothing]
+
+      /** A log action that will submit a log entry at the specified level. */
+      case class LogAt[T](level: T) extends LogAction[T]
+
+    }
+
+  }
+
+  /**
+   * An event monitor that formats and logs events using the `java.util.logging` framework.
+   */
+  case class LogEventsWithJava(
+    logger: Logger,
+    retryingAction: LogEvents.LogAction[Level] = LogEventsWithJava.defaultRetryingAction,
+    interruptedAction: LogEvents.LogAction[Level] = LogEventsWithJava.defaultInterruptedAction,
+    abortedAction: LogEvents.LogAction[Level] = LogEventsWithJava.defaultAbortedAction)
+    extends LogEvents {
+    override type LoggerType = Logger
+    override type LevelType = Level
+    override protected def offLevel = Level.OFF
+    override protected def isLoggable(level: LevelType) = logger.isLoggable(level)
+    override protected def log(level: LevelType, msg: String, thrown: Throwable) = logger.log(level, msg, thrown)
+  }
+
+  /**
+   * Factory for event monitors that submit events to a logger.
+   */
+  object LogEventsWithJava {
+
+    import LogEvents.LogAction
+
+    /** The default action to perform when a retrying event is received. */
+    def defaultRetryingAction: LogAction[Level] = LogAction.LogAt(Level.INFO)
+
+    /** The default action to perform when an interrupted event is received. */
+    def defaultInterruptedAction: LogAction[Level] = LogAction.LogAt(Level.WARNING)
+
+    /** The default action to perform when an aborted event is received. */
+    def defaultAbortedAction: LogAction[Level] = LogAction.LogAt(Level.SEVERE)
 
   }
 

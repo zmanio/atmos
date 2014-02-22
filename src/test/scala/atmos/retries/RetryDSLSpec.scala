@@ -73,7 +73,7 @@ class RetryDSLSpec extends FlatSpec with Matchers {
     } shouldEqual RetryPolicy(monitor = PrintEventsWithWriter(
       writer, PrintAction.PrintMessageAndStackTrace, PrintAction.PrintNothing, PrintAction.PrintMessage))
     val logger = Logger.getLogger(getClass.getName)
-    retrying monitorWith logger shouldEqual RetryPolicy(monitor = LogEvents(logger))
+    retrying monitorWith logger shouldEqual RetryPolicy(monitor = LogEventsWithJava(logger))
   }
 
   it should "configure retry policies with error classifiers" in {

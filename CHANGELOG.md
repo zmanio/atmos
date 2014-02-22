@@ -7,6 +7,15 @@ Reworked `atmos.retries.EventMonitor.PrintEvents`:
  - Deprecated the use of booleans to signal whether a stack trace should be printed for a particular event. The booleans are replaced by `PrintEvents.PrintAction`, a `sealed trait` / `case object` enumeration capable of representing any number of printing strategies.
  
  - Modified the retry DSL to support concise configuration of print actions on event monitors derived from print streams and print writers.
+ 
+Reworked `atmos.retries.EventMonitor.LogEvents`:
+
+ - Converted `LogEvents` into a trait and extracted the concrete
+subtype `LogEventsWithJava`.
+ 
+ - Deprecated the use of log levels to describe behavior when called with a particular event. The levels are replaced by
+`LogEvents.LogAction`, a `sealed trait` / `case object` enumeration
+capable of representing any number of logging strategies.
 
 1.2 (2014-02-18)
 ================
