@@ -441,7 +441,7 @@ object RetryDSL {
      * @param logger The SLF4J logger to supply with event messages.
      */
     implicit def slf4jLoggerToEventMonitor(logger: Slf4jLogger): EventMonitor =
-      EventMonitor.LogEventsToSlf4j(logger)
+      EventMonitor.LogEventsWithSlf4j(logger)
 
   }
 

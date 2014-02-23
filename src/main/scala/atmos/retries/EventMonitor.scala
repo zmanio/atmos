@@ -465,7 +465,7 @@ object EventMonitor {
      * `defaultRetryingAction`.
      */
     @deprecated("Use defaultRetryingAction", "1.3")
-    def defaultRetryingLevel: Level = LogEventsWithJava.defaultRetryingAction match {
+    lazy val defaultRetryingLevel: Level = LogEventsWithJava.defaultRetryingAction match {
       case LogAction.LogAt(level) => level
       case _ => Level.OFF
     }
@@ -477,7 +477,7 @@ object EventMonitor {
      * `defaultInterruptedAction`.
      */
     @deprecated("Use defaultInterruptedAction", "1.3")
-    def defaultInterruptedLevel: Level = LogEventsWithJava.defaultInterruptedAction match {
+    lazy val defaultInterruptedLevel: Level = LogEventsWithJava.defaultInterruptedAction match {
       case LogAction.LogAt(level) => level
       case _ => Level.OFF
     }
@@ -489,7 +489,7 @@ object EventMonitor {
      * `defaultAbortedAction`.
      */
     @deprecated("Use defaultAbortedAction", "1.3")
-    def defaultAbortedLevel: Level = LogEventsWithJava.defaultAbortedAction match {
+    lazy val defaultAbortedLevel: Level = LogEventsWithJava.defaultAbortedAction match {
       case LogAction.LogAt(level) => level
       case _ => Level.OFF
     }
@@ -555,50 +555,30 @@ object EventMonitor {
     import LogEvents.LogAction
 
     /** The default action to perform when a retrying event is received. */
-    def defaultRetryingAction: LogAction[Level] = LogAction.LogAt(Level.INFO)
+    val defaultRetryingAction: LogAction[Level] = LogAction.LogAt(Level.INFO)
 
     /** The default action to perform when an interrupted event is received. */
-    def defaultInterruptedAction: LogAction[Level] = LogAction.LogAt(Level.WARNING)
+    val defaultInterruptedAction: LogAction[Level] = LogAction.LogAt(Level.WARNING)
 
     /** The default action to perform when an aborted event is received. */
-    def defaultAbortedAction: LogAction[Level] = LogAction.LogAt(Level.SEVERE)
+    val defaultAbortedAction: LogAction[Level] = LogAction.LogAt(Level.SEVERE)
 
   }
 
   /**
    * An event monitor that formats and logs events using SLF4J.
    */
-  case class LogEventsToSlf4j(
+  case class LogEventsWithSlf4j(
     logger: Slf4jLogger,
-    retryingLevel: LogEventsToSlf4j.Slf4jLevel = LogEventsToSlf4j.defaultRetryingLevel,
-    interruptedLevel: LogEventsToSlf4j.Slf4jLevel = LogEventsToSlf4j.defaultInterruptedLevel,
-    abortedLevel: LogEventsToSlf4j.Slf4jLevel = LogEventsToSlf4j.defaultAbortedLevel)
-    extends EventMonitor with FormatEvents {
-
-    import LogEventsToSlf4j._
-
-    /** @inheritdoc */
-    override def retrying //
-    (name: Option[String], thrown: Throwable, attempts: Int, backoff: FiniteDuration, silent: Boolean) =
-      if (!silent && isLoggable(retryingLevel))
-        log(retryingLevel, formatRetrying(name, thrown, attempts, backoff), thrown)
-
-    /** @inheritdoc */
-    override def interrupted(name: Option[String], thrown: Throwable, attempts: Int) =
-      if (isLoggable(interruptedLevel))
-        log(interruptedLevel, formatInterrupted(name, thrown, attempts), thrown)
-
-    /** @inheritdoc */
-    override def aborted(name: Option[String], thrown: Throwable, attempts: Int) =
-      if (isLoggable(abortedLevel))
-        log(abortedLevel, formatAborted(name, thrown, attempts), thrown)
-
-    /**
-     * Returns true if the specified SLF4J level is enabled.
-     *
-     * @param level The SLF4J level to test.
-     */
-    private def isLoggable(level: Slf4jLevel) = level match {
+    retryingAction: LogEvents.LogAction[LogEventsWithSlf4j.Slf4jLevel] = LogEventsWithSlf4j.defaultRetryingAction,
+    interruptedAction: LogEvents.LogAction[LogEventsWithSlf4j.Slf4jLevel] = LogEventsWithSlf4j.defaultInterruptedAction,
+    abortedAction: LogEvents.LogAction[LogEventsWithSlf4j.Slf4jLevel] = LogEventsWithSlf4j.defaultAbortedAction)
+    extends LogEvents {
+    import LogEventsWithSlf4j.Slf4jLevel
+    override type LoggerType = Slf4jLogger
+    override type LevelType = Slf4jLevel
+    override protected def offLevel = Slf4jLevel.Off
+    override protected def isLoggable(level: LevelType) = level match {
       case Slf4jLevel.Error => logger.isErrorEnabled()
       case Slf4jLevel.Warn => logger.isWarnEnabled()
       case Slf4jLevel.Info => logger.isInfoEnabled()
@@ -606,15 +586,7 @@ object EventMonitor {
       case Slf4jLevel.Trace => logger.isTraceEnabled()
       case Slf4jLevel.Off => false
     }
-
-    /**
-     * Submits a log entry at the specified level.
-     *
-     * @param level The SLF4J level to log at.
-     * @param message The message to log.
-     * @param thrown The exception to log.
-     */
-    private def log(level: Slf4jLevel, message: String, thrown: Throwable) = level match {
+    override protected def log(level: LevelType, message: String, thrown: Throwable) = level match {
       case Slf4jLevel.Error => logger.error(message, thrown)
       case Slf4jLevel.Warn => logger.warn(message, thrown)
       case Slf4jLevel.Info => logger.info(message, thrown)
@@ -622,22 +594,23 @@ object EventMonitor {
       case Slf4jLevel.Trace => logger.trace(message, thrown)
       case Slf4jLevel.Off =>
     }
-
   }
 
   /**
    * Factory for event monitors that submit events to a SLF4J logger.
    */
-  object LogEventsToSlf4j {
+  object LogEventsWithSlf4j {
 
-    /** The default level to log retrying events at. */
-    val defaultRetryingLevel = Slf4jLevel.Info
+    import LogEvents.LogAction
 
-    /** The default level to log interrupted events at. */
-    val defaultInterruptedLevel = Slf4jLevel.Warn
+    /** The default action to perform when a retrying event is received. */
+    val defaultRetryingAction: LogAction[Slf4jLevel] = LogAction.LogAt(Slf4jLevel.Info)
 
-    /** The default level to log aborted events at. */
-    val defaultAbortedLevel = Slf4jLevel.Error
+    /** The default action to perform when an interrupted event is received. */
+    val defaultInterruptedAction: LogAction[Slf4jLevel] = LogAction.LogAt(Slf4jLevel.Warn)
+
+    /** The default action to perform when an aborted event is received. */
+    val defaultAbortedAction: LogAction[Slf4jLevel] = LogAction.LogAt(Slf4jLevel.Error)
 
     /**
      * Base class of the available SLF4J logging levels.
@@ -664,11 +637,106 @@ object EventMonitor {
       /** The SLF4J trace logging level. */
       case object Trace extends Slf4jLevel
 
-      /** The SLF4J logging level that disables logging. */
+      /**
+       * The SLF4J logging level that disables logging.
+       *
+       * NOTE: This object is deprecated and will be removed in Atmos 2.0. Users should migrate to `LogEvents.LogAction`.
+       */
+      @deprecated("Use LogEvents.LogAction", "1.3")
       case object Off extends Slf4jLevel
 
     }
 
+  }
+
+  /**
+   * An alias to `LogEventsWithSlf4j` to preserve backwards source compatibility.
+   *
+   * NOTE: This type is deprecated and will be removed in Atmos 2.0. Users should migrate to `LogEventsWithSlf4j`.
+   */
+  @deprecated("Use LogEventsWithSlf4j", "1.3")
+  type LogEventsToSlf4j = LogEventsWithSlf4j
+
+  /**
+   * A container for deprecated elements to preserve backwards source compatibility.
+   *
+   * NOTE: This object is deprecated and will be removed in Atmos 2.0. Users should migrate to `LogEventsWithSlf4j`.
+   */
+  @deprecated("Use LogEventsWithSlf4j", "1.3")
+  object LogEventsToSlf4j {
+    
+    import LogEvents.LogAction
+
+    /**
+     * An alias to `LogEventsWithSlf4j.Slf4jLevel` to preserve backwards source compatibility.
+     *
+     * NOTE: This type is deprecated and will be removed in Atmos 2.0. Users should migrate to
+     * `LogEventsWithSlf4j.Slf4jLevel`.
+     */
+    @deprecated("Use LogEventsWithSlf4j.Slf4jLevel", "1.3")
+    type Slf4jLevel = LogEventsWithSlf4j.Slf4jLevel
+
+    /**
+     * An alias to `LogEventsWithSlf4j.Slf4jLevel` to preserve backwards source compatibility.
+     *
+     * NOTE: This type is deprecated and will be removed in Atmos 2.0. Users should migrate to
+     * `LogEventsWithSlf4j.Slf4jLevel`.
+     */
+    @deprecated("Use LogEventsWithSlf4j.Slf4jLevel", "1.3")
+    val Slf4jLevel = LogEventsWithSlf4j.Slf4jLevel
+
+    /**
+     * The default Slf4j level to log retrying events at.
+     *
+     * NOTE: This method is deprecated and will be removed in Atmos 2.0. Users should migrate to
+     * `LogEventsWithSlf4j.defaultRetryingAction`.
+     */
+    @deprecated("Use defaultRetryingAction", "1.3")
+    lazy val defaultRetryingLevel: Slf4jLevel = LogEventsWithSlf4j.defaultRetryingAction match {
+      case LogAction.LogAt(level) => level
+      case _ => Slf4jLevel.Off
+    }
+
+    /**
+     * The default Slf4j level to log interrupted events at.
+     *
+     * NOTE: This method is deprecated and will be removed in Atmos 2.0. Users should migrate to
+     * `LogEventsWithSlf4j.defaultInterruptedAction`.
+     */
+    @deprecated("Use defaultInterruptedAction", "1.3")
+    lazy val defaultInterruptedLevel: Slf4jLevel = LogEventsWithSlf4j.defaultInterruptedAction match {
+      case LogAction.LogAt(level) => level
+      case _ => Slf4jLevel.Off
+    }
+
+    /**
+     * The default Slf4j level to log aborted events at.
+     *
+     * NOTE: This method is deprecated and will be removed in Atmos 2.0. Users should migrate to
+     * `LogEventsWithSlf4j.defaultAbortedAction`.
+     */
+    @deprecated("Use defaultAbortedAction", "1.3")
+    lazy val defaultAbortedLevel: Slf4jLevel = LogEventsWithSlf4j.defaultAbortedAction match {
+      case LogAction.LogAt(level) => level
+      case _ => Slf4jLevel.Off
+    }
+
+    /**
+     * Creates an event monitor that formats and logs events using Slf4j.
+     *
+     * NOTE: This method is deprecated and will be removed in Atmos 2.0. Users should migrate to
+     * `LogEventsWithSlf4j.apply(Slf4jLogger, LogAction, LogAction, LogAction)`.
+     */
+    @deprecated("Use LogEventsWithSlf4j.apply(Slf4jLogger, LogAction, LogAction, LogAction)", "1.3")
+    def apply(
+      logger: Slf4jLogger,
+      retryingLevel: LogEventsWithSlf4j.Slf4jLevel = defaultRetryingLevel,
+      interruptedLevel: LogEventsWithSlf4j.Slf4jLevel = defaultInterruptedLevel,
+      abortedLevel: LogEventsWithSlf4j.Slf4jLevel = defaultAbortedLevel): LogEventsWithSlf4j =
+        LogEventsWithSlf4j(logger,
+        if (retryingLevel == Slf4jLevel.Off) LogAction.LogNothing else LogAction.LogAt(retryingLevel),
+        if (interruptedLevel == Slf4jLevel.Off) LogAction.LogNothing else LogAction.LogAt(interruptedLevel),
+        if (abortedLevel == Slf4jLevel.Off) LogAction.LogNothing else LogAction.LogAt(abortedLevel))
   }
 
 }
