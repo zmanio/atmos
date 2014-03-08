@@ -63,7 +63,7 @@ instance of this class may be used as a policy in <code>retryFor</code>.</p><p>F
 terminates (unless directed to by an error classifier) can be created with <code>retryForever</code>:</p><pre><span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = neverRetry
 
 <span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever</pre><h4>Backoff Policies</h4><p>Backoff policies specify the delay between subsequent retry attempts and are configured on a retry policy with
-<code>using</code>. See <a href="BackoffPolicy.html" class="extype" name="atmos.retries.BackoffPolicy">atmos.retries.BackoffPolicy</a> for more information.</p><p>This DSL provides support for the six provided backoff policies (or any custom policy):</p><pre><span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever using constantBackoff { <span class="num">5.</span>millis }
+<code>using</code>. See <a href="BackoffPolicy.html" class="extype" name="atmos.retries.BackoffPolicy">atmos.retries.BackoffPolicy</a> for more information.</p><p>This DSL provides support for the six provided backoff policies:</p><pre><span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever using constantBackoff { <span class="num">5.</span>millis }
 
 <span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever using linearBackoff { <span class="num">5.</span>seconds }
 
@@ -83,9 +83,14 @@ terminates (unless directed to by an error classifier) can be created with <code
 
 <span class="cmt">// Randomizing the result of a backoff duration by adding a random duration from a range.</span>
 <span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever using { linearBackoff { <span class="num">1.</span>second } randomized -<span class="num">50.</span>millis -&gt; <span class="num">50.</span>millis }</pre><h4>Monitor Configuration</h4><p>Event monitors are notified when retry attempts fail and are configured on a retry policy using <code>monitorWith</code>. See
-<a href="EventMonitor.html" class="extype" name="atmos.retries.EventMonitor">atmos.retries.EventMonitor</a> for more information.</p><p>This DSL provides support for monitoring retry attempts with print streams, standard Java loggers and SLF4J loggers
-(or any custom monitor):</p><pre><span class="cmt">// Write information about failed attempts to stderr.</span>
+<a href="EventMonitor.html" class="extype" name="atmos.retries.EventMonitor">atmos.retries.EventMonitor</a> for more information.</p><p>This DSL provides support for monitoring retry attempts with print streams, print writers, standard Java loggers and
+SLF4J loggers:</p><pre><span class="cmt">// Print information about failed attempts to stderr using the default printing strategies.</span>
 <span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever monitorWith System.err
+
+<span class="cmt">// Print information about failed attempts to a file, customizing what events get printed and how.</span>
+<span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever monitorWith {
+  <span class="kw">new</span> PrintWriter(<span class="lit">"/path"</span>) onRetrying printNothing onInterrupted printMessage onAborted printMessageAndStackTrace
+}
 
 <span class="cmt">// Write information about failed attempts to the specified instance of java.util.logging.Logger.</span>
 <span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever monitorWith Logger.getLogger(<span class="lit">"MyLoggerName"</span>)
@@ -169,6 +174,32 @@ Retry policies can be configured with error classification functions using <code
       </span>
       </h4>
       <p class="comment cmt">Adds a termination policy factory named <code>attempts</code> to <code>Int</code> for use in expressions like <code>retryFor(5.attempts)</code>.</p>
+    </li><li name="atmos.retries.RetryDSL.PrintEventsWithStreamExtensions" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PrintEventsWithStreamExtensionsextendsAnyVal"></a>
+      <a id="PrintEventsWithStreamExtensions:PrintEventsWithStreamExtensions"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit final </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="RetryDSL$$PrintEventsWithStreamExtensions.html"><span class="name">PrintEventsWithStreamExtensions</span></a><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Exposes extensions on any instance of <code>EventMonitor.PrintEventsWithStream</code>.</p>
+    </li><li name="atmos.retries.RetryDSL.PrintEventsWithWriterExtensions" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PrintEventsWithWriterExtensionsextendsAnyVal"></a>
+      <a id="PrintEventsWithWriterExtensions:PrintEventsWithWriterExtensions"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit final </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="RetryDSL$$PrintEventsWithWriterExtensions.html"><span class="name">PrintEventsWithWriterExtensions</span></a><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Exposes extensions on any instance of <code>EventMonitor.PrintEventsWithWriter</code>.</p>
     </li><li name="atmos.retries.RetryDSL.RetryPolicyExtensions" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="RetryPolicyExtensionsextendsAnyVal"></a>
       <a id="RetryPolicyExtensions:RetryPolicyExtensions"></a>
@@ -516,15 +547,15 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).
 </p></div><dl class="paramcmts block"><dt class="param">backoff</dt><dd class="cmt"><p>The duration to add to the backoff after every attempt.
 </p></dd></dl></div>
     </li><li name="atmos.retries.RetryDSL#loggerToEventMonitor" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="loggerToEventMonitor(logger:java.util.logging.Logger):atmos.retries.EventMonitor"></a>
-      <a id="loggerToEventMonitor(Logger):EventMonitor"></a>
+      <a id="loggerToEventMonitor(logger:java.util.logging.Logger):atmos.retries.EventMonitor.LogEventsWithJava"></a>
+      <a id="loggerToEventMonitor(Logger):LogEventsWithJava"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">implicit </span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">loggerToEventMonitor</span><span class="params">(<span name="logger">logger: <span class="extype" name="java.util.logging.Logger">Logger</span></span>)</span><span class="result">: <a href="EventMonitor.html" class="extype" name="atmos.retries.EventMonitor">EventMonitor</a></span>
+        <span class="name">loggerToEventMonitor</span><span class="params">(<span name="logger">logger: <span class="extype" name="java.util.logging.Logger">Logger</span></span>)</span><span class="result">: <a href="EventMonitor$$LogEventsWithJava.html" class="extype" name="atmos.retries.EventMonitor.LogEventsWithJava">LogEventsWithJava</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Creates a new event monitor that submits events to a logger.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new event monitor that submits events to a logger.
@@ -582,20 +613,104 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="atmos.retries.RetryDSL#printMessage" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="printMessage:atmos.retries.EventMonitor.PrintEvents.PrintAction.PrintMessage.type"></a>
+      <a id="printMessage:PrintMessage.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">printMessage</span><span class="result">: <a href="EventMonitor$$PrintEvents$$PrintAction$$PrintMessage$.html" class="extype" name="atmos.retries.EventMonitor.PrintEvents.PrintAction.PrintMessage">PrintMessage</a>.type</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns a print action that will print only an event message.</p>
+    </li><li name="atmos.retries.RetryDSL#printMessageAndStackTrace" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="printMessageAndStackTrace:atmos.retries.EventMonitor.PrintEvents.PrintAction.PrintMessageAndStackTrace.type"></a>
+      <a id="printMessageAndStackTrace:PrintMessageAndStackTrace.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">printMessageAndStackTrace</span><span class="result">: <a href="EventMonitor$$PrintEvents$$PrintAction$$PrintMessageAndStackTrace$.html" class="extype" name="atmos.retries.EventMonitor.PrintEvents.PrintAction.PrintMessageAndStackTrace">PrintMessageAndStackTrace</a>.type</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns a print action that will print an event message and stack trace.</p>
+    </li><li name="atmos.retries.RetryDSL#printNothing" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="printNothing:atmos.retries.EventMonitor.PrintEvents.PrintAction.PrintNothing.type"></a>
+      <a id="printNothing:PrintNothing.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">printNothing</span><span class="result">: <a href="EventMonitor$$PrintEvents$$PrintAction$$PrintNothing$.html" class="extype" name="atmos.retries.EventMonitor.PrintEvents.PrintAction.PrintNothing">PrintNothing</a>.type</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns a print action that will print no text.</p>
     </li><li name="atmos.retries.RetryDSL#printStreamToEventMonitor" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="printStreamToEventMonitor(stream:java.io.PrintStream):atmos.retries.EventMonitor"></a>
-      <a id="printStreamToEventMonitor(PrintStream):EventMonitor"></a>
+      <a id="printStreamToEventMonitor(stream:java.io.PrintStream):atmos.retries.EventMonitor.PrintEventsWithStream"></a>
+      <a id="printStreamToEventMonitor(PrintStream):PrintEventsWithStream"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">implicit </span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">printStreamToEventMonitor</span><span class="params">(<span name="stream">stream: <span class="extype" name="java.io.PrintStream">PrintStream</span></span>)</span><span class="result">: <a href="EventMonitor.html" class="extype" name="atmos.retries.EventMonitor">EventMonitor</a></span>
+        <span class="name">printStreamToEventMonitor</span><span class="params">(<span name="stream">stream: <span class="extype" name="java.io.PrintStream">PrintStream</span></span>)</span><span class="result">: <a href="EventMonitor$$PrintEventsWithStream.html" class="extype" name="atmos.retries.EventMonitor.PrintEventsWithStream">PrintEventsWithStream</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Creates a new event monitor that prints messages to a stream.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new event monitor that prints messages to a stream.
 </p></div><dl class="paramcmts block"><dt class="param">stream</dt><dd class="cmt"><p>The stream to print events to.
+</p></dd></dl></div>
+    </li><li name="atmos.retries.RetryDSL#printStreamToEventMonitorExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="printStreamToEventMonitorExtensions(stream:java.io.PrintStream):atmos.retries.RetryDSL.PrintEventsWithStreamExtensions"></a>
+      <a id="printStreamToEventMonitorExtensions(PrintStream):PrintEventsWithStreamExtensions"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">printStreamToEventMonitorExtensions</span><span class="params">(<span name="stream">stream: <span class="extype" name="java.io.PrintStream">PrintStream</span></span>)</span><span class="result">: <a href="RetryDSL$$PrintEventsWithStreamExtensions.html" class="extype" name="atmos.retries.RetryDSL.PrintEventsWithStreamExtensions">PrintEventsWithStreamExtensions</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Creates a new event monitor extension interface for a print stream.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new event monitor extension interface for a print stream.
+</p></div><dl class="paramcmts block"><dt class="param">stream</dt><dd class="cmt"><p>The print stream to create a new event monitor extension interface for.
+</p></dd></dl></div>
+    </li><li name="atmos.retries.RetryDSL#printWriterToEventMonitor" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="printWriterToEventMonitor(writer:java.io.PrintWriter):atmos.retries.EventMonitor.PrintEventsWithWriter"></a>
+      <a id="printWriterToEventMonitor(PrintWriter):PrintEventsWithWriter"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">printWriterToEventMonitor</span><span class="params">(<span name="writer">writer: <span class="extype" name="java.io.PrintWriter">PrintWriter</span></span>)</span><span class="result">: <a href="EventMonitor$$PrintEventsWithWriter.html" class="extype" name="atmos.retries.EventMonitor.PrintEventsWithWriter">PrintEventsWithWriter</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Creates a new event monitor that prints messages to a writer.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new event monitor that prints messages to a writer.
+</p></div><dl class="paramcmts block"><dt class="param">writer</dt><dd class="cmt"><p>The writer to print events to.
+</p></dd></dl></div>
+    </li><li name="atmos.retries.RetryDSL#printWriterToEventMonitorExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="printWriterToEventMonitorExtensions(writer:java.io.PrintWriter):atmos.retries.RetryDSL.PrintEventsWithWriterExtensions"></a>
+      <a id="printWriterToEventMonitorExtensions(PrintWriter):PrintEventsWithWriterExtensions"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">printWriterToEventMonitorExtensions</span><span class="params">(<span name="writer">writer: <span class="extype" name="java.io.PrintWriter">PrintWriter</span></span>)</span><span class="result">: <a href="RetryDSL$$PrintEventsWithWriterExtensions.html" class="extype" name="atmos.retries.RetryDSL.PrintEventsWithWriterExtensions">PrintEventsWithWriterExtensions</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Creates a new event monitor extension interface for a print writer.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new event monitor extension interface for a print writer.
+</p></div><dl class="paramcmts block"><dt class="param">writer</dt><dd class="cmt"><p>The print writer to create a new event monitor extension interface for.
 </p></dd></dl></div>
     </li><li name="atmos.retries.RetryDSL#retry" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="retry[T](name:Option[String])(operation:=&gt;T)(implicitpolicy:atmos.retries.RetryPolicy):T"></a>
@@ -643,45 +758,45 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).
 </p></div><dl class="paramcmts block"><dt class="param">operation</dt><dd class="cmt"><p>The operation to repeatedly perform.
 </p></dd></dl></div>
     </li><li name="atmos.retries.RetryDSL#retryAsync" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="retryAsync[T](name:Option[String])(operation:=&gt;scala.concurrent.Future[T])(implicitpolicy:atmos.retries.RetryPolicy,implicitcontext:scala.concurrent.ExecutionContext):scala.concurrent.Future[T]"></a>
-      <a id="retryAsync[T](Option[String])(⇒Future[T])(RetryPolicy,ExecutionContext):Future[T]"></a>
+      <a id="retryAsync[T](name:Option[String])(operation:=&gt;scala.concurrent.Future[T])(implicitpolicy:atmos.retries.RetryPolicy,implicitcontext:scala.concurrent.ExecutionContext,implicitt:io.zman.rummage.Timer):scala.concurrent.Future[T]"></a>
+      <a id="retryAsync[T](Option[String])(⇒Future[T])(RetryPolicy,ExecutionContext,Timer):Future[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">retryAsync</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.retries.RetryDSL.retryAsync.T">T</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="RetryPolicy.html" class="extype" name="atmos.retries.RetryPolicy">RetryPolicy</a></span>, <span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.retries.RetryDSL.retryAsync.T">T</span>]</span>
+        <span class="name">retryAsync</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.retries.RetryDSL.retryAsync.T">T</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="RetryPolicy.html" class="extype" name="atmos.retries.RetryPolicy">RetryPolicy</a></span>, <span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>, <span name="t">t: <span class="extype" name="io.zman.rummage.Timer">Timer</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.retries.RetryDSL.retryAsync.T">T</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Performs the specified optionally named operation asynchronously, retrying according to the implicit retry policy.</p><div class="fullcomment"><div class="comment cmt"><p>Performs the specified optionally named operation asynchronously, retrying according to the implicit retry policy.
 </p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The optional name of the operation.</p></dd><dt class="param">operation</dt><dd class="cmt"><p>The operation to repeatedly perform.</p></dd><dt class="param">context</dt><dd class="cmt"><p>The execution context to retry on.
 </p></dd></dl></div>
     </li><li name="atmos.retries.RetryDSL#retryAsync" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="retryAsync[T](name:String)(operation:=&gt;scala.concurrent.Future[T])(implicitpolicy:atmos.retries.RetryPolicy,implicitcontext:scala.concurrent.ExecutionContext):scala.concurrent.Future[T]"></a>
-      <a id="retryAsync[T](String)(⇒Future[T])(RetryPolicy,ExecutionContext):Future[T]"></a>
+      <a id="retryAsync[T](name:String)(operation:=&gt;scala.concurrent.Future[T])(implicitpolicy:atmos.retries.RetryPolicy,implicitcontext:scala.concurrent.ExecutionContext,implicitt:io.zman.rummage.Timer):scala.concurrent.Future[T]"></a>
+      <a id="retryAsync[T](String)(⇒Future[T])(RetryPolicy,ExecutionContext,Timer):Future[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">retryAsync</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.retries.RetryDSL.retryAsync.T">T</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="RetryPolicy.html" class="extype" name="atmos.retries.RetryPolicy">RetryPolicy</a></span>, <span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.retries.RetryDSL.retryAsync.T">T</span>]</span>
+        <span class="name">retryAsync</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.retries.RetryDSL.retryAsync.T">T</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="RetryPolicy.html" class="extype" name="atmos.retries.RetryPolicy">RetryPolicy</a></span>, <span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>, <span name="t">t: <span class="extype" name="io.zman.rummage.Timer">Timer</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.retries.RetryDSL.retryAsync.T">T</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Performs the specified optionally named operation asynchronously, retrying according to the implicit retry policy.</p><div class="fullcomment"><div class="comment cmt"><p>Performs the specified optionally named operation asynchronously, retrying according to the implicit retry policy.
 </p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation.</p></dd><dt class="param">operation</dt><dd class="cmt"><p>The operation to repeatedly perform.</p></dd><dt class="param">context</dt><dd class="cmt"><p>The execution context to retry on.
 </p></dd></dl></div>
     </li><li name="atmos.retries.RetryDSL#retryAsync" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="retryAsync[T]()(operation:=&gt;scala.concurrent.Future[T])(implicitpolicy:atmos.retries.RetryPolicy,implicitcontext:scala.concurrent.ExecutionContext):scala.concurrent.Future[T]"></a>
-      <a id="retryAsync[T]()(⇒Future[T])(RetryPolicy,ExecutionContext):Future[T]"></a>
+      <a id="retryAsync[T]()(operation:=&gt;scala.concurrent.Future[T])(implicitpolicy:atmos.retries.RetryPolicy,implicitcontext:scala.concurrent.ExecutionContext,implicitt:io.zman.rummage.Timer):scala.concurrent.Future[T]"></a>
+      <a id="retryAsync[T]()(⇒Future[T])(RetryPolicy,ExecutionContext,Timer):Future[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">retryAsync</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">()</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.retries.RetryDSL.retryAsync.T">T</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="RetryPolicy.html" class="extype" name="atmos.retries.RetryPolicy">RetryPolicy</a></span>, <span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.retries.RetryDSL.retryAsync.T">T</span>]</span>
+        <span class="name">retryAsync</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">()</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.retries.RetryDSL.retryAsync.T">T</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="RetryPolicy.html" class="extype" name="atmos.retries.RetryPolicy">RetryPolicy</a></span>, <span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>, <span name="t">t: <span class="extype" name="io.zman.rummage.Timer">Timer</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.retries.RetryDSL.retryAsync.T">T</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Performs the specified operation asynchronously, retrying according to the implicit retry policy.</p><div class="fullcomment"><div class="comment cmt"><p>Performs the specified operation asynchronously, retrying according to the implicit retry policy.

@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>TaskBuilder - atmos.utils.Timer.TaskBuilder</title>
-          <meta name="description" content="TaskBuilder - atmos.utils.Timer.TaskBuilder" />
-          <meta name="keywords" content="TaskBuilder atmos.utils.Timer.TaskBuilder" />
+          <title>PrintEventsWithStreamExtensions - atmos.retries.RetryDSL.PrintEventsWithStreamExtensions</title>
+          <meta name="description" content="PrintEventsWithStreamExtensions - atmos.retries.RetryDSL.PrintEventsWithStreamExtensions" />
+          <meta name="keywords" content="PrintEventsWithStreamExtensions atmos.retries.RetryDSL.PrintEventsWithStreamExtensions" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -12,7 +12,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../index.html';
-            var hash = 'atmos.utils.Timer$$TaskBuilder';
+            var hash = 'atmos.retries.RetryDSL$$PrintEventsWithStreamExtensions';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -25,21 +25,21 @@
         <body class="type">
       <div id="definition">
         <img src="../../lib/class_big.png" />
-        <p id="owner"><a href="../package.html" class="extype" name="atmos">atmos</a>.<a href="package.html" class="extype" name="atmos.utils">utils</a>.<a href="Timer$.html" class="extype" name="atmos.utils.Timer">Timer</a></p>
-        <h1>TaskBuilder</h1>
+        <p id="owner"><a href="../package.html" class="extype" name="atmos">atmos</a>.<a href="package.html" class="extype" name="atmos.retries">retries</a>.<a href="RetryDSL$.html" class="extype" name="atmos.retries.RetryDSL">RetryDSL</a></p>
+        <h1>PrintEventsWithStreamExtensions</h1>
       </div>
 
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
-        <span class="modifier">final </span>
+        <span class="modifier">implicit final </span>
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <span class="name">TaskBuilder</span><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span></span>
+        <span class="name">PrintEventsWithStreamExtensions</span><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A generic task builder.
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Exposes extensions on any instance of <code>EventMonitor.PrintEventsWithStream</code>.
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyVal">AnyVal</span>, <span class="extype" name="scala.NotNull">NotNull</span>, <span class="extype" name="scala.Any">Any</span></div>
@@ -60,7 +60,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="atmos.utils.Timer.TaskBuilder"><span>TaskBuilder</span></li><li class="in" name="scala.AnyVal"><span>AnyVal</span></li><li class="in" name="scala.NotNull"><span>NotNull</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="atmos.retries.RetryDSL.PrintEventsWithStreamExtensions"><span>PrintEventsWithStreamExtensions</span></li><li class="in" name="scala.AnyVal"><span>AnyVal</span></li><li class="in" name="scala.NotNull"><span>NotNull</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -78,7 +78,23 @@
 
       <div id="template">
         <div id="allMembers">
-        
+        <div id="constructors" class="members">
+              <h3>Instance Constructors</h3>
+              <ol><li name="atmos.retries.RetryDSL.PrintEventsWithStreamExtensions#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="&lt;init&gt;(self:atmos.retries.EventMonitor.PrintEventsWithStream):atmos.retries.RetryDSL.PrintEventsWithStreamExtensions"></a>
+      <a id="&lt;init&gt;:PrintEventsWithStreamExtensions"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">new</span>
+      </span>
+      <span class="symbol">
+        <span class="name">PrintEventsWithStreamExtensions</span><span class="params">(<span name="self">self: <a href="EventMonitor$$PrintEventsWithStream.html" class="extype" name="atmos.retries.EventMonitor.PrintEventsWithStream">PrintEventsWithStream</a></span>)</span>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
 
         
 
@@ -125,21 +141,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="atmos.utils.Timer.TaskBuilder#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="apply[T](action:=&gt;T)(implicitcontext:scala.concurrent.ExecutionContext):atmos.utils.Timer.Task"></a>
-      <a id="apply[T](⇒T)(ExecutionContext):Task"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">apply</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="action">action: ⇒ <span class="extype" name="atmos.utils.Timer.TaskBuilder.apply.T">T</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <a href="Timer$$Task.html" class="extype" name="atmos.utils.Timer.Task">Task</a></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Performs a task once after this builder's delay.</p><div class="fullcomment"><div class="comment cmt"><p>Performs a task once after this builder's delay.
-</p></div><dl class="paramcmts block"><dt class="param">action</dt><dd class="cmt"><p>The action to perform after the specified delay.</p></dd><dt class="param">context</dt><dd class="cmt"><p>The execution context to perform the action on.
-</p></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -153,19 +154,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="atmos.utils.Timer.TaskBuilder#delay" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="delay:scala.concurrent.duration.FiniteDuration"></a>
-      <a id="delay:FiniteDuration"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">delay</span><span class="result">: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The initial delay duration.</p>
     </li><li name="scala.AnyVal#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_&lt;:AnyVal]"></a>
       <a id="getClass():Class[_&lt;:AnyVal]"></a>
@@ -192,23 +180,58 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="atmos.utils.Timer.TaskBuilder#thenEvery" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="thenEvery[T](interval:scala.concurrent.duration.FiniteDuration)(action:=&gt;T)(implicitcontext:scala.concurrent.ExecutionContext):atmos.utils.Timer.Task"></a>
-      <a id="thenEvery[T](FiniteDuration)(⇒T)(ExecutionContext):Task"></a>
+    </li><li name="atmos.retries.RetryDSL.PrintEventsWithStreamExtensions#onAborted" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="onAborted(action:atmos.retries.EventMonitor.PrintEvents.PrintAction):atmos.retries.EventMonitor.PrintEventsWithStream"></a>
+      <a id="onAborted(PrintAction):PrintEventsWithStream"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">thenEvery</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="interval">interval: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>)</span><span class="params">(<span name="action">action: ⇒ <span class="extype" name="atmos.utils.Timer.TaskBuilder.thenEvery.T">T</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <a href="Timer$$Task.html" class="extype" name="atmos.utils.Timer.Task">Task</a></span>
+        <span class="name">onAborted</span><span class="params">(<span name="action">action: <a href="EventMonitor$$PrintEvents$$PrintAction.html" class="extype" name="atmos.retries.EventMonitor.PrintEvents.PrintAction">PrintAction</a></span>)</span><span class="result">: <a href="EventMonitor$$PrintEventsWithStream.html" class="extype" name="atmos.retries.EventMonitor.PrintEventsWithStream">PrintEventsWithStream</a></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Performs a task after this builder's delay and repeatedly thereafter, waiting the specified interval between
-invocations.</p><div class="fullcomment"><div class="comment cmt"><p>Performs a task after this builder's delay and repeatedly thereafter, waiting the specified interval between
-invocations.
-</p></div><dl class="paramcmts block"><dt class="param">interval</dt><dd class="cmt"><p>The amount of time to wait between subsequent executions.</p></dd><dt class="param">action</dt><dd class="cmt"><p>The action to repeatedly perform.</p></dd><dt class="param">context</dt><dd class="cmt"><p>The execution context to perform the action on.
-</p></dd></dl></div>
+      <p class="shortcomment cmt">Returns a copy of the underlying monitor that prints events with the specified aborting strategy.</p>
+    </li><li name="atmos.retries.RetryDSL.PrintEventsWithStreamExtensions#onInterrupted" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="onInterrupted(action:atmos.retries.EventMonitor.PrintEvents.PrintAction):atmos.retries.EventMonitor.PrintEventsWithStream"></a>
+      <a id="onInterrupted(PrintAction):PrintEventsWithStream"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">onInterrupted</span><span class="params">(<span name="action">action: <a href="EventMonitor$$PrintEvents$$PrintAction.html" class="extype" name="atmos.retries.EventMonitor.PrintEvents.PrintAction">PrintAction</a></span>)</span><span class="result">: <a href="EventMonitor$$PrintEventsWithStream.html" class="extype" name="atmos.retries.EventMonitor.PrintEventsWithStream">PrintEventsWithStream</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns a copy of the underlying monitor that prints events with the specified interrupted strategy.</p>
+    </li><li name="atmos.retries.RetryDSL.PrintEventsWithStreamExtensions#onRetrying" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="onRetrying(action:atmos.retries.EventMonitor.PrintEvents.PrintAction):atmos.retries.EventMonitor.PrintEventsWithStream"></a>
+      <a id="onRetrying(PrintAction):PrintEventsWithStream"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">onRetrying</span><span class="params">(<span name="action">action: <a href="EventMonitor$$PrintEvents$$PrintAction.html" class="extype" name="atmos.retries.EventMonitor.PrintEvents.PrintAction">PrintAction</a></span>)</span><span class="result">: <a href="EventMonitor$$PrintEventsWithStream.html" class="extype" name="atmos.retries.EventMonitor.PrintEventsWithStream">PrintEventsWithStream</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns a copy of the underlying monitor that prints events with the specified retrying strategy.</p>
+    </li><li name="atmos.retries.RetryDSL.PrintEventsWithStreamExtensions#self" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="self:atmos.retries.EventMonitor.PrintEventsWithStream"></a>
+      <a id="self:PrintEventsWithStream"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">self</span><span class="result">: <a href="EventMonitor$$PrintEventsWithStream.html" class="extype" name="atmos.retries.EventMonitor.PrintEventsWithStream">PrintEventsWithStream</a></span>
+      </span>
+      </h4>
+      
     </li><li name="scala.Any#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toString():String"></a>
       <a id="toString():String"></a>

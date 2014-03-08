@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>Task - atmos.utils.Timer.Task</title>
-          <meta name="description" content="Task - atmos.utils.Timer.Task" />
-          <meta name="keywords" content="Task atmos.utils.Timer.Task" />
+          <title>LogEventsWithSlf4j - atmos.retries.EventMonitor.LogEventsWithSlf4j</title>
+          <meta name="description" content="LogEventsWithSlf4j - atmos.retries.EventMonitor.LogEventsWithSlf4j" />
+          <meta name="keywords" content="LogEventsWithSlf4j atmos.retries.EventMonitor.LogEventsWithSlf4j" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -12,7 +12,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../index.html';
-            var hash = 'atmos.utils.Timer$$Task';
+            var hash = 'atmos.retries.EventMonitor$$LogEventsWithSlf4j$';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -22,27 +22,27 @@
    	  </script>
     
         </head>
-        <body class="type">
+        <body class="value">
       <div id="definition">
-        <img src="../../lib/class_big.png" />
-        <p id="owner"><a href="../package.html" class="extype" name="atmos">atmos</a>.<a href="package.html" class="extype" name="atmos.utils">utils</a>.<a href="Timer$.html" class="extype" name="atmos.utils.Timer">Timer</a></p>
-        <h1>Task</h1>
+        <a href="EventMonitor$$LogEventsWithSlf4j.html" title="Go to companion"><img src="../../lib/object_to_class_big.png" /></a>
+        <p id="owner"><a href="../package.html" class="extype" name="atmos">atmos</a>.<a href="package.html" class="extype" name="atmos.retries">retries</a>.<a href="EventMonitor$.html" class="extype" name="atmos.retries.EventMonitor">EventMonitor</a></p>
+        <h1><a href="EventMonitor$$LogEventsWithSlf4j.html" title="Go to companion">LogEventsWithSlf4j</a></h1>
       </div>
 
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">class</span>
+        <span class="modifier"></span>
+        <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">Task</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <span class="name">LogEventsWithSlf4j</span><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Represents a task spawned by a timer.
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Factory for event monitors that submit events to a SLF4J logger.
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -60,7 +60,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="atmos.utils.Timer.Task"><span>Task</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="atmos.retries.EventMonitor.LogEventsWithSlf4j"><span>LogEventsWithSlf4j</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -80,7 +80,23 @@
         <div id="allMembers">
         
 
-        
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="atmos.retries.EventMonitor.LogEventsWithSlf4j.Slf4jLevel" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="Slf4jLevelextendsAnyRef"></a>
+      <a id="Slf4jLevel:Slf4jLevel"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed </span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="EventMonitor$$LogEventsWithSlf4j$$Slf4jLevel.html"><span class="name">Slf4jLevel</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Base class of the available SLF4J logging levels.</p>
+    </li></ol>
+            </div>
 
         
 
@@ -151,6 +167,19 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="atmos.retries.EventMonitor.LogEventsWithSlf4j.Slf4jLevel" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Slf4jLevel"></a>
+      <a id="Slf4jLevel:Slf4jLevel"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="EventMonitor$$LogEventsWithSlf4j$$Slf4jLevel$.html"><span class="name">Slf4jLevel</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">Declarations of the available SLF4J logging levels.</p>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -164,19 +193,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="atmos.utils.Timer.Task#cancel" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="cancel():Unit"></a>
-      <a id="cancel():Unit"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">cancel</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Cancels this task.</p>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
@@ -196,6 +212,45 @@
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="atmos.retries.EventMonitor.LogEventsWithSlf4j#defaultAbortedAction" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="defaultAbortedAction:atmos.retries.EventMonitor.LogEvents.LogAction[atmos.retries.EventMonitor.LogEventsWithSlf4j.Slf4jLevel]"></a>
+      <a id="defaultAbortedAction:LogAction[Slf4jLevel]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">defaultAbortedAction</span><span class="result">: <a href="EventMonitor$$LogEvents$$LogAction.html" class="extype" name="atmos.retries.EventMonitor.LogEvents.LogAction">LogAction</a>[<a href="EventMonitor$$LogEventsWithSlf4j$$Slf4jLevel.html" class="extype" name="atmos.retries.EventMonitor.LogEventsWithSlf4j.Slf4jLevel">Slf4jLevel</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The default action to perform when an aborted event is received.</p>
+    </li><li name="atmos.retries.EventMonitor.LogEventsWithSlf4j#defaultInterruptedAction" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="defaultInterruptedAction:atmos.retries.EventMonitor.LogEvents.LogAction[atmos.retries.EventMonitor.LogEventsWithSlf4j.Slf4jLevel]"></a>
+      <a id="defaultInterruptedAction:LogAction[Slf4jLevel]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">defaultInterruptedAction</span><span class="result">: <a href="EventMonitor$$LogEvents$$LogAction.html" class="extype" name="atmos.retries.EventMonitor.LogEvents.LogAction">LogAction</a>[<a href="EventMonitor$$LogEventsWithSlf4j$$Slf4jLevel.html" class="extype" name="atmos.retries.EventMonitor.LogEventsWithSlf4j.Slf4jLevel">Slf4jLevel</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The default action to perform when an interrupted event is received.</p>
+    </li><li name="atmos.retries.EventMonitor.LogEventsWithSlf4j#defaultRetryingAction" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="defaultRetryingAction:atmos.retries.EventMonitor.LogEvents.LogAction[atmos.retries.EventMonitor.LogEventsWithSlf4j.Slf4jLevel]"></a>
+      <a id="defaultRetryingAction:LogAction[Slf4jLevel]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">defaultRetryingAction</span><span class="result">: <a href="EventMonitor$$LogEvents$$LogAction.html" class="extype" name="atmos.retries.EventMonitor.LogEvents.LogAction">LogAction</a>[<a href="EventMonitor$$LogEventsWithSlf4j$$Slf4jLevel.html" class="extype" name="atmos.retries.EventMonitor.LogEventsWithSlf4j.Slf4jLevel">Slf4jLevel</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The default action to perform when a retrying event is received.</p>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -267,19 +322,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="atmos.utils.Timer.Task#isCancelled" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="isCancelled:Boolean"></a>
-      <a id="isCancelled:Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">isCancelled</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Returns true if this task has been cancelled.</p>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -424,7 +466,11 @@
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scala.AnyRef">
+        <div class="parent" name="scala.Serializable">
+              <h3>Inherited from <span class="extype" name="scala.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="java.io.Serializable">
+              <h3>Inherited from <span class="extype" name="java.io.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
               <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
