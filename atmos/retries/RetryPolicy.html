@@ -383,47 +383,50 @@
 </p></div><dl class="paramcmts block"><dt class="param">operation</dt><dd class="cmt"><p>The operation to repeatedly perform.
 </p></dd></dl></div>
     </li><li name="atmos.retries.RetryPolicy#retryAsync" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="retryAsync[T](name:Option[String])(operation:=&gt;scala.concurrent.Future[T])(implicitec:scala.concurrent.ExecutionContext,implicitt:io.zman.rummage.Timer):scala.concurrent.Future[T]"></a>
-      <a id="retryAsync[T](Option[String])(⇒Future[T])(ExecutionContext,Timer):Future[T]"></a>
+      <a id="retryAsync[T](name:Option[String])(operation:=&gt;scala.concurrent.Future[T])(implicitcontext:scala.concurrent.ExecutionContext):scala.concurrent.Future[T]"></a>
+      <a id="retryAsync[T](Option[String])(⇒Future[T])(ExecutionContext):Future[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">retryAsync</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.retries.RetryPolicy.retryAsync.T">T</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="ec">ec: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>, <span name="t">t: <span class="extype" name="io.zman.rummage.Timer">Timer</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.retries.RetryPolicy.retryAsync.T">T</span>]</span>
+        <span class="name">retryAsync</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.retries.RetryPolicy.retryAsync.T">T</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.retries.RetryPolicy.retryAsync.T">T</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Performs the specified optionally named operation asynchronously, retrying according to this policy.</p><div class="fullcomment"><div class="comment cmt"><p>Performs the specified optionally named operation asynchronously, retrying according to this policy.
-</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The optional name of the operation.</p></dd><dt class="param">operation</dt><dd class="cmt"><p>The operation to repeatedly perform.</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The optional name of the operation.</p></dd><dt class="param">operation</dt><dd class="cmt"><p>The operation to repeatedly perform.</p></dd><dt class="param">context</dt><dd class="cmt"><p>The execution context to retry on.
+</p></dd></dl></div>
     </li><li name="atmos.retries.RetryPolicy#retryAsync" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="retryAsync[T](name:String)(operation:=&gt;scala.concurrent.Future[T])(implicitec:scala.concurrent.ExecutionContext,implicitt:io.zman.rummage.Timer):scala.concurrent.Future[T]"></a>
-      <a id="retryAsync[T](String)(⇒Future[T])(ExecutionContext,Timer):Future[T]"></a>
+      <a id="retryAsync[T](name:String)(operation:=&gt;scala.concurrent.Future[T])(implicitcontext:scala.concurrent.ExecutionContext):scala.concurrent.Future[T]"></a>
+      <a id="retryAsync[T](String)(⇒Future[T])(ExecutionContext):Future[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">retryAsync</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.retries.RetryPolicy.retryAsync.T">T</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="ec">ec: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>, <span name="t">t: <span class="extype" name="io.zman.rummage.Timer">Timer</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.retries.RetryPolicy.retryAsync.T">T</span>]</span>
+        <span class="name">retryAsync</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.retries.RetryPolicy.retryAsync.T">T</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.retries.RetryPolicy.retryAsync.T">T</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Performs the specified optionally named operation asynchronously, retrying according to this policy.</p><div class="fullcomment"><div class="comment cmt"><p>Performs the specified optionally named operation asynchronously, retrying according to this policy.
-</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation.</p></dd><dt class="param">operation</dt><dd class="cmt"><p>The operation to repeatedly perform.</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation.</p></dd><dt class="param">operation</dt><dd class="cmt"><p>The operation to repeatedly perform.</p></dd><dt class="param">context</dt><dd class="cmt"><p>The execution context to retry on.
+</p></dd></dl></div>
     </li><li name="atmos.retries.RetryPolicy#retryAsync" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="retryAsync[T]()(operation:=&gt;scala.concurrent.Future[T])(implicitec:scala.concurrent.ExecutionContext,implicitt:io.zman.rummage.Timer):scala.concurrent.Future[T]"></a>
-      <a id="retryAsync[T]()(⇒Future[T])(ExecutionContext,Timer):Future[T]"></a>
+      <a id="retryAsync[T]()(operation:=&gt;scala.concurrent.Future[T])(implicitcontext:scala.concurrent.ExecutionContext):scala.concurrent.Future[T]"></a>
+      <a id="retryAsync[T]()(⇒Future[T])(ExecutionContext):Future[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">retryAsync</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">()</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.retries.RetryPolicy.retryAsync.T">T</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="ec">ec: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>, <span name="t">t: <span class="extype" name="io.zman.rummage.Timer">Timer</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.retries.RetryPolicy.retryAsync.T">T</span>]</span>
+        <span class="name">retryAsync</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">()</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.retries.RetryPolicy.retryAsync.T">T</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.retries.RetryPolicy.retryAsync.T">T</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Performs the specified operation asynchronously, retrying according to this policy.</p><div class="fullcomment"><div class="comment cmt"><p>Performs the specified operation asynchronously, retrying according to this policy.
-</p></div><dl class="paramcmts block"><dt class="param">operation</dt><dd class="cmt"><p>The operation to repeatedly perform.</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">operation</dt><dd class="cmt"><p>The operation to repeatedly perform.</p></dd><dt class="param">context</dt><dd class="cmt"><p>The execution context to retry on.
+</p></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>

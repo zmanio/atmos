@@ -24,7 +24,7 @@
         </head>
         <body class="value">
       <div id="definition">
-        <a href="EventMonitor$$PrintEvents.html" title="Go to companion"><img src="../../lib/object_to_trait_big.png" /></a>
+        <a href="EventMonitor$$PrintEvents.html" title="Go to companion"><img src="../../lib/object_to_class_big.png" /></a>
         <p id="owner"><a href="../package.html" class="extype" name="atmos">atmos</a>.<a href="package.html" class="extype" name="atmos.retries">retries</a>.<a href="EventMonitor$.html" class="extype" name="atmos.retries.EventMonitor">EventMonitor</a></p>
         <h1><a href="EventMonitor$$PrintEvents.html" title="Go to companion">PrintEvents</a></h1>
       </div>
@@ -35,14 +35,14 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">PrintEvents</span>
+        <span class="name">PrintEvents</span><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Definitions associated with event monitors that print information about retry events as text.
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Factory for event monitors that prints messages to a stream.
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -60,7 +60,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="atmos.retries.EventMonitor.PrintEvents"><span>PrintEvents</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="atmos.retries.EventMonitor.PrintEvents"><span>PrintEvents</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -80,23 +80,7 @@
         <div id="allMembers">
         
 
-        <div id="types" class="types members">
-              <h3>Type Members</h3>
-              <ol><li name="atmos.retries.EventMonitor.PrintEvents.PrintAction" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="PrintActionextendsAnyRef"></a>
-      <a id="PrintAction:PrintAction"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">sealed </span>
-        <span class="kind">trait</span>
-      </span>
-      <span class="symbol">
-        <a href="EventMonitor$$PrintEvents$$PrintAction.html"><span class="name">PrintAction</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Base type for printing-related actions that can be performed when a retry event is received.</p>
-    </li></ol>
-            </div>
+        
 
         
 
@@ -167,19 +151,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="atmos.retries.EventMonitor.PrintEvents.PrintAction" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="PrintAction"></a>
-      <a id="PrintAction:PrintAction"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">object</span>
-      </span>
-      <span class="symbol">
-        <a href="EventMonitor$$PrintEvents$$PrintAction$.html"><span class="name">PrintAction</span></a>
-      </span>
-      </h4>
-      <p class="comment cmt">Definition of the printing-related actions that can be performed when a retry event is received.</p>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -212,45 +183,45 @@
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="atmos.retries.EventMonitor.PrintEvents#defaultAbortedAction" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="defaultAbortedAction:atmos.retries.EventMonitor.PrintEvents.PrintAction"></a>
-      <a id="defaultAbortedAction:PrintAction"></a>
+    </li><li name="atmos.retries.EventMonitor.PrintEvents#defaultPrintAbortedStackTrace" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="defaultPrintAbortedStackTrace:Boolean"></a>
+      <a id="defaultPrintAbortedStackTrace:Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">defaultAbortedAction</span><span class="result">: <a href="EventMonitor$$PrintEvents$$PrintAction.html" class="extype" name="atmos.retries.EventMonitor.PrintEvents.PrintAction">PrintAction</a></span>
+        <span class="name">defaultPrintAbortedStackTrace</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">The action that is performed by default when an aborted event is received.</p>
-    </li><li name="atmos.retries.EventMonitor.PrintEvents#defaultInterruptedAction" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="defaultInterruptedAction:atmos.retries.EventMonitor.PrintEvents.PrintAction"></a>
-      <a id="defaultInterruptedAction:PrintAction"></a>
+      <p class="shortcomment cmt">True if the stack trace from aborted events should be printed by default.</p>
+    </li><li name="atmos.retries.EventMonitor.PrintEvents#defaultPrintInterruptedStackTrace" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="defaultPrintInterruptedStackTrace:Boolean"></a>
+      <a id="defaultPrintInterruptedStackTrace:Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">defaultInterruptedAction</span><span class="result">: <a href="EventMonitor$$PrintEvents$$PrintAction.html" class="extype" name="atmos.retries.EventMonitor.PrintEvents.PrintAction">PrintAction</a></span>
+        <span class="name">defaultPrintInterruptedStackTrace</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">The action that is performed by default when an interrupted event is received.</p>
-    </li><li name="atmos.retries.EventMonitor.PrintEvents#defaultRetryingAction" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="defaultRetryingAction:atmos.retries.EventMonitor.PrintEvents.PrintAction"></a>
-      <a id="defaultRetryingAction:PrintAction"></a>
+      <p class="shortcomment cmt">True if the stack trace from interrupted events should be printed by default.</p>
+    </li><li name="atmos.retries.EventMonitor.PrintEvents#defaultPrintRetryingStackTrace" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="defaultPrintRetryingStackTrace:Boolean"></a>
+      <a id="defaultPrintRetryingStackTrace:Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">defaultRetryingAction</span><span class="result">: <a href="EventMonitor$$PrintEvents$$PrintAction.html" class="extype" name="atmos.retries.EventMonitor.PrintEvents.PrintAction">PrintAction</a></span>
+        <span class="name">defaultPrintRetryingStackTrace</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">The action that is performed by default when a retrying event is received.</p>
+      <p class="shortcomment cmt">True if the stack trace from retrying events should be printed by default.</p>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -462,91 +433,15 @@
 
         
 
-        <div id="values" class="values members">
-              <h3>Deprecated Value Members</h3>
-              <ol><li name="atmos.retries.EventMonitor.PrintEvents#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="apply(stream:java.io.PrintStream,printRetryingStackTrace:Boolean,printInterruptedStackTrace:Boolean,printAbortedStackTrace:Boolean):atmos.retries.EventMonitor.PrintEventsWithStream"></a>
-      <a id="apply(PrintStream,Boolean,Boolean,Boolean):PrintEventsWithStream"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name deprecated" title="Deprecated: (Since version 1.3) Use PrintEventsWithStream.apply(PrintStream, PrintAction, PrintAction, PrintAction)">apply</span><span class="params">(<span name="stream">stream: <span class="extype" name="java.io.PrintStream">PrintStream</span></span>, <span name="printRetryingStackTrace">printRetryingStackTrace: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol"><span class="name"><a href="#defaultPrintRetryingStackTrace:Boolean">defaultPrintRetryingStackTrace</a></span></span></span>, <span name="printInterruptedStackTrace">printInterruptedStackTrace: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol"><span class="name"><a href="#defaultPrintInterruptedStackTrace:Boolean">defaultPrintInterruptedStackTrace</a></span></span></span>, <span name="printAbortedStackTrace">printAbortedStackTrace: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol"><span class="name"><a href="#defaultPrintAbortedStackTrace:Boolean">defaultPrintAbortedStackTrace</a></span></span></span>)</span><span class="result">: <a href="EventMonitor$$PrintEventsWithStream.html" class="extype" name="atmos.retries.EventMonitor.PrintEventsWithStream">PrintEventsWithStream</a></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Creates a new event monitor that prints information about retry events as text.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new event monitor that prints information about retry events as text.</p><p>NOTE: This method simply creates a <code>PrintEventsWithStream</code> and exists only to preserve source compatibility with
-previous versions. This method will be removed in Atmos 2.0, users should migrate to
-<code>PrintEventsWithStream.apply(PrintStream, PrintAction, PrintAction, PrintAction)</code>.
-</p></div><dl class="paramcmts block"><dt class="param">stream</dt><dd class="cmt"><p>The object that the event monitor will print to.</p></dd><dt class="param">printRetryingStackTrace</dt><dd class="cmt"><p>True if the event monitor will print the stack trace for retrying events.</p></dd><dt class="param">printInterruptedStackTrace</dt><dd class="cmt"><p>True if the event monitor will print the stack trace for interrupted events.</p></dd><dt class="param">printAbortedStackTrace</dt><dd class="cmt"><p>True if the event monitor will print the stack trace for aborted events.
-</p></dd></dl><dl class="attributes block"> <dt>Annotations</dt><dd>
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.3)</i> Use PrintEventsWithStream.apply(PrintStream, PrintAction, PrintAction, PrintAction)</p></dd></dl></div>
-    </li><li name="atmos.retries.EventMonitor.PrintEvents#defaultPrintAbortedStackTrace" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="defaultPrintAbortedStackTrace:Boolean"></a>
-      <a id="defaultPrintAbortedStackTrace:Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name deprecated" title="Deprecated: (Since version 1.3) Use defaultAbortedAction">defaultPrintAbortedStackTrace</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">True if the stack trace from aborted events should be printed by default.</p><div class="fullcomment"><div class="comment cmt"><p>True if the stack trace from aborted events should be printed by default.</p><p>NOTE: This field uses <code>defaultAbortedAction</code> to calculate its value and exists only to preserve source
-compatibility with previous versions. This method will be removed in Atmos 2.0, users should migrate to
-<code>defaultAbortedAction</code>.
-</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.3)</i> Use defaultAbortedAction</p></dd></dl></div>
-    </li><li name="atmos.retries.EventMonitor.PrintEvents#defaultPrintInterruptedStackTrace" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="defaultPrintInterruptedStackTrace:Boolean"></a>
-      <a id="defaultPrintInterruptedStackTrace:Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name deprecated" title="Deprecated: (Since version 1.3) Use defaultInterruptedAction">defaultPrintInterruptedStackTrace</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">True if the stack trace from interrupted events should be printed by default.</p><div class="fullcomment"><div class="comment cmt"><p>True if the stack trace from interrupted events should be printed by default.</p><p>NOTE: This field uses <code>defaultInterruptedAction</code> to calculate its value and exists only to preserve source
-compatibility with previous versions. This method will be removed in Atmos 2.0, users should migrate to
-<code>defaultInterruptedAction</code>.
-</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.3)</i> Use defaultInterruptedAction</p></dd></dl></div>
-    </li><li name="atmos.retries.EventMonitor.PrintEvents#defaultPrintRetryingStackTrace" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="defaultPrintRetryingStackTrace:Boolean"></a>
-      <a id="defaultPrintRetryingStackTrace:Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name deprecated" title="Deprecated: (Since version 1.3) Use defaultRetryingAction">defaultPrintRetryingStackTrace</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">True if the stack trace from retrying events should be printed by default.</p><div class="fullcomment"><div class="comment cmt"><p>True if the stack trace from retrying events should be printed by default.</p><p>NOTE: This field uses <code>defaultRetryingAction</code> to calculate its value and exists only to preserve source
-compatibility with previous versions. This method will be removed in Atmos 2.0, users should migrate to
-<code>defaultRetryingAction</code>.
-</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.3)</i> Use defaultRetryingAction</p></dd></dl></div>
-    </li></ol>
-            </div>
+        
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scala.AnyRef">
+        <div class="parent" name="scala.Serializable">
+              <h3>Inherited from <span class="extype" name="scala.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="java.io.Serializable">
+              <h3>Inherited from <span class="extype" name="java.io.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
               <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>

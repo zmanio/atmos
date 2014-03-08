@@ -35,7 +35,7 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name deprecated" title="Deprecated: (Since version 1.4) Use io.zman.rummage.Timer">Timer</span>
+        <span class="name">Timer</span>
       </span>
       </h4>
       
@@ -50,11 +50,7 @@ Timer.after(<span class="num">10.</span>seconds).thenEvery(<span class="num">3.<
 
 <span class="cmt">// Tasks can also be cancelled.</span>
 <span class="kw">val</span> task = Timer.every(<span class="num">10.</span>seconds) { println(<span class="lit">"Only once!"</span>) }
-Timer.after(<span class="num">15.</span>seconds) { task.cancel() }</pre><p>NOTE: this object will be removed in Atmos 2.0, users should migrate to <code>io.zman.rummage.Timer</code>.
-</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.4)</i> Use io.zman.rummage.Timer</p></dd></dl><div class="toggleContainer block">
+Timer.after(<span class="num">15.</span>seconds) { task.cancel() }</pre></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -96,40 +92,32 @@ Timer.after(<span class="num">15.</span>seconds) { task.cancel() }</pre><p>NOTE:
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="atmos.utils.Timer.Task" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="Task=io.zman.rummage.Timer.Task"></a>
+              <ol><li name="atmos.utils.Timer.Task" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TaskextendsAnyRef"></a>
       <a id="Task:Task"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">type</span>
+        <span class="modifier">final </span>
+        <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <span class="name deprecated" title="Deprecated: (Since version 1.4) Use io.zman.rummage.Timer.Task">Task</span><span class="result"> = <span class="extype" name="io.zman.rummage.Timer.Task">io.zman.rummage.Timer.Task</span></span>
+        <a href="Timer$$Task.html"><span class="name">Task</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Represents a task spawned by a timer.</p><div class="fullcomment"><div class="comment cmt"><p>Represents a task spawned by a timer.</p><p>NOTE: this object will be removed in Atmos 2.0, users should migrate to <code>io.zman.rummage.Timer.Task</code>.
-</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.4)</i> Use io.zman.rummage.Timer.Task</p></dd></dl></div>
-    </li><li name="atmos.utils.Timer.TaskBuilder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="TaskBuilder=io.zman.rummage.Timer.Builder"></a>
+      <p class="comment cmt">Represents a task spawned by a timer.</p>
+    </li><li name="atmos.utils.Timer.TaskBuilder" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TaskBuilderextendsAnyVal"></a>
       <a id="TaskBuilder:TaskBuilder"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">type</span>
+        <span class="modifier">final </span>
+        <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <span class="name deprecated" title="Deprecated: (Since version 1.4) Use io.zman.rummage.Timer.Builder">TaskBuilder</span><span class="result"> = <span class="extype" name="io.zman.rummage.Timer.Builder">io.zman.rummage.Timer.Builder</span></span>
+        <a href="Timer$$TaskBuilder.html"><span class="name">TaskBuilder</span></a><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">A generic task builder.</p><div class="fullcomment"><div class="comment cmt"><p>A generic task builder.</p><p>NOTE: this object will be removed in Atmos 2.0, users should migrate to <code>io.zman.rummage.Timer.Builder</code>.
-</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.4)</i> Use io.zman.rummage.Timer.Builder</p></dd></dl></div>
+      <p class="comment cmt">A generic task builder.</p>
     </li></ol>
             </div>
 
@@ -202,6 +190,21 @@ Timer.after(<span class="num">15.</span>seconds) { task.cancel() }</pre><p>NOTE:
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="atmos.utils.Timer#after" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="after[T](delay:scala.concurrent.duration.FiniteDuration):atmos.utils.Timer.TaskBuilder"></a>
+      <a id="after[T](FiniteDuration):TaskBuilder"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">after</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="delay">delay: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>)</span><span class="result">: <a href="Timer$$TaskBuilder.html" class="extype" name="atmos.utils.Timer.TaskBuilder">TaskBuilder</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Creates a builder that can perform a task once or repeatedly after the specified delay.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a builder that can perform a task once or repeatedly after the specified delay.
+</p></div><dl class="paramcmts block"><dt class="param">delay</dt><dd class="cmt"><p>The amount of time to wait before performing the task.
+</p></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -260,6 +263,23 @@ Timer.after(<span class="num">15.</span>seconds) { task.cancel() }</pre><p>NOTE:
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="atmos.utils.Timer#every" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="every[T](interval:scala.concurrent.duration.FiniteDuration)(action:=&gt;T)(implicitcontext:scala.concurrent.ExecutionContext):atmos.utils.Timer.Task"></a>
+      <a id="every[T](FiniteDuration)(⇒T)(ExecutionContext):Task"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">every</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="interval">interval: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>)</span><span class="params">(<span name="action">action: ⇒ <span class="extype" name="atmos.utils.Timer.every.T">T</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <a href="Timer$$Task.html" class="extype" name="atmos.utils.Timer.Task">Task</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Performs a task after the specified interval and repeatedly thereafter, waiting the specified interval between
+invocations.</p><div class="fullcomment"><div class="comment cmt"><p>Performs a task after the specified interval and repeatedly thereafter, waiting the specified interval between
+invocations.
+</p></div><dl class="paramcmts block"><dt class="param">interval</dt><dd class="cmt"><p>The amount of time to wait before performing the task and between subsequent executions.</p></dd><dt class="param">action</dt><dd class="cmt"><p>The action to repeatedly perform.</p></dd><dt class="param">context</dt><dd class="cmt"><p>The execution context to perform the action on.
+</p></dd></dl></div>
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
@@ -445,50 +465,7 @@ Timer.after(<span class="num">15.</span>seconds) { task.cancel() }</pre><p>NOTE:
 
         
 
-        <div id="values" class="values members">
-              <h3>Deprecated Value Members</h3>
-              <ol><li name="atmos.utils.Timer#after" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="after[T](delay:scala.concurrent.duration.FiniteDuration):atmos.utils.Timer.TaskBuilder"></a>
-      <a id="after[T](FiniteDuration):TaskBuilder"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name deprecated" title="Deprecated: (Since version 1.4) Use io.zman.rummage.Timer.after(FiniteDuration)">after</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="delay">delay: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>)</span><span class="result">: <a href="#TaskBuilder=io.zman.rummage.Timer.Builder" class="extmbr" name="atmos.utils.Timer.TaskBuilder">TaskBuilder</a></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Creates a builder that can perform a task once or repeatedly after the specified delay.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a builder that can perform a task once or repeatedly after the specified delay.
-</p></div><dl class="paramcmts block"><dt class="param">delay</dt><dd class="cmt"><p>The amount of time to wait before performing the task.</p><p>NOTE: this object will be removed in Atmos 2.0, users should migrate to
-<code>io.zman.rummage.Timer.after(FiniteDuration)</code>.
-</p></dd></dl><dl class="attributes block"> <dt>Annotations</dt><dd>
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.4)</i> Use io.zman.rummage.Timer.after(FiniteDuration)</p></dd></dl></div>
-    </li><li name="atmos.utils.Timer#every" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="every[T](interval:scala.concurrent.duration.FiniteDuration)(action:=&gt;T)(implicitcontext:scala.concurrent.ExecutionContext):atmos.utils.Timer.Task"></a>
-      <a id="every[T](FiniteDuration)(⇒T)(ExecutionContext):Task"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name deprecated" title="Deprecated: (Since version 1.4) Use io.zman.rummage.Timer.every(FiniteDuration)(=&gt; T)">every</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="interval">interval: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>)</span><span class="params">(<span name="action">action: ⇒ <span class="extype" name="atmos.utils.Timer.every.T">T</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <a href="#Task=io.zman.rummage.Timer.Task" class="extmbr" name="atmos.utils.Timer.Task">Task</a></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Performs a task after the specified interval and repeatedly thereafter, waiting the specified interval between
-invocations.</p><div class="fullcomment"><div class="comment cmt"><p>Performs a task after the specified interval and repeatedly thereafter, waiting the specified interval between
-invocations.
-</p></div><dl class="paramcmts block"><dt class="param">interval</dt><dd class="cmt"><p>The amount of time to wait before performing the task and between subsequent executions.</p></dd><dt class="param">action</dt><dd class="cmt"><p>The action to repeatedly perform.</p></dd><dt class="param">context</dt><dd class="cmt"><p>The execution context to perform the action on.</p><p>NOTE: this object will be removed in Atmos 2.0, users should migrate to
-<code>io.zman.rummage.Timer.every(FiniteDuration)(=&gt; T)</code>.
-</p></dd></dl><dl class="attributes block"> <dt>Annotations</dt><dd>
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.4)</i> Use io.zman.rummage.Timer.every(FiniteDuration)(=&gt; T)</p></dd></dl></div>
-    </li></ol>
-            </div>
+        
         </div>
 
         <div id="inheritedMembers">
