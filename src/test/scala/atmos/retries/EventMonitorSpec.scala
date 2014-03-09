@@ -37,9 +37,9 @@ class EventMonitorSpec extends FlatSpec with Matchers with MockFactory {
 
   "EventMonitor.PrintEventsWithStream" should "format and print information about retry events to a stream" in {
     import PrintEvents.PrintAction._
-    val target = new PrintEventsTarget
+    val target = new PrintMock
     for (action <- Seq(PrintNothing, PrintMessage, PrintMessageAndStackTrace)) {
-      val monitor = PrintEventsWithStream(new PrintStream(target, true), action, action, action)
+      val monitor = PrintEventsWithStream(new PrintStream(target.mock, true), action, action, action)
       monitor.retrying(None, thrown, 1, 1.second, true)
       target.complete() shouldBe PrintNothing
       monitor.retrying(Some("test"), thrown, 2, 1.second, false)
@@ -57,9 +57,9 @@ class EventMonitorSpec extends FlatSpec with Matchers with MockFactory {
 
   "EventMonitor.PrintEventsWithWriter" should "format and print information about retry events to a writer" in {
     import PrintEvents.PrintAction._
-    val target = new PrintEventsTarget
+    val target = new PrintMock
     for (action <- Seq(PrintNothing, PrintMessage, PrintMessageAndStackTrace)) {
-      val monitor = PrintEventsWithWriter(new PrintWriter(target, true), action, action, action)
+      val monitor = PrintEventsWithWriter(new PrintWriter(target.mock, true), action, action, action)
       monitor.retrying(None, thrown, 1, 1.second, true)
       target.complete() shouldBe PrintNothing
       monitor.retrying(Some("test"), thrown, 2, 1.second, false)
@@ -75,33 +75,58 @@ class EventMonitorSpec extends FlatSpec with Matchers with MockFactory {
     }
   }
 
+  /**
+   * A subclass of `ByteArrayOutputStream` that can infer a `PrintAction` from the text it is given.
+   */
+  class PrintMock {
+    val mock = new ByteArrayOutputStream
+    /* Infers a `PrintAction` from the current value of the buffer and subsequently clears the buffer. */
+    def complete(): PrintEvents.PrintAction = {
+      val txt = mock.toString.trim
+      mock.reset()
+      import PrintEvents.PrintAction._
+      if (txt.isEmpty) PrintNothing
+      else if (txt.split("[\r\n]+").size <= 2) PrintMessage
+      else PrintMessageAndStackTrace
+    }
+  }
+
   "EventMonitor.LogEventsWithJava" should "format and submit log entries to java.util.logging loggers" in {
     import LogEvents.LogAction._
-    val logger = new LogEventsWithJavaLogger
+    val logger = new LoggerMock
     for (action <- Seq(LogAt(Level.SEVERE), LogAt(Level.WARNING), LogAt(Level.INFO), LogAt(Level.CONFIG))) {
-      val monitor = LogEventsWithJava(logger, action, action, action)
+      val monitor = LogEventsWithJava(logger.mock, action, action, action)
       monitor.retrying(None, thrown, 1, 1.second, true)
-      (logger.target.isLoggable _).expects(action.level).returns(true).once
-      (logger.target.log _).expects(action.level, *, thrown).once
+      logger.isLoggable.expects(action.level).returns(true).once
+      logger.log.expects(action.level, *, thrown).once
       monitor.retrying(Some("test"), thrown, 2, 1.second, false)
-      (logger.target.isLoggable _).expects(action.level).returns(false).once
+      logger.isLoggable.expects(action.level).returns(false).once
       monitor.interrupted(None, thrown, 3)
-      (logger.target.isLoggable _).expects(action.level).returns(false).once
+      logger.isLoggable.expects(action.level).returns(false).once
       monitor.interrupted(Some("test"), thrown, 4)
-      (logger.target.isLoggable _).expects(action.level).returns(true).once
-      (logger.target.log _).expects(action.level, *, thrown).once
+      logger.isLoggable.expects(action.level).returns(true).once
+      logger.log.expects(action.level, *, thrown).once
       monitor.aborted(None, thrown, 5)
-      (logger.target.isLoggable _).expects(action.level).returns(true).once
-      (logger.target.log _).expects(action.level, *, thrown).once
+      logger.isLoggable.expects(action.level).returns(true).once
+      logger.log.expects(action.level, *, thrown).once
       monitor.aborted(Some("test"), thrown, 6)
     }
-    val monitor = LogEventsWithJava(logger, LogNothing, LogNothing, LogNothing)
+    val monitor = LogEventsWithJava(logger.mock, LogNothing, LogNothing, LogNothing)
     monitor.retrying(None, thrown, 1, 1.second, true)
     monitor.retrying(Some("test"), thrown, 2, 1.second, false)
     monitor.interrupted(None, thrown, 3)
     monitor.interrupted(Some("test"), thrown, 4)
     monitor.aborted(None, thrown, 5)
     monitor.aborted(Some("test"), thrown, 6)
+  }
+
+  class LoggerMock { self =>
+    val isLoggable = mockFunction[Level, Boolean]
+    val log = mockFunction[Level, String, Throwable, Unit]
+    val mock = new Logger(null, null) {
+      override def isLoggable(level: Level) = self.isLoggable(level)
+      override def log(level: Level, msg: String, thrown: Throwable) = self.log(level, msg, thrown)
+    }
   }
 
   "EventMonitor.LogEventsWithSlf4j" should "format and submit log entries to Slf4j loggers" in {
@@ -147,37 +172,6 @@ class EventMonitorSpec extends FlatSpec with Matchers with MockFactory {
     monitor.interrupted(Some("test"), thrown, 4)
     monitor.aborted(None, thrown, 5)
     monitor.aborted(Some("test"), thrown, 6)
-  }
-
-  /**
-   * A subclass of `ByteArrayOutputStream` that can infer a `PrintAction` from the text it is given.
-   */
-  class PrintEventsTarget extends ByteArrayOutputStream {
-
-    /** Infers a `PrintAction` from the current value of the buffer and subsequently clears the buffer. */
-    def complete(): PrintEvents.PrintAction = {
-      val txt = toString.trim
-      reset()
-      import PrintEvents.PrintAction._
-      if (txt.isEmpty) PrintNothing
-      else if (txt.split("[\r\n]+").size <= 2) PrintMessage
-      else PrintMessageAndStackTrace
-    }
-
-  }
-
-  /**
-   * A subclass of `Logger` that forwards to a mock `LogEventsWithJavaTarget`.
-   */
-  class LogEventsWithJavaLogger extends Logger(null, null) {
-    val target = mock[LogEventsWithJavaTarget]
-    override def isLoggable(level: Level) = target.isLoggable(level)
-    override def log(level: Level, msg: String, thrown: Throwable) = target.log(level, msg, thrown)
-  }
-
-  trait LogEventsWithJavaTarget {
-    def isLoggable(level: Level): Boolean
-    def log(level: Level, msg: String, thrown: Throwable): Unit
   }
 
   /**
