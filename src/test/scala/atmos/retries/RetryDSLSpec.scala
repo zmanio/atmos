@@ -22,6 +22,7 @@ package atmos.retries
 import java.io.{ PrintWriter, StringWriter }
 import java.util.logging.{ Logger, Level }
 import scala.concurrent.duration._
+import akka.event.{ Logging, LoggingAdapter }
 import org.slf4j.LoggerFactory
 import org.scalatest._
 
@@ -79,13 +80,23 @@ class RetryDSLSpec extends FlatSpec with Matchers {
       logger onRetrying logDebug onInterrupted logNothing onAborted logWarning
     } shouldEqual RetryPolicy(monitor = LogEventsWithJava(
       logger, LogAction.LogAt(Level.CONFIG), LogAction.LogNothing, LogAction.LogAt(Level.WARNING)))
-    import Slf4jSupport._
-    import LogEventsWithSlf4j.Slf4jLevel
-    val slf4j = LoggerFactory.getLogger(this.getClass)
-    retrying monitorWith {
-      slf4j onRetrying logNothing onInterrupted logInfo onAborted logError
-    } shouldEqual RetryPolicy(monitor = LogEventsWithSlf4j(
-      slf4j, LogAction.LogNothing, LogAction.LogAt(Slf4jLevel.Info), LogAction.LogAt(Slf4jLevel.Error)))
+    locally {
+      import AkkaSupport._
+      val akka: LoggingAdapter = null
+      retrying monitorWith {
+        akka onRetrying logNothing onInterrupted logInfo onAborted logError
+      } shouldEqual RetryPolicy(monitor = LogEventsWithAkka(
+        akka, LogAction.LogNothing, LogAction.LogAt(Logging.InfoLevel), LogAction.LogAt(Logging.ErrorLevel)))
+    }
+    locally {
+      import Slf4jSupport._
+      import LogEventsWithSlf4j.Slf4jLevel
+      val slf4j = LoggerFactory.getLogger(this.getClass)
+      retrying monitorWith {
+        slf4j onRetrying logNothing onInterrupted logInfo onAborted logError
+      } shouldEqual RetryPolicy(monitor = LogEventsWithSlf4j(
+        slf4j, LogAction.LogNothing, LogAction.LogAt(Slf4jLevel.Info), LogAction.LogAt(Slf4jLevel.Error)))
+    }
   }
 
   it should "configure retry policies with error classifiers" in {

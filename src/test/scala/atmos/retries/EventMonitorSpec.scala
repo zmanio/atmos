@@ -22,6 +22,7 @@ package atmos.retries
 import java.io.{ ByteArrayOutputStream, PrintStream, PrintWriter }
 import java.util.logging.{ Logger, Level }
 import scala.concurrent.duration._
+import akka.event.{ Logging, LoggingAdapter }
 import org.slf4j.{ Logger => Slf4jLogger }
 import org.scalatest._
 import org.scalamock.scalatest.MockFactory
@@ -126,6 +127,73 @@ class EventMonitorSpec extends FlatSpec with Matchers with MockFactory {
     val mock = new Logger(null, null) {
       override def isLoggable(level: Level) = self.isLoggable(level)
       override def log(level: Level, msg: String, thrown: Throwable) = self.log(level, msg, thrown)
+    }
+  }
+
+  "EventMonitor.LogEventsWithAkka" should "format and submit log entries to Akka logging adapters" in {
+    import LogEvents.LogAction._
+    import Logging.{ ErrorLevel, WarningLevel, InfoLevel, DebugLevel }
+    val adapter = new LoggingAdapterMock
+    for (action <- Seq(LogAt(WarningLevel), LogAt(InfoLevel), LogAt(DebugLevel))) {
+      val monitor = LogEventsWithAkka(adapter.mock, action, action, action)
+      monitor.retrying(None, thrown, 1, 1.second, true)
+      adapter.isEnabled.expects(action.level).returns(true).once
+      adapter.log.expects(action.level, *).once
+      monitor.retrying(Some("test"), thrown, 2, 1.second, false)
+      adapter.isEnabled.expects(action.level).returns(false).once
+      monitor.interrupted(None, thrown, 3)
+      adapter.isEnabled.expects(action.level).returns(false).once
+      monitor.interrupted(Some("test"), thrown, 4)
+      adapter.isEnabled.expects(action.level).returns(true).once
+      adapter.log.expects(action.level, *).once
+      monitor.aborted(None, thrown, 5)
+      adapter.isEnabled.expects(action.level).returns(true).once
+      adapter.log.expects(action.level, *).once
+      monitor.aborted(Some("test"), thrown, 6)
+    }
+    locally {
+      val action = LogAt(ErrorLevel)
+      val monitor = LogEventsWithAkka(adapter.mock, action, action, action)
+      monitor.retrying(None, thrown, 1, 1.second, true)
+      adapter.isEnabled.expects(action.level).returns(true).once
+      adapter.error.expects(thrown, *).once
+      monitor.retrying(Some("test"), thrown, 2, 1.second, false)
+      adapter.isEnabled.expects(action.level).returns(false).once
+      monitor.interrupted(None, thrown, 3)
+      adapter.isEnabled.expects(action.level).returns(false).once
+      monitor.interrupted(Some("test"), thrown, 4)
+      adapter.isEnabled.expects(action.level).returns(true).once
+      adapter.error.expects(thrown, *).once
+      monitor.aborted(None, thrown, 5)
+      adapter.isEnabled.expects(action.level).returns(true).once
+      adapter.error.expects(thrown, *).once
+      monitor.aborted(Some("test"), thrown, 6)
+    }
+    val monitor = LogEventsWithAkka(adapter.mock, LogNothing, LogNothing, LogNothing)
+    monitor.retrying(None, thrown, 1, 1.second, true)
+    monitor.retrying(Some("test"), thrown, 2, 1.second, false)
+    monitor.interrupted(None, thrown, 3)
+    monitor.interrupted(Some("test"), thrown, 4)
+    monitor.aborted(None, thrown, 5)
+    monitor.aborted(Some("test"), thrown, 6)
+  }
+
+  class LoggingAdapterMock { self =>
+    val isEnabled = mockFunction[Logging.LogLevel, Boolean]
+    val log = mockFunction[Logging.LogLevel, String, Unit]
+    val error = mockFunction[Throwable, String, Unit]
+    val mock = new LoggingAdapter {
+      override def isErrorEnabled = self.isEnabled(Logging.ErrorLevel)
+      override def isWarningEnabled = self.isEnabled(Logging.WarningLevel)
+      override def isInfoEnabled = self.isEnabled(Logging.InfoLevel)
+      override def isDebugEnabled = self.isEnabled(Logging.DebugLevel)
+      override protected def notifyError(message: String) = ???
+      override protected def notifyError(cause: Throwable, message: String) = ???
+      override protected def notifyWarning(message: String) = ???
+      override protected def notifyInfo(message: String) = ???
+      override protected def notifyDebug(message: String) = ???
+      override def log(level: Logging.LogLevel, message: String) = self.log(level, message)
+      override def error(cause: Throwable, message: String) = self.error(cause, message)
     }
   }
 

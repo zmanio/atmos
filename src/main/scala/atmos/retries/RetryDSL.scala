@@ -21,6 +21,7 @@ import java.util.logging.{ Logger, Level }
 import scala.concurrent.{ ExecutionContext, Future }
 import scala.concurrent.duration._
 import scala.language.implicitConversions
+import akka.event.{ Logging, LoggingAdapter }
 import org.slf4j.{ Logger => Slf4jLogger }
 
 /**
@@ -122,8 +123,8 @@ import org.slf4j.{ Logger => Slf4jLogger }
  * Event monitors are notified when retry attempts fail and are configured on a retry policy using `monitorWith`. See
  * [[atmos.retries.EventMonitor]] for more information.
  *
- * This DSL provides support for monitoring retry attempts with print streams, print writers, standard Java loggers and
- * SLF4J loggers:
+ * This DSL provides support for monitoring retry attempts with print streams, print writers, standard Java loggers,
+ * Akka logging adapters and SLF4J loggers:
  * {{{
  * // Print information about failed attempts to stderr using the default printing strategies.
  * implicit val retryPolicy = retryForever monitorWith System.err
@@ -140,6 +141,13 @@ import org.slf4j.{ Logger => Slf4jLogger }
  * // what events get logged and and at what level.
  * implicit val retryPolicy = retryForever monitorWith {
  *   Logger.getLogger("MyLoggerName") onRetrying logNothing onInterrupted logWarning onAborted logError
+ * }
+ *
+ * // Submit information about failed attempts to the specified instance of `akka.event.LoggingAdapter`, customizing
+ * // what events get logged and and at what level.
+ * import AkkaSupport._
+ * implicit val retryPolicy = retryForever monitorWith {
+ *   Logging(context.system, this) onRetrying logNothing onInterrupted logWarning onAborted logError
  * }
  *
  * // Submit information about failed attempts to the specified instance of `org.slf4j.Logger`, customizing what
@@ -526,6 +534,57 @@ object RetryDSL {
       override def warningLevel = Level.WARNING
       override def infoLevel = Level.INFO
       override def debugLevel = Level.CONFIG
+    }
+
+  }
+
+  /**
+   * Separate namespace for optional Akka support.
+   */
+  object AkkaSupport {
+
+    /**
+     * Creates a new event monitor that submits events to an Akka logging adapter.
+     *
+     * @param adapter The Akka logging adapter to supply with event messages.
+     */
+    implicit def loggingAdapterToEventMonitor(adapter: LoggingAdapter): EventMonitor.LogEventsWithAkka =
+      EventMonitor.LogEventsWithAkka(adapter)
+
+    /**
+     * Creates a new event monitor extension interface for an Akka logging adapter.
+     *
+     * @param adapter The Akka logging adapter to create a new event monitor extension interface for.
+     */
+    implicit def slf4jLoggerToEventMonitorExtensions(adapter: LoggingAdapter): LogEventsWithAkkaExtensions =
+      new LogEventsWithAkkaExtensions(adapter)
+
+    /**
+     * Exposes extensions on any instance of `EventMonitor.LogEventsWithAkka`.
+     */
+    implicit final class LogEventsWithAkkaExtensions(val self: EventMonitor.LogEventsWithAkka) extends AnyVal {
+
+      import EventMonitor.LogEvents.LogAction
+
+      /** Returns a copy of the underlying monitor that logs events at the specified retrying level. */
+      def onRetrying(action: LogAction[Logging.LogLevel]) = self.copy(retryingAction = action)
+
+      /** Returns a copy of the underlying monitor that logs events at the specified interrupted level. */
+      def onInterrupted(action: LogAction[Logging.LogLevel]) = self.copy(interruptedAction = action)
+
+      /** Returns a copy of the underlying monitor that logs events at the specified aborting level. */
+      def onAborted(action: LogAction[Logging.LogLevel]) = self.copy(abortedAction = action)
+
+    }
+
+    /**
+     * A tag for levels provided for Akka.
+     */
+    implicit object AkkaEventLogLevelType extends EventLogLevelType[Logging.LogLevel] {
+      override def errorLevel = Logging.ErrorLevel
+      override def warningLevel = Logging.WarningLevel
+      override def infoLevel = Logging.InfoLevel
+      override def debugLevel = Logging.DebugLevel
     }
 
   }
