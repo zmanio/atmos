@@ -17,7 +17,7 @@
 package atmos.retries
 
 import java.io.{ PrintStream, PrintWriter }
-import java.util.logging.Logger
+import java.util.logging.{ Logger, Level }
 import scala.concurrent.{ ExecutionContext, Future }
 import scala.concurrent.duration._
 import scala.language.implicitConversions
@@ -133,12 +133,21 @@ import org.slf4j.{ Logger => Slf4jLogger }
  *   new PrintWriter("/path") onRetrying printNothing onInterrupted printMessage onAborted printMessageAndStackTrace
  * }
  *
- * // Write information about failed attempts to the specified instance of java.util.logging.Logger.
+ * // Submit information about failed attempts to the specified instance of `java.util.logging.Logger`.
  * implicit val retryPolicy = retryForever monitorWith Logger.getLogger("MyLoggerName")
  *
- * // Write information about failed attempts to the specified instance of org.slf4j.Logger.
+ * // Submit information about failed attempts to the specified instance of `java.util.logging.Logger`, customizing
+ * // what events get logged and and at what level.
+ * implicit val retryPolicy = retryForever monitorWith {
+ *   Logger.getLogger("MyLoggerName") onRetrying logNothing onInterrupted logWarning onAborted logError
+ * }
+ *
+ * // Submit information about failed attempts to the specified instance of `org.slf4j.Logger`, customizing what
+ * // events get logged and and at what level.
  * import Slf4jSupport._
- * implicit val retryPolicy = retryForever monitorWith LoggerFactory.getLogger("MyLoggerName")
+ * implicit val retryPolicy = retryForever monitorWith {
+ *   LoggerFactory.getLogger("MyLoggerName") onRetrying logNothing onInterrupted logWarning onAborted logError
+ * }
  * }}}
  *
  * ==Error Classification==
@@ -431,17 +440,146 @@ object RetryDSL {
     EventMonitor.LogEventsWithJava(logger)
 
   /**
+   * Creates a new event monitor extension interface for a logger.
+   *
+   * @param logger The logger to create a new event monitor extension interface for.
+   */
+  implicit def loggerToEventMonitorExtensions(logger: Logger): LogEventsWithJavaExtensions =
+    new LogEventsWithJavaExtensions(logger)
+
+  /**
+   * Exposes extensions on any instance of `EventMonitor.LogEventsWithJava`.
+   */
+  implicit final class LogEventsWithJavaExtensions(val self: EventMonitor.LogEventsWithJava) extends AnyVal {
+
+    import EventMonitor.LogEvents.LogAction
+
+    /** Returns a copy of the underlying monitor that logs events at the specified retrying level. */
+    def onRetrying(action: LogAction[Level]) = self.copy(retryingAction = action)
+
+    /** Returns a copy of the underlying monitor that logs events at the specified interrupted level. */
+    def onInterrupted(action: LogAction[Level]) = self.copy(interruptedAction = action)
+
+    /** Returns a copy of the underlying monitor that logs events at the specified aborting level. */
+    def onAborted(action: LogAction[Level]) = self.copy(abortedAction = action)
+
+  }
+
+  /** Returns a log action that will not log anything. */
+  def logNothing = EventMonitor.LogEvents.LogAction.LogNothing
+
+  /** Returns a log action that will submit a log entry at an error-equivalent level. */
+  def logError[T: EventLogLevelType] = implicitly[EventLogLevelType[T]].errorAction
+
+  /** Returns a log action that will submit a log entry at a warning-equivalent level. */
+  def logWarning[T: EventLogLevelType] = implicitly[EventLogLevelType[T]].warningAction
+
+  /** Returns a log action that will submit a log entry at an info-equivalent level. */
+  def logInfo[T: EventLogLevelType] = implicitly[EventLogLevelType[T]].infoAction
+
+  /** Returns a log action that will submit a log entry at a debug-equivalent level. */
+  def logDebug[T: EventLogLevelType] = implicitly[EventLogLevelType[T]].debugAction
+
+  /**
+   * A tag for logging system specific level types, used to map generic action names to concrete logging levels.
+   *
+   * @param T The type of system specific logging level.
+   */
+  trait EventLogLevelType[T] {
+
+    /** A cached action that submits error log entries. */
+    lazy val errorAction = EventMonitor.LogEvents.LogAction.LogAt(errorLevel)
+
+    /** A cached action that submits warning log entries. */
+    lazy val warningAction = EventMonitor.LogEvents.LogAction.LogAt(warningLevel)
+
+    /** A cached action that submits info log entries. */
+    lazy val infoAction = EventMonitor.LogEvents.LogAction.LogAt(infoLevel)
+
+    /** A cached action that submits debug log entries. */
+    lazy val debugAction = EventMonitor.LogEvents.LogAction.LogAt(debugLevel)
+
+    /** The concrete error level. */
+    def errorLevel: T
+
+    /** The concrete warning level. */
+    def warningLevel: T
+
+    /** The concrete info level. */
+    def infoLevel: T
+
+    /** The concrete debug level. */
+    def debugLevel: T
+
+  }
+
+  /**
+   * Declarations of the default logging level tags.
+   */
+  object EventLogLevelType {
+
+    /**
+     * A tag for levels used by `java.util.logging`.
+     */
+    implicit object JavaLevelType extends EventLogLevelType[Level] {
+      override def errorLevel = Level.SEVERE
+      override def warningLevel = Level.WARNING
+      override def infoLevel = Level.INFO
+      override def debugLevel = Level.CONFIG
+    }
+
+  }
+
+  /**
    * Separate namespace for optional SLF4J support.
    */
   object Slf4jSupport {
+
+    import EventMonitor.LogEventsWithSlf4j.Slf4jLevel
 
     /**
      * Creates a new event monitor that submits events to a SLF4J logger.
      *
      * @param logger The SLF4J logger to supply with event messages.
      */
-    implicit def slf4jLoggerToEventMonitor(logger: Slf4jLogger): EventMonitor =
+    implicit def slf4jLoggerToEventMonitor(logger: Slf4jLogger): EventMonitor.LogEventsWithSlf4j =
       EventMonitor.LogEventsWithSlf4j(logger)
+
+    /**
+     * Creates a new event monitor extension interface for a SLF4J logger.
+     *
+     * @param logger The logger to create a new event monitor extension interface for.
+     */
+    implicit def slf4jLoggerToEventMonitorExtensions(logger: Slf4jLogger): LogEventsWithSlf4jExtensions =
+      new LogEventsWithSlf4jExtensions(logger)
+
+    /**
+     * Exposes extensions on any instance of `EventMonitor.LogEventsWithSlf4j`.
+     */
+    implicit final class LogEventsWithSlf4jExtensions(val self: EventMonitor.LogEventsWithSlf4j) extends AnyVal {
+
+      import EventMonitor.LogEvents.LogAction
+
+      /** Returns a copy of the underlying monitor that logs events at the specified retrying level. */
+      def onRetrying(action: LogAction[Slf4jLevel]) = self.copy(retryingAction = action)
+
+      /** Returns a copy of the underlying monitor that logs events at the specified interrupted level. */
+      def onInterrupted(action: LogAction[Slf4jLevel]) = self.copy(interruptedAction = action)
+
+      /** Returns a copy of the underlying monitor that logs events at the specified aborting level. */
+      def onAborted(action: LogAction[Slf4jLevel]) = self.copy(abortedAction = action)
+
+    }
+
+    /**
+     * A tag for levels provided for Slf4j.
+     */
+    implicit object Slf4jEventLogLevelType extends EventLogLevelType[Slf4jLevel] {
+      override def errorLevel = Slf4jLevel.Error
+      override def warningLevel = Slf4jLevel.Warn
+      override def infoLevel = Slf4jLevel.Info
+      override def debugLevel = Slf4jLevel.Debug
+    }
 
   }
 

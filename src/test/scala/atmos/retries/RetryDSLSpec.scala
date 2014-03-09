@@ -20,8 +20,9 @@
 package atmos.retries
 
 import java.io.{ PrintWriter, StringWriter }
-import java.util.logging.Logger
+import java.util.logging.{ Logger, Level }
 import scala.concurrent.duration._
+import org.slf4j.LoggerFactory
 import org.scalatest._
 
 /**
@@ -72,8 +73,19 @@ class RetryDSLSpec extends FlatSpec with Matchers {
       writer onRetrying printMessageAndStackTrace onInterrupted printNothing onAborted printMessage
     } shouldEqual RetryPolicy(monitor = PrintEventsWithWriter(
       writer, PrintAction.PrintMessageAndStackTrace, PrintAction.PrintNothing, PrintAction.PrintMessage))
+    import LogEvents.LogAction
     val logger = Logger.getLogger(getClass.getName)
-    retrying monitorWith logger shouldEqual RetryPolicy(monitor = LogEventsWithJava(logger))
+    retrying monitorWith {
+      logger onRetrying logDebug onInterrupted logNothing onAborted logWarning
+    } shouldEqual RetryPolicy(monitor = LogEventsWithJava(
+      logger, LogAction.LogAt(Level.CONFIG), LogAction.LogNothing, LogAction.LogAt(Level.WARNING)))
+    import Slf4jSupport._
+    import LogEventsWithSlf4j.Slf4jLevel
+    val slf4j = LoggerFactory.getLogger(this.getClass)
+    retrying monitorWith {
+      slf4j onRetrying logNothing onInterrupted logInfo onAborted logError
+    } shouldEqual RetryPolicy(monitor = LogEventsWithSlf4j(
+      slf4j, LogAction.LogNothing, LogAction.LogAt(Slf4jLevel.Info), LogAction.LogAt(Slf4jLevel.Error)))
   }
 
   it should "configure retry policies with error classifiers" in {
