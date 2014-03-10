@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>LogEvents - atmos.retries.EventMonitor.LogEvents</title>
-          <meta name="description" content="LogEvents - atmos.retries.EventMonitor.LogEvents" />
-          <meta name="keywords" content="LogEvents atmos.retries.EventMonitor.LogEvents" />
+          <title>LogEventsWithAkka - atmos.retries.EventMonitor.LogEventsWithAkka</title>
+          <meta name="description" content="LogEventsWithAkka - atmos.retries.EventMonitor.LogEventsWithAkka" />
+          <meta name="keywords" content="LogEventsWithAkka atmos.retries.EventMonitor.LogEventsWithAkka" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -12,7 +12,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../index.html';
-            var hash = 'atmos.retries.EventMonitor$$LogEvents';
+            var hash = 'atmos.retries.EventMonitor$$LogEventsWithAkka';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -24,28 +24,25 @@
         </head>
         <body class="type">
       <div id="definition">
-        <a href="EventMonitor$$LogEvents$.html" title="Go to companion"><img src="../../lib/trait_to_object_big.png" /></a>
+        <a href="EventMonitor$$LogEventsWithAkka$.html" title="Go to companion"><img src="../../lib/class_to_object_big.png" /></a>
         <p id="owner"><a href="../package.html" class="extype" name="atmos">atmos</a>.<a href="package.html" class="extype" name="atmos.retries">retries</a>.<a href="EventMonitor$.html" class="extype" name="atmos.retries.EventMonitor">EventMonitor</a></p>
-        <h1><a href="EventMonitor$$LogEvents$.html" title="Go to companion">LogEvents</a></h1>
+        <h1><a href="EventMonitor$$LogEventsWithAkka$.html" title="Go to companion">LogEventsWithAkka</a></h1>
       </div>
 
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">trait</span>
+        <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">LogEvents</span><span class="result"> extends <a href="EventMonitor.html" class="extype" name="atmos.retries.EventMonitor">EventMonitor</a> with <a href="EventMonitor$$FormatEvents.html" class="extype" name="atmos.retries.EventMonitor.FormatEvents">FormatEvents</a></span>
+        <span class="name">LogEventsWithAkka</span><span class="params">(<span name="logger">logger: <span class="extype" name="akka.event.LoggingAdapter">LoggingAdapter</span></span>, <span name="retryingAction">retryingAction: <a href="EventMonitor$$LogEvents$$LogAction.html" class="extype" name="atmos.retries.EventMonitor.LogEvents.LogAction">LogAction</a>[<span class="extype" name="akka.event.Logging.LogLevel">LogLevel</span>] = <span class="defval" name="EventMonitor.this.LogEventsWithAkka.defaultRetryingAction">...</span></span>, <span name="interruptedAction">interruptedAction: <a href="EventMonitor$$LogEvents$$LogAction.html" class="extype" name="atmos.retries.EventMonitor.LogEvents.LogAction">LogAction</a>[<span class="extype" name="akka.event.Logging.LogLevel">LogLevel</span>] = <span class="defval" name="EventMonitor.this.LogEventsWithAkka.defaultInterruptedAction">...</span></span>, <span name="abortedAction">abortedAction: <a href="EventMonitor$$LogEvents$$LogAction.html" class="extype" name="atmos.retries.EventMonitor.LogEvents.LogAction">LogAction</a>[<span class="extype" name="akka.event.Logging.LogLevel">LogLevel</span>] = <span class="defval" name="EventMonitor.this.LogEventsWithAkka.defaultAbortedAction">...</span></span>)</span><span class="result"> extends <a href="EventMonitor$$LogEvents.html" class="extype" name="atmos.retries.EventMonitor.LogEvents">LogEvents</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Base type for event monitors that formats and logs events.
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>An event monitor that formats and logs events using the <code>akka.event.LoggingAdapter</code> framework.
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a href="EventMonitor$$FormatEvents.html" class="extype" name="atmos.retries.EventMonitor.FormatEvents">FormatEvents</a>, <a href="EventMonitor.html" class="extype" name="atmos.retries.EventMonitor">EventMonitor</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
-        </div><div class="toggleContainer block">
-          <span class="toggle">Known Subclasses</span>
-          <div class="subClasses hiddenContent"><a href="EventMonitor$$LogEventsWithAkka.html" class="extype" name="atmos.retries.EventMonitor.LogEventsWithAkka">LogEventsWithAkka</a>, <a href="EventMonitor$$LogEventsWithJava.html" class="extype" name="atmos.retries.EventMonitor.LogEventsWithJava">LogEventsWithJava</a>, <a href="EventMonitor$$LogEventsWithSlf4j.html" class="extype" name="atmos.retries.EventMonitor.LogEventsWithSlf4j">LogEventsWithSlf4j</a></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <a href="EventMonitor$$LogEvents.html" class="extype" name="atmos.retries.EventMonitor.LogEvents">LogEvents</a>, <a href="EventMonitor$$FormatEvents.html" class="extype" name="atmos.retries.EventMonitor.FormatEvents">FormatEvents</a>, <a href="EventMonitor.html" class="extype" name="atmos.retries.EventMonitor">EventMonitor</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -63,7 +60,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="atmos.retries.EventMonitor.LogEvents"><span>LogEvents</span></li><li class="in" name="atmos.retries.EventMonitor.FormatEvents"><span>FormatEvents</span></li><li class="in" name="atmos.retries.EventMonitor"><span>EventMonitor</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="atmos.retries.EventMonitor.LogEventsWithAkka"><span>LogEventsWithAkka</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="atmos.retries.EventMonitor.LogEvents"><span>LogEvents</span></li><li class="in" name="atmos.retries.EventMonitor.FormatEvents"><span>FormatEvents</span></li><li class="in" name="atmos.retries.EventMonitor"><span>EventMonitor</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -81,142 +78,59 @@
 
       <div id="template">
         <div id="allMembers">
-        
+        <div id="constructors" class="members">
+              <h3>Instance Constructors</h3>
+              <ol><li name="atmos.retries.EventMonitor.LogEventsWithAkka#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="&lt;init&gt;(logger:akka.event.LoggingAdapter,retryingAction:atmos.retries.EventMonitor.LogEvents.LogAction[akka.event.Logging.LogLevel],interruptedAction:atmos.retries.EventMonitor.LogEvents.LogAction[akka.event.Logging.LogLevel],abortedAction:atmos.retries.EventMonitor.LogEvents.LogAction[akka.event.Logging.LogLevel]):atmos.retries.EventMonitor.LogEventsWithAkka"></a>
+      <a id="&lt;init&gt;:LogEventsWithAkka"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">new</span>
+      </span>
+      <span class="symbol">
+        <span class="name">LogEventsWithAkka</span><span class="params">(<span name="logger">logger: <span class="extype" name="akka.event.LoggingAdapter">LoggingAdapter</span></span>, <span name="retryingAction">retryingAction: <a href="EventMonitor$$LogEvents$$LogAction.html" class="extype" name="atmos.retries.EventMonitor.LogEvents.LogAction">LogAction</a>[<span class="extype" name="akka.event.Logging.LogLevel">LogLevel</span>] = <span class="defval" name="EventMonitor.this.LogEventsWithAkka.defaultRetryingAction">...</span></span>, <span name="interruptedAction">interruptedAction: <a href="EventMonitor$$LogEvents$$LogAction.html" class="extype" name="atmos.retries.EventMonitor.LogEvents.LogAction">LogAction</a>[<span class="extype" name="akka.event.Logging.LogLevel">LogLevel</span>] = <span class="defval" name="EventMonitor.this.LogEventsWithAkka.defaultInterruptedAction">...</span></span>, <span name="abortedAction">abortedAction: <a href="EventMonitor$$LogEvents$$LogAction.html" class="extype" name="atmos.retries.EventMonitor.LogEvents.LogAction">LogAction</a>[<span class="extype" name="akka.event.Logging.LogLevel">LogLevel</span>] = <span class="defval" name="EventMonitor.this.LogEventsWithAkka.defaultAbortedAction">...</span></span>)</span>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="atmos.retries.EventMonitor.LogEvents.LevelType" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="LevelType"></a>
+              <ol><li name="atmos.retries.EventMonitor.LogEventsWithAkka.LevelType" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="LevelType=akka.event.Logging.LogLevel"></a>
       <a id="LevelType:LevelType"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier">abstract </span>
+        <span class="modifier"></span>
         <span class="kind">type</span>
       </span>
       <span class="symbol">
-        <span class="name">LevelType</span>
+        <span class="name">LevelType</span><span class="result"> = <span class="extype" name="akka.event.Logging.LogLevel">LogLevel</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">The type of level that this event monitor submits log entries with.</p>
-    </li><li name="atmos.retries.EventMonitor.LogEvents.LoggerType" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="LoggerType"></a>
+      <p class="shortcomment cmt">The type of level that this event monitor submits log entries with.</p><div class="fullcomment"><div class="comment cmt"><p>The type of level that this event monitor submits log entries with.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.retries.EventMonitor.LogEventsWithAkka">LogEventsWithAkka</a> → <a href="EventMonitor$$LogEvents.html" class="extype" name="atmos.retries.EventMonitor.LogEvents">LogEvents</a></dd></dl></div>
+    </li><li name="atmos.retries.EventMonitor.LogEventsWithAkka.LoggerType" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="LoggerType=akka.event.LoggingAdapter"></a>
       <a id="LoggerType:LoggerType"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier">abstract </span>
+        <span class="modifier"></span>
         <span class="kind">type</span>
       </span>
       <span class="symbol">
-        <span class="name">LoggerType</span>
+        <span class="name">LoggerType</span><span class="result"> = <span class="extype" name="akka.event.LoggingAdapter">LoggingAdapter</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">The type of object that this event monitor submits log entries to.</p>
+      <p class="shortcomment cmt">The type of object that this event monitor submits log entries to.</p><div class="fullcomment"><div class="comment cmt"><p>The type of object that this event monitor submits log entries to.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.retries.EventMonitor.LogEventsWithAkka">LogEventsWithAkka</a> → <a href="EventMonitor$$LogEvents.html" class="extype" name="atmos.retries.EventMonitor.LogEvents">LogEvents</a></dd></dl></div>
     </li></ol>
             </div>
 
-        <div id="values" class="values members">
-              <h3>Abstract Value Members</h3>
-              <ol><li name="atmos.retries.EventMonitor.LogEvents#abortedAction" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="abortedAction:atmos.retries.EventMonitor.LogEvents.LogAction[LogEvents.this.LevelType]"></a>
-      <a id="abortedAction:LogAction[LevelType]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">abortedAction</span><span class="result">: <a href="EventMonitor$$LogEvents$$LogAction.html" class="extype" name="atmos.retries.EventMonitor.LogEvents.LogAction">LogAction</a>[<a href="#LevelType" class="extmbr" name="atmos.retries.EventMonitor.LogEvents.LevelType">LevelType</a>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The action that is performed when an aborted event is received.</p>
-    </li><li name="atmos.retries.EventMonitor.LogEvents#interruptedAction" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="interruptedAction:atmos.retries.EventMonitor.LogEvents.LogAction[LogEvents.this.LevelType]"></a>
-      <a id="interruptedAction:LogAction[LevelType]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">interruptedAction</span><span class="result">: <a href="EventMonitor$$LogEvents$$LogAction.html" class="extype" name="atmos.retries.EventMonitor.LogEvents.LogAction">LogAction</a>[<a href="#LevelType" class="extmbr" name="atmos.retries.EventMonitor.LogEvents.LevelType">LevelType</a>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The action that is performed when an interrupted event is received.</p>
-    </li><li name="atmos.retries.EventMonitor.LogEvents#isLoggable" visbl="prt" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="isLoggable(level:LogEvents.this.LevelType):Boolean"></a>
-      <a id="isLoggable(LevelType):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">isLoggable</span><span class="params">(<span name="level">level: <a href="#LevelType" class="extmbr" name="atmos.retries.EventMonitor.LogEvents.LevelType">LevelType</a></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Returns true if the specified level is currently loggable by the underlying logger.</p><div class="fullcomment"><div class="comment cmt"><p>Returns true if the specified level is currently loggable by the underlying logger.</p></div><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
-    </li><li name="atmos.retries.EventMonitor.LogEvents#log" visbl="prt" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="log(level:LogEvents.this.LevelType,message:String,thrown:Throwable):Unit"></a>
-      <a id="log(LevelType,String,Throwable):Unit"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">log</span><span class="params">(<span name="level">level: <a href="#LevelType" class="extmbr" name="atmos.retries.EventMonitor.LogEvents.LevelType">LevelType</a></span>, <span name="message">message: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="thrown">thrown: <span class="extype" name="scala.Throwable">Throwable</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Logs information about an event to the underlying logger.</p><div class="fullcomment"><div class="comment cmt"><p>Logs information about an event to the underlying logger.</p></div><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
-    </li><li name="atmos.retries.EventMonitor.LogEvents#logger" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="logger:LogEvents.this.LoggerType"></a>
-      <a id="logger:LoggerType"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">logger</span><span class="result">: <a href="#LoggerType" class="extmbr" name="atmos.retries.EventMonitor.LogEvents.LoggerType">LoggerType</a></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The object that this event monitor prints to.</p>
-    </li><li name="atmos.retries.EventMonitor.LogEvents#retryingAction" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="retryingAction:atmos.retries.EventMonitor.LogEvents.LogAction[LogEvents.this.LevelType]"></a>
-      <a id="retryingAction:LogAction[LevelType]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">retryingAction</span><span class="result">: <a href="EventMonitor$$LogEvents$$LogAction.html" class="extype" name="atmos.retries.EventMonitor.LogEvents.LogAction">LogAction</a>[<a href="#LevelType" class="extmbr" name="atmos.retries.EventMonitor.LogEvents.LevelType">LevelType</a>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The action that is performed when a retrying event is received.</p>
-    </li><li name="atmos.retries.EventMonitor.LogEvents#offLevel" visbl="prt" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="offLevel:LogEvents.this.LevelType"></a>
-      <a id="offLevel:LevelType"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name deprecated" title="Deprecated: (Since version 1.3) Use LogEvents.LogAction.LogNothing">offLevel</span><span class="result">: <a href="#LevelType" class="extmbr" name="atmos.retries.EventMonitor.LogEvents.LevelType">LevelType</a></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The level that will never submit a log entry.</p><div class="fullcomment"><div class="comment cmt"><p>The level that will never submit a log entry.</p><p>NOTE: This method is deprecated and is only used by other deprecated methods. This method will be removed in
-Atmos 2.0, users should instead use <code>EventMonitor.LogEvents.LogAction.LogNothing</code>.
-</p></div><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Annotations</dt><dd>
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.3)</i> Use LogEvents.LogAction.LogNothing</p></dd></dl></div>
-    </li></ol>
-            </div>
+        
 
         <div id="values" class="values members">
-              <h3>Concrete Value Members</h3>
+              <h3>Value Members</h3>
               <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="!=(x$1:AnyRef):Boolean"></a>
       <a id="!=(AnyRef):Boolean"></a>
@@ -296,7 +210,20 @@ Atmos 2.0, users should instead use <code>EventMonitor.LogEvents.LogAction.LogNo
       </h4>
       <p class="shortcomment cmt">Called when an operation has failed too many times and will not be retried.</p><div class="fullcomment"><div class="comment cmt"><p>Called when an operation has failed too many times and will not be retried.</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation that failed if one was provided.
 </p></dd><dt class="param">thrown</dt><dd class="cmt"><p>The exception that was thrown.
-</p></dd><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that were made.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.retries.EventMonitor.LogEvents">LogEvents</a> → <a href="EventMonitor.html" class="extype" name="atmos.retries.EventMonitor">EventMonitor</a></dd></dl></div>
+</p></dd><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that were made.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="EventMonitor$$LogEvents.html" class="extype" name="atmos.retries.EventMonitor.LogEvents">LogEvents</a> → <a href="EventMonitor.html" class="extype" name="atmos.retries.EventMonitor">EventMonitor</a></dd></dl></div>
+    </li><li name="atmos.retries.EventMonitor.LogEventsWithAkka#abortedAction" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="abortedAction:atmos.retries.EventMonitor.LogEvents.LogAction[akka.event.Logging.LogLevel]"></a>
+      <a id="abortedAction:LogAction[LogLevel]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">abortedAction</span><span class="result">: <a href="EventMonitor$$LogEvents$$LogAction.html" class="extype" name="atmos.retries.EventMonitor.LogEvents.LogAction">LogAction</a>[<span class="extype" name="akka.event.Logging.LogLevel">LogLevel</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The action that is performed when an aborted event is received.</p><div class="fullcomment"><div class="comment cmt"><p>The action that is performed when an aborted event is received.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.retries.EventMonitor.LogEventsWithAkka">LogEventsWithAkka</a> → <a href="EventMonitor$$LogEvents.html" class="extype" name="atmos.retries.EventMonitor.LogEvents">LogEvents</a></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -342,19 +269,6 @@ Atmos 2.0, users should instead use <code>EventMonitor.LogEvents.LogAction.LogNo
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="equals(x$1:Any):Boolean"></a>
-      <a id="equals(Any):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
@@ -432,19 +346,6 @@ Atmos 2.0, users should instead use <code>EventMonitor.LogEvents.LogAction.LogNo
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="hashCode():Int"></a>
-      <a id="hashCode():Int"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="atmos.retries.EventMonitor.LogEvents#interrupted" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="interrupted(name:Option[String],thrown:Throwable,attempts:Int):Unit"></a>
       <a id="interrupted(Option[String],Throwable,Int):Unit"></a>
@@ -459,7 +360,20 @@ Atmos 2.0, users should instead use <code>EventMonitor.LogEvents.LogAction.LogNo
       </h4>
       <p class="shortcomment cmt">Called when an operation has failed with a fatal error and will not be retried.</p><div class="fullcomment"><div class="comment cmt"><p>Called when an operation has failed with a fatal error and will not be retried.</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation that failed if one was provided.
 </p></dd><dt class="param">thrown</dt><dd class="cmt"><p>The exception that was thrown.
-</p></dd><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that were made.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.retries.EventMonitor.LogEvents">LogEvents</a> → <a href="EventMonitor.html" class="extype" name="atmos.retries.EventMonitor">EventMonitor</a></dd></dl></div>
+</p></dd><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that were made.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="EventMonitor$$LogEvents.html" class="extype" name="atmos.retries.EventMonitor.LogEvents">LogEvents</a> → <a href="EventMonitor.html" class="extype" name="atmos.retries.EventMonitor">EventMonitor</a></dd></dl></div>
+    </li><li name="atmos.retries.EventMonitor.LogEventsWithAkka#interruptedAction" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="interruptedAction:atmos.retries.EventMonitor.LogEvents.LogAction[akka.event.Logging.LogLevel]"></a>
+      <a id="interruptedAction:LogAction[LogLevel]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">interruptedAction</span><span class="result">: <a href="EventMonitor$$LogEvents$$LogAction.html" class="extype" name="atmos.retries.EventMonitor.LogEvents.LogAction">LogAction</a>[<span class="extype" name="akka.event.Logging.LogLevel">LogLevel</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The action that is performed when an interrupted event is received.</p><div class="fullcomment"><div class="comment cmt"><p>The action that is performed when an interrupted event is received.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.retries.EventMonitor.LogEventsWithAkka">LogEventsWithAkka</a> → <a href="EventMonitor$$LogEvents.html" class="extype" name="atmos.retries.EventMonitor.LogEvents">LogEvents</a></dd></dl></div>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -473,6 +387,45 @@ Atmos 2.0, users should instead use <code>EventMonitor.LogEvents.LogAction.LogNo
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="atmos.retries.EventMonitor.LogEventsWithAkka#isLoggable" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isLoggable(level:LogEventsWithAkka.this.LevelType):Boolean"></a>
+      <a id="isLoggable(LevelType):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">isLoggable</span><span class="params">(<span name="level">level: <a href="#LevelType=akka.event.Logging.LogLevel" class="extmbr" name="atmos.retries.EventMonitor.LogEventsWithAkka.LevelType">LevelType</a></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns true if the specified level is currently loggable by the underlying logger.</p><div class="fullcomment"><div class="comment cmt"><p>Returns true if the specified level is currently loggable by the underlying logger.</p></div><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.retries.EventMonitor.LogEventsWithAkka">LogEventsWithAkka</a> → <a href="EventMonitor$$LogEvents.html" class="extype" name="atmos.retries.EventMonitor.LogEvents">LogEvents</a></dd></dl></div>
+    </li><li name="atmos.retries.EventMonitor.LogEventsWithAkka#log" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="log(level:LogEventsWithAkka.this.LevelType,msg:String,thrown:Throwable):Unit"></a>
+      <a id="log(LevelType,String,Throwable):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">log</span><span class="params">(<span name="level">level: <a href="#LevelType=akka.event.Logging.LogLevel" class="extmbr" name="atmos.retries.EventMonitor.LogEventsWithAkka.LevelType">LevelType</a></span>, <span name="msg">msg: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="thrown">thrown: <span class="extype" name="scala.Throwable">Throwable</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Logs information about an event to the underlying logger.</p><div class="fullcomment"><div class="comment cmt"><p>Logs information about an event to the underlying logger.</p></div><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.retries.EventMonitor.LogEventsWithAkka">LogEventsWithAkka</a> → <a href="EventMonitor$$LogEvents.html" class="extype" name="atmos.retries.EventMonitor.LogEvents">LogEvents</a></dd></dl></div>
+    </li><li name="atmos.retries.EventMonitor.LogEventsWithAkka#logger" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="logger:akka.event.LoggingAdapter"></a>
+      <a id="logger:LoggingAdapter"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">logger</span><span class="result">: <span class="extype" name="akka.event.LoggingAdapter">LoggingAdapter</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The object that this event monitor prints to.</p><div class="fullcomment"><div class="comment cmt"><p>The object that this event monitor prints to.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.retries.EventMonitor.LogEventsWithAkka">LogEventsWithAkka</a> → <a href="EventMonitor$$LogEvents.html" class="extype" name="atmos.retries.EventMonitor.LogEvents">LogEvents</a></dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -512,6 +465,21 @@ Atmos 2.0, users should instead use <code>EventMonitor.LogEvents.LogAction.LogNo
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="atmos.retries.EventMonitor.LogEventsWithAkka#offLevel" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="offLevel:akka.event.Logging.LogLevel"></a>
+      <a id="offLevel:LogLevel"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">offLevel</span><span class="result">: <span class="extype" name="akka.event.Logging.LogLevel">LogLevel</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The level that will never submit a log entry.</p><div class="fullcomment"><div class="comment cmt"><p>The level that will never submit a log entry.</p><p>NOTE: This method is deprecated and is only used by other deprecated methods. This method will be removed in
+Atmos 2.0, users should instead use <code>EventMonitor.LogEvents.LogAction.LogNothing</code>.
+</p></div><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.retries.EventMonitor.LogEventsWithAkka">LogEventsWithAkka</a> → <a href="EventMonitor$$LogEvents.html" class="extype" name="atmos.retries.EventMonitor.LogEvents">LogEvents</a></dd></dl></div>
     </li><li name="atmos.retries.EventMonitor.LogEvents#retrying" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="retrying(name:Option[String],thrown:Throwable,attempts:Int,backoff:scala.concurrent.duration.FiniteDuration,silent:Boolean):Unit"></a>
       <a id="retrying(Option[String],Throwable,Int,FiniteDuration,Boolean):Unit"></a>
@@ -528,7 +496,20 @@ Atmos 2.0, users should instead use <code>EventMonitor.LogEvents.LogAction.LogNo
 </p></dd><dt class="param">thrown</dt><dd class="cmt"><p>The exception that was thrown.
 </p></dd><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that have been made so far.
 </p></dd><dt class="param">backoff</dt><dd class="cmt"><p>The amount of time that will pass before another attempt is made.
-</p></dd><dt class="param">silent</dt><dd class="cmt"><p>True if the exception was classified as silent.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.retries.EventMonitor.LogEvents">LogEvents</a> → <a href="EventMonitor.html" class="extype" name="atmos.retries.EventMonitor">EventMonitor</a></dd></dl></div>
+</p></dd><dt class="param">silent</dt><dd class="cmt"><p>True if the exception was classified as silent.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="EventMonitor$$LogEvents.html" class="extype" name="atmos.retries.EventMonitor.LogEvents">LogEvents</a> → <a href="EventMonitor.html" class="extype" name="atmos.retries.EventMonitor">EventMonitor</a></dd></dl></div>
+    </li><li name="atmos.retries.EventMonitor.LogEventsWithAkka#retryingAction" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="retryingAction:atmos.retries.EventMonitor.LogEvents.LogAction[akka.event.Logging.LogLevel]"></a>
+      <a id="retryingAction:LogAction[LogLevel]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">retryingAction</span><span class="result">: <a href="EventMonitor$$LogEvents$$LogAction.html" class="extype" name="atmos.retries.EventMonitor.LogEvents.LogAction">LogAction</a>[<span class="extype" name="akka.event.Logging.LogLevel">LogLevel</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The action that is performed when a retrying event is received.</p><div class="fullcomment"><div class="comment cmt"><p>The action that is performed when a retrying event is received.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.retries.EventMonitor.LogEventsWithAkka">LogEventsWithAkka</a> → <a href="EventMonitor$$LogEvents.html" class="extype" name="atmos.retries.EventMonitor.LogEvents">LogEvents</a></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -542,19 +523,6 @@ Atmos 2.0, users should instead use <code>EventMonitor.LogEvents.LogAction.LogNo
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="toString():String"></a>
-      <a id="toString():String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
@@ -628,11 +596,11 @@ Atmos 2.0, users should instead use <code>EventMonitor.LogEvents.LogAction.LogNo
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name deprecated" title="Deprecated: (Since version 1.3) Use abortedAction">abortedLevel</span><span class="result">: <a href="#LevelType" class="extmbr" name="atmos.retries.EventMonitor.LogEvents.LevelType">LevelType</a></span>
+        <span class="name deprecated" title="Deprecated: (Since version 1.3) Use abortedAction">abortedLevel</span><span class="result">: <a href="#LevelType=akka.event.Logging.LogLevel" class="extmbr" name="atmos.retries.EventMonitor.LogEventsWithAkka.LevelType">LevelType</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">The level to log aborted events at.</p><div class="fullcomment"><div class="comment cmt"><p>The level to log aborted events at.</p><p>NOTE: This method is deprecated and will be removed in Atmos 2.0. Users should migrate to <code>abortedAction</code>.
-</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="EventMonitor$$LogEvents.html" class="extype" name="atmos.retries.EventMonitor.LogEvents">LogEvents</a></dd><dt>Annotations</dt><dd>
                 <span class="name">@deprecated</span>
               
         </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.3)</i> Use abortedAction</p></dd></dl></div>
@@ -645,11 +613,11 @@ Atmos 2.0, users should instead use <code>EventMonitor.LogEvents.LogAction.LogNo
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name deprecated" title="Deprecated: (Since version 1.3) Use interruptedAction">interruptedLevel</span><span class="result">: <a href="#LevelType" class="extmbr" name="atmos.retries.EventMonitor.LogEvents.LevelType">LevelType</a></span>
+        <span class="name deprecated" title="Deprecated: (Since version 1.3) Use interruptedAction">interruptedLevel</span><span class="result">: <a href="#LevelType=akka.event.Logging.LogLevel" class="extmbr" name="atmos.retries.EventMonitor.LogEventsWithAkka.LevelType">LevelType</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">The level to log interrupted events at.</p><div class="fullcomment"><div class="comment cmt"><p>The level to log interrupted events at.</p><p>NOTE: This method is deprecated and will be removed in Atmos 2.0. Users should migrate to <code>interruptedAction</code>.
-</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="EventMonitor$$LogEvents.html" class="extype" name="atmos.retries.EventMonitor.LogEvents">LogEvents</a></dd><dt>Annotations</dt><dd>
                 <span class="name">@deprecated</span>
               
         </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.3)</i> Use interruptedAction</p></dd></dl></div>
@@ -662,11 +630,11 @@ Atmos 2.0, users should instead use <code>EventMonitor.LogEvents.LogAction.LogNo
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name deprecated" title="Deprecated: (Since version 1.3) Use retryingAction">retryingLevel</span><span class="result">: <a href="#LevelType" class="extmbr" name="atmos.retries.EventMonitor.LogEvents.LevelType">LevelType</a></span>
+        <span class="name deprecated" title="Deprecated: (Since version 1.3) Use retryingAction">retryingLevel</span><span class="result">: <a href="#LevelType=akka.event.Logging.LogLevel" class="extmbr" name="atmos.retries.EventMonitor.LogEventsWithAkka.LevelType">LevelType</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">The level to log retrying events at.</p><div class="fullcomment"><div class="comment cmt"><p>The level to log retrying events at.</p><p>NOTE: This method is deprecated and will be removed in Atmos 2.0. Users should migrate to <code>retryingAction</code>.
-</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="EventMonitor$$LogEvents.html" class="extype" name="atmos.retries.EventMonitor.LogEvents">LogEvents</a></dd><dt>Annotations</dt><dd>
                 <span class="name">@deprecated</span>
               
         </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.3)</i> Use retryingAction</p></dd></dl></div>
@@ -675,7 +643,17 @@ Atmos 2.0, users should instead use <code>EventMonitor.LogEvents.LogAction.LogNo
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="atmos.retries.EventMonitor.FormatEvents">
+        <div class="parent" name="scala.Serializable">
+              <h3>Inherited from <span class="extype" name="scala.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="java.io.Serializable">
+              <h3>Inherited from <span class="extype" name="java.io.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="scala.Product">
+              <h3>Inherited from <span class="extype" name="scala.Product">Product</span></h3>
+            </div><div class="parent" name="scala.Equals">
+              <h3>Inherited from <span class="extype" name="scala.Equals">Equals</span></h3>
+            </div><div class="parent" name="atmos.retries.EventMonitor.LogEvents">
+              <h3>Inherited from <a href="EventMonitor$$LogEvents.html" class="extype" name="atmos.retries.EventMonitor.LogEvents">LogEvents</a></h3>
+            </div><div class="parent" name="atmos.retries.EventMonitor.FormatEvents">
               <h3>Inherited from <a href="EventMonitor$$FormatEvents.html" class="extype" name="atmos.retries.EventMonitor.FormatEvents">FormatEvents</a></h3>
             </div><div class="parent" name="atmos.retries.EventMonitor">
               <h3>Inherited from <a href="EventMonitor.html" class="extype" name="atmos.retries.EventMonitor">EventMonitor</a></h3>

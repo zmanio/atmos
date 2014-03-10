@@ -63,7 +63,7 @@ instance of this class may be used as a policy in <code>retryFor</code>.</p><p>F
 terminates (unless directed to by an error classifier) can be created with <code>retryForever</code>:</p><pre><span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = neverRetry
 
 <span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever</pre><h4>Backoff Policies</h4><p>Backoff policies specify the delay between subsequent retry attempts and are configured on a retry policy with
-<code>using</code>. See <a href="BackoffPolicy.html" class="extype" name="atmos.retries.BackoffPolicy">atmos.retries.BackoffPolicy</a> for more information.</p><p>This DSL provides support for the six provided backoff policies (or any custom policy):</p><pre><span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever using constantBackoff { <span class="num">5.</span>millis }
+<code>using</code>. See <a href="BackoffPolicy.html" class="extype" name="atmos.retries.BackoffPolicy">atmos.retries.BackoffPolicy</a> for more information.</p><p>This DSL provides support for the six provided backoff policies:</p><pre><span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever using constantBackoff { <span class="num">5.</span>millis }
 
 <span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever using linearBackoff { <span class="num">5.</span>seconds }
 
@@ -83,16 +83,37 @@ terminates (unless directed to by an error classifier) can be created with <code
 
 <span class="cmt">// Randomizing the result of a backoff duration by adding a random duration from a range.</span>
 <span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever using { linearBackoff { <span class="num">1.</span>second } randomized -<span class="num">50.</span>millis -&gt; <span class="num">50.</span>millis }</pre><h4>Monitor Configuration</h4><p>Event monitors are notified when retry attempts fail and are configured on a retry policy using <code>monitorWith</code>. See
-<a href="EventMonitor.html" class="extype" name="atmos.retries.EventMonitor">atmos.retries.EventMonitor</a> for more information.</p><p>This DSL provides support for monitoring retry attempts with print streams, standard Java loggers and SLF4J loggers
-(or any custom monitor):</p><pre><span class="cmt">// Write information about failed attempts to stderr.</span>
+<a href="EventMonitor.html" class="extype" name="atmos.retries.EventMonitor">atmos.retries.EventMonitor</a> for more information.</p><p>This DSL provides support for monitoring retry attempts with print streams, print writers, standard Java loggers,
+Akka logging adapters and SLF4J loggers:</p><pre><span class="cmt">// Print information about failed attempts to stderr using the default printing strategies.</span>
 <span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever monitorWith System.err
 
-<span class="cmt">// Write information about failed attempts to the specified instance of java.util.logging.Logger.</span>
+<span class="cmt">// Print information about failed attempts to a file, customizing what events get printed and how.</span>
+<span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever monitorWith {
+  <span class="kw">new</span> PrintWriter(<span class="lit">"/path"</span>) onRetrying printNothing onInterrupted printMessage onAborted printMessageAndStackTrace
+}
+
+<span class="cmt">// Submit information about failed attempts to the specified instance of `java.util.logging.Logger`.</span>
 <span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever monitorWith Logger.getLogger(<span class="lit">"MyLoggerName"</span>)
 
-<span class="cmt">// Write information about failed attempts to the specified instance of org.slf4j.Logger.</span>
+<span class="cmt">// Submit information about failed attempts to the specified instance of `java.util.logging.Logger`, customizing</span>
+<span class="cmt">// what events get logged and and at what level.</span>
+<span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever monitorWith {
+  Logger.getLogger(<span class="lit">"MyLoggerName"</span>) onRetrying logNothing onInterrupted logWarning onAborted logError
+}
+
+<span class="cmt">// Submit information about failed attempts to the specified instance of `akka.event.LoggingAdapter`, customizing</span>
+<span class="cmt">// what events get logged and and at what level.</span>
+<span class="kw">import</span> AkkaSupport._
+<span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever monitorWith {
+  Logging(context.system, <span class="kw">this</span>) onRetrying logNothing onInterrupted logWarning onAborted logError
+}
+
+<span class="cmt">// Submit information about failed attempts to the specified instance of `org.slf4j.Logger`, customizing what</span>
+<span class="cmt">// events get logged and and at what level.</span>
 <span class="kw">import</span> Slf4jSupport._
-<span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever monitorWith LoggerFactory.getLogger(<span class="lit">"MyLoggerName"</span>)</pre><h4>Error Classification</h4><p>Errors that occur during a retry attempt can be classified as <code>Fatal</code>, <code>Recoverable</code> or <code>SilentlyRecoverable</code>.
+<span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever monitorWith {
+  LoggerFactory.getLogger(<span class="lit">"MyLoggerName"</span>) onRetrying logNothing onInterrupted logWarning onAborted logError
+}</pre><h4>Error Classification</h4><p>Errors that occur during a retry attempt can be classified as <code>Fatal</code>, <code>Recoverable</code> or <code>SilentlyRecoverable</code>.
 Retry policies can be configured with error classification functions using <code>onError</code>. See
 <a href="ErrorClassification.html" class="extype" name="atmos.retries.ErrorClassification">atmos.retries.ErrorClassification</a> for more information.</p><p>This DSL provides support for the three provided error classifications:</p><pre><span class="cmt">// Stop retrying after any runtime exception.</span>
 <span class="kw">implicit</span> <span class="kw">val</span> retryPolicy = retryForever onError { <span class="kw">case</span> _: RuntimeException <span class="kw">=&gt;</span> stopRetrying }
@@ -156,6 +177,19 @@ Retry policies can be configured with error classification functions using <code
       </span>
       </h4>
       <p class="comment cmt">Adds support for randomization to all backoff policies.</p>
+    </li><li name="atmos.retries.RetryDSL.EventLogLevelType" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="EventLogLevelType[T]extendsAnyRef"></a>
+      <a id="EventLogLevelType[T]:EventLogLevelType[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="RetryDSL$$EventLogLevelType.html"><span class="name">EventLogLevelType</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">A tag for logging system specific level types, used to map generic action names to concrete logging levels.</p>
     </li><li name="atmos.retries.RetryDSL.LimitAttemptsTerminationPolicyFactory" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="LimitAttemptsTerminationPolicyFactoryextendsAnyVal"></a>
       <a id="LimitAttemptsTerminationPolicyFactory:LimitAttemptsTerminationPolicyFactory"></a>
@@ -169,6 +203,45 @@ Retry policies can be configured with error classification functions using <code
       </span>
       </h4>
       <p class="comment cmt">Adds a termination policy factory named <code>attempts</code> to <code>Int</code> for use in expressions like <code>retryFor(5.attempts)</code>.</p>
+    </li><li name="atmos.retries.RetryDSL.LogEventsWithJavaExtensions" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LogEventsWithJavaExtensionsextendsAnyVal"></a>
+      <a id="LogEventsWithJavaExtensions:LogEventsWithJavaExtensions"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit final </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="RetryDSL$$LogEventsWithJavaExtensions.html"><span class="name">LogEventsWithJavaExtensions</span></a><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Exposes extensions on any instance of <code>EventMonitor.LogEventsWithJava</code>.</p>
+    </li><li name="atmos.retries.RetryDSL.PrintEventsWithStreamExtensions" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PrintEventsWithStreamExtensionsextendsAnyVal"></a>
+      <a id="PrintEventsWithStreamExtensions:PrintEventsWithStreamExtensions"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit final </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="RetryDSL$$PrintEventsWithStreamExtensions.html"><span class="name">PrintEventsWithStreamExtensions</span></a><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Exposes extensions on any instance of <code>EventMonitor.PrintEventsWithStream</code>.</p>
+    </li><li name="atmos.retries.RetryDSL.PrintEventsWithWriterExtensions" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PrintEventsWithWriterExtensionsextendsAnyVal"></a>
+      <a id="PrintEventsWithWriterExtensions:PrintEventsWithWriterExtensions"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit final </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="RetryDSL$$PrintEventsWithWriterExtensions.html"><span class="name">PrintEventsWithWriterExtensions</span></a><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Exposes extensions on any instance of <code>EventMonitor.PrintEventsWithWriter</code>.</p>
     </li><li name="atmos.retries.RetryDSL.RetryPolicyExtensions" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="RetryPolicyExtensionsextendsAnyVal"></a>
       <a id="RetryPolicyExtensions:RetryPolicyExtensions"></a>
@@ -268,6 +341,32 @@ Retry policies can be configured with error classification functions using <code
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="atmos.retries.RetryDSL.AkkaSupport" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="AkkaSupport"></a>
+      <a id="AkkaSupport:AkkaSupport"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="RetryDSL$$AkkaSupport$.html"><span class="name">AkkaSupport</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">Separate namespace for optional Akka support.</p>
+    </li><li name="atmos.retries.RetryDSL.EventLogLevelType" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="EventLogLevelType"></a>
+      <a id="EventLogLevelType:EventLogLevelType"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="RetryDSL$$EventLogLevelType$.html"><span class="name">EventLogLevelType</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">Declarations of the default logging level tags.</p>
     </li><li name="atmos.retries.RetryDSL.Slf4jSupport" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Slf4jSupport"></a>
       <a id="Slf4jSupport:Slf4jSupport"></a>
@@ -515,20 +614,100 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).
       <p class="shortcomment cmt">Creates a backoff policy that increases the backoff duration linearly after every attempt.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a backoff policy that increases the backoff duration linearly after every attempt.
 </p></div><dl class="paramcmts block"><dt class="param">backoff</dt><dd class="cmt"><p>The duration to add to the backoff after every attempt.
 </p></dd></dl></div>
+    </li><li name="atmos.retries.RetryDSL#logDebug" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="logDebug[T](implicitevidence$4:atmos.retries.RetryDSL.EventLogLevelType[T]):atmos.retries.EventMonitor.LogEvents.LogAction.LogAt[T]"></a>
+      <a id="logDebug[T](EventLogLevelType[T]):LogAt[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">logDebug</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="RetryDSL$$EventLogLevelType.html" class="extype" name="atmos.retries.RetryDSL.EventLogLevelType">EventLogLevelType</a>[<span class="extype" name="atmos.retries.RetryDSL.logDebug.T">T</span>]</span>)</span><span class="result">: <a href="EventMonitor$$LogEvents$$LogAction$$LogAt.html" class="extype" name="atmos.retries.EventMonitor.LogEvents.LogAction.LogAt">LogAt</a>[<span class="extype" name="atmos.retries.RetryDSL.logDebug.T">T</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns a log action that will submit a log entry at a debug-equivalent level.</p>
+    </li><li name="atmos.retries.RetryDSL#logError" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="logError[T](implicitevidence$1:atmos.retries.RetryDSL.EventLogLevelType[T]):atmos.retries.EventMonitor.LogEvents.LogAction.LogAt[T]"></a>
+      <a id="logError[T](EventLogLevelType[T]):LogAt[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">logError</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="RetryDSL$$EventLogLevelType.html" class="extype" name="atmos.retries.RetryDSL.EventLogLevelType">EventLogLevelType</a>[<span class="extype" name="atmos.retries.RetryDSL.logError.T">T</span>]</span>)</span><span class="result">: <a href="EventMonitor$$LogEvents$$LogAction$$LogAt.html" class="extype" name="atmos.retries.EventMonitor.LogEvents.LogAction.LogAt">LogAt</a>[<span class="extype" name="atmos.retries.RetryDSL.logError.T">T</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns a log action that will submit a log entry at an error-equivalent level.</p>
+    </li><li name="atmos.retries.RetryDSL#logInfo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="logInfo[T](implicitevidence$3:atmos.retries.RetryDSL.EventLogLevelType[T]):atmos.retries.EventMonitor.LogEvents.LogAction.LogAt[T]"></a>
+      <a id="logInfo[T](EventLogLevelType[T]):LogAt[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">logInfo</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="RetryDSL$$EventLogLevelType.html" class="extype" name="atmos.retries.RetryDSL.EventLogLevelType">EventLogLevelType</a>[<span class="extype" name="atmos.retries.RetryDSL.logInfo.T">T</span>]</span>)</span><span class="result">: <a href="EventMonitor$$LogEvents$$LogAction$$LogAt.html" class="extype" name="atmos.retries.EventMonitor.LogEvents.LogAction.LogAt">LogAt</a>[<span class="extype" name="atmos.retries.RetryDSL.logInfo.T">T</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns a log action that will submit a log entry at an info-equivalent level.</p>
+    </li><li name="atmos.retries.RetryDSL#logNothing" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="logNothing:atmos.retries.EventMonitor.LogEvents.LogAction.LogNothing.type"></a>
+      <a id="logNothing:LogNothing.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">logNothing</span><span class="result">: <a href="EventMonitor$$LogEvents$$LogAction$$LogNothing$.html" class="extype" name="atmos.retries.EventMonitor.LogEvents.LogAction.LogNothing">LogNothing</a>.type</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns a log action that will not log anything.</p>
+    </li><li name="atmos.retries.RetryDSL#logWarning" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="logWarning[T](implicitevidence$2:atmos.retries.RetryDSL.EventLogLevelType[T]):atmos.retries.EventMonitor.LogEvents.LogAction.LogAt[T]"></a>
+      <a id="logWarning[T](EventLogLevelType[T]):LogAt[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">logWarning</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="RetryDSL$$EventLogLevelType.html" class="extype" name="atmos.retries.RetryDSL.EventLogLevelType">EventLogLevelType</a>[<span class="extype" name="atmos.retries.RetryDSL.logWarning.T">T</span>]</span>)</span><span class="result">: <a href="EventMonitor$$LogEvents$$LogAction$$LogAt.html" class="extype" name="atmos.retries.EventMonitor.LogEvents.LogAction.LogAt">LogAt</a>[<span class="extype" name="atmos.retries.RetryDSL.logWarning.T">T</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns a log action that will submit a log entry at a warning-equivalent level.</p>
     </li><li name="atmos.retries.RetryDSL#loggerToEventMonitor" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="loggerToEventMonitor(logger:java.util.logging.Logger):atmos.retries.EventMonitor"></a>
-      <a id="loggerToEventMonitor(Logger):EventMonitor"></a>
+      <a id="loggerToEventMonitor(logger:java.util.logging.Logger):atmos.retries.EventMonitor.LogEventsWithJava"></a>
+      <a id="loggerToEventMonitor(Logger):LogEventsWithJava"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">implicit </span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">loggerToEventMonitor</span><span class="params">(<span name="logger">logger: <span class="extype" name="java.util.logging.Logger">Logger</span></span>)</span><span class="result">: <a href="EventMonitor.html" class="extype" name="atmos.retries.EventMonitor">EventMonitor</a></span>
+        <span class="name">loggerToEventMonitor</span><span class="params">(<span name="logger">logger: <span class="extype" name="java.util.logging.Logger">Logger</span></span>)</span><span class="result">: <a href="EventMonitor$$LogEventsWithJava.html" class="extype" name="atmos.retries.EventMonitor.LogEventsWithJava">LogEventsWithJava</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Creates a new event monitor that submits events to a logger.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new event monitor that submits events to a logger.
 </p></div><dl class="paramcmts block"><dt class="param">logger</dt><dd class="cmt"><p>The logger to supply with event messages.
+</p></dd></dl></div>
+    </li><li name="atmos.retries.RetryDSL#loggerToEventMonitorExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="loggerToEventMonitorExtensions(logger:java.util.logging.Logger):atmos.retries.RetryDSL.LogEventsWithJavaExtensions"></a>
+      <a id="loggerToEventMonitorExtensions(Logger):LogEventsWithJavaExtensions"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">loggerToEventMonitorExtensions</span><span class="params">(<span name="logger">logger: <span class="extype" name="java.util.logging.Logger">Logger</span></span>)</span><span class="result">: <a href="RetryDSL$$LogEventsWithJavaExtensions.html" class="extype" name="atmos.retries.RetryDSL.LogEventsWithJavaExtensions">LogEventsWithJavaExtensions</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Creates a new event monitor extension interface for a logger.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new event monitor extension interface for a logger.
+</p></div><dl class="paramcmts block"><dt class="param">logger</dt><dd class="cmt"><p>The logger to create a new event monitor extension interface for.
 </p></dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
@@ -582,20 +761,104 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="atmos.retries.RetryDSL#printMessage" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="printMessage:atmos.retries.EventMonitor.PrintEvents.PrintAction.PrintMessage.type"></a>
+      <a id="printMessage:PrintMessage.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">printMessage</span><span class="result">: <a href="EventMonitor$$PrintEvents$$PrintAction$$PrintMessage$.html" class="extype" name="atmos.retries.EventMonitor.PrintEvents.PrintAction.PrintMessage">PrintMessage</a>.type</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns a print action that will print only an event message.</p>
+    </li><li name="atmos.retries.RetryDSL#printMessageAndStackTrace" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="printMessageAndStackTrace:atmos.retries.EventMonitor.PrintEvents.PrintAction.PrintMessageAndStackTrace.type"></a>
+      <a id="printMessageAndStackTrace:PrintMessageAndStackTrace.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">printMessageAndStackTrace</span><span class="result">: <a href="EventMonitor$$PrintEvents$$PrintAction$$PrintMessageAndStackTrace$.html" class="extype" name="atmos.retries.EventMonitor.PrintEvents.PrintAction.PrintMessageAndStackTrace">PrintMessageAndStackTrace</a>.type</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns a print action that will print an event message and stack trace.</p>
+    </li><li name="atmos.retries.RetryDSL#printNothing" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="printNothing:atmos.retries.EventMonitor.PrintEvents.PrintAction.PrintNothing.type"></a>
+      <a id="printNothing:PrintNothing.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">printNothing</span><span class="result">: <a href="EventMonitor$$PrintEvents$$PrintAction$$PrintNothing$.html" class="extype" name="atmos.retries.EventMonitor.PrintEvents.PrintAction.PrintNothing">PrintNothing</a>.type</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns a print action that will print no text.</p>
     </li><li name="atmos.retries.RetryDSL#printStreamToEventMonitor" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="printStreamToEventMonitor(stream:java.io.PrintStream):atmos.retries.EventMonitor"></a>
-      <a id="printStreamToEventMonitor(PrintStream):EventMonitor"></a>
+      <a id="printStreamToEventMonitor(stream:java.io.PrintStream):atmos.retries.EventMonitor.PrintEventsWithStream"></a>
+      <a id="printStreamToEventMonitor(PrintStream):PrintEventsWithStream"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">implicit </span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">printStreamToEventMonitor</span><span class="params">(<span name="stream">stream: <span class="extype" name="java.io.PrintStream">PrintStream</span></span>)</span><span class="result">: <a href="EventMonitor.html" class="extype" name="atmos.retries.EventMonitor">EventMonitor</a></span>
+        <span class="name">printStreamToEventMonitor</span><span class="params">(<span name="stream">stream: <span class="extype" name="java.io.PrintStream">PrintStream</span></span>)</span><span class="result">: <a href="EventMonitor$$PrintEventsWithStream.html" class="extype" name="atmos.retries.EventMonitor.PrintEventsWithStream">PrintEventsWithStream</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Creates a new event monitor that prints messages to a stream.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new event monitor that prints messages to a stream.
 </p></div><dl class="paramcmts block"><dt class="param">stream</dt><dd class="cmt"><p>The stream to print events to.
+</p></dd></dl></div>
+    </li><li name="atmos.retries.RetryDSL#printStreamToEventMonitorExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="printStreamToEventMonitorExtensions(stream:java.io.PrintStream):atmos.retries.RetryDSL.PrintEventsWithStreamExtensions"></a>
+      <a id="printStreamToEventMonitorExtensions(PrintStream):PrintEventsWithStreamExtensions"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">printStreamToEventMonitorExtensions</span><span class="params">(<span name="stream">stream: <span class="extype" name="java.io.PrintStream">PrintStream</span></span>)</span><span class="result">: <a href="RetryDSL$$PrintEventsWithStreamExtensions.html" class="extype" name="atmos.retries.RetryDSL.PrintEventsWithStreamExtensions">PrintEventsWithStreamExtensions</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Creates a new event monitor extension interface for a print stream.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new event monitor extension interface for a print stream.
+</p></div><dl class="paramcmts block"><dt class="param">stream</dt><dd class="cmt"><p>The print stream to create a new event monitor extension interface for.
+</p></dd></dl></div>
+    </li><li name="atmos.retries.RetryDSL#printWriterToEventMonitor" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="printWriterToEventMonitor(writer:java.io.PrintWriter):atmos.retries.EventMonitor.PrintEventsWithWriter"></a>
+      <a id="printWriterToEventMonitor(PrintWriter):PrintEventsWithWriter"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">printWriterToEventMonitor</span><span class="params">(<span name="writer">writer: <span class="extype" name="java.io.PrintWriter">PrintWriter</span></span>)</span><span class="result">: <a href="EventMonitor$$PrintEventsWithWriter.html" class="extype" name="atmos.retries.EventMonitor.PrintEventsWithWriter">PrintEventsWithWriter</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Creates a new event monitor that prints messages to a writer.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new event monitor that prints messages to a writer.
+</p></div><dl class="paramcmts block"><dt class="param">writer</dt><dd class="cmt"><p>The writer to print events to.
+</p></dd></dl></div>
+    </li><li name="atmos.retries.RetryDSL#printWriterToEventMonitorExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="printWriterToEventMonitorExtensions(writer:java.io.PrintWriter):atmos.retries.RetryDSL.PrintEventsWithWriterExtensions"></a>
+      <a id="printWriterToEventMonitorExtensions(PrintWriter):PrintEventsWithWriterExtensions"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">printWriterToEventMonitorExtensions</span><span class="params">(<span name="writer">writer: <span class="extype" name="java.io.PrintWriter">PrintWriter</span></span>)</span><span class="result">: <a href="RetryDSL$$PrintEventsWithWriterExtensions.html" class="extype" name="atmos.retries.RetryDSL.PrintEventsWithWriterExtensions">PrintEventsWithWriterExtensions</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Creates a new event monitor extension interface for a print writer.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new event monitor extension interface for a print writer.
+</p></div><dl class="paramcmts block"><dt class="param">writer</dt><dd class="cmt"><p>The print writer to create a new event monitor extension interface for.
 </p></dd></dl></div>
     </li><li name="atmos.retries.RetryDSL#retry" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="retry[T](name:Option[String])(operation:=&gt;T)(implicitpolicy:atmos.retries.RetryPolicy):T"></a>

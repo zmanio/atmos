@@ -80,7 +80,23 @@
         <div id="allMembers">
         
 
-        
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="atmos.retries.RetryDSL.Slf4jSupport.LogEventsWithSlf4jExtensions" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LogEventsWithSlf4jExtensionsextendsAnyVal"></a>
+      <a id="LogEventsWithSlf4jExtensions:LogEventsWithSlf4jExtensions"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit final </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="RetryDSL$$Slf4jSupport$$LogEventsWithSlf4jExtensions.html"><span class="name">LogEventsWithSlf4jExtensions</span></a><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Exposes extensions on any instance of <code>EventMonitor.LogEventsWithSlf4j</code>.</p>
+    </li></ol>
+            </div>
 
         
 
@@ -151,6 +167,19 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="atmos.retries.RetryDSL.Slf4jSupport.Slf4jEventLogLevelType" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Slf4jEventLogLevelType"></a>
+      <a id="Slf4jEventLogLevelType:Slf4jEventLogLevelType"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="RetryDSL$$Slf4jSupport$$Slf4jEventLogLevelType$.html"><span class="name">Slf4jEventLogLevelType</span></a><span class="result"> extends <a href="RetryDSL$$EventLogLevelType.html" class="extype" name="atmos.retries.RetryDSL.EventLogLevelType">EventLogLevelType</a>[<a href="EventMonitor$$LogEventsWithSlf4j$$Slf4jLevel.html" class="extype" name="atmos.retries.EventMonitor.LogEventsWithSlf4j.Slf4jLevel">Slf4jLevel</a>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">A tag for levels provided for Slf4j.</p>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -307,19 +336,34 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="atmos.retries.RetryDSL.Slf4jSupport#slf4jLoggerToEventMonitor" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="slf4jLoggerToEventMonitor(logger:org.slf4j.Logger):atmos.retries.EventMonitor"></a>
-      <a id="slf4jLoggerToEventMonitor(Logger):EventMonitor"></a>
+      <a id="slf4jLoggerToEventMonitor(logger:org.slf4j.Logger):atmos.retries.EventMonitor.LogEventsWithSlf4j"></a>
+      <a id="slf4jLoggerToEventMonitor(Logger):LogEventsWithSlf4j"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">implicit </span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">slf4jLoggerToEventMonitor</span><span class="params">(<span name="logger">logger: <span class="extype" name="org.slf4j.Logger">Logger</span></span>)</span><span class="result">: <a href="EventMonitor.html" class="extype" name="atmos.retries.EventMonitor">EventMonitor</a></span>
+        <span class="name">slf4jLoggerToEventMonitor</span><span class="params">(<span name="logger">logger: <span class="extype" name="org.slf4j.Logger">Logger</span></span>)</span><span class="result">: <a href="EventMonitor$$LogEventsWithSlf4j.html" class="extype" name="atmos.retries.EventMonitor.LogEventsWithSlf4j">LogEventsWithSlf4j</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Creates a new event monitor that submits events to a SLF4J logger.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new event monitor that submits events to a SLF4J logger.
 </p></div><dl class="paramcmts block"><dt class="param">logger</dt><dd class="cmt"><p>The SLF4J logger to supply with event messages.
+</p></dd></dl></div>
+    </li><li name="atmos.retries.RetryDSL.Slf4jSupport#slf4jLoggerToEventMonitorExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="slf4jLoggerToEventMonitorExtensions(logger:org.slf4j.Logger):atmos.retries.RetryDSL.Slf4jSupport.LogEventsWithSlf4jExtensions"></a>
+      <a id="slf4jLoggerToEventMonitorExtensions(Logger):LogEventsWithSlf4jExtensions"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">slf4jLoggerToEventMonitorExtensions</span><span class="params">(<span name="logger">logger: <span class="extype" name="org.slf4j.Logger">Logger</span></span>)</span><span class="result">: <a href="RetryDSL$$Slf4jSupport$$LogEventsWithSlf4jExtensions.html" class="extype" name="atmos.retries.RetryDSL.Slf4jSupport.LogEventsWithSlf4jExtensions">LogEventsWithSlf4jExtensions</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Creates a new event monitor extension interface for a SLF4J logger.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new event monitor extension interface for a SLF4J logger.
+</p></div><dl class="paramcmts block"><dt class="param">logger</dt><dd class="cmt"><p>The logger to create a new event monitor extension interface for.
 </p></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>

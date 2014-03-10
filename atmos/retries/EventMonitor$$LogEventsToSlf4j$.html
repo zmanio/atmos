@@ -24,9 +24,9 @@
         </head>
         <body class="value">
       <div id="definition">
-        <a href="EventMonitor$$LogEventsToSlf4j.html" title="Go to companion"><img src="../../lib/object_to_class_big.png" /></a>
+        <img src="../../lib/object_big.png" />
         <p id="owner"><a href="../package.html" class="extype" name="atmos">atmos</a>.<a href="package.html" class="extype" name="atmos.retries">retries</a>.<a href="EventMonitor$.html" class="extype" name="atmos.retries.EventMonitor">EventMonitor</a></p>
-        <h1><a href="EventMonitor$$LogEventsToSlf4j.html" title="Go to companion">LogEventsToSlf4j</a></h1>
+        <h1>LogEventsToSlf4j</h1>
       </div>
 
       <h4 id="signature" class="signature">
@@ -35,14 +35,17 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">LogEventsToSlf4j</span><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <span class="name deprecated" title="Deprecated: (Since version 1.3) Use LogEventsWithSlf4j">LogEventsToSlf4j</span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Factory for event monitors that submit events to a SLF4J logger.
-</p></div><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A container for deprecated elements to preserve backwards source compatibility.</p><p>NOTE: This object is deprecated and will be removed in Atmos 2.0. Users should migrate to <code>LogEventsWithSlf4j</code>.
+</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.3)</i> Use LogEventsWithSlf4j</p></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -60,7 +63,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="atmos.retries.EventMonitor.LogEventsToSlf4j"><span>LogEventsToSlf4j</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="atmos.retries.EventMonitor.LogEventsToSlf4j"><span>LogEventsToSlf4j</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -82,19 +85,24 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="Slf4jLevelextendsAnyRef"></a>
+              <ol><li name="atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Slf4jLevel=atmos.retries.EventMonitor.LogEventsWithSlf4j.Slf4jLevel"></a>
       <a id="Slf4jLevel:Slf4jLevel"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier">sealed </span>
-        <span class="kind">trait</span>
+        <span class="modifier"></span>
+        <span class="kind">type</span>
       </span>
       <span class="symbol">
-        <a href="EventMonitor$$LogEventsToSlf4j$$Slf4jLevel.html"><span class="name">Slf4jLevel</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <span class="name deprecated" title="Deprecated: (Since version 1.3) Use LogEventsWithSlf4j.Slf4jLevel">Slf4jLevel</span><span class="result"> = <a href="EventMonitor$$LogEventsWithSlf4j$$Slf4jLevel.html" class="extype" name="atmos.retries.EventMonitor.LogEventsWithSlf4j.Slf4jLevel">LogEventsWithSlf4j.Slf4jLevel</a></span>
       </span>
       </h4>
-      <p class="comment cmt">Base class of the available SLF4J logging levels.</p>
+      <p class="shortcomment cmt">An alias to <code>LogEventsWithSlf4j.Slf4jLevel</code> to preserve backwards source compatibility.</p><div class="fullcomment"><div class="comment cmt"><p>An alias to <code>LogEventsWithSlf4j.Slf4jLevel</code> to preserve backwards source compatibility.</p><p>NOTE: This type is deprecated and will be removed in Atmos 2.0. Users should migrate to
+<code>LogEventsWithSlf4j.Slf4jLevel</code>.
+</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.3)</i> Use LogEventsWithSlf4j.Slf4jLevel</p></dd></dl></div>
     </li></ol>
             </div>
 
@@ -167,19 +175,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="Slf4jLevel"></a>
-      <a id="Slf4jLevel:Slf4jLevel"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">object</span>
-      </span>
-      <span class="symbol">
-        <a href="EventMonitor$$LogEventsToSlf4j$$Slf4jLevel$.html"><span class="name">Slf4jLevel</span></a>
-      </span>
-      </h4>
-      <p class="comment cmt">Declarations of the available SLF4J logging levels.</p>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -212,45 +207,6 @@
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="atmos.retries.EventMonitor.LogEventsToSlf4j#defaultAbortedLevel" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="defaultAbortedLevel:atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel.Error.type"></a>
-      <a id="defaultAbortedLevel:Error.type"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">defaultAbortedLevel</span><span class="result">: <a href="EventMonitor$$LogEventsToSlf4j$$Slf4jLevel$$Error$.html" class="extype" name="atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel.Error">Error</a>.type</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The default level to log aborted events at.</p>
-    </li><li name="atmos.retries.EventMonitor.LogEventsToSlf4j#defaultInterruptedLevel" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="defaultInterruptedLevel:atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel.Warn.type"></a>
-      <a id="defaultInterruptedLevel:Warn.type"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">defaultInterruptedLevel</span><span class="result">: <a href="EventMonitor$$LogEventsToSlf4j$$Slf4jLevel$$Warn$.html" class="extype" name="atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel.Warn">Warn</a>.type</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The default level to log interrupted events at.</p>
-    </li><li name="atmos.retries.EventMonitor.LogEventsToSlf4j#defaultRetryingLevel" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="defaultRetryingLevel:atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel.Info.type"></a>
-      <a id="defaultRetryingLevel:Info.type"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">defaultRetryingLevel</span><span class="result">: <a href="EventMonitor$$LogEventsToSlf4j$$Slf4jLevel$$Info$.html" class="extype" name="atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel.Info">Info</a>.type</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The default level to log retrying events at.</p>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -462,15 +418,104 @@
 
         
 
-        
+        <div id="values" class="values members">
+              <h3>Deprecated Value Members</h3>
+              <ol><li name="atmos.retries.EventMonitor.LogEventsToSlf4j#Slf4jLevel" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Slf4jLevel:atmos.retries.EventMonitor.LogEventsWithSlf4j.Slf4jLevel.type"></a>
+      <a id="Slf4jLevel:LogEventsWithSlf4j.Slf4jLevel.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: (Since version 1.3) Use LogEventsWithSlf4j.Slf4jLevel">Slf4jLevel</span><span class="result">: <a href="EventMonitor$$LogEventsWithSlf4j$$Slf4jLevel$.html" class="extype" name="atmos.retries.EventMonitor.LogEventsWithSlf4j.Slf4jLevel">LogEventsWithSlf4j.Slf4jLevel</a>.type</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">An alias to <code>LogEventsWithSlf4j.Slf4jLevel</code> to preserve backwards source compatibility.</p><div class="fullcomment"><div class="comment cmt"><p>An alias to <code>LogEventsWithSlf4j.Slf4jLevel</code> to preserve backwards source compatibility.</p><p>NOTE: This type is deprecated and will be removed in Atmos 2.0. Users should migrate to
+<code>LogEventsWithSlf4j.Slf4jLevel</code>.
+</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.3)</i> Use LogEventsWithSlf4j.Slf4jLevel</p></dd></dl></div>
+    </li><li name="atmos.retries.EventMonitor.LogEventsToSlf4j#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(logger:org.slf4j.Logger,retryingLevel:atmos.retries.EventMonitor.LogEventsWithSlf4j.Slf4jLevel,interruptedLevel:atmos.retries.EventMonitor.LogEventsWithSlf4j.Slf4jLevel,abortedLevel:atmos.retries.EventMonitor.LogEventsWithSlf4j.Slf4jLevel):atmos.retries.EventMonitor.LogEventsWithSlf4j"></a>
+      <a id="apply(Logger,LogEventsWithSlf4j.Slf4jLevel,LogEventsWithSlf4j.Slf4jLevel,LogEventsWithSlf4j.Slf4jLevel):LogEventsWithSlf4j"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: (Since version 1.3) Use LogEventsWithSlf4j.apply(Slf4jLogger, LogAction, LogAction, LogAction)">apply</span><span class="params">(<span name="logger">logger: <span class="extype" name="org.slf4j.Logger">Logger</span></span>, <span name="retryingLevel">retryingLevel: <a href="EventMonitor$$LogEventsWithSlf4j$$Slf4jLevel.html" class="extype" name="atmos.retries.EventMonitor.LogEventsWithSlf4j.Slf4jLevel">LogEventsWithSlf4j.Slf4jLevel</a> = <span class="symbol"><span class="name"><a href="#defaultRetryingLevel:atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel">defaultRetryingLevel</a></span></span></span>, <span name="interruptedLevel">interruptedLevel: <a href="EventMonitor$$LogEventsWithSlf4j$$Slf4jLevel.html" class="extype" name="atmos.retries.EventMonitor.LogEventsWithSlf4j.Slf4jLevel">LogEventsWithSlf4j.Slf4jLevel</a> = <span class="symbol"><span class="name"><a href="#defaultInterruptedLevel:atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel">defaultInterruptedLevel</a></span></span></span>, <span name="abortedLevel">abortedLevel: <a href="EventMonitor$$LogEventsWithSlf4j$$Slf4jLevel.html" class="extype" name="atmos.retries.EventMonitor.LogEventsWithSlf4j.Slf4jLevel">LogEventsWithSlf4j.Slf4jLevel</a> = <span class="symbol"><span class="name"><a href="#defaultAbortedLevel:atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel">defaultAbortedLevel</a></span></span></span>)</span><span class="result">: <a href="EventMonitor$$LogEventsWithSlf4j.html" class="extype" name="atmos.retries.EventMonitor.LogEventsWithSlf4j">LogEventsWithSlf4j</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Creates an event monitor that formats and logs events using Slf4j.</p><div class="fullcomment"><div class="comment cmt"><p>Creates an event monitor that formats and logs events using Slf4j.</p><p>NOTE: This method is deprecated and will be removed in Atmos 2.0. Users should migrate to
+<code>LogEventsWithSlf4j.apply(Slf4jLogger, LogAction, LogAction, LogAction)</code>.
+</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.3)</i> Use LogEventsWithSlf4j.apply(Slf4jLogger, LogAction, LogAction, LogAction)</p></dd></dl></div>
+    </li><li name="atmos.retries.EventMonitor.LogEventsToSlf4j#defaultAbortedLevel" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="defaultAbortedLevel:atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel"></a>
+      <a id="defaultAbortedLevel:Slf4jLevel"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">lazy val</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: (Since version 1.3) Use defaultAbortedAction">defaultAbortedLevel</span><span class="result">: <a href="#Slf4jLevel=atmos.retries.EventMonitor.LogEventsWithSlf4j.Slf4jLevel" class="extmbr" name="atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel">Slf4jLevel</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The default Slf4j level to log aborted events at.</p><div class="fullcomment"><div class="comment cmt"><p>The default Slf4j level to log aborted events at.</p><p>NOTE: This method is deprecated and will be removed in Atmos 2.0. Users should migrate to
+<code>LogEventsWithSlf4j.defaultAbortedAction</code>.
+</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.3)</i> Use defaultAbortedAction</p></dd></dl></div>
+    </li><li name="atmos.retries.EventMonitor.LogEventsToSlf4j#defaultInterruptedLevel" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="defaultInterruptedLevel:atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel"></a>
+      <a id="defaultInterruptedLevel:Slf4jLevel"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">lazy val</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: (Since version 1.3) Use defaultInterruptedAction">defaultInterruptedLevel</span><span class="result">: <a href="#Slf4jLevel=atmos.retries.EventMonitor.LogEventsWithSlf4j.Slf4jLevel" class="extmbr" name="atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel">Slf4jLevel</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The default Slf4j level to log interrupted events at.</p><div class="fullcomment"><div class="comment cmt"><p>The default Slf4j level to log interrupted events at.</p><p>NOTE: This method is deprecated and will be removed in Atmos 2.0. Users should migrate to
+<code>LogEventsWithSlf4j.defaultInterruptedAction</code>.
+</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.3)</i> Use defaultInterruptedAction</p></dd></dl></div>
+    </li><li name="atmos.retries.EventMonitor.LogEventsToSlf4j#defaultRetryingLevel" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="defaultRetryingLevel:atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel"></a>
+      <a id="defaultRetryingLevel:Slf4jLevel"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">lazy val</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: (Since version 1.3) Use defaultRetryingAction">defaultRetryingLevel</span><span class="result">: <a href="#Slf4jLevel=atmos.retries.EventMonitor.LogEventsWithSlf4j.Slf4jLevel" class="extmbr" name="atmos.retries.EventMonitor.LogEventsToSlf4j.Slf4jLevel">Slf4jLevel</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The default Slf4j level to log retrying events at.</p><div class="fullcomment"><div class="comment cmt"><p>The default Slf4j level to log retrying events at.</p><p>NOTE: This method is deprecated and will be removed in Atmos 2.0. Users should migrate to
+<code>LogEventsWithSlf4j.defaultRetryingAction</code>.
+</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.3)</i> Use defaultRetryingAction</p></dd></dl></div>
+    </li></ol>
+            </div>
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scala.Serializable">
-              <h3>Inherited from <span class="extype" name="scala.Serializable">Serializable</span></h3>
-            </div><div class="parent" name="java.io.Serializable">
-              <h3>Inherited from <span class="extype" name="java.io.Serializable">Serializable</span></h3>
-            </div><div class="parent" name="scala.AnyRef">
+        <div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
               <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
