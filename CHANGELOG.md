@@ -1,21 +1,45 @@
-1.3 (2014-??-??)
+1.3 (2014-03-10)
 ================
 Reworked `atmos.retries.EventMonitor.PrintEvents`:
 
- - Converted `PrintEvents` into a trait and extracted two concrete subtypes, `PrintEventsWithStream` and `PrintEventsWithWriter`.
+ - Converted `PrintEvents` into a trait and extracted two concrete subtypes, `PrintEventsWithStream` and
+   `PrintEventsWithWriter`.
  
- - Deprecated the use of booleans to signal whether a stack trace should be printed for a particular event. The booleans are replaced by `PrintEvents.PrintAction`, a `sealed trait` / `case object` enumeration capable of representing any number of printing strategies.
+ - Deprecated the use of booleans to signal whether a stack trace should be printed for a particular event. The
+   booleans are replaced by `PrintEvents.PrintAction`, a `sealed trait` / `case object` enumeration capable of
+   representing any number of printing strategies.
  
- - Modified the retry DSL to support concise configuration of print actions on event monitors derived from print streams and print writers.
+ - Modified the retry DSL to support concise configuration of print actions on event monitors derived from print
+   streams and print writers.
  
 Reworked `atmos.retries.EventMonitor.LogEvents`:
 
- - Converted `LogEvents` into a trait and extracted the concrete
-subtype `LogEventsWithJava`.
+ - Converted `LogEvents` into a trait and extracted the concrete subtype `LogEventsWithJava`.
  
- - Deprecated the use of log levels to describe behavior when called with a particular event. The levels are replaced by
-`LogEvents.LogAction`, a `sealed trait` / `case object` enumeration
-capable of representing any number of logging strategies.
+ - Deprecated the use of log levels to describe behavior when called with a particular event. The levels are replaced
+   by `LogEvents.LogAction`, a `sealed trait` / `case object` enumeration capable of representing any number of logging
+   strategies.
+
+ - Modified the retry DSL to support concise configuration of log actions on event monitors derived from Java loggers.
+
+Reworked the Slf4j support in `atmos.retries.EventMonitor`:
+
+ - Created `LogEventsWithSlf4j` as a subtype of `LogEvents`.
+
+ - Converted `LogEventsToSlf4j` into a deprecated collection of aliases to aspects of `LogEventsWithSlf4j`.
+
+ - Deprecated the use of log levels to describe behavior when called with a particular event, replacing them with
+  `LogEvents.LogAction`, a `sealed trait` / `case object` enumeration capable of representing any number of logging
+   strategies.
+
+ - Modified the retry DSL to support concise configuration of log actions on event monitors derived from Slf4j loggers.
+ 
+Added support for asynchronous monitoring with Akka to `atmos.retries`:
+
+ - Created `LogEventsWithAkka` as a subtype of `LogEvents`.
+
+ - Modified the retry DSL to support concise configuration of log actions on event monitors derived from Akka logging
+   adapters.
 
 1.2 (2014-02-18)
 ================
@@ -25,7 +49,8 @@ Enhancements to the backoff policies in `atmos.retries`:
  
  - Added `BackoffPolicy.Randomized`, a policy that randomizes the result of another backoff policy.
 
- - Removed the previous backoff value from the list of items provided to a `BackoffPolicy` when calculating a backoff and replaced it with the most recently thrown exception.
+ - Removed the previous backoff value from the list of items provided to a `BackoffPolicy` when calculating a backoff
+   and replaced it with the most recently thrown exception.
  
 Enhancements to the termination policies in `atmos.retries`:
 

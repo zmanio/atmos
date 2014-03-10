@@ -1,3 +1,6 @@
+import de.johoop.jacoco4sbt._
+import JacocoPlugin._
+
 //
 // Basic project information.
 //
@@ -6,7 +9,7 @@ organization := "atmos"
 
 name := "atmos"
 
-version := "1.3-SNAPSHOT"
+version := "1.3"
 
 scalaVersion := "2.10.3"
 
@@ -16,6 +19,8 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "2.0" % "test",
   "org.scalamock" %% "scalamock-scalatest-support" % "3.1.RC1" % "test"
 )
+
+jacoco.settings
 
 //
 // Documentation site generation.
