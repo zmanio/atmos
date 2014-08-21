@@ -1,5 +1,5 @@
-import de.johoop.jacoco4sbt._
-import JacocoPlugin._
+import SiteKeys._
+import GhPagesKeys._
 import SonatypeKeys._
 
 //
@@ -12,7 +12,7 @@ version := "2.0-SNAPSHOT"
 
 description := "A concise Scala library for implementing retry-on-failure behavior."
 
-homepage := Some(url("http://zman.io/atmos"))
+homepage := Some(url("http://zman.io/atmos/"))
 
 startYear := Some(2013)
 
@@ -20,7 +20,7 @@ organization := "io.zman"
 
 organizationName := "zman.io"
 
-organizationHomepage := Some(url("http://zman.io"))
+organizationHomepage := Some(url("http://zman.io/"))
 
 scalaVersion := "2.10.3"
 
@@ -34,7 +34,9 @@ libraryDependencies ++= Seq(
 
 licenses := Seq("The Apache Software License, Version 2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0.txt"))
 
-jacoco.settings
+ScoverageSbtPlugin.instrumentSettings
+
+CoverallsPlugin.coverallsSettings
 
 //
 // Documentation site generation.
@@ -42,9 +44,13 @@ jacoco.settings
 
 site.settings
 
-site.includeScaladoc(".")
+includeFilter in makeSite := "*.html" | "*.css" | "*.png" | "*.jpg" | "*.gif" | "*.js" | "*.md" | "*.yml"
+
+site.includeScaladoc("api")
 
 ghpages.settings
+
+ghpagesNoJekyll := false
 
 git.remoteRepo := "git@github.com:zmanio/atmos.git"
 
@@ -68,4 +74,3 @@ pomExtra := (
     </developer>
   </developers>
 )
-

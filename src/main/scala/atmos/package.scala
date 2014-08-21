@@ -37,4 +37,26 @@
  * 
  * For more information about using the `atmos` library, see [[http://zman.io/atmos]]
  */
-package object atmos
+package object atmos {
+
+  /** The type of error classifier functions. */
+  type ErrorClassifier = PartialFunction[Throwable, ErrorClassification]
+
+  /**
+   * Common error classifiers.
+   */
+  object ErrorClassifier {
+
+    /** An error classifier that classifies nothing */
+    val empty: ErrorClassifier = PartialFunction.empty
+    
+    /**
+     * Returns the supplied partial function.
+     * 
+     * @param f The partial function to return.
+     */
+    def apply(f: PartialFunction[Throwable, ErrorClassification]): ErrorClassifier = f
+
+  }
+
+}
