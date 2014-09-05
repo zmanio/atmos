@@ -1,5 +1,6 @@
 import SiteKeys._
-import GhPagesKeys._
+import GhReadmeKeys._
+import GhPagesKeys.ghpagesNoJekyll
 import SonatypeKeys._
 
 //
@@ -22,7 +23,7 @@ organizationName := "zman.io"
 
 organizationHomepage := Some(url("http://zman.io/"))
 
-scalaVersion := "2.10.3"
+scalaVersion := "2.10.4"
 
 libraryDependencies ++= Seq(
   "io.zman" %% "rummage" % "1.0",
@@ -48,11 +49,26 @@ includeFilter in makeSite := "*.html" | "*.css" | "*.png" | "*.jpg" | "*.gif" | 
 
 site.includeScaladoc("api")
 
+ghreadme.settings
+
+readmeMappings ++= Seq(
+  "." --- Seq(
+    "title"    -> "about",
+    "headline" -> "A concise Scala library for implementing retry-on-failure behavior.",
+    "layout"   -> "home"
+  ),
+  "changelog" --- Seq(
+    "title"    -> "changelog",
+    "headline" -> "atmos history",
+    "layout"   -> "page"
+  )
+)
+
 ghpages.settings
 
 ghpagesNoJekyll := false
 
-git.remoteRepo := "git@github.com:zmanio/atmos.git"
+git.remoteRepo := (sys.env get "GH_TOKEN" map (t => s"https://$t:@github.com/") getOrElse "git@github.com:") + "zmanio/atmos.git"
 
 //
 // Publishing to Sonatype
