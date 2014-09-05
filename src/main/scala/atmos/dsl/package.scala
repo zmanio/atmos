@@ -105,7 +105,7 @@ package object dsl {
   /**
    * Creates a backoff policy that increases the backoff duration linearly after every attempt.
    */
-  def linearBackoff: BackoffPolicyFactory = BackoffPolicyFactory(backoff.ExponentialBackoff)
+  def linearBackoff: BackoffPolicyFactory = BackoffPolicyFactory(backoff.LinearBackoff)
 
   /**
    * Creates a backoff policy that increases the backoff duration exponentially after every attempt.

@@ -20,11 +20,12 @@ package atmos
 import scala.concurrent.{ ExecutionContext, Future, Await }
 import scala.concurrent.duration._
 import org.scalatest._
+import org.scalamock.scalatest.MockFactory
 
 /**
  * Test suite for [[atmos.RetryPolicy]].
  */
-class RetryPolicySpec extends FlatSpec with Matchers {
+class RetryPolicySpec extends FlatSpec with Matchers with MockFactory {
 
   import ExecutionContext.Implicits._
   import termination._
@@ -40,14 +41,29 @@ class RetryPolicySpec extends FlatSpec with Matchers {
     counter shouldEqual 2
   }
 
+  it should "synchronously retry and swallow silent errors" in {
+    val mockMonitor = mock[EventMonitor]
+    val policy = RetryPolicy(LimitAttempts(2), monitor = mockMonitor, classifier = {
+      case _: TestException => ErrorClassification.SilentlyRecoverable
+    })
+    val e = new TestException
+    (mockMonitor.retrying _).expects(None, e, 1, *, true)
+    var counter = 0
+    policy.retry() {
+      counter += 1
+      if (counter < 2) throw e
+      counter
+    } shouldEqual 2
+    counter shouldEqual 2
+  }
+
   it should "synchronously retry until signaled to terminate" in {
     val policy = RetryPolicy(LimitAttempts(2))
     var counter = 0
     evaluating {
-      policy.retry() {
+      policy.retry("test") {
         counter += 1
-        if (counter <= 2) throw new TestException
-        counter
+        throw new TestException
       }
     } should produce[TestException]
     counter shouldEqual 2
@@ -59,10 +75,9 @@ class RetryPolicySpec extends FlatSpec with Matchers {
     })
     var counter = 0
     evaluating {
-      policy.retry() {
+      policy.retry(None) {
         counter += 1
-        if (counter < 2) throw new TestException
-        counter
+        throw new TestException
       }
     } should produce[TestException]
     counter shouldEqual 1
@@ -72,7 +87,7 @@ class RetryPolicySpec extends FlatSpec with Matchers {
     val policy = RetryPolicy(LimitAttempts(2), backoff.ConstantBackoff(1.second))
     val startAt = System.currentTimeMillis
     var counter = 0
-    policy.retry() {
+    policy.retry(Some("test")) {
       counter += 1
       if (counter < 2) throw new TestException
       counter
@@ -99,10 +114,34 @@ class RetryPolicySpec extends FlatSpec with Matchers {
     counter shouldEqual 3
   }
 
+  it should "asynchronously retry and swallow silent errors" in {
+    val mockMonitor = mock[EventMonitor]
+    val policy = RetryPolicy(LimitAttempts(3), monitor = mockMonitor, classifier = {
+      case _: TestException => ErrorClassification.SilentlyRecoverable
+    })
+    val e = new TestException
+    (mockMonitor.retrying _).expects(None, e, 1, *, true)
+    (mockMonitor.retrying _).expects(None, e, 2, *, true)
+    @volatile var counter = 0
+    val future = policy.retryAsync() {
+      if (counter == 0) {
+        counter += 1
+        throw e
+      }
+      Future {
+        counter += 1
+        if (counter < 3) throw e
+        counter
+      }
+    }
+    Await.result(future, Duration.Inf) shouldEqual 3
+    counter shouldEqual 3
+  }
+
   it should "asynchronously retry until signaled to terminate" in {
     val policy = RetryPolicy(LimitAttempts(2))
     @volatile var counter = 0
-    val future = policy.retryAsync() {
+    val future = policy.retryAsync("test") {
       Future {
         counter += 1
         if (counter <= 2) throw new TestException
@@ -118,7 +157,7 @@ class RetryPolicySpec extends FlatSpec with Matchers {
       case _: TestException => ErrorClassification.Fatal
     })
     @volatile var counter = 0
-    val future = policy.retryAsync() {
+    val future = policy.retryAsync(None) {
       Future {
         counter += 1
         if (counter < 2) throw new TestException
@@ -133,7 +172,7 @@ class RetryPolicySpec extends FlatSpec with Matchers {
     val policy = RetryPolicy(LimitAttempts(2), backoff.ConstantBackoff(1.second))
     val startAt = System.currentTimeMillis
     @volatile var counter = 0
-    val future = policy.retryAsync() {
+    val future = policy.retryAsync(Some("test")) {
       Future {
         counter += 1
         if (counter < 2) throw new TestException
