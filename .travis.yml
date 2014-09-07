@@ -1,0 +1,19 @@
+language: scala
+
+scala:
+  - 2.10.4
+
+branches:
+  only:
+    - master
+    
+before_script:
+  - git config --global user.email "z@zman.io"
+  - git config --global user.name "zmanio-ci"
+  - git config --global push.default simple
+  
+script: sbt ++$TRAVIS_SCALA_VERSION --warn coveralls ghpages-push-site
+
+notifications:
+  email:
+    - z@zman.io

@@ -1,0 +1,14 @@
+title:         atmos
+description:   minimalist retry-on-failure behavior for scala
+logo:          logo.png
+default_bg:    atmos.jpg
+layouts:       ./_includes/_layouts
+url:           "http://zman.io/atmos"
+    
+timezone:      America/Denver
+permalink:     /posts/:categories/:title
+paginate:      7
+paginate_path: "page:num"
+future:        false
+pygments:      true
+markdown:      redcarpet

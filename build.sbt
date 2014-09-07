@@ -9,9 +9,9 @@ import SonatypeKeys._
 
 name := "atmos"
 
-version := "2.0-SNAPSHOT"
+version := "2.0"
 
-description := "A concise Scala library for implementing retry-on-failure behavior."
+description := "minimalist retry-on-failure behavior for scala"
 
 homepage := Some(url("http://zman.io/atmos/"))
 
@@ -54,12 +54,12 @@ ghreadme.settings
 readmeMappings ++= Seq(
   "." --- Seq(
     "title"    -> "about",
-    "headline" -> "A concise Scala library for implementing retry-on-failure behavior.",
+    "headline" -> "minimalist retry-on-failure behavior for scala",
     "layout"   -> "home"
   ),
   "changelog" --- Seq(
     "title"    -> "changelog",
-    "headline" -> "atmos history",
+    "headline" -> "they say history inevitably repeats itself",
     "layout"   -> "page"
   )
 )
