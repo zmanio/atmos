@@ -1,5 +1,9 @@
-1.3 (2014-03-10)
-================
+# 2.0 (2014-??-??)
+
+Moved to the `io.zman` organization namespace.
+
+# 1.3 (2014-03-10)
+
 Reworked `atmos.retries.EventMonitor.PrintEvents`:
 
  - Converted `PrintEvents` into a trait and extracted two concrete subtypes, `PrintEventsWithStream` and
@@ -41,8 +45,8 @@ Added support for asynchronous monitoring with Akka to `atmos.retries`:
  - Modified the retry DSL to support concise configuration of log actions on event monitors derived from Akka logging
    adapters.
 
-1.2 (2014-02-18)
-================
+# 1.2 (2014-02-18)
+
 Enhancements to the backoff policies in `atmos.retries`:
 
  - Added `BackoffPolicy.Selected`, a policy that selects another backoff policy based on the most recent exception.
@@ -62,10 +66,10 @@ Internal project changes:
 
   - Changed to FlatSpec as opposed to using FunSpec.
 
-1.1 (2013-12-17)
-================
+# 1.1 (2013-12-17)
+
 Added support for SLF4J monitoring to `atmos.retries`.
 
-1.0 (2013-11-21)
-================
+# 1.0 (2013-11-21)
+
 Initial release.
