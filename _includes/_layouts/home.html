@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<!--
+zman.io
+
+Copyright (c) 2014 Lonnie Pryor III <lonnie@pryor.us.com>
+http://zman.io
+
+Copyright (c) 2014 Hossain Mohd Faysal <hmfaysal@alum.mit.edu>
+http://hmfaysal.github.io
+
+Derived from https://github.com/hmfaysal/hmfaysal-omega-theme v 1.1
+-->
+<head>
+{% include head.html %}
+</head>
+<body class="home-template" itemscope itemtype="http://schema.org/WebPage">
+<div id="fade"></div>
+<a id="slide" class="animated fade"></a>
+<aside id="sidebar">
+    <nav id="navigation">
+    <h2>MENU</h2>
+    <hr>
+           <li><a href="/">projects</a></li>
+           <li><a href="/blog">blog</a></li>
+           <li><a href="/categories">categories</a></li>
+           <li><a href="/tags">tags</a></li>
+           <li><a href="/feed.xml" title="Atom/RSS feed"><i class="icon-rss"></i> Feed</a></li>
+    </nav>
+    
+    
+</aside>
+{% if page.image.feature %}<header id="masthead" class="blog-background overlay align-center align-middle animated from-bottom"  style="background-image: url(/images/{{ page.image.feature }})" itemscope itemtype="http://schema.org/Organization">
+{% else %}
+<header id="masthead" class="blog-background overlay align-center align-middle animated from-bottom"  style="background-image: url(/images/{{ site.default_bg }})" itemscope itemtype="http://schema.org/Organization">
+{% endif %}
+{% if site.description %}
+    <div class="inner">
+        <div class="container">
+            <a class="brand light" href="{{ site.url }}" role="banner" itemprop="url">
+
+                {% if site.logo %}<img itemprop="logo" src="/images/{{ site.logo }}" alt="{{ site.title }} Logo" />{% endif %}
+
+            <h1 class="blog-title light" itemprop="name">
+                {{ site.title }}
+            </h1>
+                
+            </a>
+            <h2 class="blog-description light bordered bordered-top" itemprop="description">
+                {{ page.headline }}
+            </h2>
+        </div>
+    </div>
+    {% else %}
+    <div class="inner">
+        <div class="container">
+            <a class="brand" href="{{ site.url }}" role="banner" itemprop="url">
+                
+                    <img itemprop="logo" src="/images/{{ site.logo }}" alt="{{ site.title }} Logo" />
+
+            <h1 class="blog-title light" itemprop="name">
+                {{ site.title }}
+            </h1>
+                
+            </a>
+        </div>
+    </div>
+    {% endif %}
+</header>
+
+
+
+<div id="main" class="content" role="main" itemprop="mainContentOfPage">
+    <div class="container">
+        <div class="row">
+            <div class="page-body" itemprop="description">
+            {{ content }}
+            </div>    
+        </div>
+    </div>
+</div>
+    {% include footer.html %}
+
+{% include scripts.html %}  
+</body>
+</html>

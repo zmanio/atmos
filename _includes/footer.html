@@ -1,0 +1,29 @@
+{% if page.image.feature %}
+<footer id="footer"  class="blog-background overlay text-center align-middle animated from-top" style="background-image: url(/images/{{ page.image.feature }})" >
+{% else %}
+<footer id="footer"  class="blog-background overlay text-center align-middle animated from-top" style="background-image: url(/images/{{ site.default_bg }})" >
+{% endif %}
+
+    <div class="inner">
+        <div class="container">
+
+            <ul class="social-icons">
+            <li>
+                <a href="http://github.com/zmanio" data-toggle="tooltip" title="zman on github" target="_blank">
+                    <i class="icon-github"></i>
+                </a>
+            </li>
+        </ul>
+            <div>
+                <a href="/about/">Lonnie Pryor III</a> &copy; {{ site.time | date: '%Y' }} &bull; All rights reserved.
+            </div>
+            <ul class="menu-items">
+            <li><a href="/">projects</a>&nbsp;&bull;</li>
+            <li><a href="/blog">blog</a>&nbsp;&bull;</li>
+            <li><a href="/categories">categories</a>&nbsp;&bull;</li>
+            <li><a href="/tags">tags</a>&nbsp;&bull;</li>
+            <li><a href="/feed.xml" title="Atom/RSS feed"><i class="icon-rss"></i> Feed</a></li>
+        </ul>
+        </div>
+    </div>
+</footer>

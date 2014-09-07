@@ -1,0 +1,52 @@
+<div id="fade"></div>
+<a id="slide" class="animated fade"></a>
+<aside id="sidebar">
+    <nav id="navigation">
+    <h2>MENU</h2>
+    <hr>
+           <li><a href="/">projects</a></li>
+           <li><a href="/blog">blog</a></li>
+           <li><a href="/categories">categories</a></li>
+           <li><a href="/tags">tags</a></li>
+           <li><a href="/feed.xml" title="Atom/RSS feed"><i class="icon-rss"></i> Feed</a></li>
+    </nav>
+    
+    
+</aside>
+{% if page.image.feature %}<header id="masthead" class="blog-background overlay align-center align-middle animated from-bottom"  style="background-image: url(/images/{{ page.image.feature }})" itemscope itemtype="http://schema.org/Organization">{% if page.imagecredit %}<span class="image-credit">Photo Credit: <a href="{{ page.imagecreditlink }}" target="_blank">{{ page.imagecredit }}</a></span>{% endif %}
+{% else %}
+<header id="masthead" class="blog-background overlay align-center align-middle animated from-bottom"  style="background-image: url(/images/{{ site.default_bg }})" itemscope itemtype="http://schema.org/Organization">
+{% endif %}
+{% if page.headline %}
+    <div class="inner">
+        <div class="container">
+            <a class="brand light" href="{{ site.url }}" role="banner" itemprop="url">
+
+                {% if site.logo %}<img itemprop="logo" src="/images/{{ site.logo }}" alt="{{ site.title }} Logo" />{% endif %}
+
+            <h1 class="blog-title light" itemprop="name">
+                {{ site.title }}
+            </h1>
+                
+            </a>
+            <h2 class="blog-description light bordered bordered-top" itemprop="description">
+                {{ page.headline }}
+            </h2>
+        </div>
+    </div>
+    {% else %}
+    <div class="inner">
+        <div class="container">
+            <a class="brand" href="{{ site.url }}" role="banner" itemprop="url">
+
+                {% if site.logo %}<img itemprop="logo" src="/images/{{ site.logo }}" alt="{{ site.title }} Logo" />{% endif %}
+
+            <h1 class="blog-title light" itemprop="name">
+                {{ site.title }}
+            </h1>
+                
+            </a>
+        </div>
+    </div>
+    {% endif %}
+</header>

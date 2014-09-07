@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<!--
+zman.io
+
+Copyright (c) 2014 Lonnie Pryor III <lonnie@pryor.us.com>
+http://zman.io
+
+Copyright (c) 2014 Hossain Mohd Faysal <hmfaysal@alum.mit.edu>
+http://hmfaysal.github.io
+
+Derived from https://github.com/hmfaysal/hmfaysal-omega-theme v 1.1
+-->
+<head>
+{% include head.html %}
+</head>
+<body class="home-template" itemscope itemtype="http://schema.org/WebPage">
+{% include header.html %}
+<div id="main" class="content" role="main" itemprop="mainContentOfPage">
+    <div class="container">
+
+        <div class="row">
+            <article class="page col-md-8 col-md-offset-2">
+
+                    <header class="post-header">
+                        {% if page.link %}
+                        <h1 class="post-title text-center hyper lighter"><a href="{{ page.link }}" data-toggle="tooltip" title="Go to {{ page.link }}" style="color: #fff; background-color: #45ADA8; border-radius: 4px; padding: 10px">{{ page.title }} <span class="link-arrow">&rarr;</span></a></h1>
+                        {% else %}
+                        <h1 class="post-title text-center hyper lighter bordered-bottom">{{ page.title }}</h1>
+                        {% endif %}
+                        <div class="post-info text-center small">
+                            {% if page.modified %}Last modified on <time datetime="{{ page.modified | date: "%Y-%m-%d" }}" itemprop="dateModified">{{ page.modified | date: "%d %b %Y" }}</time>{% endif %}
+                        </div>
+                    </header>
+                    <div class="page-body" itemprop="description">
+                        {{ content }}
+                    </div>
+                    </footer>
+            </article>
+        </div>
+    </div>
+</div>
+    {% include footer.html %}
+
+{% include scripts.html %}  
+</body>
+</html>

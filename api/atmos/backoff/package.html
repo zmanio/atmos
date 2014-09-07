@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>backoff - atmos.backoff</title>
+          <meta name="description" content="backoff - atmos.backoff" />
+          <meta name="keywords" content="backoff atmos.backoff" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../index.html';
+            var hash = 'atmos.backoff.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img src="../../lib/package_big.png" />
+        <p id="owner"><a href="../package.html" class="extype" name="atmos">atmos</a></p>
+        <h1>backoff</h1>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">backoff</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>The <code>atmos.backoff</code> package provides common implementations of the <a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">atmos.BackoffPolicy</a> trait.
+</p></div><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="atmos.backoff"><span>backoff</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="atmos.backoff.ConstantBackoff" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ConstantBackoffextendsBackoffPolicywithProductwithSerializable"></a>
+      <a id="ConstantBackoff:ConstantBackoff"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="ConstantBackoff.html"><span class="name">ConstantBackoff</span></a><span class="params">(<span name="backoff">backoff: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span> = <span class="defval" name="backoff.this.`package`.defaultBackoff">...</span></span>)</span><span class="result"> extends <a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">BackoffPolicy</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">A policy that uses the same backoff after every retry.</p>
+    </li><li name="atmos.backoff.ExponentialBackoff" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ExponentialBackoffextendsBackoffPolicywithProductwithSerializable"></a>
+      <a id="ExponentialBackoff:ExponentialBackoff"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="ExponentialBackoff.html"><span class="name">ExponentialBackoff</span></a><span class="params">(<span name="initialBackoff">initialBackoff: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span> = <span class="defval" name="backoff.this.`package`.defaultBackoff">...</span></span>)</span><span class="result"> extends <a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">BackoffPolicy</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">A policy that doubles the backoff duration after every attempt.</p>
+    </li><li name="atmos.backoff.FibonacciBackoff" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="FibonacciBackoffextendsBackoffPolicywithProductwithSerializable"></a>
+      <a id="FibonacciBackoff:FibonacciBackoff"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="FibonacciBackoff.html"><span class="name">FibonacciBackoff</span></a><span class="params">(<span name="initialBackoff">initialBackoff: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span> = <span class="defval" name="backoff.this.`package`.defaultBackoff">...</span></span>)</span><span class="result"> extends <a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">BackoffPolicy</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">A policy that increases the initial backoff duration by repeatedly multiplying by an approximation of the golden
+ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
+    </li><li name="atmos.backoff.LinearBackoff" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LinearBackoffextendsBackoffPolicywithProductwithSerializable"></a>
+      <a id="LinearBackoff:LinearBackoff"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="LinearBackoff.html"><span class="name">LinearBackoff</span></a><span class="params">(<span name="initialBackoff">initialBackoff: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span> = <span class="defval" name="backoff.this.`package`.defaultBackoff">...</span></span>)</span><span class="result"> extends <a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">BackoffPolicy</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">A policy that increases the backoff duration by the same amount after every retry.</p>
+    </li><li name="atmos.backoff.RandomizedBackoff" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RandomizedBackoffextendsBackoffPolicywithProductwithSerializable"></a>
+      <a id="RandomizedBackoff:RandomizedBackoff"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="RandomizedBackoff.html"><span class="name">RandomizedBackoff</span></a><span class="params">(<span name="policy">policy: <a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">BackoffPolicy</a></span>, <span name="range">range: (<span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span>, <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span>)</span>)</span><span class="result"> extends <a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">BackoffPolicy</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">A policy that randomizes the result of another policy by adding a random duration in the specified range.</p>
+    </li><li name="atmos.backoff.SelectedBackoff" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SelectedBackoffextendsBackoffPolicywithProductwithSerializable"></a>
+      <a id="SelectedBackoff:SelectedBackoff"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="SelectedBackoff.html"><span class="name">SelectedBackoff</span></a><span class="params">(<span name="f">f: (<span class="extype" name="scala.Throwable">Throwable</span>) ⇒ <a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">BackoffPolicy</a></span>)</span><span class="result"> extends <a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">BackoffPolicy</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">A policy that delegates to another policy that is selected based on the most recently thrown exception.</p>
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="atmos.backoff.package#defaultBackoff" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="defaultBackoff:scala.concurrent.duration.FiniteDuration"></a>
+      <a id="defaultBackoff:FiniteDuration"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">defaultBackoff</span><span class="result">: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The default backoff duration.</p>
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+      <script defer="defer" type="text/javascript" id="jquery-js" src="../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../lib/template.js"></script>
+    </body>
+      </html>
