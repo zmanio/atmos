@@ -18,7 +18,7 @@
 package atmos.dsl
 
 import java.util.logging.Level
-import atmos._
+import atmos.monitor
 
 /**
  * Exposes extensions on any instance of `monitor.LogEventsWithJava`.

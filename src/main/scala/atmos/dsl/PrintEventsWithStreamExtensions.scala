@@ -17,7 +17,7 @@
  */
 package atmos.dsl
 
-import atmos._
+import atmos.monitor
 
 /**
  * Adds DSL extension methods to the [[atmos.monitor.PrintEventsWithStream]] interface.

@@ -17,7 +17,7 @@
  */
 package atmos.dsl
 
-import atmos._
+import atmos.monitor
 import monitor.LogAction
 import monitor.LogEventsWithSlf4j.Slf4jLevel
 

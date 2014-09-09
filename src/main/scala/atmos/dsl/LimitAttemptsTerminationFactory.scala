@@ -17,7 +17,7 @@
  */
 package atmos.dsl
 
-import atmos._
+import atmos.termination
 
 /**
  * Adds a termination policy factory named `attempts` to `Int`.

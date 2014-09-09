@@ -19,7 +19,7 @@ package atmos.dsl
 
 import scala.language.implicitConversions
 import org.slf4j.Logger
-import atmos._
+import atmos.monitor
 import monitor.LogEventsWithSlf4j.Slf4jLevel
 
 /**
@@ -55,7 +55,7 @@ object Slf4jSupport {
   /**
    * A tag for levels provided for Slf4j.
    */
-  implicit object Slf4jEventLogLevels extends dsl.EventLogLevels[Slf4jLevel] {
+  implicit object Slf4jEventLogLevels extends EventLogLevels[Slf4jLevel] {
 
     /** @inheritdoc */
     override def errorLevel = Slf4jLevel.Error

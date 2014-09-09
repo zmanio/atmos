@@ -18,7 +18,7 @@
 package atmos.dsl
 
 import akka.event.Logging
-import atmos._
+import atmos.monitor
 
 /**
  * Adds DSL extension methods to the [[atmos.monitor.LogEventsWithAkka]] interface.

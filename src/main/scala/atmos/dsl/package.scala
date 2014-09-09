@@ -29,6 +29,37 @@ import rummage.Timer
 package object dsl {
 
   //
+  // Aliases for the top-level API.
+  //
+
+  /** An alias to the `RetryPolicy` type. */
+  type RetryPolicy = atmos.RetryPolicy
+
+  /** An alias to the `RetryPolicy` companion. */
+  val RetryPolicy = atmos.RetryPolicy
+
+  /** An alias to the `TerminationPolicy` type. */
+  type TerminationPolicy = atmos.TerminationPolicy
+
+  /** An alias to the `BackoffPolicy` type. */
+  type BackoffPolicy = atmos.BackoffPolicy
+
+  /** An alias to the `RetryPolicy` type. */
+  type ErrorClassification = atmos.ErrorClassification
+
+  /** An alias to the `ErrorClassification` companion. */
+  val ErrorClassification = atmos.ErrorClassification
+
+  /** An alias to the `ErrorClassifier` type. */
+  type ErrorClassifier = atmos.ErrorClassifier
+
+  /** An alias to the `ErrorClassifier` companion. */
+  val ErrorClassifier = atmos.ErrorClassifier
+
+  /** An alias to the `EventMonitor` type. */
+  type EventMonitor = atmos.EventMonitor
+
+  //
   // Retry policy factories and extensions.
   //
 

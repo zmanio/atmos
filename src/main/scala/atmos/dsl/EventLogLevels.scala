@@ -17,7 +17,7 @@
  */
 package atmos.dsl
 
-import atmos._
+import atmos.monitor
 
 /**
  * A tag for logging system specific level types, used to map generic action names to concrete logging levels.

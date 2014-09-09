@@ -17,8 +17,6 @@
  */
 package atmos.dsl
 
-import atmos._
-
 /**
  * Adds DSL extension methods to the retry policy interface.
  *

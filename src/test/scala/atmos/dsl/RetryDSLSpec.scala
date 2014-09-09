@@ -31,12 +31,11 @@ import org.scalatest._
  */
 class RetryDSLSpec extends FlatSpec with Matchers {
 
-  import atmos._
+  import atmos.dsl._
+  import atmos.backoff._
+  import atmos.monitor._
+  import atmos.termination._
   import ErrorClassification._
-  import backoff._
-  import monitor._
-  import termination._
-  import dsl._
 
   "RetryDSL" should "create retry policies by describing termination policies" in {
     neverRetry shouldEqual RetryPolicy(AlwaysTerminate)

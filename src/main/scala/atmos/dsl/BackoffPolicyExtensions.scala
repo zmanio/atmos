@@ -18,7 +18,7 @@
 package atmos.dsl
 
 import scala.concurrent.duration._
-import atmos._
+import atmos.backoff
 
 /**
  * Adds DSL extension methods to the backoff policy interface.

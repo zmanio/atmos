@@ -17,7 +17,7 @@
  */
 package atmos.dsl
 
-import atmos._
+import atmos.termination
 
 /**
  * Adds DSL extension methods to the termination policy interface.
