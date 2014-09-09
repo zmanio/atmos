@@ -82,7 +82,20 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="atmos.dsl.BackoffPolicyExtensions" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="atmos.dsl.BackoffPolicy" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="BackoffPolicy=atmos.BackoffPolicy"></a>
+      <a id="BackoffPolicy:BackoffPolicy"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">BackoffPolicy</span><span class="result"> = <a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">atmos.BackoffPolicy</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">An alias to the <code>BackoffPolicy</code> type.</p>
+    </li><li name="atmos.dsl.BackoffPolicyExtensions" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="BackoffPolicyExtensionsextendsAnyValwithProductwithSerializable"></a>
       <a id="BackoffPolicyExtensions:BackoffPolicyExtensions"></a>
       <h4 class="signature">
@@ -91,7 +104,7 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="BackoffPolicyExtensions.html"><span class="name">BackoffPolicyExtensions</span></a><span class="params">(<span name="self">self: <a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">BackoffPolicy</a></span>)</span><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="BackoffPolicyExtensions.html"><span class="name">BackoffPolicyExtensions</span></a><span class="params">(<span name="self">self: <a href="#BackoffPolicy=atmos.BackoffPolicy" class="extmbr" name="atmos.dsl.BackoffPolicy">BackoffPolicy</a></span>)</span><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       <p class="comment cmt">Adds DSL extension methods to the backoff policy interface.</p>
@@ -104,10 +117,36 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="BackoffPolicyFactory.html"><span class="name">BackoffPolicyFactory</span></a><span class="params">(<span name="self">self: (<span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span>) ⇒ <a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">BackoffPolicy</a></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="BackoffPolicyFactory.html"><span class="name">BackoffPolicyFactory</span></a><span class="params">(<span name="self">self: (<span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span>) ⇒ <a href="#BackoffPolicy=atmos.BackoffPolicy" class="extmbr" name="atmos.dsl.BackoffPolicy">BackoffPolicy</a></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       <p class="comment cmt">A factory for duration-based backoff policies.</p>
+    </li><li name="atmos.dsl.ErrorClassification" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ErrorClassification=atmos.ErrorClassification"></a>
+      <a id="ErrorClassification:ErrorClassification"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ErrorClassification</span><span class="result"> = <a href="../ErrorClassification.html" class="extype" name="atmos.ErrorClassification">atmos.ErrorClassification</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">An alias to the <code>RetryPolicy</code> type.</p>
+    </li><li name="atmos.dsl.ErrorClassifier" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ErrorClassifier=atmos.ErrorClassifier"></a>
+      <a id="ErrorClassifier:ErrorClassifier"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ErrorClassifier</span><span class="result"> = <span class="extype" name="scala.PartialFunction">PartialFunction</span>[<span class="extype" name="scala.Throwable">Throwable</span>, <a href="../ErrorClassification.html" class="extype" name="atmos.ErrorClassification">atmos.ErrorClassification</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">An alias to the <code>ErrorClassifier</code> type.</p>
     </li><li name="atmos.dsl.EventLogLevels" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="EventLogLevels[T]extendsAnyRef"></a>
       <a id="EventLogLevels[T]:EventLogLevels[T]"></a>
@@ -121,6 +160,19 @@
       </span>
       </h4>
       <p class="comment cmt">A tag for logging system specific level types, used to map generic action names to concrete logging levels.</p>
+    </li><li name="atmos.dsl.EventMonitor" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="EventMonitor=atmos.EventMonitor"></a>
+      <a id="EventMonitor:EventMonitor"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">EventMonitor</span><span class="result"> = <a href="../EventMonitor.html" class="extype" name="atmos.EventMonitor">atmos.EventMonitor</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">An alias to the <code>EventMonitor</code> type.</p>
     </li><li name="atmos.dsl.LimitAttemptsTerminationFactory" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="LimitAttemptsTerminationFactoryextendsAnyValwithProductwithSerializable"></a>
       <a id="LimitAttemptsTerminationFactory:LimitAttemptsTerminationFactory"></a>
@@ -199,6 +251,19 @@
       </span>
       </h4>
       <p class="comment cmt">Adds DSL extension methods to the <a href="../monitor/PrintEventsWithWriter.html" class="extype" name="atmos.monitor.PrintEventsWithWriter">atmos.monitor.PrintEventsWithWriter</a> interface.</p>
+    </li><li name="atmos.dsl.RetryPolicy" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RetryPolicy=atmos.RetryPolicy"></a>
+      <a id="RetryPolicy:RetryPolicy"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">RetryPolicy</span><span class="result"> = <a href="../RetryPolicy.html" class="extype" name="atmos.RetryPolicy">atmos.RetryPolicy</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">An alias to the <code>RetryPolicy</code> type.</p>
     </li><li name="atmos.dsl.RetryPolicyExtensions" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="RetryPolicyExtensionsextendsAnyValwithProductwithSerializable"></a>
       <a id="RetryPolicyExtensions:RetryPolicyExtensions"></a>
@@ -208,10 +273,23 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="RetryPolicyExtensions.html"><span class="name">RetryPolicyExtensions</span></a><span class="params">(<span name="self">self: <a href="../RetryPolicy.html" class="extype" name="atmos.RetryPolicy">RetryPolicy</a></span>)</span><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="RetryPolicyExtensions.html"><span class="name">RetryPolicyExtensions</span></a><span class="params">(<span name="self">self: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>)</span><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       <p class="comment cmt">Adds DSL extension methods to the retry policy interface.</p>
+    </li><li name="atmos.dsl.TerminationPolicy" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TerminationPolicy=atmos.TerminationPolicy"></a>
+      <a id="TerminationPolicy:TerminationPolicy"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">TerminationPolicy</span><span class="result"> = <a href="../TerminationPolicy.html" class="extype" name="atmos.TerminationPolicy">atmos.TerminationPolicy</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">An alias to the <code>TerminationPolicy</code> type.</p>
     </li><li name="atmos.dsl.TerminationPolicyExtensions" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="TerminationPolicyExtensionsextendsAnyValwithProductwithSerializable"></a>
       <a id="TerminationPolicyExtensions:TerminationPolicyExtensions"></a>
@@ -221,7 +299,7 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="TerminationPolicyExtensions.html"><span class="name">TerminationPolicyExtensions</span></a><span class="params">(<span name="self">self: <a href="../TerminationPolicy.html" class="extype" name="atmos.TerminationPolicy">TerminationPolicy</a></span>)</span><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="TerminationPolicyExtensions.html"><span class="name">TerminationPolicyExtensions</span></a><span class="params">(<span name="self">self: <a href="#TerminationPolicy=atmos.TerminationPolicy" class="extmbr" name="atmos.dsl.TerminationPolicy">TerminationPolicy</a></span>)</span><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       <p class="comment cmt">Adds DSL extension methods to the termination policy interface.</p>
@@ -258,6 +336,32 @@
       </span>
       </h4>
       <p class="comment cmt">Factory for backoff policy factories.</p>
+    </li><li name="atmos.dsl.package#ErrorClassification" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ErrorClassification:atmos.ErrorClassification.type"></a>
+      <a id="ErrorClassification:atmos.ErrorClassification.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ErrorClassification</span><span class="result">: <a href="../ErrorClassification$.html" class="extype" name="atmos.ErrorClassification">atmos.ErrorClassification</a>.type</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">An alias to the <code>ErrorClassification</code> companion.</p>
+    </li><li name="atmos.dsl.package#ErrorClassifier" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ErrorClassifier:atmos.ErrorClassifier.type"></a>
+      <a id="ErrorClassifier:atmos.ErrorClassifier.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ErrorClassifier</span><span class="result">: <a href="../package$$ErrorClassifier$.html" class="extype" name="atmos.ErrorClassifier">atmos.ErrorClassifier</a>.type</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">An alias to the <code>ErrorClassifier</code> companion.</p>
     </li><li name="atmos.dsl.EventLogLevels" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="EventLogLevels"></a>
       <a id="EventLogLevels:EventLogLevels"></a>
@@ -271,6 +375,19 @@
       </span>
       </h4>
       <p class="comment cmt">Declarations of the default logging level tags.</p>
+    </li><li name="atmos.dsl.package#RetryPolicy" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RetryPolicy:atmos.RetryPolicy.type"></a>
+      <a id="RetryPolicy:atmos.RetryPolicy.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">RetryPolicy</span><span class="result">: <a href="../RetryPolicy$.html" class="extype" name="atmos.RetryPolicy">atmos.RetryPolicy</a>.type</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">An alias to the <code>RetryPolicy</code> companion.</p>
     </li><li name="atmos.dsl.Slf4jSupport" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Slf4jSupport"></a>
       <a id="Slf4jSupport:Slf4jSupport"></a>
@@ -285,7 +402,7 @@
       </h4>
       <p class="comment cmt">Separate namespace for optional SLF4J support.</p>
     </li><li name="atmos.dsl.package#backoffPolicyToBackoffPolicyExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="backoffPolicyToBackoffPolicyExtensions(policy:atmos.BackoffPolicy):atmos.dsl.BackoffPolicyExtensions"></a>
+      <a id="backoffPolicyToBackoffPolicyExtensions(policy:atmos.dsl.package.BackoffPolicy):atmos.dsl.BackoffPolicyExtensions"></a>
       <a id="backoffPolicyToBackoffPolicyExtensions(BackoffPolicy):BackoffPolicyExtensions"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -293,7 +410,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">backoffPolicyToBackoffPolicyExtensions</span><span class="params">(<span name="policy">policy: <a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">BackoffPolicy</a></span>)</span><span class="result">: <a href="BackoffPolicyExtensions.html" class="extype" name="atmos.dsl.BackoffPolicyExtensions">BackoffPolicyExtensions</a></span>
+        <span class="name">backoffPolicyToBackoffPolicyExtensions</span><span class="params">(<span name="policy">policy: <a href="#BackoffPolicy=atmos.BackoffPolicy" class="extmbr" name="atmos.dsl.BackoffPolicy">BackoffPolicy</a></span>)</span><span class="result">: <a href="BackoffPolicyExtensions.html" class="extype" name="atmos.dsl.BackoffPolicyExtensions">BackoffPolicyExtensions</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Provides an implicit extension of the backoff policy interface.</p><div class="fullcomment"><div class="comment cmt"><p>Provides an implicit extension of the backoff policy interface.
@@ -340,7 +457,7 @@
       <p class="shortcomment cmt">Creates a backoff policy that increases the backoff duration by repeatedly multiplying by the an approximation of
 the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
     </li><li name="atmos.dsl.package#finiteDurationToTerminationPolicy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="finiteDurationToTerminationPolicy(duration:scala.concurrent.duration.FiniteDuration):atmos.TerminationPolicy"></a>
+      <a id="finiteDurationToTerminationPolicy(duration:scala.concurrent.duration.FiniteDuration):atmos.dsl.package.TerminationPolicy"></a>
       <a id="finiteDurationToTerminationPolicy(FiniteDuration):TerminationPolicy"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -348,7 +465,7 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">finiteDurationToTerminationPolicy</span><span class="params">(<span name="duration">duration: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>)</span><span class="result">: <a href="../TerminationPolicy.html" class="extype" name="atmos.TerminationPolicy">TerminationPolicy</a></span>
+        <span class="name">finiteDurationToTerminationPolicy</span><span class="params">(<span name="duration">duration: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>)</span><span class="result">: <a href="#TerminationPolicy=atmos.TerminationPolicy" class="extmbr" name="atmos.dsl.TerminationPolicy">TerminationPolicy</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Creates a termination policy that limits a retry operation to the specified time frame for use in expressions like
@@ -387,7 +504,7 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
 </p></div><dl class="paramcmts block"><dt class="param">attempts</dt><dd class="cmt"><p>The maximum number of attempts that resulting termination policies will specify.
 </p></dd></dl></div>
     </li><li name="atmos.dsl.package#keepRetrying" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="keepRetrying:atmos.ErrorClassification"></a>
+      <a id="keepRetrying:atmos.dsl.package.ErrorClassification"></a>
       <a id="keepRetrying:ErrorClassification"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -395,12 +512,12 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">keepRetrying</span><span class="result">: <a href="../ErrorClassification.html" class="extype" name="atmos.ErrorClassification">ErrorClassification</a></span>
+        <span class="name">keepRetrying</span><span class="result">: <a href="#ErrorClassification=atmos.ErrorClassification" class="extmbr" name="atmos.dsl.ErrorClassification">ErrorClassification</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Returns the <code>Recoverable</code> error classification.</p>
     </li><li name="atmos.dsl.package#keepRetryingSilently" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="keepRetryingSilently:atmos.ErrorClassification"></a>
+      <a id="keepRetryingSilently:atmos.dsl.package.ErrorClassification"></a>
       <a id="keepRetryingSilently:ErrorClassification"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -408,7 +525,7 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">keepRetryingSilently</span><span class="result">: <a href="../ErrorClassification.html" class="extype" name="atmos.ErrorClassification">ErrorClassification</a></span>
+        <span class="name">keepRetryingSilently</span><span class="result">: <a href="#ErrorClassification=atmos.ErrorClassification" class="extmbr" name="atmos.dsl.ErrorClassification">ErrorClassification</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Returns the <code>SilentlyRecoverable</code> error classification.</p>
@@ -536,7 +653,7 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
 </p></div><dl class="paramcmts block"><dt class="param">logger</dt><dd class="cmt"><p>The logger to create a new event monitor extension interface for.
 </p></dd></dl></div>
     </li><li name="atmos.dsl.package#neverRetry" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="neverRetry:atmos.RetryPolicy"></a>
+      <a id="neverRetry:atmos.dsl.package.RetryPolicy"></a>
       <a id="neverRetry:RetryPolicy"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -544,7 +661,7 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">neverRetry</span><span class="result">: <a href="../RetryPolicy.html" class="extype" name="atmos.RetryPolicy">RetryPolicy</a></span>
+        <span class="name">neverRetry</span><span class="result">: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Creates a new retry policy that immediately terminates.</p>
@@ -678,7 +795,7 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
 </p></div><dl class="paramcmts block"><dt class="param">writer</dt><dd class="cmt"><p>The print writer to create a new event monitor extension interface for.
 </p></dd></dl></div>
     </li><li name="atmos.dsl.package#retry" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="retry[T](name:Option[String])(operation:=&gt;T)(implicitpolicy:atmos.RetryPolicy):T"></a>
+      <a id="retry[T](name:Option[String])(operation:=&gt;T)(implicitpolicy:atmos.dsl.package.RetryPolicy):T"></a>
       <a id="retry[T](Option[String])(⇒T)(RetryPolicy):T"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -686,14 +803,14 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">retry</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="atmos.dsl.retry.T">T</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="../RetryPolicy.html" class="extype" name="atmos.RetryPolicy">RetryPolicy</a></span>)</span><span class="result">: <span class="extype" name="atmos.dsl.retry.T">T</span></span>
+        <span class="name">retry</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="atmos.dsl.retry.T">T</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>)</span><span class="result">: <span class="extype" name="atmos.dsl.retry.T">T</span></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Performs the specified optionally named operation synchronously, retrying according to the implicit retry policy.</p><div class="fullcomment"><div class="comment cmt"><p>Performs the specified optionally named operation synchronously, retrying according to the implicit retry policy.
 </p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The optional name of the operation.</p></dd><dt class="param">operation</dt><dd class="cmt"><p>The operation to repeatedly perform.</p></dd><dt class="param">policy</dt><dd class="cmt"><p>The retry policy to execute with.
 </p></dd></dl></div>
     </li><li name="atmos.dsl.package#retry" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="retry[T](name:String)(operation:=&gt;T)(implicitpolicy:atmos.RetryPolicy):T"></a>
+      <a id="retry[T](name:String)(operation:=&gt;T)(implicitpolicy:atmos.dsl.package.RetryPolicy):T"></a>
       <a id="retry[T](String)(⇒T)(RetryPolicy):T"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -701,14 +818,14 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">retry</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="atmos.dsl.retry.T">T</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="../RetryPolicy.html" class="extype" name="atmos.RetryPolicy">RetryPolicy</a></span>)</span><span class="result">: <span class="extype" name="atmos.dsl.retry.T">T</span></span>
+        <span class="name">retry</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="atmos.dsl.retry.T">T</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>)</span><span class="result">: <span class="extype" name="atmos.dsl.retry.T">T</span></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Performs the specified named operation synchronously, retrying according to the implicit retry policy.</p><div class="fullcomment"><div class="comment cmt"><p>Performs the specified named operation synchronously, retrying according to the implicit retry policy.
 </p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation.</p></dd><dt class="param">operation</dt><dd class="cmt"><p>The operation to repeatedly perform.</p></dd><dt class="param">policy</dt><dd class="cmt"><p>The retry policy to execute with.
 </p></dd></dl></div>
     </li><li name="atmos.dsl.package#retry" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="retry[T]()(operation:=&gt;T)(implicitpolicy:atmos.RetryPolicy):T"></a>
+      <a id="retry[T]()(operation:=&gt;T)(implicitpolicy:atmos.dsl.package.RetryPolicy):T"></a>
       <a id="retry[T]()(⇒T)(RetryPolicy):T"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -716,14 +833,14 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">retry</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">()</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="atmos.dsl.retry.T">T</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="../RetryPolicy.html" class="extype" name="atmos.RetryPolicy">RetryPolicy</a></span>)</span><span class="result">: <span class="extype" name="atmos.dsl.retry.T">T</span></span>
+        <span class="name">retry</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">()</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="atmos.dsl.retry.T">T</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>)</span><span class="result">: <span class="extype" name="atmos.dsl.retry.T">T</span></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Performs the specified operation synchronously, retrying according to the implicit retry policy.</p><div class="fullcomment"><div class="comment cmt"><p>Performs the specified operation synchronously, retrying according to the implicit retry policy.
 </p></div><dl class="paramcmts block"><dt class="param">operation</dt><dd class="cmt"><p>The operation to repeatedly perform.</p></dd><dt class="param">policy</dt><dd class="cmt"><p>The retry policy to execute with.
 </p></dd></dl></div>
     </li><li name="atmos.dsl.package#retryAsync" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="retryAsync[T](name:Option[String])(operation:=&gt;scala.concurrent.Future[T])(implicitpolicy:atmos.RetryPolicy,implicitcontext:scala.concurrent.ExecutionContext,implicittimer:rummage.Timer):scala.concurrent.Future[T]"></a>
+      <a id="retryAsync[T](name:Option[String])(operation:=&gt;scala.concurrent.Future[T])(implicitpolicy:atmos.dsl.package.RetryPolicy,implicitcontext:scala.concurrent.ExecutionContext,implicittimer:rummage.Timer):scala.concurrent.Future[T]"></a>
       <a id="retryAsync[T](Option[String])(⇒Future[T])(RetryPolicy,ExecutionContext,Timer):Future[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -731,14 +848,14 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">retryAsync</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.dsl.retryAsync.T">T</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="../RetryPolicy.html" class="extype" name="atmos.RetryPolicy">RetryPolicy</a></span>, <span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>, <span name="timer">timer: <span class="extype" name="rummage.Timer">Timer</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.dsl.retryAsync.T">T</span>]</span>
+        <span class="name">retryAsync</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.dsl.retryAsync.T">T</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>, <span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>, <span name="timer">timer: <span class="extype" name="rummage.Timer">Timer</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.dsl.retryAsync.T">T</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Performs the specified optionally named operation asynchronously, retrying according to the implicit retry policy.</p><div class="fullcomment"><div class="comment cmt"><p>Performs the specified optionally named operation asynchronously, retrying according to the implicit retry policy.
 </p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The optional name of the operation.</p></dd><dt class="param">operation</dt><dd class="cmt"><p>The operation to repeatedly perform.</p></dd><dt class="param">policy</dt><dd class="cmt"><p>The retry policy to execute with.</p></dd><dt class="param">context</dt><dd class="cmt"><p>The execution context to retry on.</p></dd><dt class="param">timer</dt><dd class="cmt"><p>The timer to schedule backoff notifications on.
 </p></dd></dl></div>
     </li><li name="atmos.dsl.package#retryAsync" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="retryAsync[T](name:String)(operation:=&gt;scala.concurrent.Future[T])(implicitpolicy:atmos.RetryPolicy,implicitcontext:scala.concurrent.ExecutionContext,implicittimer:rummage.Timer):scala.concurrent.Future[T]"></a>
+      <a id="retryAsync[T](name:String)(operation:=&gt;scala.concurrent.Future[T])(implicitpolicy:atmos.dsl.package.RetryPolicy,implicitcontext:scala.concurrent.ExecutionContext,implicittimer:rummage.Timer):scala.concurrent.Future[T]"></a>
       <a id="retryAsync[T](String)(⇒Future[T])(RetryPolicy,ExecutionContext,Timer):Future[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -746,14 +863,14 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">retryAsync</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.dsl.retryAsync.T">T</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="../RetryPolicy.html" class="extype" name="atmos.RetryPolicy">RetryPolicy</a></span>, <span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>, <span name="timer">timer: <span class="extype" name="rummage.Timer">Timer</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.dsl.retryAsync.T">T</span>]</span>
+        <span class="name">retryAsync</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.dsl.retryAsync.T">T</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>, <span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>, <span name="timer">timer: <span class="extype" name="rummage.Timer">Timer</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.dsl.retryAsync.T">T</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Performs the specified optionally named operation asynchronously, retrying according to the implicit retry policy.</p><div class="fullcomment"><div class="comment cmt"><p>Performs the specified optionally named operation asynchronously, retrying according to the implicit retry policy.
 </p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation.</p></dd><dt class="param">operation</dt><dd class="cmt"><p>The operation to repeatedly perform.</p></dd><dt class="param">policy</dt><dd class="cmt"><p>The retry policy to execute with.</p></dd><dt class="param">context</dt><dd class="cmt"><p>The execution context to retry on.</p></dd><dt class="param">timer</dt><dd class="cmt"><p>The timer to schedule backoff notifications on.
 </p></dd></dl></div>
     </li><li name="atmos.dsl.package#retryAsync" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="retryAsync[T]()(operation:=&gt;scala.concurrent.Future[T])(implicitpolicy:atmos.RetryPolicy,implicitcontext:scala.concurrent.ExecutionContext,implicittimer:rummage.Timer):scala.concurrent.Future[T]"></a>
+      <a id="retryAsync[T]()(operation:=&gt;scala.concurrent.Future[T])(implicitpolicy:atmos.dsl.package.RetryPolicy,implicitcontext:scala.concurrent.ExecutionContext,implicittimer:rummage.Timer):scala.concurrent.Future[T]"></a>
       <a id="retryAsync[T]()(⇒Future[T])(RetryPolicy,ExecutionContext,Timer):Future[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -761,14 +878,14 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">retryAsync</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">()</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.dsl.retryAsync.T">T</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="../RetryPolicy.html" class="extype" name="atmos.RetryPolicy">RetryPolicy</a></span>, <span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>, <span name="timer">timer: <span class="extype" name="rummage.Timer">Timer</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.dsl.retryAsync.T">T</span>]</span>
+        <span class="name">retryAsync</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">()</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.dsl.retryAsync.T">T</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>, <span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>, <span name="timer">timer: <span class="extype" name="rummage.Timer">Timer</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.dsl.retryAsync.T">T</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Performs the specified operation asynchronously, retrying according to the implicit retry policy.</p><div class="fullcomment"><div class="comment cmt"><p>Performs the specified operation asynchronously, retrying according to the implicit retry policy.
 </p></div><dl class="paramcmts block"><dt class="param">operation</dt><dd class="cmt"><p>The operation to repeatedly perform.</p></dd><dt class="param">policy</dt><dd class="cmt"><p>The retry policy to execute with.</p></dd><dt class="param">context</dt><dd class="cmt"><p>The execution context to retry on.</p></dd><dt class="param">timer</dt><dd class="cmt"><p>The timer to schedule backoff notifications on.
 </p></dd></dl></div>
     </li><li name="atmos.dsl.package#retryFor" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="retryFor(termination:atmos.TerminationPolicy):atmos.RetryPolicy"></a>
+      <a id="retryFor(termination:atmos.dsl.package.TerminationPolicy):atmos.dsl.package.RetryPolicy"></a>
       <a id="retryFor(TerminationPolicy):RetryPolicy"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -776,14 +893,14 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">retryFor</span><span class="params">(<span name="termination">termination: <a href="../TerminationPolicy.html" class="extype" name="atmos.TerminationPolicy">TerminationPolicy</a></span>)</span><span class="result">: <a href="../RetryPolicy.html" class="extype" name="atmos.RetryPolicy">RetryPolicy</a></span>
+        <span class="name">retryFor</span><span class="params">(<span name="termination">termination: <a href="#TerminationPolicy=atmos.TerminationPolicy" class="extmbr" name="atmos.dsl.TerminationPolicy">TerminationPolicy</a></span>)</span><span class="result">: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Creates a new retry policy based on the specified termination policy.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new retry policy based on the specified termination policy.
 </p></div><dl class="paramcmts block"><dt class="param">termination</dt><dd class="cmt"><p>The termination policy that will be used by the new retry policy.
 </p></dd></dl></div>
     </li><li name="atmos.dsl.package#retryForever" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="retryForever:atmos.RetryPolicy"></a>
+      <a id="retryForever:atmos.dsl.package.RetryPolicy"></a>
       <a id="retryForever:RetryPolicy"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -791,12 +908,12 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">retryForever</span><span class="result">: <a href="../RetryPolicy.html" class="extype" name="atmos.RetryPolicy">RetryPolicy</a></span>
+        <span class="name">retryForever</span><span class="result">: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Creates a new retry policy that never terminates.</p>
     </li><li name="atmos.dsl.package#retryPolicyToRetryPolicyExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="retryPolicyToRetryPolicyExtensions(policy:atmos.RetryPolicy):atmos.dsl.RetryPolicyExtensions"></a>
+      <a id="retryPolicyToRetryPolicyExtensions(policy:atmos.dsl.package.RetryPolicy):atmos.dsl.RetryPolicyExtensions"></a>
       <a id="retryPolicyToRetryPolicyExtensions(RetryPolicy):RetryPolicyExtensions"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -804,14 +921,14 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">retryPolicyToRetryPolicyExtensions</span><span class="params">(<span name="policy">policy: <a href="../RetryPolicy.html" class="extype" name="atmos.RetryPolicy">RetryPolicy</a></span>)</span><span class="result">: <a href="RetryPolicyExtensions.html" class="extype" name="atmos.dsl.RetryPolicyExtensions">RetryPolicyExtensions</a></span>
+        <span class="name">retryPolicyToRetryPolicyExtensions</span><span class="params">(<span name="policy">policy: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>)</span><span class="result">: <a href="RetryPolicyExtensions.html" class="extype" name="atmos.dsl.RetryPolicyExtensions">RetryPolicyExtensions</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Provides an implicit extension of the retry policy interface.</p><div class="fullcomment"><div class="comment cmt"><p>Provides an implicit extension of the retry policy interface.
 </p></div><dl class="paramcmts block"><dt class="param">policy</dt><dd class="cmt"><p>The retry policy to extend the interface of.
 </p></dd></dl></div>
     </li><li name="atmos.dsl.package#retrying" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="retrying:atmos.RetryPolicy"></a>
+      <a id="retrying:atmos.dsl.package.RetryPolicy"></a>
       <a id="retrying:RetryPolicy"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -819,12 +936,12 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">retrying</span><span class="result">: <a href="../RetryPolicy.html" class="extype" name="atmos.RetryPolicy">RetryPolicy</a></span>
+        <span class="name">retrying</span><span class="result">: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Creates a new default retry policy.</p>
     </li><li name="atmos.dsl.package#selectedBackoff" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="selectedBackoff(f:Throwable=&gt;atmos.BackoffPolicy):atmos.BackoffPolicy"></a>
+      <a id="selectedBackoff(f:Throwable=&gt;atmos.dsl.package.BackoffPolicy):atmos.dsl.package.BackoffPolicy"></a>
       <a id="selectedBackoff((Throwable)⇒BackoffPolicy):BackoffPolicy"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -832,14 +949,14 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">selectedBackoff</span><span class="params">(<span name="f">f: (<span class="extype" name="scala.Throwable">Throwable</span>) ⇒ <a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">BackoffPolicy</a></span>)</span><span class="result">: <a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">BackoffPolicy</a></span>
+        <span class="name">selectedBackoff</span><span class="params">(<span name="f">f: (<span class="extype" name="scala.Throwable">Throwable</span>) ⇒ <a href="#BackoffPolicy=atmos.BackoffPolicy" class="extmbr" name="atmos.dsl.BackoffPolicy">BackoffPolicy</a></span>)</span><span class="result">: <a href="#BackoffPolicy=atmos.BackoffPolicy" class="extmbr" name="atmos.dsl.BackoffPolicy">BackoffPolicy</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Creates a backoff policy selects another policy based on the most recently thrown exception.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a backoff policy selects another policy based on the most recently thrown exception.
 </p></div><dl class="paramcmts block"><dt class="param">f</dt><dd class="cmt"><p>The function that maps from exceptions to backoff policies.
 </p></dd></dl></div>
     </li><li name="atmos.dsl.package#stopRetrying" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="stopRetrying:atmos.ErrorClassification"></a>
+      <a id="stopRetrying:atmos.dsl.package.ErrorClassification"></a>
       <a id="stopRetrying:ErrorClassification"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -847,12 +964,12 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">stopRetrying</span><span class="result">: <a href="../ErrorClassification.html" class="extype" name="atmos.ErrorClassification">ErrorClassification</a></span>
+        <span class="name">stopRetrying</span><span class="result">: <a href="#ErrorClassification=atmos.ErrorClassification" class="extmbr" name="atmos.dsl.ErrorClassification">ErrorClassification</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Returns the <code>Fatal</code> error classification.</p>
     </li><li name="atmos.dsl.package#terminationPolicyToTerminationPolicyExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="terminationPolicyToTerminationPolicyExtensions(policy:atmos.TerminationPolicy):atmos.dsl.TerminationPolicyExtensions"></a>
+      <a id="terminationPolicyToTerminationPolicyExtensions(policy:atmos.dsl.package.TerminationPolicy):atmos.dsl.TerminationPolicyExtensions"></a>
       <a id="terminationPolicyToTerminationPolicyExtensions(TerminationPolicy):TerminationPolicyExtensions"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -860,7 +977,7 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">terminationPolicyToTerminationPolicyExtensions</span><span class="params">(<span name="policy">policy: <a href="../TerminationPolicy.html" class="extype" name="atmos.TerminationPolicy">TerminationPolicy</a></span>)</span><span class="result">: <a href="TerminationPolicyExtensions.html" class="extype" name="atmos.dsl.TerminationPolicyExtensions">TerminationPolicyExtensions</a></span>
+        <span class="name">terminationPolicyToTerminationPolicyExtensions</span><span class="params">(<span name="policy">policy: <a href="#TerminationPolicy=atmos.TerminationPolicy" class="extmbr" name="atmos.dsl.TerminationPolicy">TerminationPolicy</a></span>)</span><span class="result">: <a href="TerminationPolicyExtensions.html" class="extype" name="atmos.dsl.TerminationPolicyExtensions">TerminationPolicyExtensions</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Provides an implicit extension of the termination policy interface.</p><div class="fullcomment"><div class="comment cmt"><p>Provides an implicit extension of the termination policy interface.

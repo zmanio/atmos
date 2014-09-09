@@ -35,7 +35,7 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">RetryPolicyExtensions</span><span class="params">(<span name="self">self: <a href="../RetryPolicy.html" class="extype" name="atmos.RetryPolicy">RetryPolicy</a></span>)</span><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <span class="name">RetryPolicyExtensions</span><span class="params">(<span name="self">self: <a href="package.html#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>)</span><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
@@ -82,7 +82,7 @@
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="atmos.dsl.RetryPolicyExtensions#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="&lt;init&gt;(self:atmos.RetryPolicy):atmos.dsl.RetryPolicyExtensions"></a>
+      <a id="&lt;init&gt;(self:atmos.dsl.RetryPolicy):atmos.dsl.RetryPolicyExtensions"></a>
       <a id="&lt;init&gt;:RetryPolicyExtensions"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -90,7 +90,7 @@
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">RetryPolicyExtensions</span><span class="params">(<span name="self">self: <a href="../RetryPolicy.html" class="extype" name="atmos.RetryPolicy">RetryPolicy</a></span>)</span>
+        <span class="name">RetryPolicyExtensions</span><span class="params">(<span name="self">self: <a href="package.html#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>)</span>
       </span>
       </h4>
       <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">self</dt><dd class="cmt"><p>The retry policy to add the extension methods to.
@@ -183,52 +183,52 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="atmos.dsl.RetryPolicyExtensions#monitorWith" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="monitorWith(monitor:atmos.EventMonitor):atmos.RetryPolicy"></a>
-      <a id="monitorWith(EventMonitor):RetryPolicy"></a>
+      <a id="monitorWith(monitor:atmos.dsl.EventMonitor):atmos.RetryPolicy"></a>
+      <a id="monitorWith(EventMonitor):atmos.RetryPolicy"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">monitorWith</span><span class="params">(<span name="monitor">monitor: <a href="../EventMonitor.html" class="extype" name="atmos.EventMonitor">EventMonitor</a></span>)</span><span class="result">: <a href="../RetryPolicy.html" class="extype" name="atmos.RetryPolicy">RetryPolicy</a></span>
+        <span class="name">monitorWith</span><span class="params">(<span name="monitor">monitor: <a href="package.html#EventMonitor=atmos.EventMonitor" class="extmbr" name="atmos.dsl.EventMonitor">EventMonitor</a></span>)</span><span class="result">: <a href="../RetryPolicy.html" class="extype" name="atmos.RetryPolicy">atmos.RetryPolicy</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Creates a new retry policy by replacing the underlying policy's monitor.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new retry policy by replacing the underlying policy's monitor.
 </p></div><dl class="paramcmts block"><dt class="param">monitor</dt><dd class="cmt"><p>The monitor to use.
 </p></dd></dl></div>
     </li><li name="atmos.dsl.RetryPolicyExtensions#onError" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="onError(classifier:atmos.ErrorClassifier):atmos.RetryPolicy"></a>
-      <a id="onError(ErrorClassifier):RetryPolicy"></a>
+      <a id="onError(classifier:atmos.dsl.ErrorClassifier):atmos.RetryPolicy"></a>
+      <a id="onError(ErrorClassifier):atmos.RetryPolicy"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">onError</span><span class="params">(<span name="classifier">classifier: <a href="../package.html#ErrorClassifier=PartialFunction[Throwable,atmos.ErrorClassification]" class="extmbr" name="atmos.ErrorClassifier">ErrorClassifier</a></span>)</span><span class="result">: <a href="../RetryPolicy.html" class="extype" name="atmos.RetryPolicy">RetryPolicy</a></span>
+        <span class="name">onError</span><span class="params">(<span name="classifier">classifier: <a href="package.html#ErrorClassifier=atmos.ErrorClassifier" class="extmbr" name="atmos.dsl.ErrorClassifier">ErrorClassifier</a></span>)</span><span class="result">: <a href="../RetryPolicy.html" class="extype" name="atmos.RetryPolicy">atmos.RetryPolicy</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Creates a new retry policy by replacing the underlying policy's error classifier.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new retry policy by replacing the underlying policy's error classifier.
 </p></div><dl class="paramcmts block"><dt class="param">classifier</dt><dd class="cmt"><p>The error classifier policy to use.
 </p></dd></dl></div>
     </li><li name="atmos.dsl.RetryPolicyExtensions#retryFor" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="retryFor(termination:atmos.TerminationPolicy):atmos.RetryPolicy"></a>
-      <a id="retryFor(TerminationPolicy):RetryPolicy"></a>
+      <a id="retryFor(termination:atmos.dsl.TerminationPolicy):atmos.RetryPolicy"></a>
+      <a id="retryFor(TerminationPolicy):atmos.RetryPolicy"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">retryFor</span><span class="params">(<span name="termination">termination: <a href="../TerminationPolicy.html" class="extype" name="atmos.TerminationPolicy">TerminationPolicy</a></span>)</span><span class="result">: <a href="../RetryPolicy.html" class="extype" name="atmos.RetryPolicy">RetryPolicy</a></span>
+        <span class="name">retryFor</span><span class="params">(<span name="termination">termination: <a href="package.html#TerminationPolicy=atmos.TerminationPolicy" class="extmbr" name="atmos.dsl.TerminationPolicy">TerminationPolicy</a></span>)</span><span class="result">: <a href="../RetryPolicy.html" class="extype" name="atmos.RetryPolicy">atmos.RetryPolicy</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Creates a new retry policy by replacing the underlying policy's termination policy.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new retry policy by replacing the underlying policy's termination policy.
 </p></div><dl class="paramcmts block"><dt class="param">termination</dt><dd class="cmt"><p>The termination policy to use.
 </p></dd></dl></div>
     </li><li name="atmos.dsl.RetryPolicyExtensions#self" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="self:atmos.RetryPolicy"></a>
+      <a id="self:atmos.dsl.RetryPolicy"></a>
       <a id="self:RetryPolicy"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -236,20 +236,20 @@
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">self</span><span class="result">: <a href="../RetryPolicy.html" class="extype" name="atmos.RetryPolicy">RetryPolicy</a></span>
+        <span class="name">self</span><span class="result">: <a href="package.html#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">The retry policy to add the extension methods to.</p>
     </li><li name="atmos.dsl.RetryPolicyExtensions#using" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="using(backoff:atmos.BackoffPolicy):atmos.RetryPolicy"></a>
-      <a id="using(BackoffPolicy):RetryPolicy"></a>
+      <a id="using(backoff:atmos.dsl.BackoffPolicy):atmos.RetryPolicy"></a>
+      <a id="using(BackoffPolicy):atmos.RetryPolicy"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">using</span><span class="params">(<span name="backoff">backoff: <a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">BackoffPolicy</a></span>)</span><span class="result">: <a href="../RetryPolicy.html" class="extype" name="atmos.RetryPolicy">RetryPolicy</a></span>
+        <span class="name">using</span><span class="params">(<span name="backoff">backoff: <a href="package.html#BackoffPolicy=atmos.BackoffPolicy" class="extmbr" name="atmos.dsl.BackoffPolicy">BackoffPolicy</a></span>)</span><span class="result">: <a href="../RetryPolicy.html" class="extype" name="atmos.RetryPolicy">atmos.RetryPolicy</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Creates a new retry policy by replacing the underlying policy's backoff policy.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new retry policy by replacing the underlying policy's backoff policy.
