@@ -86,13 +86,15 @@ In addition to making retry behavior easy to understand, atmos provides the abil
 
 ## Getting Started
 
+<a name="getting-started"></a>
+
 Prerequisites:
 
  - [Scala](http://scala-lang.org/) 2.10.x
 
+<!---
  - [SBT](http://www.scala-sbt.org/) or a similar build tool.
 
-<!---
 To use atmos in your project simply add one line to your SBT configuration:
 
 ```scala
@@ -104,15 +106,17 @@ libraryDependencies += "io.zman" %% "atmos" % "2.0"
 
 ## Using the Library
 
+<a name="using-the-library"></a>
+
 The atmos library divides the definition of a retry policy into four parts:
 
- - Termination policies enforce an upper bound on the number of retry attempts that are made.
+ - [Termination policies](#termination-policies) enforce an upper bound on the number of retry attempts that are made.
 
- - Backoff policies calculate the delay that is inserted before subsequent retry attempts.
+ - [Backoff policies](#backoff-policies) calculate the delay that is inserted before subsequent retry attempts.
 
- - Error classifiers define the strategy used to determine if an error prevents further attempts.
+ - [Error classifiers](#error-classifiers) define the strategy used to determine if an error prevents further attempts.
 
- - Event monitors are notified of events that occur while performing a retry operation.
+ - [Event monitors](#event-monitors) are notified of events that occur while performing a retry operation.
 
 Using the naive retry loop from above, we can classify its behavior according to the four elements of a retry policy:
 
@@ -144,16 +148,32 @@ Atmos decomposes the traditional retry loop into these four, independent strateg
 
 ### Termination Policies
 
+<a name="termination-policies"></a>
+
 ### Backoff Policies
+
+<a name="backoff-policies"></a>
 
 ### Error Classifiers
 
+<a name="error-classifiers"></a>
+
 ### Event Monitors
+
+<a name="event-monitors"></a>
 
 ### Retrying Synchronously
 
+<a name="retrying-synchronously"></a>
+
 ### Retrying Asynchronously
+
+<a name="retrying-asynchronously"></a>
 
 ### Example Retry Policies
 
+<a name="example-retry-policies"></a>
+
 ## Building and Testing
+
+<a name="building-and-testing"></a>
