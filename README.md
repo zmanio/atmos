@@ -223,7 +223,7 @@ import atmos.dsl._
 // Wait 5 milliseconds between each attempt.
 implicit val retryPolicy = retryForever using constantBackoff { 5 millis }
 
-// Wait 5 minites after the first attempt, then 10 seconds, then 15 seconds and so on.
+// Wait 5 seconds after the first attempt, then 10 seconds, then 15 seconds and so on.
 val otherRetryPolicy = retryForever using linearBackoff { 5 seconds }
 
 // Wait 5 minites after the first attempt, then 10 seconds, then 20 seconds and so on.
@@ -348,14 +348,22 @@ val akkaRetryPolicy = retryForever monitorWith {
 
 ### Retrying Synchronously
 
+(work-in-progress)
+
 <a name="retrying-asynchronously"></a>
 
 ### Retrying Asynchronously
+
+(work-in-progress)
 
 <a name="example-retry-policies"></a>
 
 ### Example Retry Policies
 
+(work-in-progress)
+
 <a name="building-and-testing"></a>
 
 ## Building and Testing
+
+(work-in-progress)
