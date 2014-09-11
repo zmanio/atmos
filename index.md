@@ -40,7 +40,7 @@ Retry loops like the one above bring a number of issues with them:
 
  - They obscure the actual work that the program is trying to do (the lone call to `doSomethingThatMightFail()` above).
 
- - They are convoluted and tend to contain more and more mutable state the more complex they get, making them hard to reason about and resistant to change.
+ - They are convoluted and tend to contain lots of mutable state, making them hard to reason about and resistant to change.
 
  - They are difficult and tedious to test, possibly leading to undiscovered bugs in the code base.
 
@@ -79,6 +79,8 @@ In addition to making retry behavior easy to understand, atmos provides the abil
    - [Retrying Synchronously](#retrying-synchronously)
 
    - [Retrying Asynchronously](#retrying-asynchronously)
+
+   - [Retrying with Actors](#retrying-with-actors)
 
    - [Example Retry Policies](#example-retry-policies)
 
@@ -144,19 +146,7 @@ while (true) {
 }
 ```
 
-Atmos decomposes the traditional retry loop into these four, independent strategies and allows you to easily recombine them in whatever fashion you see fit.
-
-A retry policy is encapsulated in the `atmos.RetryPolicy` class. Typically, a retry policy is declared as an `implicit` variable and the `retry()` method from the DSL is used to execute a retry operation. However, if you have multiple policies in the same scope (or if you want to avoid using implicit parameters) you can also call `retry()` directly on the policy object:
-
-```scala
-import atmos.dsl._
-
-implicit val policy: RetryPolicy = ???
-
-// The following two statements are equivalent:
-retry() { doSomething() }
-policy.retry() { doSomething() }
-```
+Atmos decomposes the traditional retry loop into these four, independent strategies and allows you to easily recombine them in whatever fashion you see fit. A reconstructed retry policy is encapsulated in the `atmos.RetryPolicy` class. 
 
 <a name="termination-policies"></a>
 
@@ -353,11 +343,48 @@ val akkaRetryPolicy = retryForever monitorWith {
 
 ### Retrying Synchronously
 
-(work-in-progress)
+When you retry synchronously you pass a block of code to the `retry()` method and that block is repeatedly executed until it completes successfully or ultimately fails in accordance with your policy. If a block completes successfully then the value the block evaluates to becomes the return value of `retry()`. If a block fails to complete successfully, meaning it was interrupted by a fatal error or had to abort after too many attempts, then the most recently thrown exception is thrown from `retry()`.
+
+Typically, a retry policy is declared as an implicit variable and the `retry()` method from the DSL is used to execute a synchronous retry operation. However, if you have multiple policies in the same scope (or if you want to avoid using implicit parameters) you can also call `retry()` directly on the policy object:
+
+```scala
+import atmos.dsl._
+
+implicit val policy = retryForever
+
+// The following two statements are equivalent:
+retry() { doSomething() }
+policy.retry() { doSomething() }
+```
+
+When calling `retry()` you have the option of giving the operation a name that is included in any log messages:
+
+```scala
+import atmos.dsl._
+
+implicit val policy = retryForever
+
+// The following two statements will have a custom operation name in log messages:
+retry("Doing something") { doSomething() }
+val result = retry(Some("Getting something")) { getSomething() }
+
+// The following two statements will have a generic operation name in log messages:
+retry() { doSomethingMysterious() }
+val result = retry(None) { getSomethingMysterious() }
+```
+
+It is important to note that synchronous retry operations will block the calling thread while waiting for a backoff duration to expire. Use synchronous retries carefully in situations where you do not control the calling thread.
 
 <a name="retrying-asynchronously"></a>
 
 ### Retrying Asynchronously
+
+(work-in-progress)
+```
+
+<a name="retrying-with-actors"></a>
+
+### Retrying with Actors
 
 (work-in-progress)
 
