@@ -59,25 +59,25 @@ In addition to making retry behavior easy to understand, atmos provides the abil
 
 ## Table of Contents
 
-[Getting Started](#getting-started)
+ - [Getting Started](#getting-started)
 
-[Using the Library](#using-the-library)
+ - [Using the Library](#using-the-library)
 
- - [Termination Policies](#termination-policies)
+   - [Termination Policies](#termination-policies)
 
- - [Backoff Policies](#backoff-policies)
+   - [Backoff Policies](#backoff-policies)
 
- - [Error Classifiers](#error-classifiers)
+   - [Error Classifiers](#error-classifiers)
 
- - [Event Monitors](#event-monitors)
+   - [Event Monitors](#event-monitors)
 
- - [Retrying Synchronously](#retrying-synchronously)
+   - [Retrying Synchronously](#retrying-synchronously)
 
- - [Retrying Asynchronously](#retrying-asynchronously)
+   - [Retrying Asynchronously](#retrying-asynchronously)
 
- - [Example Retry Policies](#example-retry-policies)
+   - [Example Retry Policies](#example-retry-policies)
 
-[Building and Testing](#building-and-testing)
+ - [Building and Testing](#building-and-testing)
 
 <a name="getting-started"></a>
 
@@ -285,7 +285,7 @@ import atmos.dsl._
 // Stop retrying after any runtime exception.
 implicit val retryPolicy = retryForever onError { case _: RuntimeException => stopRetrying }
 
-// Continue retrying silently after all runtime exceptions except illegal argument exceptions.
+// Don't log any runtime exceptions except illegal argument exceptions.
 val otherRetryPolicy = retryForever onError {
   case _: IllegalArgumentException => keepRetrying
   case _: RuntimeException => keepRetryingSilently
@@ -308,7 +308,7 @@ implicit val retryPolicy = retryForever monitorWith System.err
 
 // Print information about failed attempts to a file, customizing what events get printed and how.
 val otherRetryPolicy = retryForever monitorWith {
-  new PrintWriter("/path") onRetrying printNothing onInterrupted printMessage onAborted printMessageAndStackTrace
+  new PrintWriter("myFile.log") onRetrying printNothing onInterrupted printMessage onAborted printMessageAndStackTrace
 }
 ```
 
