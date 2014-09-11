@@ -60,25 +60,15 @@ In addition to making retry behavior easy to understand, atmos provides the abil
 ## Table of Contents
 
  - [Getting Started](#getting-started)
-
  - [Using the Library](#using-the-library)
-
    - [Termination Policies](#termination-policies)
-
    - [Backoff Policies](#backoff-policies)
-
    - [Error Classifiers](#error-classifiers)
-
    - [Event Monitors](#event-monitors)
-
    - [Retrying Synchronously](#retrying-synchronously)
-
    - [Retrying Asynchronously](#retrying-asynchronously)
-
    - [Retrying with Actors](#retrying-with-actors)
-
    - [Example Retry Policies](#example-retry-policies)
-
  - [Building and Testing](#building-and-testing)
 
 <a name="getting-started"></a>
@@ -108,11 +98,8 @@ libraryDependencies += "io.zman" %% "atmos" % "2.0"
 The atmos library divides the definition of a retry policy into four parts:
 
  - [Termination policies](#termination-policies) enforce an upper bound on the number of retry attempts that are made.
-
  - [Backoff policies](#backoff-policies) calculate the delay that is inserted before subsequent retry attempts.
-
  - [Error classifiers](#error-classifiers) define the strategy used to determine if an error prevents further attempts.
-
  - [Event monitors](#event-monitors) are notified of events that occur while performing a retry operation.
 
 Using the naive retry loop from above, we can classify its behavior according to the four elements of a retry policy:
@@ -374,7 +361,27 @@ It is important to note that synchronous retry operations will block the calling
 
 ### Retrying Asynchronously
 
-(work-in-progress)
+Atmos also supports asynchronous retries using Scala Futures. There are, however, some additional dependencies that must be considered before retrying asynchronously:
+
+ - There must be an implicit `scala.concurrent.ExecutionContext` available at the point the retry operation is invoked. This execution context is where subsequent attempts will be run and can typically be the same context used to execute your futures.
+ - You may optionally define an implicit `rummage.Timer` from the [rummage](http://zman.io/rummage) project. This is the component responsible for providing delayed callbacks when a backoff duration expires and is backed by a single daemon thread by default. It is unlikely that you will need to provide a custom timer unless you are working with [actors](#retrying-with-actors).
+
+Asynchronous retriy operations are executed with the `retryAsync` method. In the same fashion as the synchronous form, you may optionally provide an operation name and you can either call this method via the DSL with an implicit retry policy or directly on the retry policy itself.
+
+```scala
+import scala.concurrent.Future
+import scala.concurrent.ExecutionContext.Implicits._
+import atmos.dsl._
+
+implicit val policy = retryForever
+
+// The following two statements will have a custom operation name in log messages:
+retryAsync("Doing something") { Future { doSomething() } }
+retryAsync(Some("Doing something else")) { doSomethingElse() }
+
+// The following two statements will have a generic operation name in log messages:
+retryAsync() { doSomethingMysterious() }
+retryAsync(None) { doSomethingElseMysterious() }
 ```
 
 <a name="retrying-with-actors"></a>
