@@ -3,9 +3,11 @@ title: changelog
 headline: they say history inevitably repeats itself
 layout: page
 ---
-# 2.0 (2014-??-??)
+# 2.0 (2014-09-12)
 
-Moved to the `io.zman` organization namespace.
+Moved to the `io.zman` organization namespace and moved from the `atmos.retries` package to the `atmos` package.
+
+In addition to the namespace changes, much of the code was refactored to break up files that had begun to grow far too large. There were no notable functionality changes in this release.
 
 # 1.3 (2014-03-10)
 
