@@ -1,18 +1,15 @@
 language: scala
 
 scala:
-  - 2.10.4
+  - 2.11.6
 
 branches:
   only:
     - master
-    
-before_script:
-  - git config --global user.email "z@zman.io"
-  - git config --global user.name "zmanio-ci"
-  - git config --global push.default simple
   
-script: sbt ++$TRAVIS_SCALA_VERSION --warn coveralls ghpages-push-site
+script: sbt ++$TRAVIS_SCALA_VERSION clean coverage test
+
+after_success: sbt coveralls
 
 notifications:
   email:

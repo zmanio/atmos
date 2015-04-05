@@ -1,3 +1,7 @@
+# 2.1 (2015-04-??)
+
+Added support for Scala 2.11 in addition to Scala 2.10.
+
 # 2.0 (2014-09-12)
 
 Moved to the `io.zman` organization namespace and moved from the `atmos.retries` package to the `atmos` package.

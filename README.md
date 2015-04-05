@@ -78,15 +78,15 @@ Prerequisites:
 
  - [Java](http://www.oracle.com/technetwork/java/index.html) 1.6+
 
- - [Scala](http://scala-lang.org/) 2.10.x
+ - [Scala](http://scala-lang.org/) 2.10.4+ or Scala 2.11.6+
 
 To use from SBT, add the following to your build.sbt file:
 
 ```scala
-libraryDependencies += "io.zman" %% "atmos" % "2.0"
+libraryDependencies += "io.zman" %% "atmos" % "2.1"
 ```
 
-For other build systems or to download the jar see [atmos in the central repository](http://mvnrepository.com/artifact/io.zman/atmos_2.10/2.0).
+For other build systems or to download the jar see [atmos in the central repository](http://mvnrepository.com/artifact/io.zman/atmos_2.11/2.1).
 
 <a name="using-the-library"></a>
 
