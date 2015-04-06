@@ -249,7 +249,7 @@ val otherRetryPolicy = retryForever using { linearBackoff { 5 minutes } randomiz
 
 Errors that occur during a retry attempt can be classified as `Fatal`, `Recoverable` or `SilentlyRecoverable`. `Fatal` errors will interrupt a retry operation and cause it to immediately fail. `Recoverable` errors will be logged and suppressed so that the retry operation can continue. `SilentlyRecoverable` errors will be suppressed without being logged so that the retry operation can continue. Error classifications are defined in [`atmos.ErrorClassification`](http://zman.io/atmos/api/#atmos.ErrorClassification).
 
-Error classifiers are simply implementations of `PartialFunction` that map instances of `Throwable` to the desired error classification. In situations where a classifier is not defined for a particular error, `scala.util.control.NonFatal` is used to classify errors as `Fatal` or `Recoverable`. The appropriate partial function type is defined as [`atmos.ErrorClassifier`](http://zman.io/atmos/api/#atmos.ErrorClassifier) and includes a factory in the companion object.
+Error classifiers are simply implementations of `PartialFunction` that map outcomes to the desired error classification. In situations where a classifier is not defined for a particular outcome, `scala.util.control.NonFatal` is used to classify `Throwable` outcomes as `Fatal` or `Recoverable`, all other outcomes are considered `Recoverable`. The appropriate partial function type is defined as [`atmos.ErrorClassifier`](http://zman.io/atmos/api/#atmos.ErrorClassifier) and includes a factory in the companion object.
 
 Error classifiers are configured by calling `onError` on an existing retry policy:
 
