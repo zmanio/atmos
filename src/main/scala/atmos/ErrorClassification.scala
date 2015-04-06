@@ -1,7 +1,7 @@
 /* ErrorClassification.scala
  * 
  * Copyright (c) 2013-2014 linkedin.com
- * Copyright (c) 2013-2015 zman.io
+ * Copyright (c) 2013-2014 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,17 +35,14 @@ sealed trait ErrorClassification {
 /**
  * Definitions of the supported error classifications and the default classification function.
  */
-object ErrorClassification extends (Any => ErrorClassification) {
+object ErrorClassification extends (Throwable => ErrorClassification) {
 
   /**
    * Returns a classification for the specified error using the default strategy.
    *
    * @param thrown The error to classify.
    */
-  override def apply(outcome: Any): ErrorClassification = outcome match {
-    case NonFatal(_) => Recoverable
-    case _ => Fatal
-  }
+  override def apply(thrown: Throwable): ErrorClassification = if (NonFatal(thrown)) Recoverable else Fatal
 
   /**
    * The classification of errors that will interrupt the retry operation.

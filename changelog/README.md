@@ -1,10 +1,6 @@
 # 2.1 (2015-04-??)
 
- - Added support for Scala 2.11 in addition to Scala 2.10.
- 
- - Changed error classifiers from `Throwable => ErrorClassification` to `Any => ErrorClassification`. This is a breaking change
-   for any attempts to use an error classifier typed as the previously-supported `PartialFunction[Throwable, ErrorClassification]`.
-   Uses of the factory in the `ErrorClassifier` companion object and direct uses of the DSL will compile normally.
+Added support for Scala 2.11 in addition to Scala 2.10.
 
 # 2.0 (2014-09-12)
 

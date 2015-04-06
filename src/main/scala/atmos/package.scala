@@ -1,7 +1,7 @@
 /* package.scala
  * 
  * Copyright (c) 2013-2014 linkedin.com
- * Copyright (c) 2013-2015 zman.io
+ * Copyright (c) 2013-2014 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,7 +40,7 @@
 package object atmos {
 
   /** The type of error classifier functions. */
-  type ErrorClassifier = PartialFunction[Any, ErrorClassification]
+  type ErrorClassifier = PartialFunction[Throwable, ErrorClassification]
 
   /**
    * Common error classifiers.
@@ -55,7 +55,7 @@ package object atmos {
      * 
      * @param f The partial function to return.
      */
-    def apply(f: PartialFunction[Any, ErrorClassification]): ErrorClassifier = f
+    def apply(f: PartialFunction[Throwable, ErrorClassification]): ErrorClassifier = f
 
   }
 
