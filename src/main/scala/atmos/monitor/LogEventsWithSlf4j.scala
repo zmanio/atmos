@@ -1,6 +1,6 @@
 /* LogEventsWithSlf4j.scala
  * 
- * Copyright (c) 2013-2014 bizo.com
+ * Copyright (c) 2013-2014 linkedin.com
  * Copyright (c) 2013-2014 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
