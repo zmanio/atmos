@@ -150,11 +150,11 @@ package object dsl {
   def fibonacciBackoff: BackoffPolicyFactory = BackoffPolicyFactory(backoff.FibonacciBackoff)
 
   /**
-   * Creates a backoff policy selects another policy based on the most recently thrown exception.
+   * Creates a backoff policy selects another policy based on the most recently evaluated outcome.
    *
-   * @param f The function that maps from exceptions to backoff policies.
+   * @param f The function that maps from outcomes to backoff policies.
    */
-  def selectedBackoff(f: Throwable => BackoffPolicy): BackoffPolicy = backoff.SelectedBackoff(f)
+  def selectedBackoff(f: Any => BackoffPolicy): BackoffPolicy = backoff.SelectedBackoff(f)
 
   /**
    * Provides an implicit extension of the backoff policy interface.

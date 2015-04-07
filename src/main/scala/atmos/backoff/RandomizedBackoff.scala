@@ -1,7 +1,7 @@
 /* RandomizedBackoff.scala
  * 
  * Copyright (c) 2013-2014 linkedin.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ case class RandomizedBackoff(policy: BackoffPolicy, range: (FiniteDuration, Fini
   }
   
   /** @inheritdoc */
-  def nextBackoff(attempts: Int, previousError: Throwable) =
-    policy.nextBackoff(attempts, previousError) + offset + (scaleInNanos * Random.nextDouble()).round.nanos
+  def nextBackoff(attempts: Int, previousOutcome: Any) =
+    policy.nextBackoff(attempts, previousOutcome) + offset + (scaleInNanos * Random.nextDouble()).round.nanos
     
 }

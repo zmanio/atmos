@@ -1,12 +1,18 @@
 # 2.1 (2015-04-??)
 
-Added support for Scala 2.11 in addition to Scala 2.10.
+ - Added support for Scala 2.11 in addition to Scala 2.10.
+ 
+ - Changed backoff policies from accepting `previousError: Throwable` to `previousOutcome: Any` in order to support the
+   addition of result classifiers. This is a breaking change for any implementations of `BackoffPolicy`, as well as any
+   uses of `atmos.backoff.SelectedBackoff` that use a value typed as `PartialFunction[Throwable => BackoffPolicy]`.
+   Direct usage of `selectedBackoff` in the DSL will continue to compile normally.
 
 # 2.0 (2014-09-12)
 
 Moved to the `io.zman` organization namespace and moved from the `atmos.retries` package to the `atmos` package.
 
-In addition to the namespace changes, much of the code was refactored to break up files that had begun to grow far too large. There were no notable functionality changes in this release.
+In addition to the namespace changes, much of the code was refactored to break up files that had begun to grow far too
+large. There were no notable functionality changes in this release.
 
 # 1.3 (2014-03-10)
 

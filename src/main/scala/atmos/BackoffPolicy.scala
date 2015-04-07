@@ -1,7 +1,7 @@
 /* BackoffPolicy.scala
  * 
  * Copyright (c) 2013-2014 linkedin.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,12 +25,12 @@ import scala.concurrent.duration.FiniteDuration
 trait BackoffPolicy {
 
   /**
-   * Computes the next backoff duration using the specified number of attempts and the error that caused this retry
-   * event to happen.
+   * Computes the next backoff duration using the specified number of attempts and the outcome that caused the
+   * operation to consider another attempt.
    *
    * @param attempts The number of attempts that have been made so far.
-   * @param previousError The error that caused this retry event to happen.
+   * @param previousOutcome The outcome that caused the operation to consider another attempt.
    */
-  def nextBackoff(attempts: Int, previousError: Throwable): FiniteDuration
+  def nextBackoff(attempts: Int, previousOutcome: Any): FiniteDuration
 
 }

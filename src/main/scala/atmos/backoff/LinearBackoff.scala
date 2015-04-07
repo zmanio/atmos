@@ -1,7 +1,7 @@
 /* LinearBackoff.scala
  * 
  * Copyright (c) 2013-2014 linkedin.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,6 @@ import scala.concurrent.duration.FiniteDuration
 case class LinearBackoff(initialBackoff: FiniteDuration = defaultBackoff) extends atmos.BackoffPolicy {
 
   /** @inheritdoc */
-  def nextBackoff(attempts: Int, previousError: Throwable) = initialBackoff * attempts
+  def nextBackoff(attempts: Int, previousOutcome: Any) = initialBackoff * attempts
 
 }

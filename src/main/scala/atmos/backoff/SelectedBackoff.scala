@@ -1,7 +1,7 @@
 /* SelectedBackoff.scala
  * 
  * Copyright (c) 2013-2014 linkedin.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,9 +24,9 @@ import atmos.BackoffPolicy
  *
  * @param f The function that maps from exceptions to backoff policies.
  */
-case class SelectedBackoff(f: Throwable => BackoffPolicy) extends BackoffPolicy {
+case class SelectedBackoff(f: Any => BackoffPolicy) extends BackoffPolicy {
 
   /** @inheritdoc */
-  def nextBackoff(attempts: Int, previousError: Throwable) = f(previousError).nextBackoff(attempts, previousError)
+  def nextBackoff(attempts: Int, previousOutcome: Any) = f(previousOutcome).nextBackoff(attempts, previousOutcome)
 
 }
