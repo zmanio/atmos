@@ -1,7 +1,7 @@
 /* IgnoreEvents.scala
  * 
  * Copyright (c) 2013-2014 linkedin.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 package atmos.monitor
 
 import scala.concurrent.duration.FiniteDuration
+import scala.util.Try
 
 /**
  * A monitor that ignores all events.
@@ -25,12 +26,12 @@ import scala.concurrent.duration.FiniteDuration
 case object IgnoreEvents extends atmos.EventMonitor {
   
   /** @inheritdoc */
-  def retrying (name: Option[String], thrown: Throwable, attempts: Int, backoff: FiniteDuration, silent: Boolean) = {}
+  def retrying (name: Option[String], outcome: Try[Any], attempts: Int, backoff: FiniteDuration, silent: Boolean) = ()
   
   /** @inheritdoc */
-  def interrupted(name: Option[String], thrown: Throwable, attempts: Int) = {}
+  def interrupted(name: Option[String], outcome: Try[Any], attempts: Int) = ()
   
   /** @inheritdoc */
-  def aborted(name: Option[String], thrown: Throwable, attempts: Int) = {}
+  def aborted(name: Option[String], outcome: Try[Any], attempts: Int) = ()
   
 }

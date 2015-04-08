@@ -18,6 +18,7 @@
 package atmos.monitor
 
 import scala.concurrent.duration._
+import scala.util.Failure
 import org.scalatest._
 
 /**
@@ -36,9 +37,9 @@ class FormatEventsSpec extends FlatSpec with Matchers {
       attempt <- 1 to 10
     } {
       for (backoff <- 1L to 100L map (100.millis * _))
-        checkMessage(name, thrown, attempt, Some(backoff), formatter.formatRetrying(name, thrown, attempt, backoff))
-      checkMessage(name, thrown, attempt, None, formatter.formatInterrupted(name, thrown, attempt))
-      checkMessage(name, thrown, attempt, None, formatter.formatAborted(name, thrown, attempt))
+        checkMessage(name, thrown, attempt, Some(backoff), formatter.formatRetrying(name, Failure(thrown), attempt, backoff))
+      checkMessage(name, thrown, attempt, None, formatter.formatInterrupted(name, Failure(thrown), attempt))
+      checkMessage(name, thrown, attempt, None, formatter.formatAborted(name, Failure(thrown), attempt))
     }
   }
 

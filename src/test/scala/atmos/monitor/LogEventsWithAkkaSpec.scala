@@ -1,7 +1,7 @@
 /* LogEventsWithAkkaSpec.scala
  * 
  * Copyright (c) 2013-2014 linkedin.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,12 +34,13 @@ class LogEventsWithAkkaSpec extends FlatSpec with Matchers with MockFactory {
     for {
       level <- Seq(Logging.ErrorLevel, Logging.WarningLevel, Logging.InfoLevel, Logging.DebugLevel)
       enabled <- Seq(true, false)
+      t <- Seq(Some(thrown), None)
     } {
       fixture.isEnabled.expects(level).returns(enabled).once
       monitor.isLoggable(level) shouldBe enabled
-      if (level == Logging.ErrorLevel) fixture.error.expects(thrown, "MSG").once
+      if (level == Logging.ErrorLevel && t.isDefined) fixture.error.expects(thrown, "MSG").once
       else fixture.log.expects(level, "MSG").once
-      monitor.log(level, "MSG", thrown)
+      monitor.log(level, "MSG", t)
     }
   }
 

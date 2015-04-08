@@ -1,7 +1,7 @@
 /* PrintEventsSpec.scala
  * 
  * Copyright (c) 2013-2014 linkedin.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 package atmos.monitor
 
 import scala.concurrent.duration._
+import scala.util.{ Failure, Success }
 import org.scalatest._
 import org.scalamock.scalatest.MockFactory
 
@@ -28,6 +29,7 @@ class PrintEventsSpec extends FlatSpec with Matchers with MockFactory {
   
   import PrintAction._
 
+  val result = "result"
   val thrown = new RuntimeException
 
   "PrintEvents" should "forward relevant event messages to the underlying target" in {
@@ -36,18 +38,19 @@ class PrintEventsSpec extends FlatSpec with Matchers with MockFactory {
       fixture = new PrintEventsFixture(action)
       name <- Seq(Some("name"), None)
       attempt <- 1 to 10
+      outcome <- Seq(Success(result), Failure(thrown))
     } {
       for {
         backoff <- 1L to 100L map (100.millis * _)
         silent <- Seq(true, false)
       } {
-        if (!silent) fixture.expectsOnce()
-        fixture.mock.retrying(name, thrown, attempt, backoff, silent)
+        if (!silent) fixture.expectsOnce(outcome isFailure)
+        fixture.mock.retrying(name, outcome, attempt, backoff, silent)
       }
-      fixture.expectsOnce()
-      fixture.mock.interrupted(name, thrown, attempt)
-      fixture.expectsOnce()
-      fixture.mock.aborted(name, thrown, attempt)
+      fixture.expectsOnce(outcome isFailure)
+      fixture.mock.interrupted(name, outcome, attempt)
+      fixture.expectsOnce(outcome isFailure)
+      fixture.mock.aborted(name, outcome, attempt)
     }
   }
 
@@ -62,12 +65,12 @@ class PrintEventsSpec extends FlatSpec with Matchers with MockFactory {
       def printMessageAndStackTrace(message: String, thrown: Throwable) =
         self.printMessageAndStackTrace(message, thrown)
     }
-    def expectsOnce() = action match {
-      case PrintMessageAndStackTrace =>
+    def expectsOnce(failure: Boolean) = action match {
+      case PrintMessageAndStackTrace if failure =>
         printMessageAndStackTrace.expects(*, thrown).once
-      case PrintMessage =>
-        printMessage.expects(*).once
       case PrintNothing =>
+      case _ =>
+        printMessage.expects(*).once
     }
   }
 

@@ -1,7 +1,7 @@
 /* LogEvents.scala
  * 
  * Copyright (c) 2013-2014 linkedin.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 package atmos.monitor
 
 import scala.concurrent.duration.FiniteDuration
+import scala.util.{ Failure, Success, Try }
 
 /**
  * Base type for event monitors that submit log entries for retry events.
@@ -37,26 +38,29 @@ trait LogEvents extends atmos.EventMonitor with FormatEvents {
   val abortedAction: LogAction[LevelType]
 
   /** @inheritdoc */
-  def retrying(name: Option[String], thrown: Throwable, attempts: Int, backoff: FiniteDuration, silent: Boolean) =
+  def retrying(name: Option[String], outcome: Try[Any], attempts: Int, backoff: FiniteDuration, silent: Boolean) =
     retryingAction match {
       case LogAction.LogAt(level) if !silent && isLoggable(level) =>
-        log(level, formatRetrying(name, thrown, attempts, backoff), thrown)
+        log(level, formatRetrying(name, outcome, attempts, backoff),
+          outcome match { case Success(_) => None case Failure(t) => Some(t) })
       case _ =>
     }
 
   /** @inheritdoc */
-  def interrupted(name: Option[String], thrown: Throwable, attempts: Int) =
+  def interrupted(name: Option[String], outcome: Try[Any], attempts: Int) =
     interruptedAction match {
       case LogAction.LogAt(level) if isLoggable(level) =>
-        log(level, formatInterrupted(name, thrown, attempts), thrown)
+        log(level, formatInterrupted(name, outcome, attempts),
+          outcome match { case Success(_) => None case Failure(t) => Some(t) })
       case _ =>
     }
 
   /** @inheritdoc */
-  def aborted(name: Option[String], thrown: Throwable, attempts: Int) =
+  def aborted(name: Option[String], outcome: Try[Any], attempts: Int) =
     abortedAction match {
       case LogAction.LogAt(level) if isLoggable(level) =>
-        log(level, formatAborted(name, thrown, attempts), thrown)
+        log(level, formatAborted(name, outcome, attempts),
+          outcome match { case Success(_) => None case Failure(t) => Some(t) })
       case _ =>
     }
 
@@ -64,6 +68,6 @@ trait LogEvents extends atmos.EventMonitor with FormatEvents {
   protected def isLoggable(level: LevelType): Boolean
 
   /** Logs information about an event to the underlying logger. */
-  protected def log(level: LevelType, message: String, thrown: Throwable): Unit
+  protected def log(level: LevelType, message: String, thrown: Option[Throwable]): Unit
 
 }

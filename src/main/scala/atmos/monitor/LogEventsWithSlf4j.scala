@@ -1,7 +1,7 @@
 /* LogEventsWithSlf4j.scala
  * 
  * Copyright (c) 2013-2014 linkedin.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,12 +49,21 @@ case class LogEventsWithSlf4j(
   }
 
   /** @inheritdoc */
-  def log(level: Slf4jLevel, message: String, thrown: Throwable) = level match {
-    case Slf4jLevel.Error => logger.error(message, thrown)
-    case Slf4jLevel.Warn => logger.warn(message, thrown)
-    case Slf4jLevel.Info => logger.info(message, thrown)
-    case Slf4jLevel.Debug => logger.debug(message, thrown)
-    case Slf4jLevel.Trace => logger.trace(message, thrown)
+  def log(level: Slf4jLevel, message: String, thrown: Option[Throwable]) = thrown match {
+    case Some(t) => level match {
+      case Slf4jLevel.Error => logger.error(message, t)
+      case Slf4jLevel.Warn => logger.warn(message, t)
+      case Slf4jLevel.Info => logger.info(message, t)
+      case Slf4jLevel.Debug => logger.debug(message, t)
+      case Slf4jLevel.Trace => logger.trace(message, t)
+    }
+    case None => level match {
+      case Slf4jLevel.Error => logger.error(message)
+      case Slf4jLevel.Warn => logger.warn(message)
+      case Slf4jLevel.Info => logger.info(message)
+      case Slf4jLevel.Debug => logger.debug(message)
+      case Slf4jLevel.Trace => logger.trace(message)
+    }
   }
 
 }

@@ -1,7 +1,7 @@
 /* PrintEvents.scala
  * 
  * Copyright (c) 2013-2014 linkedin.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 package atmos.monitor
 
 import scala.concurrent.duration.FiniteDuration
+import scala.util.{ Failure, Success, Try }
 
 /**
  * Base type for event monitors that print information about retry events as text.
@@ -36,24 +37,25 @@ trait PrintEvents extends atmos.EventMonitor with FormatEvents {
   val abortedAction: PrintAction
 
   /** @inheritdoc */
-  def retrying(name: Option[String], thrown: Throwable, attempts: Int, backoff: FiniteDuration, silent: Boolean) =
+  def retrying(name: Option[String], outcome: Try[Any], attempts: Int, backoff: FiniteDuration, silent: Boolean) =
     if (!silent && retryingAction != PrintNothing)
-      printEvent(formatRetrying(name, thrown, attempts, backoff), thrown, retryingAction == PrintMessageAndStackTrace)
+      printEvent(formatRetrying(name, outcome, attempts, backoff), outcome, retryingAction == PrintMessageAndStackTrace)
 
   /** @inheritdoc */
-  def interrupted(name: Option[String], thrown: Throwable, attempts: Int) =
+  def interrupted(name: Option[String], outcome: Try[Any], attempts: Int) =
     if (interruptedAction != PrintNothing)
-      printEvent(formatInterrupted(name, thrown, attempts), thrown, interruptedAction == PrintMessageAndStackTrace)
+      printEvent(formatInterrupted(name, outcome, attempts), outcome, interruptedAction == PrintMessageAndStackTrace)
 
   /** @inheritdoc */
-  def aborted(name: Option[String], thrown: Throwable, attempts: Int) =
+  def aborted(name: Option[String], outcome: Try[Any], attempts: Int) =
     if (abortedAction != PrintNothing)
-      printEvent(formatAborted(name, thrown, attempts), thrown, abortedAction == PrintMessageAndStackTrace)
+      printEvent(formatAborted(name, outcome, attempts), outcome, abortedAction == PrintMessageAndStackTrace)
 
   /** Utility method that handles locking on the target object when printing both a message and a stack trace. */
-  private def printEvent(message: String, thrown: Throwable, printStackTrace: Boolean): Unit =
-    if (printStackTrace) printMessageAndStackTrace(message, thrown)
-    else printMessage(message)
+  private def printEvent(message: String, outcome: Try[Any], printStackTrace: Boolean): Unit = outcome match {
+    case Failure(t) if printStackTrace => printMessageAndStackTrace(message, t)
+    case _ => printMessage(message)
+  }
 
   /** Prints a message the to underlying target object. */
   protected def printMessage(message: String): Unit

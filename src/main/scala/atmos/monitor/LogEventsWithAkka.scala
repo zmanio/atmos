@@ -1,7 +1,7 @@
 /* LogEventsWithAkka.scala
  * 
  * Copyright (c) 2013-2014 linkedin.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,9 +41,12 @@ case class LogEventsWithAkka(
   def isLoggable(level: Logging.LogLevel) = adapter.isEnabled(level)
 
   /** @inheritdoc */
-  def log(level: Logging.LogLevel, msg: String, thrown: Throwable) = level match {
-    case Logging.ErrorLevel => adapter.error(thrown, msg)
-    case level => adapter.log(level, msg)
+  def log(level: Logging.LogLevel, msg: String, thrown: Option[Throwable]) = thrown match {
+    case Some(t) => level match {
+      case Logging.ErrorLevel => adapter.error(t, msg)
+      case level => adapter.log(level, msg)
+    }
+    case None => adapter.log(level, msg)
   }
 
 }

@@ -1,7 +1,7 @@
 /* RetryPolicySpec.scala
  * 
  * Copyright (c) 2013-2014 linkedin.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,7 +47,7 @@ class RetryPolicySpec extends FlatSpec with Matchers with MockFactory {
       case _: TestException => ErrorClassification.SilentlyRecoverable
     })
     val e = new TestException
-    (mockMonitor.retrying _).expects(None, e, 1, *, true)
+    (mockMonitor.retrying(_: Option[String], _: Throwable, _: Int, _: FiniteDuration, _: Boolean)).expects(None, e, 1, *, true)
     var counter = 0
     policy.retry() {
       counter += 1
@@ -120,8 +120,8 @@ class RetryPolicySpec extends FlatSpec with Matchers with MockFactory {
       case _: TestException => ErrorClassification.SilentlyRecoverable
     })
     val e = new TestException
-    (mockMonitor.retrying _).expects(None, e, 1, *, true)
-    (mockMonitor.retrying _).expects(None, e, 2, *, true)
+    (mockMonitor.retrying(_: Option[String], _: Throwable, _: Int, _: FiniteDuration, _: Boolean)).expects(None, e, 1, *, true)
+    (mockMonitor.retrying(_: Option[String], _: Throwable, _: Int, _: FiniteDuration, _: Boolean)).expects(None, e, 2, *, true)
     @volatile var counter = 0
     val future = policy.retryAsync() {
       if (counter == 0) {

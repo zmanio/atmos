@@ -1,7 +1,7 @@
 /* LogEventsWithSlf4jSpec.scala
  * 
  * Copyright (c) 2013-2014 linkedin.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,11 +36,12 @@ class LogEventsWithSlf4jSpec extends FlatSpec with Matchers with MockFactory {
       fixture = new LoggerFixture(level)
       monitor = LogEventsWithSlf4j(fixture.logger)
       enabled <- Seq(true, false)
+      t <- Seq(Some(thrown), None)
     } {
       fixture.expectIsEnabledOnce(enabled)
       monitor.isLoggable(level) shouldBe enabled
-      fixture.expectLogOnce("MSG", thrown)
-      monitor.log(level, "MSG", thrown)
+      fixture.expectLogOnce("MSG", t)
+      monitor.log(level, "MSG", t)
     }
   }
 
@@ -53,17 +54,31 @@ class LogEventsWithSlf4jSpec extends FlatSpec with Matchers with MockFactory {
       case Slf4jLevel.Debug => (logger.isDebugEnabled _).expects().returns(enabled).once
       case Slf4jLevel.Trace => (logger.isTraceEnabled _).expects().returns(enabled).once
     }
-    def expectLogOnce(message: String, thrown: Throwable) = level match {
-      case Slf4jLevel.Error => (logger.error _).expects(message, thrown).once
-      case Slf4jLevel.Warn => (logger.warn _).expects(message, thrown).once
-      case Slf4jLevel.Info => (logger.info _).expects(message, thrown).once
-      case Slf4jLevel.Debug => (logger.debug _).expects(message, thrown).once
-      case Slf4jLevel.Trace => (logger.trace _).expects(message, thrown).once
+    def expectLogOnce(message: String, thrown: Option[Throwable]) = thrown match {
+      case Some(t) => level match {
+        case Slf4jLevel.Error => (logger.error(_: String, _: Throwable)).expects(message, t).once
+        case Slf4jLevel.Warn => (logger.warn(_: String, _: Throwable)).expects(message, t).once
+        case Slf4jLevel.Info => (logger.info(_: String, _: Throwable)).expects(message, t).once
+        case Slf4jLevel.Debug => (logger.debug(_: String, _: Throwable)).expects(message, t).once
+        case Slf4jLevel.Trace => (logger.trace(_: String, _: Throwable)).expects(message, t).once
+      }
+      case None => level match {
+        case Slf4jLevel.Error => (logger.error(_: String)).expects(message).once
+        case Slf4jLevel.Warn => (logger.warn(_: String)).expects(message).once
+        case Slf4jLevel.Info => (logger.info(_: String)).expects(message).once
+        case Slf4jLevel.Debug => (logger.debug(_: String)).expects(message).once
+        case Slf4jLevel.Trace => (logger.trace(_: String)).expects(message).once
+      }
     }
   }
 
   // A trait that presents a narrow view of Slf4j loggers to help ScalaMock resolve the correct overloaded method.
   trait MockLogger extends Logger {
+    def trace(s: String): Unit
+    def debug(s: String): Unit
+    def info(s: String): Unit
+    def warn(s: String): Unit
+    def error(s: String): Unit
     def trace(s: String, t: Throwable): Unit
     def debug(s: String, t: Throwable): Unit
     def info(s: String, t: Throwable): Unit

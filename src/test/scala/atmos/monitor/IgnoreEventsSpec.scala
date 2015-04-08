@@ -1,7 +1,7 @@
 /* IgnoreEventsSpec.scala
  * 
  * Copyright (c) 2013-2014 linkedin.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 package atmos.monitor
 
 import scala.concurrent.duration._
+import scala.util.{ Failure, Success }
 import org.scalatest._
 
 /**
@@ -25,6 +26,7 @@ import org.scalatest._
  */
 class IgnoreEventsSpec extends FlatSpec with Matchers {
 
+  val result = "result"
   val thrown = new RuntimeException
 
   "IgnoreEvents" should "do nothing in response to retry events" in {
@@ -32,13 +34,14 @@ class IgnoreEventsSpec extends FlatSpec with Matchers {
     for {
       name <- Seq(Some("name"), None)
       attempt <- 1 to 10
+      outcome <- Seq(Success(result), Failure(thrown))
     } {
       for {
-        backoff <- 1L to 100L map (100.millis * _)
+        backoff <- 1L to 100L map { 100.millis * _ }
         silent <- Seq(true, false)
-      } IgnoreEvents.retrying(name, thrown, attempt, backoff, silent)
-      IgnoreEvents.interrupted(name, thrown, attempt)
-      IgnoreEvents.aborted(name, thrown, attempt)
+      } IgnoreEvents.retrying(name, outcome, attempt, backoff, silent)
+      IgnoreEvents.interrupted(name, outcome, attempt)
+      IgnoreEvents.aborted(name, outcome, attempt)
     }
   }
 
