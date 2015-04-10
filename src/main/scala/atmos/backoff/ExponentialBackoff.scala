@@ -18,6 +18,7 @@
 package atmos.backoff
 
 import scala.concurrent.duration.FiniteDuration
+import scala.util.Try
 
 /**
  * A policy that doubles the backoff duration after every attempt.
@@ -27,6 +28,6 @@ import scala.concurrent.duration.FiniteDuration
 case class ExponentialBackoff(initialBackoff: FiniteDuration = defaultBackoff) extends atmos.BackoffPolicy {
 
   /** @inheritdoc */
-  def nextBackoff(attempts: Int, previousOutcome: Any) = initialBackoff * (1L << attempts - 1)
+  def nextBackoff(attempts: Int, outcome: Try[Any]) = initialBackoff * (1L << attempts - 1)
 
 }

@@ -18,6 +18,7 @@
 package atmos.backoff
 
 import scala.concurrent.duration.FiniteDuration
+import scala.util.Try
 
 /**
  * A policy that uses the same backoff after every retry.
@@ -27,6 +28,6 @@ import scala.concurrent.duration.FiniteDuration
 case class ConstantBackoff(backoff: FiniteDuration = defaultBackoff) extends atmos.BackoffPolicy {
   
   /** @inheritdoc */
-  def nextBackoff(attempts: Int, previousOutcome: Any) = backoff
+  def nextBackoff(attempts: Int, outcome: Try[Any]) = backoff
   
 }

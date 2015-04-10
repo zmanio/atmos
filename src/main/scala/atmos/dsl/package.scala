@@ -1,7 +1,7 @@
 /* package.scala
  * 
  * Copyright (c) 2013-2014 linkedin.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import java.io.{ PrintStream, PrintWriter }
 import scala.concurrent.{ ExecutionContext, Future }
 import scala.concurrent.duration._
 import scala.language.implicitConversions
+import scala.util.{ Failure, Try }
 import rummage.Timer
 
 /**
@@ -154,7 +155,7 @@ package object dsl {
    *
    * @param f The function that maps from outcomes to backoff policies.
    */
-  def selectedBackoff(f: Any => BackoffPolicy): BackoffPolicy = backoff.SelectedBackoff(f)
+  def selectedBackoff(f: Try[Any] => BackoffPolicy): BackoffPolicy = backoff.SelectedBackoff(f)
 
   /**
    * Provides an implicit extension of the backoff policy interface.

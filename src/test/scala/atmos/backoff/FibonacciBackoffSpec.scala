@@ -1,7 +1,7 @@
 /* FibonacciBackoffSpec.scala
  * 
  * Copyright (c) 2013-2014 linkedin.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 package atmos.backoff
 
 import scala.concurrent.duration._
+import scala.util.{ Failure, Success }
 import org.scalatest._
 
 /**
@@ -25,14 +26,16 @@ import org.scalatest._
  */
 class FibonacciBackoffSpec extends FlatSpec with Matchers {
 
+  val result = "result"
   val thrown = new RuntimeException
 
   "FibonacciBackoff" should "scale its backoff by repeatedly multiplying with an approximation of the golden ratio" in {
     for {
       backoff <- 1L to 100L map (100.millis * _)
       policy = FibonacciBackoff(backoff)
+      outcome <- Seq(Success(result), Failure(thrown))
       attempt <- 1 to 10
-    } policy.nextBackoff(attempt, thrown) shouldEqual scale(backoff.toNanos, attempt).round.nanos
+    } policy.nextBackoff(attempt, outcome) shouldEqual scale(backoff.toNanos, attempt).round.nanos
   }
   
   /** Scales a number by repeatedly multiplying with an approximation of the golden ratio. */

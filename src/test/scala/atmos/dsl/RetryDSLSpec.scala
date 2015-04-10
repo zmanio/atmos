@@ -22,6 +22,7 @@ package atmos.dsl
 import java.io.{ PrintWriter, StringWriter }
 import java.util.logging.{ Logger, Level }
 import scala.concurrent.duration._
+import scala.util.Try
 import akka.event.{ Logging, LoggingAdapter }
 import org.slf4j.LoggerFactory
 import org.scalatest._
@@ -58,7 +59,7 @@ class RetryDSLSpec extends FlatSpec with Matchers {
     retrying using exponentialBackoff(1.second) shouldEqual RetryPolicy(backoff = ExponentialBackoff(1.second))
     retrying using fibonacciBackoff shouldEqual RetryPolicy(backoff = FibonacciBackoff())
     retrying using fibonacciBackoff(1.second) shouldEqual RetryPolicy(backoff = FibonacciBackoff(1.second))
-    val selector: Any => BackoffPolicy = { case _ => LinearBackoff() }
+    val selector: Try[Any] => BackoffPolicy = { case _ => LinearBackoff() }
     retrying using selectedBackoff(selector) shouldEqual RetryPolicy(backoff = SelectedBackoff(selector))
     val zero = Duration.Zero
     val min = -10.millis

@@ -18,6 +18,7 @@
 package atmos.backoff
 
 import scala.concurrent.duration._
+import scala.util.Try
 
 /**
  * A policy that increases the initial backoff duration by repeatedly multiplying by an approximation of the golden
@@ -28,7 +29,7 @@ import scala.concurrent.duration._
 case class FibonacciBackoff(initialBackoff: FiniteDuration = defaultBackoff) extends atmos.BackoffPolicy {
 
   /** @inheritdoc */
-  def nextBackoff(attempts: Int, previousOutcome: Any) =
+  def nextBackoff(attempts: Int, outcome: Try[Any]) =
     (initialBackoff.toNanos * math.pow(8.0 / 5.0, attempts - 1.0)).round.nanos
 
 }

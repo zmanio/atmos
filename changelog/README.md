@@ -2,10 +2,10 @@
 
  - Added support for Scala 2.11 in addition to Scala 2.10.
  
- - Changed backoff policies from accepting `previousError: Throwable` to `previousOutcome: Any` in order to support the
+ - Changed backoff policies from accepting `previousError: Throwable` to `outcome: Try[Any]` in order to support the
    addition of result classifiers. This is a breaking change for any implementations of `BackoffPolicy`, as well as any
-   uses of `atmos.backoff.SelectedBackoff` that use a value typed as `PartialFunction[Throwable => BackoffPolicy]`.
-   Direct usage of `selectedBackoff` in the DSL will continue to compile normally.
+   uses of `atmos.backoff.SelectedBackoff` or the DSL method `selectedBackoff`. Uses of other backoff implementations
+   or other backoff elements of the DSL will continue to compile normally.
 
 # 2.0 (2014-09-12)
 

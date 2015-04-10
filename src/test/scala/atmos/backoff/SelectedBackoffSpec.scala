@@ -1,7 +1,7 @@
 /* SelectedBackoffSpec.scala
  * 
  * Copyright (c) 2013-2014 linkedin.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 package atmos.backoff
 
 import scala.concurrent.duration._
+import scala.util.{ Failure, Success }
 import org.scalatest._
 
 /**
@@ -25,18 +26,31 @@ import org.scalatest._
  */
 class SelectedBackoffSpec extends FlatSpec with Matchers {
 
+  val normalResult = "normal"
+  val specialResult = "special"
   val normalThrown = new RuntimeException
   val specialThrown = new RuntimeException
 
-  "SelectedBackoff" should "select another backoff policy to used based on the most recent exception" in {
+  "SelectedBackoff" should "select another backoff policy to used based on the most recent outcome" in {
     for {
       backoff <- 1L to 100L map (100.millis * _)
-      normalPolicy = ConstantBackoff(backoff)
-      specialPolicy = ConstantBackoff(backoff)
-      policy = SelectedBackoff { case `normalThrown` => normalPolicy case `specialThrown` => specialPolicy }
-      (thrown, basePolicy) <- Seq(normalThrown -> normalPolicy, specialThrown -> specialPolicy)
+      rNormalPolicy = ConstantBackoff(backoff)
+      rSpecialPolicy = LinearBackoff(backoff)
+      tNormalPolicy = ExponentialBackoff(backoff)
+      tSpecialPolicy = FibonacciBackoff(backoff)
+      policy = SelectedBackoff {
+        case Success(r) if r == normalResult => rNormalPolicy
+        case Success(r) if r == specialResult => rSpecialPolicy
+        case Failure(t) if t == normalThrown => tNormalPolicy
+        case Failure(t) if t == specialThrown => tSpecialPolicy
+      }
+      (outcome, expectedPolicy) <-Seq(
+          Success(normalResult) -> rNormalPolicy,
+          Success(specialResult) -> rSpecialPolicy,
+          Failure(normalThrown) -> tNormalPolicy,
+          Failure(specialThrown) -> tSpecialPolicy)
       attempt <- 1 to 10
-    } policy.nextBackoff(attempt, thrown) shouldEqual basePolicy.nextBackoff(attempt, thrown)
+    } policy.nextBackoff(attempt, outcome) shouldEqual expectedPolicy.nextBackoff(attempt, outcome)
   }
 
 }

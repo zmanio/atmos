@@ -20,6 +20,7 @@ package atmos.backoff
 import scala.concurrent.duration._
 import scala.util.Random
 import atmos.BackoffPolicy
+import scala.util.Try
 
 /**
  * A policy that randomizes the result of another policy by adding a random duration in the specified range.
@@ -36,7 +37,7 @@ case class RandomizedBackoff(policy: BackoffPolicy, range: (FiniteDuration, Fini
   }
   
   /** @inheritdoc */
-  def nextBackoff(attempts: Int, previousOutcome: Any) =
-    policy.nextBackoff(attempts, previousOutcome) + offset + (scaleInNanos * Random.nextDouble()).round.nanos
+  def nextBackoff(attempts: Int, outcome: Try[Any]) =
+    policy.nextBackoff(attempts, outcome) + offset + (scaleInNanos * Random.nextDouble()).round.nanos
     
 }
