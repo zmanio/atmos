@@ -19,6 +19,7 @@ package atmos
 
 import scala.concurrent.{ ExecutionContext, Future, Await }
 import scala.concurrent.duration._
+import scala.util.{ Failure, Success, Try }
 import org.scalatest._
 import org.scalamock.scalatest.MockFactory
 
@@ -47,7 +48,7 @@ class RetryPolicySpec extends FlatSpec with Matchers with MockFactory {
       case _: TestException => ErrorClassification.SilentlyRecoverable
     })
     val e = new TestException
-    (mockMonitor.retrying(_: Option[String], _: Throwable, _: Int, _: FiniteDuration, _: Boolean)).expects(None, e, 1, *, true)
+    (mockMonitor.retrying(_: Option[String], _: Try[Any], _: Int, _: FiniteDuration, _: Boolean)).expects(None, Failure(e), 1, *, true)
     var counter = 0
     policy.retry() {
       counter += 1
@@ -96,6 +97,18 @@ class RetryPolicySpec extends FlatSpec with Matchers with MockFactory {
     (System.currentTimeMillis - startAt).millis should be >= 1.second
   }
 
+  it should "retry when unacceptable results are returned" in {
+    val policy = RetryPolicy(LimitAttempts(2), results = ResultClassifier {
+      case i: Int if i < 2 => ResultClassification.Unacceptable()
+    })
+    var counter = 0
+    policy.retry(None) {
+      counter += 1
+      counter
+    } shouldEqual 2
+    counter shouldEqual 2
+  }
+
   it should "asynchronously retry until complete" in {
     val policy = RetryPolicy(LimitAttempts(3))
     @volatile var counter = 0
@@ -120,8 +133,8 @@ class RetryPolicySpec extends FlatSpec with Matchers with MockFactory {
       case _: TestException => ErrorClassification.SilentlyRecoverable
     })
     val e = new TestException
-    (mockMonitor.retrying(_: Option[String], _: Throwable, _: Int, _: FiniteDuration, _: Boolean)).expects(None, e, 1, *, true)
-    (mockMonitor.retrying(_: Option[String], _: Throwable, _: Int, _: FiniteDuration, _: Boolean)).expects(None, e, 2, *, true)
+    (mockMonitor.retrying(_: Option[String], _: Try[Any], _: Int, _: FiniteDuration, _: Boolean)).expects(None, Failure(e), 1, *, true)
+    (mockMonitor.retrying(_: Option[String], _: Try[Any], _: Int, _: FiniteDuration, _: Boolean)).expects(None, Failure(e), 2, *, true)
     @volatile var counter = 0
     val future = policy.retryAsync() {
       if (counter == 0) {

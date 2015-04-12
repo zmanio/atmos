@@ -36,6 +36,7 @@ class RetryDSLSpec extends FlatSpec with Matchers {
   import atmos.backoff._
   import atmos.monitor._
   import atmos.termination._
+  import ResultClassification._
   import ErrorClassification._
 
   "RetryDSL" should "create retry policies by describing termination policies" in {
@@ -102,14 +103,25 @@ class RetryDSLSpec extends FlatSpec with Matchers {
     }
   }
 
+  it should "configure retry policies with result classifiers" in {
+    acceptResult shouldEqual Acceptable
+    (rejectResult: ResultClassification) shouldEqual Unacceptable(ResultClassification.defaultUnacceptableStatus)
+    rejectResult() shouldEqual Unacceptable(ResultClassification.defaultUnacceptableStatus)
+    rejectResult { keepRetryingSilently } shouldEqual Unacceptable(SilentlyRecoverable)
+    val errors = ErrorClassifier {
+      case _: RuntimeException => stopRetrying
+    }
+    retrying onError errors shouldEqual RetryPolicy(errors = errors)
+  }
+
   it should "configure retry policies with error classifiers" in {
     stopRetrying shouldEqual Fatal
     keepRetrying shouldEqual Recoverable
     keepRetryingSilently shouldEqual SilentlyRecoverable
-    val classifier = ErrorClassifier {
+    val errors = ErrorClassifier {
       case _: RuntimeException => stopRetrying
     }
-    retrying onError classifier shouldEqual RetryPolicy(classifier = classifier)
+    retrying onError errors shouldEqual RetryPolicy(errors = errors)
   }
 
 }

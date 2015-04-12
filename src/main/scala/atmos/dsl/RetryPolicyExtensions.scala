@@ -46,10 +46,17 @@ case class RetryPolicyExtensions(self: RetryPolicy) extends AnyVal {
   def monitorWith(monitor: EventMonitor) = self.copy(monitor = monitor)
 
   /**
+   * Creates a new retry policy by replacing the underlying policy's result classifier.
+   *
+   * @param results The result classifier to use.
+   */
+  def onResult(results: ResultClassifier) = self.copy(results = results)
+
+  /**
    * Creates a new retry policy by replacing the underlying policy's error classifier.
    *
-   * @param classifier The error classifier policy to use.
+   * @param errors The error classifier to use.
    */
-  def onError(classifier: ErrorClassifier) = self.copy(classifier = classifier)
+  def onError(errors: ErrorClassifier) = self.copy(errors = errors)
 
 }

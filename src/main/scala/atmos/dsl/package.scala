@@ -45,7 +45,22 @@ package object dsl {
   /** An alias to the `BackoffPolicy` type. */
   type BackoffPolicy = atmos.BackoffPolicy
 
-  /** An alias to the `RetryPolicy` type. */
+  /** An alias to the `EventMonitor` type. */
+  type EventMonitor = atmos.EventMonitor
+
+  /** An alias to the `ResultClassification` type. */
+  type ResultClassification = atmos.ResultClassification
+
+  /** An alias to the `ResultClassification` companion. */
+  val ResultClassification = atmos.ResultClassification
+
+  /** An alias to the `ResultClassifier` type. */
+  type ResultClassifier = atmos.ResultClassifier
+
+  /** An alias to the `ResultClassifier` companion. */
+  val ResultClassifier = atmos.ResultClassifier
+
+  /** An alias to the `ErrorClassification` type. */
   type ErrorClassification = atmos.ErrorClassification
 
   /** An alias to the `ErrorClassification` companion. */
@@ -56,9 +71,6 @@ package object dsl {
 
   /** An alias to the `ErrorClassifier` companion. */
   val ErrorClassifier = atmos.ErrorClassifier
-
-  /** An alias to the `EventMonitor` type. */
-  type EventMonitor = atmos.EventMonitor
 
   //
   // Retry policy factories and extensions.
@@ -273,7 +285,17 @@ package object dsl {
     LogEventsWithJavaExtensions(policy)
 
   //
-  // Classification factories.
+  // Result classification factories.
+  //
+
+  /** Returns the `Acceptable` result classification. */
+  def acceptResult: ResultClassification = ResultClassification.Acceptable
+
+  /** Returns a factory for an `Unacceptable` result classification with an optional status. */
+  def rejectResult: ResultRejection = ResultRejection
+
+  //
+  // Error classification factories.
   //
 
   /** Returns the `Fatal` error classification. */

@@ -1,8 +1,10 @@
 A [Scala](http://www.scala-lang.org/) library for describing retry-on-failure behavior using a concise, literate [embedded DSL](http://c2.com/cgi/wiki?EmbeddedDomainSpecificLanguage).
 
-There are places in most modern software where small, intermittent errors can occur and disrupt the normal flow of execution. Traditionally, a *retry loop* is used in these situations, with constraints on the number of attempts that can be made and how certain errors are handled. A naive retry loop that would make up to three attempts, waiting 100 milliseconds between each attempt, could look like this:
+There are places in most modern software where small, intermittent errors can occur and disrupt the normal flow of execution. Traditionally, a *retry loop* is used in these situations, with constraints on the number of attempts that can be made and how certain results and errors are handled. A naive retry loop that would make up to three attempts, waiting 100 milliseconds between each attempt and accepting only non-empty results could look like this:
 
 ```scala
+import scala.concurrent.duration._
+
 def doSomethingUntilItWorks(): String = {
   val maxAttempts = 3
   val backoff = 100 millis
@@ -10,7 +12,14 @@ def doSomethingUntilItWorks(): String = {
   while (true) {
     attempts += 1
     try {
-      return doSomethingThatMightFail()
+      val result = doSomethingThatMightFail()
+      if (result nonEmpty) {
+        return result
+      } else {
+        println("Retrying after empty result")
+        Thread.sleep(backoff toMillis)
+      }
+      return 
     } catch {
       case e: SomeImportantException =>
         println("Interrupted by important exception: " + e.getMessage)
@@ -29,13 +38,15 @@ def doSomethingUntilItWorks(): String = {
   }
   sys.error("unreachable")
 }
+
+def doSomethingThatMightFail(): String
 ```
 
 Retry loops like the one above have a number of problems:
 
  - They obscure the actual work that the program is trying to do (the lone call to `doSomethingThatMightFail()` above).
 
- - They are convoluted and tend to contain lots of mutable state, making them hard to reason about and resistant to change.
+ - They are convoluted and tend to contain mutable state, making them hard to reason about and resistant to change.
 
  - They are difficult and tedious to test, possibly leading to undiscovered bugs in the code base.
 
@@ -43,15 +54,20 @@ With the atmos library, a *retry policy* can be described using a minimalistic D
 
 ```scala
 import atmos.dsl._
+import scala.concurrent.duration._
 
-implicit val retryPolicy = retryFor { 3 attempts } using constantBackoff { 100 millis } monitorWith System.out onError {
+implicit val retryPolicy = retryFor { 3 attempts } using constantBackoff { 100 millis } monitorWith System.out onResult {
+  case str: String if str isEmpty => rejectResult
+} onError {
   case _: SomeImportantException => stopRetrying
 }
+
+def doSomethingThatMightFail(): String
 
 val result = retry() { doSomethingThatMightFail() }
 ```
 
-In addition to making retry behavior easy to understand, atmos provides the ability to customize the strategies that control [loop termination](#termination-policies), [backoff calculation](#backoff-policies), [error handling](#error-classifiers) and [event monitoring](#event-monitors), as well as supporting both [synchronous](#retrying-synchronously) and [asynchronous](#retrying-asynchronously) styles of programming. See the [user guide](#using-the-library) below for information about the wide array of customization options this library supports.
+In addition to making retry behavior easy to understand, atmos provides the ability to customize the strategies that control [loop termination](#termination-policies), [backoff calculation](#backoff-policies), [event monitoring](#event-monitors), [result acceptance](#result-classifiers), [error handling](#error-classifiers), as well as supporting both [synchronous](#retrying-synchronously) and [asynchronous](#retrying-asynchronously) styles of programming. See the [user guide](#using-the-library) below for information about the wide array of customization options this library supports.
 
 [code](https://github.com/zmanio/atmos) - [licence](https://github.com/zmanio/atmos/blob/master/LICENSE) - [api](http://zman.io/atmos/api/#atmos.package) - [history](changelog/)
 
@@ -63,8 +79,9 @@ In addition to making retry behavior easy to understand, atmos provides the abil
  - [Using the Library](#using-the-library)
    - [Termination Policies](#termination-policies)
    - [Backoff Policies](#backoff-policies)
-   - [Error Classifiers](#error-classifiers)
    - [Event Monitors](#event-monitors)
+   - [Result Classifiers](#result-classifiers)
+   - [Error Classifiers](#error-classifiers)
    - [Retrying Synchronously](#retrying-synchronously)
    - [Retrying Asynchronously](#retrying-asynchronously)
    - [Retrying with Actors](#retrying-with-actors)
@@ -92,40 +109,47 @@ For other build systems or to download the jar see [atmos in the central reposit
 
 ## Using the Library
 
-The atmos library divides the definition of a retry policy into four parts:
+The atmos library divides the definition of a retry policy into five parts:
 
  - [Termination policies](#termination-policies) enforce an upper bound on the number of retry attempts.
  - [Backoff policies](#backoff-policies) calculate the delay that is inserted between retry attempts.
- - [Error classifiers](#error-classifiers) determine if an error prevents further attempts.
  - [Event monitors](#event-monitors) are notified of events that occur during a retry operation.
+ - [Result classifiers](#result-classifiers) determine if a result warrants further attempts.
+ - [Error classifiers](#error-classifiers) determine if an error prevents further attempts.
 
-Using the naive retry loop from above, we can classify its behavior according to the four elements of a retry policy:
+Using the naive retry loop from above, we can classify its behavior according to the five elements of a retry policy:
 
 
 ```scala
 while (true) {
-  attempts += 1                        // Termination policy
+  attempts += 1                                // Termination policy
   try {
-    return doSomethingThatMightFail()
+      val result = doSomethingThatMightFail()
+      if (result.length > 0) {                 // Result classifier
+        return result
+      } else {
+        println("Retrying after empty result") // Event monitor
+        Thread.sleep(backoff toMillis)         // Backoff policy
+      }
   } catch {
-    case e: SomeImportantException =>  // Error classifier
-      println("interrupted")           // Event monitor
+    case e: SomeImportantException =>          // Error classifier
+      println("interrupted")                   // Event monitor
       throw e
-    case NonFatal(e) =>                // Error classifier
-      if (attempts >= maxAttempts) {   // Termination policy
-        println("aborting")            // Event monitor
+    case NonFatal(e) =>                        // Error classifier
+      if (attempts >= maxAttempts) {           // Termination policy
+        println("aborting")                    // Event monitor
         throw e
       }
-      println("retrying")              // Event monitor
-      Thread.sleep(backoff toMillis)   // Backoff policy
+      println("retrying")                      // Event monitor
+      Thread.sleep(backoff toMillis)           // Backoff policy
     case e =>
-      println("interrupted")           // Event monitor
+      println("interrupted")                   // Event monitor
       throw e
   }
 }
 ```
 
-Atmos decomposes the traditional retry loop into these four, independent strategies and allows you to easily recombine them in whatever fashion you see fit. A reconstructed retry policy is encapsulated in the [`atmos.RetryPolicy`](http://zman.io/atmos/api/#atmos.RetryPolicy) class.
+Atmos decomposes the traditional retry loop into these five, independent strategies and allows you to easily recombine them in whatever fashion you see fit. A reconstructed retry policy is encapsulated in the [`atmos.RetryPolicy`](http://zman.io/atmos/api/#atmos.RetryPolicy) class.
 
 <a name="termination-policies"></a>
 
@@ -243,29 +267,6 @@ implicit val retryPolicy = retryForever using { constantBackoff { 1 second } ran
 val otherRetryPolicy = retryForever using { linearBackoff { 5 minutes } randomized -30.seconds -> 30.seconds }
 ```
 
-<a name="error-classifiers"></a>
-
-### Error Classifiers
-
-Errors that occur during a retry attempt can be classified as `Fatal`, `Recoverable` or `SilentlyRecoverable`. `Fatal` errors will interrupt a retry operation and cause it to immediately fail. `Recoverable` errors will be logged and suppressed so that the retry operation can continue. `SilentlyRecoverable` errors will be suppressed without being logged so that the retry operation can continue. Error classifications are defined in [`atmos.ErrorClassification`](http://zman.io/atmos/api/#atmos.ErrorClassification).
-
-Error classifiers are simply implementations of `PartialFunction` that map instances of `Throwable` to the desired error classification. In situations where a classifier is not defined for a particular error, `scala.util.control.NonFatal` is used to classify errors as `Fatal` or `Recoverable`. The appropriate partial function type is defined as [`atmos.ErrorClassifier`](http://zman.io/atmos/api/#atmos.ErrorClassifier) and includes a factory in the companion object.
-
-Error classifiers are configured by calling `onError` on an existing retry policy:
-
-```scala
-import atmos.dsl._
-
-// Stop retrying after any runtime exception.
-implicit val retryPolicy = retryForever onError { case _: RuntimeException => stopRetrying }
-
-// Don't log any runtime exceptions except illegal argument exceptions.
-val otherRetryPolicy = retryForever onError {
-  case _: IllegalArgumentException => keepRetrying
-  case _: RuntimeException => keepRetryingSilently
-}
-```
-
 <a name="event-monitors"></a>
 
 ### Event Monitors
@@ -320,6 +321,52 @@ import akka.event.Logging
 import AkkaSupport._
 val akkaRetryPolicy = retryForever monitorWith {
   Logging(context.system, this) onRetrying logNothing onInterrupted logWarning onAborted logError
+}
+```
+
+<a name="result-classifiers"></a>
+
+### Result Classifiers
+
+Results that occur during a retry attempt can be classified as `Acceptable` or `Unaccptable`. `Acceptable` results will be immediately returned by the retry operation. `Unaccptable` results will be logged or suppressed so that the retry operation can continue if the status associated with the result. Result classifications are defined in [`atmos.ResultClassification`](http://zman.io/atmos/api/#atmos.ResultClassification).
+
+Result classifiers are simply implementations of `PartialFunction` that map instances of `Any` to the desired result classification. In situations where a classifier is not defined for a particular result, any result is considered `Acceptable`. The appropriate partial function type is defined as [`atmos.ResultClassifier`](http://zman.io/atmos/api/#atmos.ResultClassifier) and includes a factory in the companion object.
+
+Result classifiers are configured by calling `onResult` on an existing retry policy:
+
+```scala
+import atmos.dsl._
+
+// Do not accept any empty results.
+implicit val retryPolicy = retryForever onResult { case str: String if str isEmpty => rejectResult }
+
+// Don't log any empty results but log all results that are too long.
+val otherRetryPolicy = retryForever onResult {
+  case str: String if str isEmpty => rejectResult { keepRetryingSilently }
+  case str: String if str.length > maxStringLength => rejectResult
+}
+```
+
+<a name="error-classifiers"></a>
+
+### Error Classifiers
+
+Errors that occur during a retry attempt can be classified as `Fatal`, `Recoverable` or `SilentlyRecoverable`. `Fatal` errors will interrupt a retry operation and cause it to immediately fail. `Recoverable` errors will be logged or suppressed so that the retry operation can continue. `SilentlyRecoverable` errors will be suppressed without being logged so that the retry operation can continue. Error classifications are defined in [`atmos.ErrorClassification`](http://zman.io/atmos/api/#atmos.ErrorClassification).
+
+Error classifiers are simply implementations of `PartialFunction` that map instances of `Throwable` to the desired error classification. In situations where a classifier is not defined for a particular error, `scala.util.control.NonFatal` is used to classify errors as `Fatal` or `Recoverable`. The appropriate partial function type is defined as [`atmos.ErrorClassifier`](http://zman.io/atmos/api/#atmos.ErrorClassifier) and includes a factory in the companion object.
+
+Error classifiers are configured by calling `onError` on an existing retry policy:
+
+```scala
+import atmos.dsl._
+
+// Stop retrying after any runtime exception.
+implicit val retryPolicy = retryForever onError { case _: RuntimeException => stopRetrying }
+
+// Don't log any runtime exceptions except illegal argument exceptions.
+val otherRetryPolicy = retryForever onError {
+  case _: IllegalArgumentException => keepRetrying
+  case _: RuntimeException => keepRetryingSilently
 }
 ```
 

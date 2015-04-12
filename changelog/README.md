@@ -2,6 +2,9 @@
 
  - Added support for Scala 2.11 in addition to Scala 2.10.
  
+ - Added `atmos.ResultClassifier`, `atmos.ResultClassification` and modified the retry logic to support unacceptable
+   results. Also added `onResult`, `acceptResult`, `rejectResult` and other supporting classes to the DSL.
+ 
  - Changed backoff policies from accepting `previousError: Throwable` to `outcome: Try[Any]` in order to support the
    addition of result classifiers. This is a breaking change for any implementations of `BackoffPolicy`, as well as any
    uses of `atmos.backoff.SelectedBackoff` or the DSL method `selectedBackoff`. Uses of other backoff implementations
