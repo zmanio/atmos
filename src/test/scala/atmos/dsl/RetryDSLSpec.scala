@@ -101,6 +101,15 @@ class RetryDSLSpec extends FlatSpec with Matchers {
       } shouldEqual RetryPolicy(monitor = LogEventsWithSlf4j(
         slf4j, LogAction.LogNothing, LogAction.LogAt(Slf4jLevel.Info), LogAction.LogAt(Slf4jLevel.Error)))
     }
+    retrying monitorWith {
+      System.out onRetrying printMessageAndStackTrace onInterrupted printNothing onAborted printMessage
+    } alsoMonitorWith {
+      writer onRetrying printMessageAndStackTrace onInterrupted printNothing onAborted printMessage
+    } shouldEqual RetryPolicy(monitor = ChainedEvents(
+      PrintEventsWithStream(
+        System.out, PrintAction.PrintMessageAndStackTrace, PrintAction.PrintNothing, PrintAction.PrintMessage),
+      PrintEventsWithWriter(
+        writer, PrintAction.PrintMessageAndStackTrace, PrintAction.PrintNothing, PrintAction.PrintMessage)))
   }
 
   it should "configure retry policies with result classifiers" in {

@@ -17,6 +17,8 @@
  */
 package atmos.dsl
 
+import atmos.monitor.ChainedEvents
+
 /**
  * Adds DSL extension methods to the retry policy interface.
  *
@@ -44,6 +46,13 @@ case class RetryPolicyExtensions(self: RetryPolicy) extends AnyVal {
    * @param monitor The monitor to use.
    */
   def monitorWith(monitor: EventMonitor) = self.copy(monitor = monitor)
+
+  /**
+   * Creates a new retry policy by chaining the specified event monitor to the underlying policy's monitor.
+   *
+   * @param monitor The monitor to chain to the underlying policy's monitor.
+   */
+  def alsoMonitorWith(monitor: EventMonitor) = self.copy(monitor = ChainedEvents(self.monitor, monitor))
 
   /**
    * Creates a new retry policy by replacing the underlying policy's result classifier.

@@ -271,7 +271,7 @@ val otherRetryPolicy = retryForever using { linearBackoff { 5 minutes } randomiz
 
 ### Event Monitors
 
-Event monitors are notified when retry attempts fail and are configured on a retry policy using `monitorWith`.  Any type that implements the [`atmos.EventMonitor`](http://zman.io/atmos/api/#atmos.EventMonitor) trait can be used in a retry policy, but the DSL exposes factory methods for creating the most common implementations.
+Event monitors are notified when retry attempts fail and are configured on a retry policy using `monitorWith` and `alsoMonitorWith`.  Any type that implements the [`atmos.EventMonitor`](http://zman.io/atmos/api/#atmos.EventMonitor) trait can be used in a retry policy, but the DSL exposes factory methods for creating the most common implementations.
 
 Event monitors handle three distinct types of events:
  - Retrying events occur when an attempt has failed but another attempt is going to be made.
@@ -322,6 +322,17 @@ import AkkaSupport._
 val akkaRetryPolicy = retryForever monitorWith {
   Logging(context.system, this) onRetrying logNothing onInterrupted logWarning onAborted logError
 }
+```
+
+Finally, multiple event monitors can be chained together and each monitor will be notified of every event:
+
+```scala
+
+import java.util.logging.Logger
+import atmos.dsl._
+
+// Submit information about failed attempts to stderr as well as an instance of `java.util.logging.Logger`.
+implicit val retryPolicy = retryForever monitorWith System.err alsoMonitorWith Logger.getLogger("MyLoggerName")
 ```
 
 <a name="result-classifiers"></a>
