@@ -22,7 +22,7 @@ import scala.concurrent.{ ExecutionContext, Future }
 import scala.concurrent.duration._
 import scala.language.implicitConversions
 import scala.util.{ Failure, Try }
-import rummage.Timer
+import rummage.Clock
 
 /**
  * The `atmos.dsl` package defines a domain specific language for constructing and using retry policies.
@@ -316,8 +316,9 @@ package object dsl {
    *
    * @param operation The operation to repeatedly perform.
    * @param policy The retry policy to execute with.
+   * @param clock The clock used to track time and wait out backoff delays.
    */
-  def retry[T]()(operation: => T)(implicit policy: RetryPolicy): T =
+  def retry[T]()(operation: => T)(implicit policy: RetryPolicy, clock: Clock): T =
     policy.retry()(operation)
 
   /**
@@ -326,8 +327,9 @@ package object dsl {
    * @param name The name of the operation.
    * @param operation The operation to repeatedly perform.
    * @param policy The retry policy to execute with.
+   * @param clock The clock used to track time and wait out backoff delays.
    */
-  def retry[T](name: String)(operation: => T)(implicit policy: RetryPolicy): T =
+  def retry[T](name: String)(operation: => T)(implicit policy: RetryPolicy, clock: Clock): T =
     policy.retry(name)(operation)
 
   /**
@@ -336,8 +338,9 @@ package object dsl {
    * @param name The optional name of the operation.
    * @param operation The operation to repeatedly perform.
    * @param policy The retry policy to execute with.
+   * @param clock The clock used to track time and wait out backoff delays.
    */
-  def retry[T](name: Option[String])(operation: => T)(implicit policy: RetryPolicy): T =
+  def retry[T](name: Option[String])(operation: => T)(implicit policy: RetryPolicy, clock: Clock): T =
     policy.retry(name)(operation)
 
   /**
@@ -346,10 +349,10 @@ package object dsl {
    * @param operation The operation to repeatedly perform.
    * @param policy The retry policy to execute with.
    * @param context The execution context to retry on.
-   * @param timer The timer to schedule backoff notifications on.
+   * @param clock The clock used to track time and schedule backoff notifications.
    */
   def retryAsync[T]()(operation: => Future[T]) //
-  (implicit policy: RetryPolicy, context: ExecutionContext, timer: Timer): Future[T] =
+  (implicit policy: RetryPolicy, context: ExecutionContext, clock: Clock): Future[T] =
     policy.retryAsync()(operation)
 
   /**
@@ -359,10 +362,10 @@ package object dsl {
    * @param operation The operation to repeatedly perform.
    * @param policy The retry policy to execute with.
    * @param context The execution context to retry on.
-   * @param timer The timer to schedule backoff notifications on.
+   * @param clock The clock used to track time and schedule backoff notifications.
    */
   def retryAsync[T](name: String)(operation: => Future[T]) //
-  (implicit policy: RetryPolicy, context: ExecutionContext, timer: Timer): Future[T] =
+  (implicit policy: RetryPolicy, context: ExecutionContext, clock: Clock): Future[T] =
     policy.retryAsync(name)(operation)
 
   /**
@@ -372,10 +375,10 @@ package object dsl {
    * @param operation The operation to repeatedly perform.
    * @param policy The retry policy to execute with.
    * @param context The execution context to retry on.
-   * @param timer The timer to schedule backoff notifications on.
+   * @param clock The clock used to track time and schedule backoff notifications.
    */
   def retryAsync[T](name: Option[String])(operation: => Future[T]) //
-  (implicit policy: RetryPolicy, context: ExecutionContext, timer: Timer): Future[T] =
+  (implicit policy: RetryPolicy, context: ExecutionContext, clock: Clock): Future[T] =
     policy.retryAsync(name)(operation)
 
 }

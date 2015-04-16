@@ -18,6 +18,8 @@
    `alsoMonitorWith`.
    
  - Added support for chaining together multiple result classifiers and error classifiers in the DSL.
+   
+ - Moved from using the deprecated `rummage.Timer` to the new `rummage.Clock` for tracking time and implementing synchronous and asynchronous backoffs.
 
 # 2.0 (2014-09-12)
 

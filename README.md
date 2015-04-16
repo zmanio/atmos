@@ -415,6 +415,8 @@ policy.retry() { doSomethingMysterious() }
 val result2 = policy.retry(None) { getSomethingMysterious() }
 ```
 
+You may optionally define an implicit `rummage.Clock`, from the [rummage](http://zman.io/rummage) project, at the point the retry operation is invoked. This is the component responsible for blocking the calling thread until a backoff duration expires. By default, timing is controlled by a singular, global daemon thread. It is unlikely that you will need to provide a custom clock outside of testing.
+
 It is important to note that synchronous retry operations will block the calling thread while waiting for a backoff duration to expire. Use synchronous retries carefully in situations where you do not control the calling thread.
 
 <a name="retrying-asynchronously"></a>
@@ -428,7 +430,7 @@ To retry asynchronously you call the `retryAsync()` method and pass it a block o
 When retrying asynchronously, certain additional dependencies must be specified:
 
  - There must be an implicit `scala.concurrent.ExecutionContext` available at the point the retry operation is invoked. This execution context is where the block provided to `retryAsync()` will be executed during subsequent retries. This can typically be the same context used to execute your futures (if applicable).
- - You may optionally define an implicit `rummage.Timer`, from the [rummage](http://zman.io/rummage) project, at the point the retry operation is invoked. This is the component responsible for providing non-blocking, asynchronous callbacks based on when a backoff duration expires. By default, timing is controlled by a singular, global daemon thread. It is unlikely that you will need to provide a custom timer unless you are working with [actors](#retrying-with-actors).
+ - You may optionally define an implicit `rummage.Clock`, from the [rummage](http://zman.io/rummage) project, at the point the retry operation is invoked. This is the component responsible for providing non-blocking, asynchronous callbacks based on when a backoff duration expires. By default, timing is controlled by a singular, global daemon thread. It is unlikely that you will need to provide a custom clock outside of testing unless you are working with [actors](#retrying-with-actors).
 
 Asynchronous retries support the same operations as the synchronous form: you may optionally provide an operation name and you can either call this method via the DSL with an implicit retry policy or directly on the retry policy itself.
 
@@ -454,7 +456,7 @@ val futureResult = policy.retryAsync(None) { Future { getSomethingInTheFuture() 
 
 The atmos library has built-in support for [Akka](http://akka.io/), specifically for retrying asynchronously when using the ask pattern. To use this library with actors there are only a couple extra steps involved beyond what is described in [Retrying Asynchronously](#retrying-asynchronously) above.
 
-First, you will want to make sure you have an implicit instance of `rummage.AkkaTimer` from the [rummage](http://zman.io/rummage) project in scope, this will make sure that your actor system is the one responsible for scheduling asynchronous backoff timers. Second, you'll want to make sure and use Akka logging support to keep your entire retry operation non-blocking.
+First, you will want to make sure you have an implicit instance of `rummage.Clock` from the [rummage](http://zman.io/rummage) project in scope, this will make sure that your actor system is the one responsible for scheduling asynchronous backoff timers. This can be accomplished by importing `rummage.AkkaClocks._` inside an actor or by creating an implicit `rummage.AkkaClock` yourself. Second, you'll want to make sure and use Akka logging support to keep your entire retry operation non-blocking.
 
 ```scala
 import scala.concurrent.duration._
@@ -462,7 +464,7 @@ import akka.actor.{ ActorRef, ActorSystem }
 import akka.event.Logging
 import akka.pattern.{ ask, pipe }
 import akka.util.Timeout
-import rummage.AkkaTimer
+import rummage.AkkaClock._
 import atmos.dsl._
 import AkkaSupport._
 
@@ -470,10 +472,10 @@ val system: ActorSystem = ???
 val actor: ActorRef = ???
 val otherActor: ActorRef = ???
 
-implicit val context = system.dispatcher
-implicit val timer = AkkaTimer(system)
-implicit val timeout = Timeout(2 seconds)
 implicit val policy = retryForever monitorWith Logging(system, this.getClass)
+implicit val context = system.dispatcher
+implicit val clock = AkkaClock(system.scheduler)
+implicit val timeout = Timeout(2 seconds)
 
 retryAsync("Ask an actor over and over") { actor ? "Hello!" } pipeTo otherActor
 ```
