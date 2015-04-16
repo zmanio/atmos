@@ -1,7 +1,7 @@
 /* RetryPolicyExtensions.scala
  * 
  * Copyright (c) 2013-2014 linkedin.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,10 +62,24 @@ case class RetryPolicyExtensions(self: RetryPolicy) extends AnyVal {
   def onResult(results: ResultClassifier) = self.copy(results = results)
 
   /**
+   * Creates a new retry policy by chaining the specified result classifier to the underlying policy's classifier.
+   *
+   * @param results The result classifier to chain to the underlying policy's classifier.
+   */
+  def orOnResult(results: ResultClassifier) = self.copy(results = self.results orElse results)
+
+  /**
    * Creates a new retry policy by replacing the underlying policy's error classifier.
    *
    * @param errors The error classifier to use.
    */
   def onError(errors: ErrorClassifier) = self.copy(errors = errors)
+
+  /**
+   * Creates a new retry policy by chaining the specified error classifier to the underlying policy's classifier.
+   *
+   * @param errors The error classifier to chain to the underlying policy's classifier.
+   */
+  def orOnError(errors: ErrorClassifier) = self.copy(errors = self.errors orElse errors)
 
 }

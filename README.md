@@ -339,11 +339,11 @@ implicit val retryPolicy = retryForever monitorWith System.err alsoMonitorWith L
 
 ### Result Classifiers
 
-Results that occur during a retry attempt can be classified as `Acceptable` or `Unaccptable`. `Acceptable` results will be immediately returned by the retry operation. `Unaccptable` results will be logged or suppressed so that the retry operation can continue if the status associated with the result. Result classifications are defined in [`atmos.ResultClassification`](http://zman.io/atmos/api/#atmos.ResultClassification).
+Results that occur during a retry attempt can be classified as `Acceptable` or `Unaccptable`. `Acceptable` results will be immediately returned by the retry operation. `Unaccptable` results will be logged or suppressed so that the retry operation can continue if the status associated with the result indicates so. Result classifications are defined in [`atmos.ResultClassification`](http://zman.io/atmos/api/#atmos.ResultClassification).
 
 Result classifiers are simply implementations of `PartialFunction` that map instances of `Any` to the desired result classification. In situations where a classifier is not defined for a particular result, any result is considered `Acceptable`. The appropriate partial function type is defined as [`atmos.ResultClassifier`](http://zman.io/atmos/api/#atmos.ResultClassifier) and includes a factory in the companion object.
 
-Result classifiers are configured by calling `onResult` on an existing retry policy:
+Result classifiers are configured by calling `onResult` to replace the classifier on an existing retry policy, or by using `orOnResult` to chain a result classifier to the one that a retry policy already contains:
 
 ```scala
 import atmos.dsl._
@@ -351,9 +351,9 @@ import atmos.dsl._
 // Do not accept any empty results.
 implicit val retryPolicy = retryForever onResult { case str: String if str isEmpty => rejectResult }
 
-// Don't log any empty results but log all results that are too long.
-val otherRetryPolicy = retryForever onResult {
-  case str: String if str isEmpty => rejectResult { keepRetryingSilently }
+// Extend the above policy by silently rejecting whitespace only results but rejecting and loggging all results that are too long.
+val otherRetryPolicy = retryPolicy orOnResult {
+  case str: String if str.trim isEmpty => rejectResult { keepRetryingSilently }
   case str: String if str.length > maxStringLength => rejectResult
 }
 ```
@@ -366,17 +366,17 @@ Errors that occur during a retry attempt can be classified as `Fatal`, `Recovera
 
 Error classifiers are simply implementations of `PartialFunction` that map instances of `Throwable` to the desired error classification. In situations where a classifier is not defined for a particular error, `scala.util.control.NonFatal` is used to classify errors as `Fatal` or `Recoverable`. The appropriate partial function type is defined as [`atmos.ErrorClassifier`](http://zman.io/atmos/api/#atmos.ErrorClassifier) and includes a factory in the companion object.
 
-Error classifiers are configured by calling `onError` on an existing retry policy:
+Error classifiers are configured by calling `onError` to replace the classifier on an existing retry policy, or by using `orOnError` to chain an error classifier to the one that a retry policy already contains:
 
 ```scala
 import atmos.dsl._
 
-// Stop retrying after any runtime exception.
-implicit val retryPolicy = retryForever onError { case _: RuntimeException => stopRetrying }
+// Stop retrying after any illegal argument exception.
+implicit val retryPolicy = retryForever onError { case _: IllegalArgumentException => stopRetrying }
 
-// Don't log any runtime exceptions except illegal argument exceptions.
-val otherRetryPolicy = retryForever onError {
-  case _: IllegalArgumentException => keepRetrying
+// Extend the above policy by loggging all illegal state exceptions but supressing logging for all other runtime exceptions.
+val otherRetryPolicy = retryPolicy orOnError {
+  case _: IllegalStateException => keepRetrying
   case _: RuntimeException => keepRetryingSilently
 }
 ```

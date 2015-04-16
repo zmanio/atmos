@@ -117,10 +117,16 @@ class RetryDSLSpec extends FlatSpec with Matchers {
     (rejectResult: ResultClassification) shouldEqual Unacceptable(ResultClassification.defaultUnacceptableStatus)
     rejectResult() shouldEqual Unacceptable(ResultClassification.defaultUnacceptableStatus)
     rejectResult { keepRetryingSilently } shouldEqual Unacceptable(SilentlyRecoverable)
-    val errors = ErrorClassifier {
-      case _: RuntimeException => stopRetrying
+    val results = ResultClassifier {
+      case Some(_) => acceptResult
     }
-    retrying onError errors shouldEqual RetryPolicy(errors = errors)
+    retrying onResult results shouldEqual RetryPolicy(results = results)
+    val orResults = ResultClassifier {
+      case None => rejectResult { stopRetrying }
+    }
+    val chained = retrying onResult results orOnResult orResults
+    chained.results(Some("data")) shouldBe Acceptable
+    chained.results(None) shouldBe Unacceptable(Fatal)
   }
 
   it should "configure retry policies with error classifiers" in {
@@ -131,6 +137,12 @@ class RetryDSLSpec extends FlatSpec with Matchers {
       case _: RuntimeException => stopRetrying
     }
     retrying onError errors shouldEqual RetryPolicy(errors = errors)
+    val orErrors = ErrorClassifier {
+      case _: Exception => keepRetryingSilently
+    }
+    val chained = retrying onError errors orOnError orErrors
+    chained.errors(new RuntimeException) shouldBe Fatal
+    chained.errors(new Exception) shouldBe SilentlyRecoverable
   }
 
 }

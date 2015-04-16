@@ -16,6 +16,8 @@
    
  - Added support for chaining together multiple event monitors in `atmos.events.ChainedEvents` and in the DSL as
    `alsoMonitorWith`.
+   
+ - Added support for chaining together multiple result classifiers and error classifiers in the DSL.
 
 # 2.0 (2014-09-12)
 
