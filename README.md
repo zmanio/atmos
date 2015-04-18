@@ -86,7 +86,7 @@ To use from SBT, add the following to your build.sbt file:
 libraryDependencies += "io.zman" %% "atmos" % "2.0.1"
 ```
 
-For other build systems or to download the jar see [atmos in the central repository](http://mvnrepository.com/artifact/io.zman/atmos_2.10/2.0).
+For other build systems or to download the jar see [atmos in the central repository](http://mvnrepository.com/artifact/io.zman/atmos_2.10/2.0.1).
 
 <a name="using-the-library"></a>
 
