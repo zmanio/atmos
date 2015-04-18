@@ -1,3 +1,7 @@
+# 2.0.1 (2015-04-18)
+
+Rebuilt the 2.0 library with a version of [scoverage](https://github.com/scoverage/sbt-scoverage) that does not add itself to this library's transitive dependency chain.
+
 # 2.0 (2014-09-12)
 
 Moved to the `io.zman` organization namespace and moved from the `atmos.retries` package to the `atmos` package.
