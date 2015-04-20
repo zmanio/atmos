@@ -61,12 +61,12 @@ class RetryPolicySpec extends FlatSpec with Matchers with MockFactory {
   it should "synchronously retry until signaled to terminate" in {
     val policy = RetryPolicy(LimitAttempts(2))
     var counter = 0
-    evaluating {
+    a [TestException] should be thrownBy {
       policy.retry("test") {
         counter += 1
         throw new TestException
       }
-    } should produce[TestException]
+    }
     counter shouldEqual 2
   }
 
@@ -75,12 +75,12 @@ class RetryPolicySpec extends FlatSpec with Matchers with MockFactory {
       case _: TestException => ErrorClassification.Fatal
     })
     var counter = 0
-    evaluating {
+    a [TestException] should be thrownBy {
       policy.retry(None) {
         counter += 1
         throw new TestException
       }
-    } should produce[TestException]
+    }
     counter shouldEqual 1
   }
 
@@ -161,7 +161,7 @@ class RetryPolicySpec extends FlatSpec with Matchers with MockFactory {
         counter
       }
     }
-    evaluating { Await.result(future, Duration.Inf) } should produce[TestException]
+    a [TestException] should be thrownBy { Await.result(future, Duration.Inf) }
     counter shouldEqual 2
   }
 
@@ -177,7 +177,7 @@ class RetryPolicySpec extends FlatSpec with Matchers with MockFactory {
         counter
       }
     }
-    evaluating { Await.result(future, Duration.Inf) } should produce[TestException]
+    a [TestException] should be thrownBy { Await.result(future, Duration.Inf) }
     counter shouldEqual 1
   }
 
