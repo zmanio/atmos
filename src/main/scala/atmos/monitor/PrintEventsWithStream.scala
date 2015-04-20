@@ -1,7 +1,7 @@
 /* PrintEventsWithStream.scala
  * 
  * Copyright (c) 2013-2014 linkedin.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,11 +34,11 @@ case class PrintEventsWithStream(
   abortedAction: PrintAction = PrintEventsWithStream.defaultAbortedAction)
   extends PrintEvents {
 
-  /** @inheritdoc */
-  def printMessage(message: String) = stream.println(message)
+  /* Pass the message to the underlying stream. */
+  override def printMessage(message: String) = stream.println(message)
 
-  /** @inheritdoc */
-  def printMessageAndStackTrace(message: String, thrown: Throwable) = stream synchronized {
+  /* Pass the message and throwable to the underlying stream. */
+  override def printMessageAndStackTrace(message: String, thrown: Throwable) = stream synchronized {
     stream.println(message)
     thrown.printStackTrace(stream)
   }

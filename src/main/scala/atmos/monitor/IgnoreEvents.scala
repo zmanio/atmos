@@ -25,13 +25,13 @@ import scala.util.Try
  */
 case object IgnoreEvents extends atmos.EventMonitor {
   
-  /** @inheritdoc */
-  def retrying (name: Option[String], outcome: Try[Any], attempts: Int, backoff: FiniteDuration, silent: Boolean) = ()
+  /* Ignore the retrying event. */
+  override def retrying (name: Option[String], outcome: Try[Any], attempts: Int, backoff: FiniteDuration, silent: Boolean) = ()
   
-  /** @inheritdoc */
-  def interrupted(name: Option[String], outcome: Try[Any], attempts: Int) = ()
+  /* Ignore the interrupted event. */
+  override def interrupted(name: Option[String], outcome: Try[Any], attempts: Int) = ()
   
-  /** @inheritdoc */
-  def aborted(name: Option[String], outcome: Try[Any], attempts: Int) = ()
+  /* Ignore the aborted event. */
+  override def aborted(name: Option[String], outcome: Try[Any], attempts: Int) = ()
   
 }

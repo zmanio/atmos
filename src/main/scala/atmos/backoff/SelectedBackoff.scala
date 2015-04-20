@@ -27,7 +27,7 @@ import scala.util.Try
  */
 case class SelectedBackoff(f: Try[Any] => BackoffPolicy) extends BackoffPolicy {
 
-  /** @inheritdoc */
-  def nextBackoff(attempts: Int, outcome: Try[Any]) = f(outcome).nextBackoff(attempts, outcome)
+  /* Return the result of the backoff policy specified by the underlying function. */
+  override def nextBackoff(attempts: Int, outcome: Try[Any]) = f(outcome).nextBackoff(attempts, outcome)
 
 }

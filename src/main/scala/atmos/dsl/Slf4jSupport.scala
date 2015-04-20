@@ -1,7 +1,7 @@
 /* Slf4jSupport.scala
  * 
  * Copyright (c) 2013-2014 linkedin.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,19 +56,10 @@ object Slf4jSupport {
    * A tag for levels provided for Slf4j.
    */
   implicit object Slf4jEventLogLevels extends EventLogLevels[Slf4jLevel] {
-
-    /** @inheritdoc */
     override def errorLevel = Slf4jLevel.Error
-
-    /** @inheritdoc */
     override def warningLevel = Slf4jLevel.Warn
-
-    /** @inheritdoc */
     override def infoLevel = Slf4jLevel.Info
-
-    /** @inheritdoc */
     override def debugLevel = Slf4jLevel.Debug
-
   }
 
 }

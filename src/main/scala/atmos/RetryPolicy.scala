@@ -189,7 +189,9 @@ case class RetryPolicy(
 
     /** Repeatedly performs this operation synchronously until interrupted or aborted. */
     @annotation.tailrec
-    def run(): T = afterAttempt(Try(operation())) match {
+    def run(): T = afterAttempt {
+      try Success(operation()) catch { case thrown: Throwable => Failure(thrown) }
+    } match {
       case Outcome.Continue(backoffDuration) =>
         clock.syncWait(backoffDuration)
         run()
@@ -220,14 +222,8 @@ case class RetryPolicy(
 
     /** Repeatedly performs this operation asynchronously until interrupted or aborted. */
     def run(): Future[T] = {
-      spawn()
+      try spawn() onComplete this catch { case thrown: Throwable => promise.failure(thrown) }
       promise.future
-    }
-
-    /** Runs the user-supplied function and spawns an asynchronous operation. */
-    private def spawn(): Unit = {
-      val outcome = try operation() catch { case t: Throwable => Future.failed(t) }
-      try outcome onComplete this catch { case t: Throwable => promise.failure(t) }
     }
 
     /* Respond to the completion of the future. */
@@ -237,8 +233,15 @@ case class RetryPolicy(
         afterAttempt(attempt) match {
           case Outcome.Continue(backoffDuration) =>
             clock.asyncWait(backoffDuration) onComplete {
-              case Success(_) => spawn()
-              case Failure(thrown) => promise.failure(thrown)
+              case Success(_) =>
+                try spawn() onComplete this catch {
+                  case thrown: Throwable =>
+                    notifyOnError = false
+                    promise.failure(thrown)
+                }
+              case Failure(thrown) =>
+                notifyOnError = false
+                promise.failure(thrown)
             }
           case Outcome.Throw(thrown) =>
             notifyOnError = false
@@ -248,9 +251,13 @@ case class RetryPolicy(
             promise.success(result)
         }
       } catch {
-        case t: Throwable => if (notifyOnError) promise.failure(t)
+        case t: Throwable if notifyOnError => promise.failure(t)
       }
     }
+
+    /** Runs the user-supplied function and spawns an asynchronous operation. */
+    private def spawn(): Future[T] =
+      try operation() catch { case thrown: Throwable => Future.failed(thrown) }
 
   }
 

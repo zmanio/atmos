@@ -11,7 +11,7 @@
    or other backoff elements of the DSL will continue to compile normally.
  
  - Changed event monitors from accepting `thrown: Throwable` to `outcome: Try[Any]` in order to support the addition of
-   result classifiers. This is a breaking change for any implementations of `EventMonitor`` or extensions of the
+   result classifiers. This is a breaking change for any implementations of `EventMonitor` or extensions of the
    classes defined in `atmos.monitor`. Direct usage of the DSL will continue to compile normally.
    
  - Added support for chaining together multiple event monitors in `atmos.events.ChainedEvents` and in the DSL as

@@ -1,7 +1,7 @@
 /* PrintEventsWithWriter.scala
  * 
  * Copyright (c) 2013-2014 linkedin.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,11 +34,11 @@ case class PrintEventsWithWriter(
   abortedAction: PrintAction = PrintEventsWithWriter.defaultAbortedAction)
   extends PrintEvents {
 
-  /** @inheritdoc */
-  def printMessage(message: String) = writer.println(message)
+  /* Pass the message to the underlying writer. */
+  override def printMessage(message: String) = writer.println(message)
 
-  /** @inheritdoc */
-  def printMessageAndStackTrace(message: String, thrown: Throwable) = writer synchronized {
+  /* Pass the message and throwable to the underlying writer. */
+  override def printMessageAndStackTrace(message: String, thrown: Throwable) = writer synchronized {
     writer.println(message)
     thrown.printStackTrace(writer)
   }

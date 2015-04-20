@@ -37,8 +37,8 @@ trait LogEvents extends atmos.EventMonitor with FormatEvents {
   /** The action that is performed when an aborted event is received. */
   val abortedAction: LogAction[LevelType]
 
-  /** @inheritdoc */
-  def retrying(name: Option[String], outcome: Try[Any], attempts: Int, backoff: FiniteDuration, silent: Boolean) =
+  /* Submit the event information to the logger if said event is not silent. */
+  override def retrying(name: Option[String], outcome: Try[Any], attempts: Int, backoff: FiniteDuration, silent: Boolean) =
     retryingAction match {
       case LogAction.LogAt(level) if !silent && isLoggable(level) =>
         log(level, formatRetrying(name, outcome, attempts, backoff),
@@ -46,8 +46,8 @@ trait LogEvents extends atmos.EventMonitor with FormatEvents {
       case _ =>
     }
 
-  /** @inheritdoc */
-  def interrupted(name: Option[String], outcome: Try[Any], attempts: Int) =
+  /* Submit the event information to the logger. */
+  override def interrupted(name: Option[String], outcome: Try[Any], attempts: Int) =
     interruptedAction match {
       case LogAction.LogAt(level) if isLoggable(level) =>
         log(level, formatInterrupted(name, outcome, attempts),
@@ -55,8 +55,8 @@ trait LogEvents extends atmos.EventMonitor with FormatEvents {
       case _ =>
     }
 
-  /** @inheritdoc */
-  def aborted(name: Option[String], outcome: Try[Any], attempts: Int) =
+  /* Submit the event information to the logger. */
+  override def aborted(name: Option[String], outcome: Try[Any], attempts: Int) =
     abortedAction match {
       case LogAction.LogAt(level) if isLoggable(level) =>
         log(level, formatAborted(name, outcome, attempts),

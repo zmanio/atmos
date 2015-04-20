@@ -36,8 +36,8 @@ case class RandomizedBackoff(policy: BackoffPolicy, range: (FiniteDuration, Fini
     low -> (high - low).toNanos
   }
   
-  /** @inheritdoc */
-  def nextBackoff(attempts: Int, outcome: Try[Any]) =
+  /* Randomize the result of the underlying backoff policy. */
+  override def nextBackoff(attempts: Int, outcome: Try[Any]) =
     policy.nextBackoff(attempts, outcome) + offset + (scaleInNanos * Random.nextDouble()).round.nanos
     
 }

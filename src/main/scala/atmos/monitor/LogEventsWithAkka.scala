@@ -34,14 +34,14 @@ case class LogEventsWithAkka(
   abortedAction: LogAction[Logging.LogLevel] = LogEventsWithAkka.defaultAbortedAction)
   extends LogEvents {
 
-  /** @inheritdoc */
-  type LevelType = Logging.LogLevel
+  /* Use Akka logging levels. */
+  override type LevelType = Logging.LogLevel
 
-  /** @inheritdoc */
-  def isLoggable(level: Logging.LogLevel) = adapter.isEnabled(level)
+  /* Check if the specified level is enabled in the underlying adapter. */
+  override def isLoggable(level: Logging.LogLevel) = adapter.isEnabled(level)
 
-  /** @inheritdoc */
-  def log(level: Logging.LogLevel, msg: String, thrown: Option[Throwable]) = thrown match {
+  /* Submit the supplied entry to the underlying adapter. */
+  override def log(level: Logging.LogLevel, msg: String, thrown: Option[Throwable]) = thrown match {
     case Some(t) => level match {
       case Logging.ErrorLevel => adapter.error(t, msg)
       case level => adapter.log(level, msg)

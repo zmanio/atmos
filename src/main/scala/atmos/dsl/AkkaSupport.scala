@@ -1,7 +1,7 @@
 /* AkkaSupport.scala
  * 
  * Copyright (c) 2013-2014 linkedin.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,19 +55,10 @@ object AkkaSupport {
    * A tag for levels provided for Akka.
    */
   implicit object AkkaEventLogLevels extends EventLogLevels[Logging.LogLevel] {
-
-    /** @inheritdoc */
-    def errorLevel = Logging.ErrorLevel
-
-    /** @inheritdoc */
-    def warningLevel = Logging.WarningLevel
-
-    /** @inheritdoc */
-    def infoLevel = Logging.InfoLevel
-
-    /** @inheritdoc */
-    def debugLevel = Logging.DebugLevel
-
+    override def errorLevel = Logging.ErrorLevel
+    override def warningLevel = Logging.WarningLevel
+    override def infoLevel = Logging.InfoLevel
+    override def debugLevel = Logging.DebugLevel
   }
 
 }

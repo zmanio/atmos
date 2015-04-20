@@ -36,11 +36,11 @@ case class LogEventsWithSlf4j(
 
   import LogEventsWithSlf4j.Slf4jLevel
 
-  /** @inheritdoc */
-  type LevelType = Slf4jLevel
+  /* Use Slf4j logging levels. */
+  override type LevelType = Slf4jLevel
 
-  /** @inheritdoc */
-  def isLoggable(level: Slf4jLevel) = level match {
+  /* Check if the specified level is enabled in the underlying logger. */
+  override def isLoggable(level: Slf4jLevel) = level match {
     case Slf4jLevel.Error => logger.isErrorEnabled()
     case Slf4jLevel.Warn => logger.isWarnEnabled()
     case Slf4jLevel.Info => logger.isInfoEnabled()
@@ -48,8 +48,8 @@ case class LogEventsWithSlf4j(
     case Slf4jLevel.Trace => logger.isTraceEnabled()
   }
 
-  /** @inheritdoc */
-  def log(level: Slf4jLevel, message: String, thrown: Option[Throwable]) = thrown match {
+  /* Submit the supplied entry to the underlying logger. */
+  override def log(level: Slf4jLevel, message: String, thrown: Option[Throwable]) = thrown match {
     case Some(t) => level match {
       case Slf4jLevel.Error => logger.error(message, t)
       case Slf4jLevel.Warn => logger.warn(message, t)

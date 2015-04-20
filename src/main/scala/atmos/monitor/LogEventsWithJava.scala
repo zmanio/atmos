@@ -34,14 +34,14 @@ case class LogEventsWithJava(
   abortedAction: LogAction[Level] = LogEventsWithJava.defaultAbortedAction)
   extends LogEvents {
 
-  /** @inheritdoc */
-  type LevelType = Level
+  /* Use Java logging levels. */
+  override type LevelType = Level
 
-  /** @inheritdoc */
-  def isLoggable(level: Level) = logger.isLoggable(level)
+  /* Check if the specified level is enabled in the underlying logger. */
+  override def isLoggable(level: Level) = logger.isLoggable(level)
 
-  /** @inheritdoc */
-  def log(level: Level, msg: String, thrown: Option[Throwable]) = thrown match {
+  /* Submit the supplied entry to the underlying logger. */
+  override def log(level: Level, msg: String, thrown: Option[Throwable]) = thrown match {
     case Some(t) => logger.log(level, msg, t)
     case None => logger.log(level, msg)
   }

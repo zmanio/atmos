@@ -28,8 +28,8 @@ import scala.util.Try
  */
 case class FibonacciBackoff(initialBackoff: FiniteDuration = defaultBackoff) extends atmos.BackoffPolicy {
 
-  /** @inheritdoc */
-  def nextBackoff(attempts: Int, outcome: Try[Any]) =
+  /* Start with the initial backoff and multiply the previous backoff by the golden ratio every subsequent attempt. */
+  override def nextBackoff(attempts: Int, outcome: Try[Any]) =
     (initialBackoff.toNanos * math.pow(8.0 / 5.0, attempts - 1.0)).round.nanos
 
 }

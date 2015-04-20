@@ -36,18 +36,18 @@ trait PrintEvents extends atmos.EventMonitor with FormatEvents {
   /** The action that is performed when an aborted event is received. */
   val abortedAction: PrintAction
 
-  /** @inheritdoc */
-  def retrying(name: Option[String], outcome: Try[Any], attempts: Int, backoff: FiniteDuration, silent: Boolean) =
+  /* Print the event information if said event is not silent. */
+  override def retrying(name: Option[String], outcome: Try[Any], attempts: Int, backoff: FiniteDuration, silent: Boolean) =
     if (!silent && retryingAction != PrintNothing)
       printEvent(formatRetrying(name, outcome, attempts, backoff), outcome, retryingAction == PrintMessageAndStackTrace)
 
-  /** @inheritdoc */
-  def interrupted(name: Option[String], outcome: Try[Any], attempts: Int) =
+  /* Print the event information. */
+  override def interrupted(name: Option[String], outcome: Try[Any], attempts: Int) =
     if (interruptedAction != PrintNothing)
       printEvent(formatInterrupted(name, outcome, attempts), outcome, interruptedAction == PrintMessageAndStackTrace)
 
-  /** @inheritdoc */
-  def aborted(name: Option[String], outcome: Try[Any], attempts: Int) =
+  /* Print the event information. */
+  override def aborted(name: Option[String], outcome: Try[Any], attempts: Int) =
     if (abortedAction != PrintNothing)
       printEvent(formatAborted(name, outcome, attempts), outcome, abortedAction == PrintMessageAndStackTrace)
 

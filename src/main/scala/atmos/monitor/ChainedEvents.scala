@@ -29,7 +29,7 @@ import scala.util.Try
 case class ChainedEvents(firstMonitor: EventMonitor, secondMonitor: EventMonitor) extends EventMonitor {
 
   /* Notify both monitors of the retrying event. */
-  def retrying(name: Option[String], outcome: Try[Any], attempts: Int, backoff: FiniteDuration, silent: Boolean) = {
+  override def retrying(name: Option[String], outcome: Try[Any], attempts: Int, backoff: FiniteDuration, silent: Boolean) = {
     try {
       firstMonitor.retrying(name, outcome, attempts, backoff, silent)
     } catch {
@@ -41,7 +41,7 @@ case class ChainedEvents(firstMonitor: EventMonitor, secondMonitor: EventMonitor
   }
 
   /* Notify both monitors of the interrupted event. */
-  def interrupted(name: Option[String], outcome: Try[Any], attempts: Int) = {
+  override def interrupted(name: Option[String], outcome: Try[Any], attempts: Int) = {
     try {
       firstMonitor.interrupted(name, outcome, attempts)
     } catch {
@@ -53,7 +53,7 @@ case class ChainedEvents(firstMonitor: EventMonitor, secondMonitor: EventMonitor
   }
 
   /* Notify both monitors of the aborted event. */
-  def aborted(name: Option[String], outcome: Try[Any], attempts: Int) = {
+  override def aborted(name: Option[String], outcome: Try[Any], attempts: Int) = {
     try {
       firstMonitor.aborted(name, outcome, attempts)
     } catch {

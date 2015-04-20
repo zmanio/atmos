@@ -27,7 +27,7 @@ import scala.util.Try
  */
 case class ExponentialBackoff(initialBackoff: FiniteDuration = defaultBackoff) extends atmos.BackoffPolicy {
 
-  /** @inheritdoc */
-  def nextBackoff(attempts: Int, outcome: Try[Any]) = initialBackoff * (1L << attempts - 1)
+  /* Start with the initial backoff and double the previous backoff for every subsequent attempt. */
+  override def nextBackoff(attempts: Int, outcome: Try[Any]) = initialBackoff * (1L << attempts - 1)
 
 }

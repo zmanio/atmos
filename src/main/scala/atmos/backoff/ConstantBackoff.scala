@@ -27,7 +27,7 @@ import scala.util.Try
  */
 case class ConstantBackoff(backoff: FiniteDuration = defaultBackoff) extends atmos.BackoffPolicy {
   
-  /** @inheritdoc */
-  def nextBackoff(attempts: Int, outcome: Try[Any]) = backoff
+  /* Return the constant backoff value. */
+  override def nextBackoff(attempts: Int, outcome: Try[Any]) = backoff
   
 }
