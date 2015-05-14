@@ -18,7 +18,7 @@
 package atmos.monitor
 
 import scala.concurrent.duration._
-import scala.util.{ Failure, Success }
+import scala.util.{ Failure, Success, Try }
 import org.scalatest._
 import org.scalamock.scalatest.MockFactory
 
@@ -26,7 +26,7 @@ import org.scalamock.scalatest.MockFactory
  * Test suite for [[atmos.monitor.PrintEvents]].
  */
 class PrintEventsSpec extends FlatSpec with Matchers with MockFactory {
-  
+
   import PrintAction._
 
   val result = "result"
@@ -34,39 +34,48 @@ class PrintEventsSpec extends FlatSpec with Matchers with MockFactory {
 
   "PrintEvents" should "forward relevant event messages to the underlying target" in {
     for {
-      action <- Seq(PrintNothing, PrintMessage, PrintMessageAndStackTrace)
-      fixture = new PrintEventsFixture(action)
+      (action, failAction) <- Seq(
+        PrintNothing -> PrintMessage,
+        PrintMessage -> PrintMessageAndStackTrace,
+        PrintMessageAndStackTrace -> PrintNothing)
+      selector <- Seq(
+        EventClassifier.empty[PrintAction],
+        EventClassifier { case Failure(t) if t == thrown => failAction })
+      fixture = new PrintEventsFixture(action, selector)
       name <- Seq(Some("name"), None)
       attempt <- 1 to 10
       outcome <- Seq(Success(result), Failure(thrown))
     } {
       for {
-        backoff <- 1L to 100L map (100.millis * _)
+        backoff <- 1L to 10L map (100.millis * _)
         silent <- Seq(true, false)
       } {
-        if (!silent) fixture.expectsOnce(outcome isFailure)
+        if (!silent) fixture.expectsOnce(outcome)
         fixture.mock.retrying(name, outcome, attempt, backoff, silent)
       }
-      fixture.expectsOnce(outcome isFailure)
+      fixture.expectsOnce(outcome)
       fixture.mock.interrupted(name, outcome, attempt)
-      fixture.expectsOnce(outcome isFailure)
+      fixture.expectsOnce(outcome)
       fixture.mock.aborted(name, outcome, attempt)
     }
   }
 
-  class PrintEventsFixture(action: PrintAction) { self =>
+  class PrintEventsFixture(action: PrintAction, selector: EventClassifier[PrintAction]) { self =>
     val printMessage = mockFunction[String, Unit]
     val printMessageAndStackTrace = mockFunction[String, Throwable, Unit]
     val mock = new PrintEvents {
       val retryingAction = action
       val interruptedAction = action
       val abortedAction = action
+      val retryingActionSelector = selector
+      val interruptedActionSelector = selector
+      val abortedActionSelector = selector
       def printMessage(message: String) = self.printMessage(message)
       def printMessageAndStackTrace(message: String, thrown: Throwable) =
         self.printMessageAndStackTrace(message, thrown)
     }
-    def expectsOnce(failure: Boolean) = action match {
-      case PrintMessageAndStackTrace if failure =>
+    def expectsOnce(outcome: Try[String]) = selector.applyOrElse(outcome, (_: Try[Any]) => action) match {
+      case PrintMessageAndStackTrace if outcome isFailure =>
         printMessageAndStackTrace.expects(*, thrown).once
       case PrintNothing =>
       case _ =>

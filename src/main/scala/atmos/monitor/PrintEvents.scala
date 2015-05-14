@@ -27,29 +27,45 @@ trait PrintEvents extends atmos.EventMonitor with FormatEvents {
 
   import PrintAction._
 
-  /** The action that is performed when a retrying event is received. */
+  /** The action that is performed by default when a retrying event is received. */
   val retryingAction: PrintAction
 
-  /** The action that is performed when an interrupted event is received. */
+  /** The action that is performed by default when an interrupted event is received. */
   val interruptedAction: PrintAction
 
-  /** The action that is performed when an aborted event is received. */
+  /** The action that is performed by default when an aborted event is received. */
   val abortedAction: PrintAction
+
+  /** The strategy used to select an action to perform for a retrying event, defaulting to `retryingAction`. */
+  val retryingActionSelector: EventClassifier[PrintAction]
+
+  /** The strategy used to select an action to perform for an interrupted event, defaulting to `interruptedAction`. */
+  val interruptedActionSelector: EventClassifier[PrintAction]
+
+  /** The strategy used to select an action to perform for an aborted event, defaulting to `abortedAction`. */
+  val abortedActionSelector: EventClassifier[PrintAction]
 
   /* Print the event information if said event is not silent. */
   override def retrying(name: Option[String], outcome: Try[Any], attempts: Int, backoff: FiniteDuration, silent: Boolean) =
-    if (!silent && retryingAction != PrintNothing)
-      printEvent(formatRetrying(name, outcome, attempts, backoff), outcome, retryingAction == PrintMessageAndStackTrace)
+    if (!silent) {
+      val action = retryingActionSelector.applyOrElse(outcome, (_: Try[Any]) => retryingAction)
+      if (action != PrintNothing)
+        printEvent(formatRetrying(name, outcome, attempts, backoff), outcome, action == PrintMessageAndStackTrace)
+    }
 
   /* Print the event information. */
-  override def interrupted(name: Option[String], outcome: Try[Any], attempts: Int) =
-    if (interruptedAction != PrintNothing)
-      printEvent(formatInterrupted(name, outcome, attempts), outcome, interruptedAction == PrintMessageAndStackTrace)
+  override def interrupted(name: Option[String], outcome: Try[Any], attempts: Int) = {
+    val action = interruptedActionSelector.applyOrElse(outcome, (_: Try[Any]) => interruptedAction)
+    if (action != PrintNothing)
+      printEvent(formatInterrupted(name, outcome, attempts), outcome, action == PrintMessageAndStackTrace)
+  }
 
   /* Print the event information. */
-  override def aborted(name: Option[String], outcome: Try[Any], attempts: Int) =
-    if (abortedAction != PrintNothing)
-      printEvent(formatAborted(name, outcome, attempts), outcome, abortedAction == PrintMessageAndStackTrace)
+  override def aborted(name: Option[String], outcome: Try[Any], attempts: Int) = {
+    val action = abortedActionSelector.applyOrElse(outcome, (_: Try[Any]) => abortedAction)
+    if (action != PrintNothing)
+      printEvent(formatAborted(name, outcome, attempts), outcome, action == PrintMessageAndStackTrace)
+  }
 
   /** Utility method that handles locking on the target object when printing both a message and a stack trace. */
   private def printEvent(message: String, outcome: Try[Any], printStackTrace: Boolean): Unit = outcome match {

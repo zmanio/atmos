@@ -324,6 +324,35 @@ val akkaRetryPolicy = retryForever monitorWith {
 }
 ```
 
+The behavior of event monitors can be customized based on the outcome of the most recent attempt:
+
+```scala
+import atmos.dsl._
+import scala.util.Failure
+import java.util.logging.Logger
+
+// When interrupted, print the error messsage unless the operation failed with a RuntimeException, in which case both
+// the message and stack trace are printed.
+val printingRetryPolicy = retryForever monitorWith {
+  System.err onInterrupted printMessage onInterruptedWhere {
+    case Failure(e: RuntimeException) => printMessageAndStackTrace
+  }
+}
+
+// Do the same thing as above but for aborted events and with simpler syntax.
+val similarPrintingRetryPolicy = retryForever monitorWith {
+  System.err onAborted printMessage onAbortedWith [RuntimeException] printMessageAndStackTrace
+}
+
+// It is possible to compose multiple monitoring customizations by chaining outcome analyzers using the `or` version
+//  of the DSL methods. Monitor customizations are also supported on Slf4j and Akka loggers.
+val loggingRetryPolicy = retryForever monitorWith {
+  Logger.getLogger("log") onRetrying logDebug onRetryingWith [RuntimeException] logInfo orOnRetryingWhere {
+    case Failure(e: Error) => logWarning
+  }
+}
+```
+
 Finally, multiple event monitors can be chained together and each monitor will be notified of every event:
 
 ```scala

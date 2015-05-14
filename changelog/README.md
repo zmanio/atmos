@@ -17,6 +17,8 @@
  - Added support for chaining together multiple event monitors in `atmos.events.ChainedEvents` and in the DSL as
    `alsoMonitorWith`.
    
+ - Added library and DSL support for fine grained event monitoring to all supported event monitors.
+   
  - Added support for chaining together multiple result classifiers and error classifiers in the DSL.
    
  - Moved from using the deprecated `rummage.Timer` to the new `rummage.Clock` for tracking time and implementing synchronous and asynchronous backoffs.

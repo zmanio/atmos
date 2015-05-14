@@ -1,7 +1,7 @@
 /* LogEventsWithJavaExtensions.scala
  * 
  * Copyright (c) 2013-2014 linkedin.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,21 +17,38 @@
  */
 package atmos.dsl
 
-import java.util.logging.Level
-import atmos.monitor
+import atmos.monitor.{ EventClassifier, LogAction, LogEventsWithJava }
 
 /**
  * Exposes extensions on any instance of `monitor.LogEventsWithJava`.
  */
-case class LogEventsWithJavaExtensions(self: monitor.LogEventsWithJava) extends AnyVal {
+case class LogEventsWithJavaExtensions(self: LogEventsWithJava) extends AbstractLogEventsExtensions {
 
-  /** Returns a copy of the underlying monitor that logs events at the specified retrying level. */
-  def onRetrying(action: monitor.LogAction[Level]) = self.copy(retryingAction = action)
+  /* Set the level to Java logging levels. */
+  override type Level = java.util.logging.Level
 
-  /** Returns a copy of the underlying monitor that logs events at the specified interrupted level. */
-  def onInterrupted(action: monitor.LogAction[Level]) = self.copy(interruptedAction = action)
+  /* Set the self type to the wrapped type. */
+  override type Self = LogEventsWithJava
 
-  /** Returns a copy of the underlying monitor that logs events at the specified aborting level. */
-  def onAborted(action: monitor.LogAction[Level]) = self.copy(abortedAction = action)
+  /* Set the default retrying action. */
+  override def onRetrying(action: LogAction[Level]) = self.copy(retryingAction = action)
+
+  /* Set the default interrupted action. */
+  override def onInterrupted(action: LogAction[Level]) = self.copy(interruptedAction = action)
+
+  /* Set the default aborted action. */
+  override def onAborted(action: LogAction[Level]) = self.copy(abortedAction = action)
+
+  /* Set a custom retrying action. */
+  override def onRetryingWhere(classifier: EventClassifier[LogAction[Level]]) =
+    self.copy(retryingActionSelector = classifier)
+
+  /* Set a custom interrupted action. */
+  override def onInterruptedWhere(classifier: EventClassifier[LogAction[Level]]) =
+    self.copy(interruptedActionSelector = classifier)
+
+  /* Set a custom aborted action. */
+  override def onAbortedWhere(classifier: EventClassifier[LogAction[Level]]) =
+    self.copy(abortedActionSelector = classifier)
 
 }

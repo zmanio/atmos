@@ -18,7 +18,7 @@
 package atmos.monitor
 
 import scala.concurrent.duration._
-import scala.util.{ Failure, Success }
+import scala.util.{ Failure, Success, Try }
 import org.scalatest._
 import org.scalamock.scalatest.MockFactory
 
@@ -34,28 +34,34 @@ class LogEventsSpec extends FlatSpec with Matchers with MockFactory {
 
   "LogEvents" should "submit relevant log entries to the underlying target" in {
     for {
-      action <- Seq(LogNothing, LogAt(Lvl.Error), LogAt(Lvl.Warn))
-      fixture = new LogEventsFixture(action)
+      (action, failAction) <- Seq(
+        LogNothing -> LogAt(Lvl.Error),
+        LogAt(Lvl.Error) -> LogAt(Lvl.Warn),
+        LogAt(Lvl.Warn) -> LogNothing)
+      selector <- Seq(
+        EventClassifier.empty[LogAction[Lvl]],
+        EventClassifier { case Failure(t) if t == thrown => failAction })
+      fixture = new LogEventsFixture(action, selector)
       enabled <- Seq(true, false)
       name <- Seq(Some("name"), None)
       attempt <- 1 to 10
       outcome <- Seq(Success(result), Failure(thrown))
     } {
       for {
-        backoff <- 1L to 100L map (100.millis * _)
+        backoff <- 1L to 10L map (100.millis * _)
         silent <- Seq(true, false)
       } {
-        if (!silent) fixture.expectsOnce(enabled, outcome.isFailure)
+        if (!silent) fixture.expectsOnce(enabled, outcome)
         fixture.mock.retrying(name, outcome, attempt, backoff, silent)
       }
-      fixture.expectsOnce(enabled, outcome.isFailure)
+      fixture.expectsOnce(enabled, outcome)
       fixture.mock.interrupted(name, outcome, attempt)
-      fixture.expectsOnce(enabled, outcome.isFailure)
+      fixture.expectsOnce(enabled, outcome)
       fixture.mock.aborted(name, outcome, attempt)
     }
   }
 
-  class LogEventsFixture(action: LogAction[Lvl]) { self =>
+  class LogEventsFixture(action: LogAction[Lvl], selector: EventClassifier[LogAction[Lvl]]) { self =>
     val isLoggable = mockFunction[Lvl, Boolean]
     val log = mockFunction[Lvl, String, Option[Throwable], Unit]
     val mock = new LogEvents {
@@ -63,15 +69,19 @@ class LogEventsSpec extends FlatSpec with Matchers with MockFactory {
       val retryingAction = action
       val interruptedAction = action
       val abortedAction = action
+      val retryingActionSelector = selector
+      val interruptedActionSelector = selector
+      val abortedActionSelector = selector
       def isLoggable(level: Lvl) = self.isLoggable(level)
       def log(level: Lvl, message: String, thrown: Option[Throwable]) = self.log(level, message, thrown)
     }
-    def expectsOnce(enabled: Boolean, failure: Boolean) = action match {
-      case LogAt(lvl) =>
-        isLoggable.expects(lvl).returning(enabled).once
-        if (enabled) log.expects(lvl, *, if (failure) Some(thrown) else None).once
-      case LogNothing =>
-    }
+    def expectsOnce(enabled: Boolean, outcome: Try[String]) =
+      selector.applyOrElse(outcome, (_: Try[Any]) => action) match {
+        case LogAt(lvl) =>
+          isLoggable.expects(lvl).returning(enabled).once
+          if (enabled) log.expects(lvl, *, if (outcome isFailure) Some(thrown) else None).once
+        case LogNothing =>
+      }
   }
 
   sealed trait Lvl

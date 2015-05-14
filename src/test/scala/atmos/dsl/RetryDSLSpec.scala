@@ -26,11 +26,13 @@ import scala.util.Try
 import akka.event.{ Logging, LoggingAdapter }
 import org.slf4j.LoggerFactory
 import org.scalatest._
+import scala.util.{ Failure, Success }
+import org.scalamock.scalatest.MockFactory
 
 /**
  * Test suite for [[atmos.retries.RetryDSL]].
  */
-class RetryDSLSpec extends FlatSpec with Matchers {
+class RetryDSLSpec extends FlatSpec with Matchers with MockFactory {
 
   import atmos.backoff._
   import atmos.monitor._
