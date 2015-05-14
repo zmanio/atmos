@@ -25,7 +25,7 @@ scalaVersion := "2.11.6"
 crossScalaVersions := Seq("2.10.4", "2.11.6")
 
 libraryDependencies ++= Seq(
-  "io.zman" %% "rummage" % "1.2",
+  "io.zman" %% "rummage" % "1.3",
   "com.typesafe.akka" %% "akka-actor" % "2.3.2" % "provided",
   "org.slf4j" % "slf4j-api" % "1.7.5" % "provided",
   "org.scalatest" %% "scalatest" % "2.2.4" % "test",

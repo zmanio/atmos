@@ -431,10 +431,12 @@ When retrying asynchronously, certain additional dependencies must be specified:
 
  - There must be an implicit `scala.concurrent.ExecutionContext` available at the point the retry operation is invoked. This execution context is where the block provided to `retryAsync()` will be executed during subsequent retries. This can typically be the same context used to execute your futures (if applicable).
  - You may optionally define an implicit `rummage.Clock`, from the [rummage](http://zman.io/rummage) project, at the point the retry operation is invoked. This is the component responsible for providing non-blocking, asynchronous callbacks based on when a backoff duration expires. By default, timing is controlled by a singular, global daemon thread. It is unlikely that you will need to provide a custom clock outside of testing unless you are working with [actors](#retrying-with-actors).
+ - The atmos DSL provides support for limiting the amount of time that a future is allowed to complete by providing a `withDeadline` method on `scala.concurrent.Future`.
 
 Asynchronous retries support the same operations as the synchronous form: you may optionally provide an operation name and you can either call this method via the DSL with an implicit retry policy or directly on the retry policy itself.
 
 ```scala
+import scala.concurrent.duration._
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 import atmos.dsl._
@@ -446,8 +448,16 @@ retryAsync("Doing something in the future") { Future { doSomething() } }
 val futureResult = retryAsync(Some("Getting something in the future")) { Future { getSomething() } }
 
 // The following two statements will have a generic operation name in log messages:
-policy.retryAsync() { Future { doSomethingMysterious() } }
+retryAsync() { Future { doSomethingMysterious() } }
 val futureResult = policy.retryAsync(None) { Future { getSomethingInTheFuture() } }
+
+// It is possible to limit the amount of time in which a single retry attempt can complete.
+retryAsync() { Future { doSomethingMysterious() } withDeadline 20.seconds }
+val futureResult = policy.retryAsync() { Future { doSomethingMysterious() } withDeadline 20.seconds }
+
+// It is possible to limit the amount of time in which an entire retry operation can complete.
+retryAsync() { Future { doSomethingMysterious() } } withDeadline 20.seconds
+val futureResult = policy.retryAsync() { Future { doSomethingMysterious() } } withDeadline 20.seconds
 ```
 
 <a name="retrying-with-actors"></a>

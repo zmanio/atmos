@@ -32,7 +32,6 @@ import org.scalatest._
  */
 class RetryDSLSpec extends FlatSpec with Matchers {
 
-  import atmos.dsl._
   import atmos.backoff._
   import atmos.monitor._
   import atmos.termination._

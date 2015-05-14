@@ -22,12 +22,12 @@ import scala.concurrent.{ ExecutionContext, Future }
 import scala.concurrent.duration._
 import scala.language.implicitConversions
 import scala.util.{ Failure, Try }
-import rummage.Clock
+import rummage.{ Clock, Deadlines }
 
 /**
  * The `atmos.dsl` package defines a domain specific language for constructing and using retry policies.
  */
-package object dsl {
+package object dsl extends Deadlines {
 
   //
   // Aliases for the top-level API.

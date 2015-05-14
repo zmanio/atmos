@@ -20,6 +20,8 @@
  - Added support for chaining together multiple result classifiers and error classifiers in the DSL.
    
  - Moved from using the deprecated `rummage.Timer` to the new `rummage.Clock` for tracking time and implementing synchronous and asynchronous backoffs.
+   
+ - Included the `rummage.Deadlines` DSL in the atmos DSL, enabling the use of `withDeadline` on arbitrary futures.
 
 # 2.0.1 (2015-04-18)
 
