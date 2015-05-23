@@ -146,4 +146,12 @@ class RetryDSLSpec extends FlatSpec with Matchers with MockFactory {
     chained.errors(new Exception) shouldBe SilentlyRecoverable
   }
 
+  it should "return Java log levels in response to generic level queries" in {
+    import EventLogLevels.JavaLogLevels
+    JavaLogLevels.errorLevel shouldBe Level.SEVERE
+    JavaLogLevels.warningLevel shouldBe Level.WARNING
+    JavaLogLevels.infoLevel shouldBe Level.INFO
+    JavaLogLevels.debugLevel shouldBe Level.CONFIG
+  }
+
 }
