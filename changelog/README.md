@@ -1,4 +1,4 @@
-# 2.1 (2015-04-??)
+# 2.1 (2015-05-23)
 
  - Added support for Scala 2.11 in addition to Scala 2.10.
  

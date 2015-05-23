@@ -6,7 +6,7 @@ import SonatypeKeys._
 
 name := "atmos"
 
-version := "2.1-SNAPSHOT"
+version := "2.1"
 
 description := "minimalist retry-on-failure behavior for scala"
 
