@@ -44,10 +44,10 @@ class FormatEventsSpec extends FlatSpec with Matchers {
   }
 
   def checkMessage(name: Option[String], e: Exception, attempt: Int, backoff: Option[FiniteDuration], msg: String) = {
-    msg should include (name getOrElse "operation")
-    if (e.getMessage.nonEmpty) msg should include (e.getMessage)
-    msg should include (attempt.toString)
-    backoff foreach { backoff => msg should include (backoff.toString) }
+    msg should include(name getOrElse "operation")
+    if (e.getMessage.nonEmpty) msg should include(e.getMessage)
+    msg should include(attempt.toString)
+    backoff foreach { backoff => msg should include(backoff.toString) }
   }
 
 }

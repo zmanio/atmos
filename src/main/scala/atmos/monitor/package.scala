@@ -34,14 +34,14 @@ package object monitor {
 
     /** An event classifier that classifies nothing. */
     def empty[T]: EventClassifier[T] = PartialFunction.empty
-    
+
     /**
      * Returns the supplied partial function.
-     * 
+     *
      * @param f The partial function to return.
      */
     def apply[T](f: PartialFunction[Try[Any], T]): EventClassifier[T] = f
 
   }
-  
+
 }

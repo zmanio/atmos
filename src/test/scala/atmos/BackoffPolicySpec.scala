@@ -25,9 +25,9 @@ import org.scalamock.scalatest.MockFactory
  * Test suite for [[atmos.BackoffPolicy]].
  */
 class BackoffPolicySpec extends FlatSpec with Matchers with MockFactory {
-  
+
   val thrown = new RuntimeException
-  
+
   "BackoffPolicy" should "support deprecated APIs" in {
     val fixture = new BackoffPolicyFixture
     fixture.nextBackoff.expects(1, Failure(thrown))

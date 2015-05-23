@@ -44,11 +44,11 @@ class SelectedBackoffSpec extends FlatSpec with Matchers {
         case Failure(t) if t == normalThrown => tNormalPolicy
         case Failure(t) if t == specialThrown => tSpecialPolicy
       }
-      (outcome, expectedPolicy) <-Seq(
-          Success(normalResult) -> rNormalPolicy,
-          Success(specialResult) -> rSpecialPolicy,
-          Failure(normalThrown) -> tNormalPolicy,
-          Failure(specialThrown) -> tSpecialPolicy)
+      (outcome, expectedPolicy) <- Seq(
+        Success(normalResult) -> rNormalPolicy,
+        Success(specialResult) -> rSpecialPolicy,
+        Failure(normalThrown) -> tNormalPolicy,
+        Failure(specialThrown) -> tSpecialPolicy)
       attempt <- 1 to 10
     } policy.nextBackoff(attempt, outcome) shouldEqual expectedPolicy.nextBackoff(attempt, outcome)
   }

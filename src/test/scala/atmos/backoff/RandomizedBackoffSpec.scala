@@ -36,7 +36,7 @@ class RandomizedBackoffSpec extends FlatSpec with Matchers {
       policy = RandomizedBackoff(ConstantBackoff(backoff), first -> second)
       outcome <- Seq(Success(result), Failure(thrown))
       attempt <- 1 to 10
-    } checkBackoff(backoff, first, second,  policy.nextBackoff(attempt, outcome))
+    } checkBackoff(backoff, first, second, policy.nextBackoff(attempt, outcome))
   }
 
   /** Checks that a randomized duration conforms to the expected range. */

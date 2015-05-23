@@ -25,8 +25,8 @@ import scala.concurrent.duration.FiniteDuration
  * @param maxAttempts The maximum number of attempts that can be performed.
  */
 case class LimitAttempts(maxAttempts: Int = defaultMaxAttempts) extends atmos.TerminationPolicy {
-  
+
   /* Signal for termination when the maximum attempt threshold is reached. */
   override def shouldTerminate(attempts: Int, nextAttemptAt: FiniteDuration) = attempts >= maxAttempts
-  
+
 }

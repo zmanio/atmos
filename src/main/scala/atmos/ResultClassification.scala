@@ -25,7 +25,7 @@ sealed trait ResultClassification
  * Definitions of the supported result classifications and the default classification function.
  */
 object ResultClassification extends (Any => ResultClassification) {
-  
+
   /** The default status used for unacceptable results. */
   val defaultUnacceptableStatus = ErrorClassification.Recoverable
 

@@ -24,7 +24,7 @@ sealed trait ResultRejection {
 }
 
 object ResultRejection extends ResultRejection {
-  
+
   implicit def resultRejectionToResultClassification(self: ResultRejection): ResultClassification = self()
-  
+
 }

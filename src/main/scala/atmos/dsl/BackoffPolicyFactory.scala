@@ -29,7 +29,7 @@ case class BackoffPolicyFactory(self: FiniteDuration => BackoffPolicy) {
 
   /**
    * Creates a backoff policy using this factory's underlying mapping.
-   * 
+   *
    * @param backoff The base backoff duration to pass to the backoff policy mapping.
    */
   def apply(backoff: FiniteDuration = atmos.backoff.defaultBackoff): BackoffPolicy = self(backoff)
@@ -40,12 +40,12 @@ case class BackoffPolicyFactory(self: FiniteDuration => BackoffPolicy) {
  * Factory for backoff policy factories.
  */
 object BackoffPolicyFactory {
-  
+
   /**
    * An implicit view of any backoff policy factory as a backoff policy with the default base backoff duration.
-   * 
+   *
    * @param factory The backoff policy factory to use to construct a default backoff policy instance.
    */
   implicit def backoffPolicyFactoryToBackoffPolicy(factory: BackoffPolicyFactory): BackoffPolicy = factory()
-  
+
 }

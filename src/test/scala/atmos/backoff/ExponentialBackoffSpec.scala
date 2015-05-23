@@ -37,7 +37,7 @@ class ExponentialBackoffSpec extends FlatSpec with Matchers {
       attempt <- 1 to 10
     } policy.nextBackoff(attempt, outcome) shouldEqual scale(backoff.toNanos, attempt).nanos
   }
-  
+
   /** Scales a number by repeatedly multiplying by two. */
   def scale(n: Long, attempts: Int): Long = if (attempts <= 1) n else scale(n * 2, attempts - 1)
 

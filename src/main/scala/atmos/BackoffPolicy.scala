@@ -33,7 +33,6 @@ trait BackoffPolicy {
    * @param outcome The outcome that caused the operation to consider another attempt.
    */
   def nextBackoff(attempts: Int, outcome: Try[Any]): FiniteDuration
-  
 
   /**
    * Computes the next backoff duration using the specified number of attempts and the error that caused the

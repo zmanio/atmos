@@ -22,7 +22,7 @@ import scala.util.Try
 
 /**
  * A monitor that will always pass invocations on to the two specified monitors.
- * 
+ *
  * @param firstMonitor The first event monitor to pass all invocations to.
  * @param secondMonitor The second event monitor to pass all invocations to.
  */

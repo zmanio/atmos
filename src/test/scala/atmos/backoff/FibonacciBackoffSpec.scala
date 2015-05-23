@@ -37,7 +37,7 @@ class FibonacciBackoffSpec extends FlatSpec with Matchers {
       attempt <- 1 to 10
     } policy.nextBackoff(attempt, outcome) shouldEqual scale(backoff.toNanos, attempt).round.nanos
   }
-  
+
   /** Scales a number by repeatedly multiplying with an approximation of the golden ratio. */
   def scale(n: Double, attempts: Int): Double = if (attempts <= 1) n else scale(n * 8.0 / 5.0, attempts - 1)
 

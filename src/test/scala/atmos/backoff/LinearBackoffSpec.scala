@@ -37,7 +37,7 @@ class LinearBackoffSpec extends FlatSpec with Matchers {
       attempt <- 1 to 10
     } policy.nextBackoff(attempt, outcome) shouldEqual scale(backoff.toNanos, attempt).nanos
   }
-  
+
   /** Scales a number by multiplying by the number of failed attempts. */
   def scale(n: Long, attempts: Int): Long = n * attempts
 

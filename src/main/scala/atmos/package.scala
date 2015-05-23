@@ -36,7 +36,7 @@
  *    [[atmos.termination]] package provides a number of common termination policy implementations.
  *
  * Additionally, the [[atmos.dsl]] package provides a concise DSL for describing retry policies.
- * 
+ *
  * For more information about using the `atmos` library, see [[http://zman.io/atmos]]
  */
 package object atmos {
@@ -51,10 +51,10 @@ package object atmos {
 
     /** A result classifier that classifies nothing. */
     val empty: ResultClassifier = PartialFunction.empty
-    
+
     /**
      * Returns the supplied partial function.
-     * 
+     *
      * @param f The partial function to return.
      */
     def apply(f: PartialFunction[Any, ResultClassification]): ResultClassifier = f
@@ -71,10 +71,10 @@ package object atmos {
 
     /** An error classifier that classifies nothing. */
     val empty: ErrorClassifier = PartialFunction.empty
-    
+
     /**
      * Returns the supplied partial function.
-     * 
+     *
      * @param f The partial function to return.
      */
     def apply(f: PartialFunction[Throwable, ErrorClassification]): ErrorClassifier = f

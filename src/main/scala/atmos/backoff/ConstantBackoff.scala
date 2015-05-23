@@ -26,8 +26,8 @@ import scala.util.Try
  * @param initialBackoff The backoff used for every retry.
  */
 case class ConstantBackoff(backoff: FiniteDuration = defaultBackoff) extends atmos.BackoffPolicy {
-  
+
   /* Return the constant backoff value. */
   override def nextBackoff(attempts: Int, outcome: Try[Any]) = backoff
-  
+
 }
