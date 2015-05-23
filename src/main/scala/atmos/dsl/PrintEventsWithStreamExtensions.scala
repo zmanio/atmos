@@ -1,7 +1,7 @@
 /* PrintEventsWithStreamExtensions.scala
  * 
- * Copyright (c) 2013-2014 bizo.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2014 linkedin.com
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,24 +17,37 @@
  */
 package atmos.dsl
 
-import atmos.monitor
+import atmos.monitor.{ EventClassifier, PrintAction, PrintEventsWithStream }
 
 /**
  * Adds DSL extension methods to the [[atmos.monitor.PrintEventsWithStream]] interface.
  *
  * @param self The print stream event monitor to add the extension methods to.
  */
-case class PrintEventsWithStreamExtensions(self: monitor.PrintEventsWithStream) extends AnyVal {
+case class PrintEventsWithStreamExtensions(self: PrintEventsWithStream) extends AbstractPrintEventsExtensions {
 
-  import monitor.PrintAction
+  /* Set the self type to the wrapped type. */
+  override type Self = PrintEventsWithStream
 
-  /** Returns a copy of the underlying monitor that prints events with the specified retrying strategy. */
-  def onRetrying(action: PrintAction) = self.copy(retryingAction = action)
+  /* Set the default retrying action. */
+  override def onRetrying(action: PrintAction) = self.copy(retryingAction = action)
 
-  /** Returns a copy of the underlying monitor that prints events with the specified interrupted strategy. */
-  def onInterrupted(action: PrintAction) = self.copy(interruptedAction = action)
+  /* Set the default interrupted action. */
+  override def onInterrupted(action: PrintAction) = self.copy(interruptedAction = action)
 
-  /** Returns a copy of the underlying monitor that prints events with the specified aborting strategy. */
-  def onAborted(action: PrintAction) = self.copy(abortedAction = action)
+  /* Set the default aborted action. */
+  override def onAborted(action: PrintAction) = self.copy(abortedAction = action)
+
+  /* Set a custom retrying action. */
+  override def onRetryingWhere(classifier: EventClassifier[PrintAction]) =
+    self.copy(retryingActionSelector = classifier)
+
+  /* Set a custom interrupted action. */
+  override def onInterruptedWhere(classifier: EventClassifier[PrintAction]) =
+    self.copy(interruptedActionSelector = classifier)
+
+  /* Set a custom aborted action. */
+  override def onAbortedWhere(classifier: EventClassifier[PrintAction]) =
+    self.copy(abortedActionSelector = classifier)
 
 }

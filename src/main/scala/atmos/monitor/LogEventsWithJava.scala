@@ -1,7 +1,7 @@
 /* LogEventsWithJava.scala
  * 
- * Copyright (c) 2013-2014 bizo.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2014 linkedin.com
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,25 +23,37 @@ import java.util.logging.{ Logger, Level }
  * An event monitor that formats and logs events using the `java.util.logging` framework.
  *
  * @param logger The logger that this event monitor submits to.
- * @param retryingAction The action that is performed when a retrying event is received.
- * @param interruptedAction The action that is performed when an interrupted event is received.
- * @param abortedAction The action that is performed when an aborted event is received.
+ * @param retryingAction The action that is performed by default when a retrying event is received.
+ * @param interruptedAction The action that is performed by default when an interrupted event is received.
+ * @param abortedAction The action that is performed by default when an aborted event is received.
+ * @param retryingActionSelector The strategy used to select an action to perform for a retrying event, defaulting to
+ *                               `retryingAction`.
+ * @param interruptedActionSelector The strategy used to select an action to perform for an interrupted event,
+ *                                  defaulting to `interruptedAction`.
+ * @param abortedActionSelector The strategy used to select an action to perform for an aborted event, defaulting to
+ *                              `abortedAction`.
  */
 case class LogEventsWithJava(
   logger: Logger,
   retryingAction: LogAction[Level] = LogEventsWithJava.defaultRetryingAction,
   interruptedAction: LogAction[Level] = LogEventsWithJava.defaultInterruptedAction,
-  abortedAction: LogAction[Level] = LogEventsWithJava.defaultAbortedAction)
+  abortedAction: LogAction[Level] = LogEventsWithJava.defaultAbortedAction,
+  retryingActionSelector: EventClassifier[LogAction[Level]] = EventClassifier.empty,
+  interruptedActionSelector: EventClassifier[LogAction[Level]] = EventClassifier.empty,
+  abortedActionSelector: EventClassifier[LogAction[Level]] = EventClassifier.empty)
   extends LogEvents {
 
-  /** @inheritdoc */
-  type LevelType = Level
+  /* Use Java logging levels. */
+  override type LevelType = Level
 
-  /** @inheritdoc */
-  def isLoggable(level: Level) = logger.isLoggable(level)
+  /* Check if the specified level is enabled in the underlying logger. */
+  override def isLoggable(level: Level) = logger.isLoggable(level)
 
-  /** @inheritdoc */
-  def log(level: Level, msg: String, thrown: Throwable) = logger.log(level, msg, thrown)
+  /* Submit the supplied entry to the underlying logger. */
+  override def log(level: Level, msg: String, thrown: Option[Throwable]) = thrown match {
+    case Some(t) => logger.log(level, msg, t)
+    case None => logger.log(level, msg)
+  }
 
 }
 

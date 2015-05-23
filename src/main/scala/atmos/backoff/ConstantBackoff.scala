@@ -1,7 +1,7 @@
 /* ConstantBackoff.scala
  * 
- * Copyright (c) 2013-2014 bizo.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2014 linkedin.com
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 package atmos.backoff
 
 import scala.concurrent.duration.FiniteDuration
+import scala.util.Try
 
 /**
  * A policy that uses the same backoff after every retry.
@@ -25,8 +26,8 @@ import scala.concurrent.duration.FiniteDuration
  * @param initialBackoff The backoff used for every retry.
  */
 case class ConstantBackoff(backoff: FiniteDuration = defaultBackoff) extends atmos.BackoffPolicy {
-  
-  /** @inheritdoc */
-  def nextBackoff(attempts: Int, previousError: Throwable) = backoff
-  
+
+  /* Return the constant backoff value. */
+  override def nextBackoff(attempts: Int, outcome: Try[Any]) = backoff
+
 }

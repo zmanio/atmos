@@ -1,7 +1,7 @@
 /* LinearBackoffSpec.scala
  * 
- * Copyright (c) 2013-2014 bizo.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2014 linkedin.com
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 package atmos.backoff
 
 import scala.concurrent.duration._
+import scala.util.{ Failure, Success }
 import org.scalatest._
 
 /**
@@ -25,16 +26,18 @@ import org.scalatest._
  */
 class LinearBackoffSpec extends FlatSpec with Matchers {
 
+  val result = "result"
   val thrown = new RuntimeException
 
   "LinearBackoff" should "scale its backoff by multiplying by the number of failed attempts" in {
     for {
       backoff <- 1L to 100L map (100.millis * _)
       policy = LinearBackoff(backoff)
+      outcome <- Seq(Success(result), Failure(thrown))
       attempt <- 1 to 10
-    } policy.nextBackoff(attempt, thrown) shouldEqual scale(backoff.toNanos, attempt).nanos
+    } policy.nextBackoff(attempt, outcome) shouldEqual scale(backoff.toNanos, attempt).nanos
   }
-  
+
   /** Scales a number by multiplying by the number of failed attempts. */
   def scale(n: Long, attempts: Int): Long = n * attempts
 

@@ -1,7 +1,7 @@
 /* RandomizedBackoffSpec.scala
  * 
- * Copyright (c) 2013-2014 bizo.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2014 linkedin.com
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 package atmos.backoff
 
 import scala.concurrent.duration._
+import scala.util.{ Failure, Success }
 import org.scalatest._
 
 /**
@@ -25,6 +26,7 @@ import org.scalatest._
  */
 class RandomizedBackoffSpec extends FlatSpec with Matchers {
 
+  val result = "result"
   val thrown = new RuntimeException
 
   "RandomizedBackoff" should "adjust the result of another backoff policy with a random value" in {
@@ -32,8 +34,9 @@ class RandomizedBackoffSpec extends FlatSpec with Matchers {
       backoff <- 1L to 100L map (100.millis * _)
       (first, second) <- Seq(-10.millis -> 10.millis, 0.millis -> 0.millis, 10.millis -> 0.millis)
       policy = RandomizedBackoff(ConstantBackoff(backoff), first -> second)
+      outcome <- Seq(Success(result), Failure(thrown))
       attempt <- 1 to 10
-    } checkBackoff(backoff, first, second,  policy.nextBackoff(attempt, thrown))
+    } checkBackoff(backoff, first, second, policy.nextBackoff(attempt, outcome))
   }
 
   /** Checks that a randomized duration conforms to the expected range. */

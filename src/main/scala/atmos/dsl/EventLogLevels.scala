@@ -1,7 +1,7 @@
 /* EventLogLevels.scala
  * 
- * Copyright (c) 2013-2014 bizo.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2014 linkedin.com
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -63,19 +63,10 @@ object EventLogLevels {
    * A tag for levels used by `java.util.logging`.
    */
   implicit object JavaLogLevels extends EventLogLevels[Level] {
-
-    /** @inheritdoc */
-    def errorLevel = Level.SEVERE
-
-    /** @inheritdoc */
-    def warningLevel = Level.WARNING
-
-    /** @inheritdoc */
-    def infoLevel = Level.INFO
-
-    /** @inheritdoc */
-    def debugLevel = Level.CONFIG
-
+    override def errorLevel = Level.SEVERE
+    override def warningLevel = Level.WARNING
+    override def infoLevel = Level.INFO
+    override def debugLevel = Level.CONFIG
   }
 
 }

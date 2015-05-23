@@ -1,7 +1,7 @@
 /* PrintEventsSpec.scala
  * 
- * Copyright (c) 2013-2014 bizo.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2014 linkedin.com
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 package atmos.monitor
 
 import scala.concurrent.duration._
+import scala.util.{ Failure, Success, Try }
 import org.scalatest._
 import org.scalamock.scalatest.MockFactory
 
@@ -25,49 +26,60 @@ import org.scalamock.scalatest.MockFactory
  * Test suite for [[atmos.monitor.PrintEvents]].
  */
 class PrintEventsSpec extends FlatSpec with Matchers with MockFactory {
-  
+
   import PrintAction._
 
+  val result = "result"
   val thrown = new RuntimeException
 
   "PrintEvents" should "forward relevant event messages to the underlying target" in {
     for {
-      action <- Seq(PrintNothing, PrintMessage, PrintMessageAndStackTrace)
-      fixture = new PrintEventsFixture(action)
+      (action, failAction) <- Seq(
+        PrintNothing -> PrintMessage,
+        PrintMessage -> PrintMessageAndStackTrace,
+        PrintMessageAndStackTrace -> PrintNothing)
+      selector <- Seq(
+        EventClassifier.empty[PrintAction],
+        EventClassifier { case Failure(t) if t == thrown => failAction })
+      fixture = new PrintEventsFixture(action, selector)
       name <- Seq(Some("name"), None)
       attempt <- 1 to 10
+      outcome <- Seq(Success(result), Failure(thrown))
     } {
       for {
-        backoff <- 1L to 100L map (100.millis * _)
+        backoff <- 1L to 10L map (100.millis * _)
         silent <- Seq(true, false)
       } {
-        if (!silent) fixture.expectsOnce()
-        fixture.mock.retrying(name, thrown, attempt, backoff, silent)
+        if (!silent) fixture.expectsOnce(outcome)
+        fixture.mock.retrying(name, outcome, attempt, backoff, silent)
       }
-      fixture.expectsOnce()
-      fixture.mock.interrupted(name, thrown, attempt)
-      fixture.expectsOnce()
-      fixture.mock.aborted(name, thrown, attempt)
+      fixture.expectsOnce(outcome)
+      fixture.mock.interrupted(name, outcome, attempt)
+      fixture.expectsOnce(outcome)
+      fixture.mock.aborted(name, outcome, attempt)
     }
   }
 
-  class PrintEventsFixture(action: PrintAction) { self =>
+  class PrintEventsFixture(action: PrintAction, selector: EventClassifier[PrintAction]) { self =>
     val printMessage = mockFunction[String, Unit]
     val printMessageAndStackTrace = mockFunction[String, Throwable, Unit]
     val mock = new PrintEvents {
       val retryingAction = action
       val interruptedAction = action
       val abortedAction = action
+      val retryingActionSelector = selector
+      val interruptedActionSelector = selector
+      val abortedActionSelector = selector
       def printMessage(message: String) = self.printMessage(message)
       def printMessageAndStackTrace(message: String, thrown: Throwable) =
         self.printMessageAndStackTrace(message, thrown)
     }
-    def expectsOnce() = action match {
-      case PrintMessageAndStackTrace =>
+    def expectsOnce(outcome: Try[String]) = selector.applyOrElse(outcome, (_: Try[Any]) => action) match {
+      case PrintMessageAndStackTrace if outcome isFailure =>
         printMessageAndStackTrace.expects(*, thrown).once
-      case PrintMessage =>
-        printMessage.expects(*).once
       case PrintNothing =>
+      case _ =>
+        printMessage.expects(*).once
     }
   }
 

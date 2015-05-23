@@ -1,7 +1,7 @@
 /* package.scala
  * 
- * Copyright (c) 2013-2014 bizo.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2014 linkedin.com
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,31 @@
  */
 package atmos
 
+import scala.util.Try
+
 /**
  * The `atmos.monitor` package provides common implementations of the [[atmos.EventMonitor]] trait.
  */
-package object monitor
+package object monitor {
+
+  /** The type of event classifier functions. */
+  type EventClassifier[T] = PartialFunction[Try[Any], T]
+
+  /**
+   * Common event classifiers.
+   */
+  object EventClassifier {
+
+    /** An event classifier that classifies nothing. */
+    def empty[T]: EventClassifier[T] = PartialFunction.empty
+
+    /**
+     * Returns the supplied partial function.
+     *
+     * @param f The partial function to return.
+     */
+    def apply[T](f: PartialFunction[Try[Any], T]): EventClassifier[T] = f
+
+  }
+
+}

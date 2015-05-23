@@ -1,7 +1,7 @@
 /* RequireBoth.scala
  * 
- * Copyright (c) 2013-2014 bizo.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2014 linkedin.com
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,8 +28,8 @@ import atmos.TerminationPolicy
  */
 case class RequireBoth(first: TerminationPolicy, second: TerminationPolicy) extends TerminationPolicy {
 
-  /** @inheritdoc */
-  def shouldTerminate(attempts: Int, nextAttemptAt: FiniteDuration) =
+  /* Signal for termination when both of the underlying policies do so. */
+  override def shouldTerminate(attempts: Int, nextAttemptAt: FiniteDuration) =
     first.shouldTerminate(attempts, nextAttemptAt) && second.shouldTerminate(attempts, nextAttemptAt)
 
 }

@@ -1,7 +1,7 @@
 /* LogEventsWithSlf4j.scala
  * 
- * Copyright (c) 2013-2014 bizo.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2014 linkedin.com
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,24 +23,33 @@ import org.slf4j.Logger
  * An event monitor that formats and logs events using Slf4j.
  *
  * @param logger The logger that this event monitor submits to.
- * @param retryingAction The action that is performed when a retrying event is received.
- * @param interruptedAction The action that is performed when an interrupted event is received.
- * @param abortedAction The action that is performed when an aborted event is received.
+ * @param retryingAction The action that is performed by default when a retrying event is received.
+ * @param interruptedAction The action that is performed by default when an interrupted event is received.
+ * @param abortedAction The action that is performed by default when an aborted event is received.
+ * @param retryingActionSelector The strategy used to select an action to perform for a retrying event, defaulting to
+ *                               `retryingAction`.
+ * @param interruptedActionSelector The strategy used to select an action to perform for an interrupted event,
+ *                                  defaulting to `interruptedAction`.
+ * @param abortedActionSelector The strategy used to select an action to perform for an aborted event, defaulting to
+ *                              `abortedAction`.
  */
 case class LogEventsWithSlf4j(
   logger: Logger,
   retryingAction: LogAction[LogEventsWithSlf4j.Slf4jLevel] = LogEventsWithSlf4j.defaultRetryingAction,
   interruptedAction: LogAction[LogEventsWithSlf4j.Slf4jLevel] = LogEventsWithSlf4j.defaultInterruptedAction,
-  abortedAction: LogAction[LogEventsWithSlf4j.Slf4jLevel] = LogEventsWithSlf4j.defaultAbortedAction)
+  abortedAction: LogAction[LogEventsWithSlf4j.Slf4jLevel] = LogEventsWithSlf4j.defaultAbortedAction,
+  retryingActionSelector: EventClassifier[LogAction[LogEventsWithSlf4j.Slf4jLevel]] = EventClassifier.empty,
+  interruptedActionSelector: EventClassifier[LogAction[LogEventsWithSlf4j.Slf4jLevel]] = EventClassifier.empty,
+  abortedActionSelector: EventClassifier[LogAction[LogEventsWithSlf4j.Slf4jLevel]] = EventClassifier.empty)
   extends LogEvents {
 
   import LogEventsWithSlf4j.Slf4jLevel
 
-  /** @inheritdoc */
-  type LevelType = Slf4jLevel
+  /* Use Slf4j logging levels. */
+  override type LevelType = Slf4jLevel
 
-  /** @inheritdoc */
-  def isLoggable(level: Slf4jLevel) = level match {
+  /* Check if the specified level is enabled in the underlying logger. */
+  override def isLoggable(level: Slf4jLevel) = level match {
     case Slf4jLevel.Error => logger.isErrorEnabled()
     case Slf4jLevel.Warn => logger.isWarnEnabled()
     case Slf4jLevel.Info => logger.isInfoEnabled()
@@ -48,13 +57,22 @@ case class LogEventsWithSlf4j(
     case Slf4jLevel.Trace => logger.isTraceEnabled()
   }
 
-  /** @inheritdoc */
-  def log(level: Slf4jLevel, message: String, thrown: Throwable) = level match {
-    case Slf4jLevel.Error => logger.error(message, thrown)
-    case Slf4jLevel.Warn => logger.warn(message, thrown)
-    case Slf4jLevel.Info => logger.info(message, thrown)
-    case Slf4jLevel.Debug => logger.debug(message, thrown)
-    case Slf4jLevel.Trace => logger.trace(message, thrown)
+  /* Submit the supplied entry to the underlying logger. */
+  override def log(level: Slf4jLevel, message: String, thrown: Option[Throwable]) = thrown match {
+    case Some(t) => level match {
+      case Slf4jLevel.Error => logger.error(message, t)
+      case Slf4jLevel.Warn => logger.warn(message, t)
+      case Slf4jLevel.Info => logger.info(message, t)
+      case Slf4jLevel.Debug => logger.debug(message, t)
+      case Slf4jLevel.Trace => logger.trace(message, t)
+    }
+    case None => level match {
+      case Slf4jLevel.Error => logger.error(message)
+      case Slf4jLevel.Warn => logger.warn(message)
+      case Slf4jLevel.Info => logger.info(message)
+      case Slf4jLevel.Debug => logger.debug(message)
+      case Slf4jLevel.Trace => logger.trace(message)
+    }
   }
 
 }

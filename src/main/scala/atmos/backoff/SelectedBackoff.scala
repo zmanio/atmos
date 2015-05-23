@@ -1,7 +1,7 @@
 /* SelectedBackoff.scala
  * 
- * Copyright (c) 2013-2014 bizo.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2014 linkedin.com
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,15 +18,16 @@
 package atmos.backoff
 
 import atmos.BackoffPolicy
+import scala.util.Try
 
 /**
- * A policy that delegates to another policy that is selected based on the most recently thrown exception.
+ * A policy that delegates to another policy that is selected based on the most recently evaluated outcome.
  *
- * @param f The function that maps from exceptions to backoff policies.
+ * @param f The function that maps from outcomes to backoff policies.
  */
-case class SelectedBackoff(f: Throwable => BackoffPolicy) extends BackoffPolicy {
+case class SelectedBackoff(f: Try[Any] => BackoffPolicy) extends BackoffPolicy {
 
-  /** @inheritdoc */
-  def nextBackoff(attempts: Int, previousError: Throwable) = f(previousError).nextBackoff(attempts, previousError)
+  /* Return the result of the backoff policy specified by the underlying function. */
+  override def nextBackoff(attempts: Int, outcome: Try[Any]) = f(outcome).nextBackoff(attempts, outcome)
 
 }

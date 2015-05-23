@@ -1,7 +1,7 @@
 /* package.scala
  * 
- * Copyright (c) 2013-2014 bizo.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2014 linkedin.com
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,12 +21,13 @@ import java.io.{ PrintStream, PrintWriter }
 import scala.concurrent.{ ExecutionContext, Future }
 import scala.concurrent.duration._
 import scala.language.implicitConversions
-import rummage.Timer
+import scala.util.{ Failure, Try }
+import rummage.{ Clock, Deadlines }
 
 /**
  * The `atmos.dsl` package defines a domain specific language for constructing and using retry policies.
  */
-package object dsl {
+package object dsl extends Deadlines {
 
   //
   // Aliases for the top-level API.
@@ -44,7 +45,22 @@ package object dsl {
   /** An alias to the `BackoffPolicy` type. */
   type BackoffPolicy = atmos.BackoffPolicy
 
-  /** An alias to the `RetryPolicy` type. */
+  /** An alias to the `EventMonitor` type. */
+  type EventMonitor = atmos.EventMonitor
+
+  /** An alias to the `ResultClassification` type. */
+  type ResultClassification = atmos.ResultClassification
+
+  /** An alias to the `ResultClassification` companion. */
+  val ResultClassification = atmos.ResultClassification
+
+  /** An alias to the `ResultClassifier` type. */
+  type ResultClassifier = atmos.ResultClassifier
+
+  /** An alias to the `ResultClassifier` companion. */
+  val ResultClassifier = atmos.ResultClassifier
+
+  /** An alias to the `ErrorClassification` type. */
   type ErrorClassification = atmos.ErrorClassification
 
   /** An alias to the `ErrorClassification` companion. */
@@ -55,9 +71,6 @@ package object dsl {
 
   /** An alias to the `ErrorClassifier` companion. */
   val ErrorClassifier = atmos.ErrorClassifier
-
-  /** An alias to the `EventMonitor` type. */
-  type EventMonitor = atmos.EventMonitor
 
   //
   // Retry policy factories and extensions.
@@ -150,11 +163,11 @@ package object dsl {
   def fibonacciBackoff: BackoffPolicyFactory = BackoffPolicyFactory(backoff.FibonacciBackoff)
 
   /**
-   * Creates a backoff policy selects another policy based on the most recently thrown exception.
+   * Creates a backoff policy selects another policy based on the most recently evaluated outcome.
    *
-   * @param f The function that maps from exceptions to backoff policies.
+   * @param f The function that maps from outcomes to backoff policies.
    */
-  def selectedBackoff(f: Throwable => BackoffPolicy): BackoffPolicy = backoff.SelectedBackoff(f)
+  def selectedBackoff(f: Try[Any] => BackoffPolicy): BackoffPolicy = backoff.SelectedBackoff(f)
 
   /**
    * Provides an implicit extension of the backoff policy interface.
@@ -272,7 +285,17 @@ package object dsl {
     LogEventsWithJavaExtensions(policy)
 
   //
-  // Classification factories.
+  // Result classification factories.
+  //
+
+  /** Returns the `Acceptable` result classification. */
+  def acceptResult: ResultClassification = ResultClassification.Acceptable
+
+  /** Returns a factory for an `Unacceptable` result classification with an optional status. */
+  def rejectResult: ResultRejection = ResultRejection
+
+  //
+  // Error classification factories.
   //
 
   /** Returns the `Fatal` error classification. */
@@ -293,8 +316,9 @@ package object dsl {
    *
    * @param operation The operation to repeatedly perform.
    * @param policy The retry policy to execute with.
+   * @param clock The clock used to track time and wait out backoff delays.
    */
-  def retry[T]()(operation: => T)(implicit policy: RetryPolicy): T =
+  def retry[T]()(operation: => T)(implicit policy: RetryPolicy, clock: Clock): T =
     policy.retry()(operation)
 
   /**
@@ -303,8 +327,9 @@ package object dsl {
    * @param name The name of the operation.
    * @param operation The operation to repeatedly perform.
    * @param policy The retry policy to execute with.
+   * @param clock The clock used to track time and wait out backoff delays.
    */
-  def retry[T](name: String)(operation: => T)(implicit policy: RetryPolicy): T =
+  def retry[T](name: String)(operation: => T)(implicit policy: RetryPolicy, clock: Clock): T =
     policy.retry(name)(operation)
 
   /**
@@ -313,8 +338,9 @@ package object dsl {
    * @param name The optional name of the operation.
    * @param operation The operation to repeatedly perform.
    * @param policy The retry policy to execute with.
+   * @param clock The clock used to track time and wait out backoff delays.
    */
-  def retry[T](name: Option[String])(operation: => T)(implicit policy: RetryPolicy): T =
+  def retry[T](name: Option[String])(operation: => T)(implicit policy: RetryPolicy, clock: Clock): T =
     policy.retry(name)(operation)
 
   /**
@@ -323,10 +349,10 @@ package object dsl {
    * @param operation The operation to repeatedly perform.
    * @param policy The retry policy to execute with.
    * @param context The execution context to retry on.
-   * @param timer The timer to schedule backoff notifications on.
+   * @param clock The clock used to track time and schedule backoff notifications.
    */
   def retryAsync[T]()(operation: => Future[T]) //
-  (implicit policy: RetryPolicy, context: ExecutionContext, timer: Timer): Future[T] =
+  (implicit policy: RetryPolicy, context: ExecutionContext, clock: Clock): Future[T] =
     policy.retryAsync()(operation)
 
   /**
@@ -336,10 +362,10 @@ package object dsl {
    * @param operation The operation to repeatedly perform.
    * @param policy The retry policy to execute with.
    * @param context The execution context to retry on.
-   * @param timer The timer to schedule backoff notifications on.
+   * @param clock The clock used to track time and schedule backoff notifications.
    */
   def retryAsync[T](name: String)(operation: => Future[T]) //
-  (implicit policy: RetryPolicy, context: ExecutionContext, timer: Timer): Future[T] =
+  (implicit policy: RetryPolicy, context: ExecutionContext, clock: Clock): Future[T] =
     policy.retryAsync(name)(operation)
 
   /**
@@ -349,10 +375,10 @@ package object dsl {
    * @param operation The operation to repeatedly perform.
    * @param policy The retry policy to execute with.
    * @param context The execution context to retry on.
-   * @param timer The timer to schedule backoff notifications on.
+   * @param clock The clock used to track time and schedule backoff notifications.
    */
   def retryAsync[T](name: Option[String])(operation: => Future[T]) //
-  (implicit policy: RetryPolicy, context: ExecutionContext, timer: Timer): Future[T] =
+  (implicit policy: RetryPolicy, context: ExecutionContext, clock: Clock): Future[T] =
     policy.retryAsync(name)(operation)
 
 }

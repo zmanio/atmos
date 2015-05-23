@@ -1,6 +1,6 @@
 /* package.scala
  * 
- * Copyright (c) 2013-2014 bizo.com
+ * Copyright (c) 2013-2014 linkedin.com
  * Copyright (c) 2013-2014 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,10 +23,10 @@ import scala.concurrent.duration._
  * The `atmos.termination` package provides common implementations of the [[atmos.TerminationPolicy]] trait.
  */
 package object termination {
-  
+
   /** The default maximum number of attempts that can be performed. */
   val defaultMaxAttempts: Int = 3
-  
+
   /** The default maximum duration that a retry operation should not exceed. */
   val defaultMaxDuration: FiniteDuration = 10.seconds
 

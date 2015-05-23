@@ -1,7 +1,7 @@
 /* LimitDuration.scala
  * 
- * Copyright (c) 2013-2014 bizo.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2014 linkedin.com
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import scala.concurrent.duration.FiniteDuration
  */
 case class LimitDuration(maxDuration: FiniteDuration = defaultMaxDuration) extends atmos.TerminationPolicy {
 
-  /** @inheritdoc */
-  def shouldTerminate(attempts: Int, nextAttemptAt: FiniteDuration) = nextAttemptAt >= maxDuration
+  /* Signal for termination when the maximum duration threshold is reached. */
+  override def shouldTerminate(attempts: Int, nextAttemptAt: FiniteDuration) = nextAttemptAt >= maxDuration
 
 }

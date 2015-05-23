@@ -1,6 +1,6 @@
 /* FormatEventsSpec.scala
  * 
- * Copyright (c) 2013-2014 bizo.com
+ * Copyright (c) 2013-2014 linkedin.com
  * Copyright (c) 2013-2014 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,6 +18,7 @@
 package atmos.monitor
 
 import scala.concurrent.duration._
+import scala.util.Failure
 import org.scalatest._
 
 /**
@@ -36,17 +37,17 @@ class FormatEventsSpec extends FlatSpec with Matchers {
       attempt <- 1 to 10
     } {
       for (backoff <- 1L to 100L map (100.millis * _))
-        checkMessage(name, thrown, attempt, Some(backoff), formatter.formatRetrying(name, thrown, attempt, backoff))
-      checkMessage(name, thrown, attempt, None, formatter.formatInterrupted(name, thrown, attempt))
-      checkMessage(name, thrown, attempt, None, formatter.formatAborted(name, thrown, attempt))
+        checkMessage(name, thrown, attempt, Some(backoff), formatter.formatRetrying(name, Failure(thrown), attempt, backoff))
+      checkMessage(name, thrown, attempt, None, formatter.formatInterrupted(name, Failure(thrown), attempt))
+      checkMessage(name, thrown, attempt, None, formatter.formatAborted(name, Failure(thrown), attempt))
     }
   }
 
   def checkMessage(name: Option[String], e: Exception, attempt: Int, backoff: Option[FiniteDuration], msg: String) = {
-    msg should include (name getOrElse "operation")
-    if (e.getMessage.nonEmpty) msg should include (e.getMessage)
-    msg should include (attempt.toString)
-    backoff foreach { backoff => msg should include (backoff.toString) }
+    msg should include(name getOrElse "operation")
+    if (e.getMessage.nonEmpty) msg should include(e.getMessage)
+    msg should include(attempt.toString)
+    backoff foreach { backoff => msg should include(backoff.toString) }
   }
 
 }

@@ -1,7 +1,7 @@
 /* FormatEvents.scala
  * 
- * Copyright (c) 2013-2014 bizo.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2014 linkedin.com
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 package atmos.monitor
 
 import scala.concurrent.duration.FiniteDuration
+import scala.util.{ Failure, Success, Try }
 
 /**
  * A mix-in that formats messages for retry events.
@@ -28,44 +29,53 @@ trait FormatEvents {
    * Formats a message for a retrying event.
    *
    * @param name The name of the operation that failed if one was provided.
-   * @param thrown The exception that was thrown.
+   * @param outcome The outcome of the most recent retry attempt.
    * @param attempts The number of attempts that have been made so far.
    * @param backoff The amount of time that will pass before another attempt is made.
    */
-  def formatRetrying(name: Option[String], thrown: Throwable, attempts: Int, backoff: FiniteDuration): String = {
+  def formatRetrying(name: Option[String], outcome: Try[Any], attempts: Int, backoff: FiniteDuration): String = {
     val op = name getOrElse "operation"
-    val tpe = thrown.getClass.getName
-    val suffix = Option(thrown.getMessage) filter (_.nonEmpty) map (msg => s": $msg") getOrElse ""
-    s"""|Attempt $attempts of $op failed: $tpe$suffix
-        |Retrying after $backoff ...""".stripMargin
+    val message = toMessage(outcome)
+    s"""|Attempt $attempts of $op failed: $message
+        |Retrying after $backoff ...""" stripMargin
   }
 
   /**
    * Formats a message for an interrupted event.
    *
    * @param name The name of the operation that failed if one was provided.
-   * @param thrown The exception that was thrown.
+   * @param outcome The outcome of the most recent retry attempt.
    * @param attempts The number of attempts that were made.
    */
-  def formatInterrupted(name: Option[String], thrown: Throwable, attempts: Int): String = {
+  def formatInterrupted(name: Option[String], outcome: Try[Any], attempts: Int): String = {
     val op = name getOrElse "operation"
-    val tpe = thrown.getClass.getName
-    val suffix = Option(thrown.getMessage) filter (_.nonEmpty) map (msg => s": $msg") getOrElse ""
-    s"Attempt $attempts of $op interrupted: $tpe$suffix"
+    val message = toMessage(outcome)
+    s"Attempt $attempts of $op interrupted: $message"
   }
 
   /**
    * Formats a message for an aborted event.
    *
    * @param name The name of the operation that failed if one was provided.
-   * @param thrown The exception that was thrown.
+   * @param outcome The outcome of the most recent retry attempt.
    * @param attempts The number of attempts that were made.
    */
-  def formatAborted(name: Option[String], thrown: Throwable, attempts: Int): String = {
+  def formatAborted(name: Option[String], outcome: Try[Any], attempts: Int): String = {
     val op = name getOrElse "operation"
-    val tpe = thrown.getClass.getName
-    val suffix = Option(thrown.getMessage) filter (_.nonEmpty) map (msg => s": $msg") getOrElse ""
-    s"Too many exceptions after attempt $attempts of $op... aborting: $tpe$suffix"
+    val message = toMessage(outcome)
+    s"Too many exceptions after attempt $attempts of $op... aborting: $message"
+  }
+
+  /**
+   * Converts the provided outcome to a message describing the outcome.
+   *
+   * @param outcome The outcome of the most recent retry attempt.
+   */
+  private def toMessage(outcome: Try[Any]): String = outcome match {
+    case Success(result) =>
+      String valueOf result
+    case Failure(thrown) =>
+      thrown.getClass.getName + { Option(thrown getMessage) filter { _ nonEmpty } map { msg => ": " + msg } getOrElse "" }
   }
 
 }

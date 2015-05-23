@@ -1,7 +1,7 @@
 /* ExponentialBackoff.scala
  * 
- * Copyright (c) 2013-2014 bizo.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2014 linkedin.com
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 package atmos.backoff
 
 import scala.concurrent.duration.FiniteDuration
+import scala.util.Try
 
 /**
  * A policy that doubles the backoff duration after every attempt.
@@ -26,7 +27,7 @@ import scala.concurrent.duration.FiniteDuration
  */
 case class ExponentialBackoff(initialBackoff: FiniteDuration = defaultBackoff) extends atmos.BackoffPolicy {
 
-  /** @inheritdoc */
-  def nextBackoff(attempts: Int, previousError: Throwable) = initialBackoff * (1L << attempts - 1)
+  /* Start with the initial backoff and double the previous backoff for every subsequent attempt. */
+  override def nextBackoff(attempts: Int, outcome: Try[Any]) = initialBackoff * (1L << attempts - 1)
 
 }

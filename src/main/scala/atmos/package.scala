@@ -1,7 +1,7 @@
 /* package.scala
  * 
- * Copyright (c) 2013-2014 bizo.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2014 linkedin.com
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,8 @@
  * Retry behavior is controlled by an instance of [[atmos.RetryPolicy]] configured with strategies for various
  * components of the retry operation. The elements that define a retry policy are:
  *
+ *  - [[atmos.ResultClassifier]]: Defines what results are acceptable for a retry operation to return.
+ *
  *  - [[atmos.ErrorClassifier]]: Defines when a retry operation should be interrupted by a fatal error.
  *
  *  - [[atmos.BackoffPolicy]]: Defines how long to wait between successive retry attempts. The [[atmos.backoff]]
@@ -34,10 +36,30 @@
  *    [[atmos.termination]] package provides a number of common termination policy implementations.
  *
  * Additionally, the [[atmos.dsl]] package provides a concise DSL for describing retry policies.
- * 
+ *
  * For more information about using the `atmos` library, see [[http://zman.io/atmos]]
  */
 package object atmos {
+
+  /** The type of result classifier functions. */
+  type ResultClassifier = PartialFunction[Any, ResultClassification]
+
+  /**
+   * Common result classifiers.
+   */
+  object ResultClassifier {
+
+    /** A result classifier that classifies nothing. */
+    val empty: ResultClassifier = PartialFunction.empty
+
+    /**
+     * Returns the supplied partial function.
+     *
+     * @param f The partial function to return.
+     */
+    def apply(f: PartialFunction[Any, ResultClassification]): ResultClassifier = f
+
+  }
 
   /** The type of error classifier functions. */
   type ErrorClassifier = PartialFunction[Throwable, ErrorClassification]
@@ -47,12 +69,12 @@ package object atmos {
    */
   object ErrorClassifier {
 
-    /** An error classifier that classifies nothing */
+    /** An error classifier that classifies nothing. */
     val empty: ErrorClassifier = PartialFunction.empty
-    
+
     /**
      * Returns the supplied partial function.
-     * 
+     *
      * @param f The partial function to return.
      */
     def apply(f: PartialFunction[Throwable, ErrorClassification]): ErrorClassifier = f
