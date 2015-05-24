@@ -5,9 +5,11 @@ layout: home
 ---
 A [Scala](http://www.scala-lang.org/) library for describing retry-on-failure behavior using a concise, literate [embedded DSL](http://c2.com/cgi/wiki?EmbeddedDomainSpecificLanguage).
 
-There are places in most modern software where small, intermittent errors can occur and disrupt the normal flow of execution. Traditionally, a *retry loop* is used in these situations, with constraints on the number of attempts that can be made and how certain errors are handled. A naive retry loop that would make up to three attempts, waiting 100 milliseconds between each attempt, could look like this:
+There are places in most modern software where small, intermittent errors can occur and disrupt the normal flow of execution. Traditionally, a *retry loop* is used in these situations, with constraints on the number of attempts that can be made and how certain results and errors are handled. A naive retry loop that would make up to three attempts, waiting 100 milliseconds between each attempt and accepting only non-empty results could look like this:
 
 ```scala
+import scala.concurrent.duration._
+
 def doSomethingUntilItWorks(): String = {
   val maxAttempts = 3
   val backoff = 100 millis
@@ -15,7 +17,14 @@ def doSomethingUntilItWorks(): String = {
   while (true) {
     attempts += 1
     try {
-      return doSomethingThatMightFail()
+      val result = doSomethingThatMightFail()
+      if (result nonEmpty) {
+        return result
+      } else {
+        println("Retrying after empty result")
+        Thread.sleep(backoff toMillis)
+      }
+      return 
     } catch {
       case e: SomeImportantException =>
         println("Interrupted by important exception: " + e.getMessage)
@@ -34,13 +43,15 @@ def doSomethingUntilItWorks(): String = {
   }
   sys.error("unreachable")
 }
+
+def doSomethingThatMightFail(): String
 ```
 
 Retry loops like the one above have a number of problems:
 
  - They obscure the actual work that the program is trying to do (the lone call to `doSomethingThatMightFail()` above).
 
- - They are convoluted and tend to contain lots of mutable state, making them hard to reason about and resistant to change.
+ - They are convoluted and tend to contain mutable state, making them hard to reason about and resistant to change.
 
  - They are difficult and tedious to test, possibly leading to undiscovered bugs in the code base.
 
@@ -48,15 +59,20 @@ With the atmos library, a *retry policy* can be described using a minimalistic D
 
 ```scala
 import atmos.dsl._
+import scala.concurrent.duration._
 
-implicit val retryPolicy = retryFor { 3 attempts } using constantBackoff { 100 millis } monitorWith System.out onError {
+implicit val retryPolicy = retryFor { 3 attempts } using constantBackoff { 100 millis } monitorWith System.out onResult {
+  case str: String if str isEmpty => rejectResult
+} onError {
   case _: SomeImportantException => stopRetrying
 }
+
+def doSomethingThatMightFail(): String
 
 val result = retry() { doSomethingThatMightFail() }
 ```
 
-In addition to making retry behavior easy to understand, atmos provides the ability to customize the strategies that control [loop termination](#termination-policies), [backoff calculation](#backoff-policies), [error handling](#error-classifiers) and [event monitoring](#event-monitors), as well as supporting both [synchronous](#retrying-synchronously) and [asynchronous](#retrying-asynchronously) styles of programming. See the [user guide](#using-the-library) below for information about the wide array of customization options this library supports.
+In addition to making retry behavior easy to understand, atmos provides the ability to customize the strategies that control [loop termination](#termination-policies), [backoff calculation](#backoff-policies), [event monitoring](#event-monitors), [result acceptance](#result-classifiers), [error handling](#error-classifiers), as well as supporting both [synchronous](#retrying-synchronously) and [asynchronous](#retrying-asynchronously) styles of programming. See the [user guide](#using-the-library) below for information about the wide array of customization options this library supports.
 
 [code](https://github.com/zmanio/atmos) - [licence](https://github.com/zmanio/atmos/blob/master/LICENSE) - [api](http://zman.io/atmos/api/#atmos.package) - [history](changelog/)
 
@@ -68,8 +84,9 @@ In addition to making retry behavior easy to understand, atmos provides the abil
  - [Using the Library](#using-the-library)
    - [Termination Policies](#termination-policies)
    - [Backoff Policies](#backoff-policies)
-   - [Error Classifiers](#error-classifiers)
    - [Event Monitors](#event-monitors)
+   - [Result Classifiers](#result-classifiers)
+   - [Error Classifiers](#error-classifiers)
    - [Retrying Synchronously](#retrying-synchronously)
    - [Retrying Asynchronously](#retrying-asynchronously)
    - [Retrying with Actors](#retrying-with-actors)
@@ -83,54 +100,61 @@ Prerequisites:
 
  - [Java](http://www.oracle.com/technetwork/java/index.html) 1.6+
 
- - [Scala](http://scala-lang.org/) 2.10.x
+ - [Scala](http://scala-lang.org/) 2.10.4+ or Scala 2.11.6+
 
 To use from SBT, add the following to your build.sbt file:
 
 ```scala
-libraryDependencies += "io.zman" %% "atmos" % "2.0"
+libraryDependencies += "io.zman" %% "atmos" % "2.1"
 ```
 
-For other build systems or to download the jar see [atmos in the central repository](http://mvnrepository.com/artifact/io.zman/atmos_2.10/2.0).
+For other build systems or to download the jar see [atmos in the central repository](http://mvnrepository.com/artifact/io.zman/atmos_2.11/2.1).
 
 <a name="using-the-library"></a>
 
 ## Using the Library
 
-The atmos library divides the definition of a retry policy into four parts:
+The atmos library divides the definition of a retry policy into five parts:
 
  - [Termination policies](#termination-policies) enforce an upper bound on the number of retry attempts.
  - [Backoff policies](#backoff-policies) calculate the delay that is inserted between retry attempts.
- - [Error classifiers](#error-classifiers) determine if an error prevents further attempts.
  - [Event monitors](#event-monitors) are notified of events that occur during a retry operation.
+ - [Result classifiers](#result-classifiers) determine if a result warrants further attempts.
+ - [Error classifiers](#error-classifiers) determine if an error prevents further attempts.
 
-Using the naive retry loop from above, we can classify its behavior according to the four elements of a retry policy:
+Using the naive retry loop from above, we can classify its behavior according to the five elements of a retry policy:
 
 
 ```scala
 while (true) {
-  attempts += 1                        // Termination policy
+  attempts += 1                                // Termination policy
   try {
-    return doSomethingThatMightFail()
+      val result = doSomethingThatMightFail()
+      if (result.length > 0) {                 // Result classifier
+        return result
+      } else {
+        println("Retrying after empty result") // Event monitor
+        Thread.sleep(backoff toMillis)         // Backoff policy
+      }
   } catch {
-    case e: SomeImportantException =>  // Error classifier
-      println("interrupted")           // Event monitor
+    case e: SomeImportantException =>          // Error classifier
+      println("interrupted")                   // Event monitor
       throw e
-    case NonFatal(e) =>                // Error classifier
-      if (attempts >= maxAttempts) {   // Termination policy
-        println("aborting")            // Event monitor
+    case NonFatal(e) =>                        // Error classifier
+      if (attempts >= maxAttempts) {           // Termination policy
+        println("aborting")                    // Event monitor
         throw e
       }
-      println("retrying")              // Event monitor
-      Thread.sleep(backoff toMillis)   // Backoff policy
+      println("retrying")                      // Event monitor
+      Thread.sleep(backoff toMillis)           // Backoff policy
     case e =>
-      println("interrupted")           // Event monitor
+      println("interrupted")                   // Event monitor
       throw e
   }
 }
 ```
 
-Atmos decomposes the traditional retry loop into these four, independent strategies and allows you to easily recombine them in whatever fashion you see fit. A reconstructed retry policy is encapsulated in the [`atmos.RetryPolicy`](http://zman.io/atmos/api/#atmos.RetryPolicy) class.
+Atmos decomposes the traditional retry loop into these five, independent strategies and allows you to easily recombine them in whatever fashion you see fit. A reconstructed retry policy is encapsulated in the [`atmos.RetryPolicy`](http://zman.io/atmos/api/#atmos.RetryPolicy) class.
 
 <a name="termination-policies"></a>
 
@@ -248,34 +272,11 @@ implicit val retryPolicy = retryForever using { constantBackoff { 1 second } ran
 val otherRetryPolicy = retryForever using { linearBackoff { 5 minutes } randomized -30.seconds -> 30.seconds }
 ```
 
-<a name="error-classifiers"></a>
-
-### Error Classifiers
-
-Errors that occur during a retry attempt can be classified as `Fatal`, `Recoverable` or `SilentlyRecoverable`. `Fatal` errors will interrupt a retry operation and cause it to immediately fail. `Recoverable` errors will be logged and suppressed so that the retry operation can continue. `SilentlyRecoverable` errors will be suppressed without being logged so that the retry operation can continue. Error classifications are defined in [`atmos.ErrorClassification`](http://zman.io/atmos/api/#atmos.ErrorClassification).
-
-Error classifiers are simply implementations of `PartialFunction` that map instances of `Throwable` to the desired error classification. In situations where a classifier is not defined for a particular error, `scala.util.control.NonFatal` is used to classify errors as `Fatal` or `Recoverable`. The appropriate partial function type is defined as [`atmos.ErrorClassifier`](http://zman.io/atmos/api/#atmos.ErrorClassifier) and includes a factory in the companion object.
-
-Error classifiers are configured by calling `onError` on an existing retry policy:
-
-```scala
-import atmos.dsl._
-
-// Stop retrying after any runtime exception.
-implicit val retryPolicy = retryForever onError { case _: RuntimeException => stopRetrying }
-
-// Don't log any runtime exceptions except illegal argument exceptions.
-val otherRetryPolicy = retryForever onError {
-  case _: IllegalArgumentException => keepRetrying
-  case _: RuntimeException => keepRetryingSilently
-}
-```
-
 <a name="event-monitors"></a>
 
 ### Event Monitors
 
-Event monitors are notified when retry attempts fail and are configured on a retry policy using `monitorWith`.  Any type that implements the [`atmos.EventMonitor`](http://zman.io/atmos/api/#atmos.EventMonitor) trait can be used in a retry policy, but the DSL exposes factory methods for creating the most common implementations.
+Event monitors are notified when retry attempts fail and are configured on a retry policy using `monitorWith` and `alsoMonitorWith`.  Any type that implements the [`atmos.EventMonitor`](http://zman.io/atmos/api/#atmos.EventMonitor) trait can be used in a retry policy, but the DSL exposes factory methods for creating the most common implementations.
 
 Event monitors handle three distinct types of events:
  - Retrying events occur when an attempt has failed but another attempt is going to be made.
@@ -328,6 +329,99 @@ val akkaRetryPolicy = retryForever monitorWith {
 }
 ```
 
+The behavior of event monitors can be customized based on the outcome of the most recent attempt:
+
+```scala
+import atmos.dsl._
+import scala.util.Failure
+import java.util.logging.Logger
+
+// When interrupted, print the error messsage unless the operation failed with a RuntimeException, in which case both
+// the message and stack trace are printed.
+val printingRetryPolicy = retryForever monitorWith {
+  System.err onInterrupted printMessage onInterruptedWhere {
+    case Failure(e: RuntimeException) => printMessageAndStackTrace
+  }
+}
+
+// Do the same thing as above but for aborted events and with simpler syntax.
+val similarPrintingRetryPolicy = retryForever monitorWith {
+  System.err onAborted printMessage onAbortedWith [RuntimeException] printMessageAndStackTrace
+}
+
+// It is possible to compose multiple monitoring customizations by chaining outcome analyzers using the `or` version
+//  of the DSL methods. Monitor customizations are also supported on Slf4j and Akka loggers.
+val loggingRetryPolicy = retryForever monitorWith {
+  Logger.getLogger("log") onRetrying logDebug onRetryingWith [RuntimeException] logInfo orOnRetryingWhere {
+    case Failure(e: Error) => logWarning
+  }
+}
+
+// NOTE: In Scala 2.10 the `onXxxWith[Throwable]` methods require chaining method invocations with `.`, `(` and `)`.
+val sameLoggingRetryPolicy = retryForever monitorWith {
+  Logger.getLogger("log").onRetrying(logDebug).onRetryingWith[RuntimeException](logInfo).orOnRetryingWhere {
+    case Failure(e: Error) => logWarning
+  }
+}
+```
+
+Finally, multiple event monitors can be chained together and each monitor will be notified of every event:
+
+```scala
+
+import java.util.logging.Logger
+import atmos.dsl._
+
+// Submit information about failed attempts to stderr as well as an instance of `java.util.logging.Logger`.
+implicit val retryPolicy = retryForever monitorWith System.err alsoMonitorWith Logger.getLogger("MyLoggerName")
+```
+
+<a name="result-classifiers"></a>
+
+### Result Classifiers
+
+Results that occur during a retry attempt can be classified as `Acceptable` or `Unaccptable`. `Acceptable` results will be immediately returned by the retry operation. `Unaccptable` results will be logged or suppressed so that the retry operation can continue if the status associated with the result indicates so. Result classifications are defined in [`atmos.ResultClassification`](http://zman.io/atmos/api/#atmos.ResultClassification).
+
+Result classifiers are simply implementations of `PartialFunction` that map instances of `Any` to the desired result classification. In situations where a classifier is not defined for a particular result, any result is considered `Acceptable`. The appropriate partial function type is defined as [`atmos.ResultClassifier`](http://zman.io/atmos/api/#atmos.ResultClassifier) and includes a factory in the companion object.
+
+Result classifiers are configured by calling `onResult` to replace the classifier on an existing retry policy, or by using `orOnResult` to chain a result classifier to the one that a retry policy already contains:
+
+```scala
+import atmos.dsl._
+
+// Do not accept any empty results.
+implicit val retryPolicy = retryForever onResult { case str: String if str isEmpty => rejectResult }
+
+// Extend the above policy by silently rejecting whitespace only results but rejecting and loggging all results that are too long.
+val otherRetryPolicy = retryPolicy orOnResult {
+  case str: String if str.trim isEmpty => rejectResult { keepRetryingSilently }
+  case str: String if str.length > maxStringLength => rejectResult
+}
+```
+
+<a name="error-classifiers"></a>
+
+### Error Classifiers
+
+Errors that occur during a retry attempt can be classified as `Fatal`, `Recoverable` or `SilentlyRecoverable`. `Fatal` errors will interrupt a retry operation and cause it to immediately fail. `Recoverable` errors will be logged or suppressed so that the retry operation can continue. `SilentlyRecoverable` errors will be suppressed without being logged so that the retry operation can continue. Error classifications are defined in [`atmos.ErrorClassification`](http://zman.io/atmos/api/#atmos.ErrorClassification).
+
+Error classifiers are simply implementations of `PartialFunction` that map instances of `Throwable` to the desired error classification. In situations where a classifier is not defined for a particular error, `scala.util.control.NonFatal` is used to classify errors as `Fatal` or `Recoverable`. The appropriate partial function type is defined as [`atmos.ErrorClassifier`](http://zman.io/atmos/api/#atmos.ErrorClassifier) and includes a factory in the companion object.
+
+Error classifiers are configured by calling `onError` to replace the classifier on an existing retry policy, or by using `orOnError` to chain an error classifier to the one that a retry policy already contains:
+
+```scala
+import atmos.dsl._
+
+// Stop retrying after any illegal argument exception.
+implicit val retryPolicy = retryForever onError { case _: IllegalArgumentException => stopRetrying }
+
+// Extend the above policy by loggging all illegal state exceptions but supressing logging for all other runtime exceptions.
+val otherRetryPolicy = retryPolicy orOnError {
+  case _: IllegalStateException => keepRetrying
+  case _: RuntimeException => keepRetryingSilently
+}
+```
+
 <a name="retrying-synchronously"></a>
 
 ### Retrying Synchronously
@@ -362,6 +456,8 @@ policy.retry() { doSomethingMysterious() }
 val result2 = policy.retry(None) { getSomethingMysterious() }
 ```
 
+You may optionally define an implicit `rummage.Clock`, from the [rummage](http://zman.io/rummage) project, at the point the retry operation is invoked. This is the component responsible for blocking the calling thread until a backoff duration expires. By default, timing is controlled by a singular, global daemon thread. It is unlikely that you will need to provide a custom clock outside of testing.
+
 It is important to note that synchronous retry operations will block the calling thread while waiting for a backoff duration to expire. Use synchronous retries carefully in situations where you do not control the calling thread.
 
 <a name="retrying-asynchronously"></a>
@@ -375,11 +471,13 @@ To retry asynchronously you call the `retryAsync()` method and pass it a block o
 When retrying asynchronously, certain additional dependencies must be specified:
 
  - There must be an implicit `scala.concurrent.ExecutionContext` available at the point the retry operation is invoked. This execution context is where the block provided to `retryAsync()` will be executed during subsequent retries. This can typically be the same context used to execute your futures (if applicable).
- - You may optionally define an implicit `rummage.Timer`, from the [rummage](http://zman.io/rummage) project, at the point the retry operation is invoked. This is the component responsible for providing non-blocking, asynchronous callbacks based on when a backoff duration expires. By default, timing is controlled by a singular, global daemon thread. It is unlikely that you will need to provide a custom timer unless you are working with [actors](#retrying-with-actors).
+ - You may optionally define an implicit `rummage.Clock`, from the [rummage](http://zman.io/rummage) project, at the point the retry operation is invoked. This is the component responsible for providing non-blocking, asynchronous callbacks based on when a backoff duration expires. By default, timing is controlled by a singular, global daemon thread. It is unlikely that you will need to provide a custom clock outside of testing unless you are working with [actors](#retrying-with-actors).
+ - The atmos DSL provides support for limiting the amount of time that a future is allowed to complete by providing a `withDeadline` method on `scala.concurrent.Future`.
 
 Asynchronous retries support the same operations as the synchronous form: you may optionally provide an operation name and you can either call this method via the DSL with an implicit retry policy or directly on the retry policy itself.
 
 ```scala
+import scala.concurrent.duration._
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 import atmos.dsl._
@@ -391,8 +489,16 @@ retryAsync("Doing something in the future") { Future { doSomething() } }
 val futureResult = retryAsync(Some("Getting something in the future")) { Future { getSomething() } }
 
 // The following two statements will have a generic operation name in log messages:
-policy.retryAsync() { Future { doSomethingMysterious() } }
+retryAsync() { Future { doSomethingMysterious() } }
 val futureResult = policy.retryAsync(None) { Future { getSomethingInTheFuture() } }
+
+// It is possible to limit the amount of time in which a single retry attempt can complete.
+retryAsync() { Future { doSomethingMysterious() } withDeadline 20.seconds }
+val futureResult = policy.retryAsync() { Future { doSomethingMysterious() } withDeadline 20.seconds }
+
+// It is possible to limit the amount of time in which an entire retry operation can complete.
+retryAsync() { Future { doSomethingMysterious() } } withDeadline 20.seconds
+val futureResult = policy.retryAsync() { Future { doSomethingMysterious() } } withDeadline 20.seconds
 ```
 
 <a name="retrying-with-actors"></a>
@@ -401,7 +507,7 @@ val futureResult = policy.retryAsync(None) { Future { getSomethingInTheFuture() 
 
 The atmos library has built-in support for [Akka](http://akka.io/), specifically for retrying asynchronously when using the ask pattern. To use this library with actors there are only a couple extra steps involved beyond what is described in [Retrying Asynchronously](#retrying-asynchronously) above.
 
-First, you will want to make sure you have an implicit instance of `rummage.AkkaTimer` from the [rummage](http://zman.io/rummage) project in scope, this will make sure that your actor system is the one responsible for scheduling asynchronous backoff timers. Second, you'll want to make sure and use Akka logging support to keep your entire retry operation non-blocking.
+First, you will want to make sure you have an implicit instance of `rummage.Clock` from the [rummage](http://zman.io/rummage) project in scope, this will make sure that your actor system is the one responsible for scheduling asynchronous backoff timers. This can be accomplished by importing `rummage.AkkaClocks._` inside an actor or by creating an implicit `rummage.AkkaClock` yourself. Second, you'll want to make sure and use Akka logging support to keep your entire retry operation non-blocking.
 
 ```scala
 import scala.concurrent.duration._
@@ -409,7 +515,7 @@ import akka.actor.{ ActorRef, ActorSystem }
 import akka.event.Logging
 import akka.pattern.{ ask, pipe }
 import akka.util.Timeout
-import rummage.AkkaTimer
+import rummage.AkkaClock._
 import atmos.dsl._
 import AkkaSupport._
 
@@ -417,10 +523,10 @@ val system: ActorSystem = ???
 val actor: ActorRef = ???
 val otherActor: ActorRef = ???
 
-implicit val context = system.dispatcher
-implicit val timer = AkkaTimer(system)
-implicit val timeout = Timeout(2 seconds)
 implicit val policy = retryForever monitorWith Logging(system, this.getClass)
+implicit val context = system.dispatcher
+implicit val clock = AkkaClock(system.scheduler)
+implicit val timeout = Timeout(2 seconds)
 
 retryAsync("Ask an actor over and over") { actor ? "Hello!" } pipeTo otherActor
 ```

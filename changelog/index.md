@@ -3,11 +3,43 @@ title: changelog
 headline: they say history inevitably repeats itself
 layout: page
 ---
+# 2.1 (2015-05-23)
+
+ - Added support for Scala 2.11 in addition to Scala 2.10.
+ 
+ - Added `atmos.ResultClassifier`, `atmos.ResultClassification` and modified the retry logic to support unacceptable
+   results. Also added `onResult`, `acceptResult`, `rejectResult` and other supporting classes to the DSL.
+ 
+ - Changed backoff policies from accepting `previousError: Throwable` to `outcome: Try[Any]` in order to support the
+   addition of result classifiers. This is a breaking change for any implementations of `BackoffPolicy`, as well as any
+   uses of `atmos.backoff.SelectedBackoff` or the DSL method `selectedBackoff`. Uses of other backoff implementations
+   or other backoff elements of the DSL will continue to compile normally.
+ 
+ - Changed event monitors from accepting `thrown: Throwable` to `outcome: Try[Any]` in order to support the addition of
+   result classifiers. This is a breaking change for any implementations of `EventMonitor` or extensions of the
+   classes defined in `atmos.monitor`. Direct usage of the DSL will continue to compile normally.
+   
+ - Added support for chaining together multiple event monitors in `atmos.events.ChainedEvents` and in the DSL as
+   `alsoMonitorWith`.
+   
+ - Added library and DSL support for fine grained event monitoring to all supported event monitors.
+   
+ - Added support for chaining together multiple result classifiers and error classifiers in the DSL.
+   
+ - Moved from using the deprecated `rummage.Timer` to the new `rummage.Clock` for tracking time and implementing synchronous and asynchronous backoffs.
+   
+ - Included the `rummage.Deadlines` DSL in the atmos DSL, enabling the use of `withDeadline` on arbitrary futures.
+
+# 2.0.1 (2015-04-18)
+
+Rebuilt the 2.0 library with a version of [scoverage](https://github.com/scoverage/sbt-scoverage) that does not add itself to this library's transitive dependency chain.
+
 # 2.0 (2014-09-12)
 
 Moved to the `io.zman` organization namespace and moved from the `atmos.retries` package to the `atmos` package.
 
-In addition to the namespace changes, much of the code was refactored to break up files that had begun to grow far too large. There were no notable functionality changes in this release.
+In addition to the namespace changes, much of the code was refactored to break up files that had begun to grow far too
+large. There were no notable functionality changes in this release.
 
 # 1.3 (2014-03-10)
 

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
           <title>monitor - atmos.monitor</title>
@@ -9,6 +8,11 @@
           
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+      
       <script type="text/javascript">
          if(top === self) {
             var url = '../../index.html';
@@ -26,7 +30,11 @@
       <div id="definition">
         <img src="../../lib/package_big.png" />
         <p id="owner"><a href="../package.html" class="extype" name="atmos">atmos</a></p>
-        <h1>monitor</h1>
+        <h1>monitor</h1><span class="permalink">
+      <a href="../../index.html#atmos.monitor.package" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -82,7 +90,43 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="atmos.monitor.FormatEvents" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+              <ol><li name="atmos.monitor.ChainedEvents" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ChainedEventsextendsEventMonitorwithProductwithSerializable"></a>
+      <a id="ChainedEvents:ChainedEvents"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="ChainedEvents.html"><span class="name">ChainedEvents</span></a><span class="params">(<span name="firstMonitor">firstMonitor: <a href="../EventMonitor.html" class="extype" name="atmos.EventMonitor">EventMonitor</a></span>, <span name="secondMonitor">secondMonitor: <a href="../EventMonitor.html" class="extype" name="atmos.EventMonitor">EventMonitor</a></span>)</span><span class="result"> extends <a href="../EventMonitor.html" class="extype" name="atmos.EventMonitor">EventMonitor</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.package@ChainedEventsextendsEventMonitorwithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A monitor that will always pass invocations on to the two specified monitors.</p><div class="fullcomment"><div class="comment cmt"><p>A monitor that will always pass invocations on to the two specified monitors.
+</p></div><dl class="paramcmts block"><dt class="param">firstMonitor</dt><dd class="cmt"><p>The first event monitor to pass all invocations to.</p></dd><dt class="param">secondMonitor</dt><dd class="cmt"><p>The second event monitor to pass all invocations to.
+</p></dd></dl></div>
+    </li><li name="atmos.monitor.EventClassifier" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="EventClassifier[T]=PartialFunction[scala.util.Try[Any],T]"></a>
+      <a id="EventClassifier[T]:EventClassifier[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">EventClassifier</span><span class="tparams">[<span name="T">T</span>]</span><span class="result"> = <span class="extype" name="scala.PartialFunction">PartialFunction</span>[<span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Any">Any</span>], <span class="extype" name="atmos.monitor.EventClassifier.T">T</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.package@EventClassifier[T]=PartialFunction[scala.util.Try[Any],T]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The type of event classifier functions.</p>
+    </li><li name="atmos.monitor.FormatEvents" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="FormatEventsextendsAnyRef"></a>
       <a id="FormatEvents:FormatEvents"></a>
       <h4 class="signature">
@@ -93,8 +137,12 @@
       <span class="symbol">
         <a href="FormatEvents.html"><span class="name">FormatEvents</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">A mix-in that formats messages for retry events.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.package@FormatEventsextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A mix-in that formats messages for retry events.</p>
     </li><li name="atmos.monitor.LogAction" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="LogAction[+T]extendsAnyRef"></a>
       <a id="LogAction[+T]:LogAction[T]"></a>
@@ -106,8 +154,12 @@
       <span class="symbol">
         <a href="LogAction.html"><span class="name">LogAction</span></a><span class="tparams">[<span name="T">+T</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Base type for logging-related actions that can be performed when a retry event is received.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.package@LogAction[+T]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Base type for logging-related actions that can be performed when a retry event is received.</p>
     </li><li name="atmos.monitor.LogEvents" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="LogEventsextendsEventMonitorwithFormatEvents"></a>
       <a id="LogEvents:LogEvents"></a>
@@ -119,9 +171,13 @@
       <span class="symbol">
         <a href="LogEvents.html"><span class="name">LogEvents</span></a><span class="result"> extends <a href="../EventMonitor.html" class="extype" name="atmos.EventMonitor">EventMonitor</a> with <a href="FormatEvents.html" class="extype" name="atmos.monitor.FormatEvents">FormatEvents</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">Base type for event monitors that submit log entries for retry events.</p>
-    </li><li name="atmos.monitor.LogEventsWithAkka" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.package@LogEventsextendsEventMonitorwithFormatEvents" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Base type for event monitors that submit log entries for retry events.</p>
+    </li><li name="atmos.monitor.LogEventsWithAkka" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="LogEventsWithAkkaextendsLogEventswithProductwithSerializable"></a>
       <a id="LogEventsWithAkka:LogEventsWithAkka"></a>
       <h4 class="signature">
@@ -130,11 +186,20 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="LogEventsWithAkka.html"><span class="name">LogEventsWithAkka</span></a><span class="params">(<span name="adapter">adapter: <span class="extype" name="akka.event.LoggingAdapter">LoggingAdapter</span></span>, <span name="retryingAction">retryingAction: <a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<span class="extype" name="akka.event.Logging.LogLevel">LogLevel</span>] = <span class="defval" name="LogEventsWithAkka.defaultRetryingAction">...</span></span>, <span name="interruptedAction">interruptedAction: <a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<span class="extype" name="akka.event.Logging.LogLevel">LogLevel</span>] = <span class="defval" name="LogEventsWithAkka.defaultInterruptedAction">...</span></span>, <span name="abortedAction">abortedAction: <a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<span class="extype" name="akka.event.Logging.LogLevel">LogLevel</span>] = <span class="defval" name="LogEventsWithAkka.defaultAbortedAction">...</span></span>)</span><span class="result"> extends <a href="LogEvents.html" class="extype" name="atmos.monitor.LogEvents">LogEvents</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="LogEventsWithAkka.html"><span class="name">LogEventsWithAkka</span></a><span class="params">(<span name="adapter">adapter: <span class="extype" name="akka.event.LoggingAdapter">LoggingAdapter</span></span>, <span name="retryingAction">retryingAction: <a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<span class="extype" name="akka.event.Logging.LogLevel">LogLevel</span>] = <span class="defval" name='<span class="name"><a href="LogEventsWithAkka$.html">LogEventsWithAkka.defaultRetryingAction</a></span>'>...</span></span>, <span name="interruptedAction">interruptedAction: <a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<span class="extype" name="akka.event.Logging.LogLevel">LogLevel</span>] = <span class="defval" name='<span class="name"><a href="LogEventsWithAkka$.html">LogEventsWithAkka.defaultInterruptedAction</a></span>'>...</span></span>, <span name="abortedAction">abortedAction: <a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<span class="extype" name="akka.event.Logging.LogLevel">LogLevel</span>] = <span class="defval" name='<span class="name"><a href="LogEventsWithAkka$.html">LogEventsWithAkka.defaultAbortedAction</a></span>'>...</span></span>, <span name="retryingActionSelector">retryingActionSelector: <a href="#EventClassifier[T]=PartialFunction[scala.util.Try[Any],T]" class="extmbr" name="atmos.monitor.EventClassifier">EventClassifier</a>[<a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<span class="extype" name="akka.event.Logging.LogLevel">LogLevel</span>]] = <span class="symbol"><span class="name"><a href="package$$EventClassifier$.html">EventClassifier.empty</a></span></span></span>, <span name="interruptedActionSelector">interruptedActionSelector: <a href="#EventClassifier[T]=PartialFunction[scala.util.Try[Any],T]" class="extmbr" name="atmos.monitor.EventClassifier">EventClassifier</a>[<a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<span class="extype" name="akka.event.Logging.LogLevel">LogLevel</span>]] = <span class="symbol"><span class="name"><a href="package$$EventClassifier$.html">EventClassifier.empty</a></span></span></span>, <span name="abortedActionSelector">abortedActionSelector: <a href="#EventClassifier[T]=PartialFunction[scala.util.Try[Any],T]" class="extmbr" name="atmos.monitor.EventClassifier">EventClassifier</a>[<a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<span class="extype" name="akka.event.Logging.LogLevel">LogLevel</span>]] = <span class="symbol"><span class="name"><a href="package$$EventClassifier$.html">EventClassifier.empty</a></span></span></span>)</span><span class="result"> extends <a href="LogEvents.html" class="extype" name="atmos.monitor.LogEvents">LogEvents</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">An event monitor that formats and logs events using the <code>akka.event.LoggingAdapter</code> framework.</p>
-    </li><li name="atmos.monitor.LogEventsWithJava" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.package@LogEventsWithAkkaextendsLogEventswithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">An event monitor that formats and logs events using the <code>akka.event.LoggingAdapter</code> framework.</p><div class="fullcomment"><div class="comment cmt"><p>An event monitor that formats and logs events using the <code>akka.event.LoggingAdapter</code> framework.
+</p></div><dl class="paramcmts block"><dt class="param">adapter</dt><dd class="cmt"><p>The logging adapter that this event monitor submits to.</p></dd><dt class="param">retryingAction</dt><dd class="cmt"><p>The action that is performed by default when a retrying event is received.</p></dd><dt class="param">interruptedAction</dt><dd class="cmt"><p>The action that is performed by default when an interrupted event is received.</p></dd><dt class="param">abortedAction</dt><dd class="cmt"><p>The action that is performed by default when an aborted event is received.</p></dd><dt class="param">retryingActionSelector</dt><dd class="cmt"><p>The strategy used to select an action to perform for a retrying event, defaulting to
+                              <code>retryingAction</code>.</p></dd><dt class="param">interruptedActionSelector</dt><dd class="cmt"><p>The strategy used to select an action to perform for an interrupted event,
+                                 defaulting to <code>interruptedAction</code>.</p></dd><dt class="param">abortedActionSelector</dt><dd class="cmt"><p>The strategy used to select an action to perform for an aborted event, defaulting to
+                             <code>abortedAction</code>.
+</p></dd></dl></div>
+    </li><li name="atmos.monitor.LogEventsWithJava" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="LogEventsWithJavaextendsLogEventswithProductwithSerializable"></a>
       <a id="LogEventsWithJava:LogEventsWithJava"></a>
       <h4 class="signature">
@@ -143,11 +208,20 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="LogEventsWithJava.html"><span class="name">LogEventsWithJava</span></a><span class="params">(<span name="logger">logger: <span class="extype" name="java.util.logging.Logger">Logger</span></span>, <span name="retryingAction">retryingAction: <a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<span class="extype" name="java.util.logging.Level">Level</span>] = <span class="defval" name="LogEventsWithJava.defaultRetryingAction">...</span></span>, <span name="interruptedAction">interruptedAction: <a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<span class="extype" name="java.util.logging.Level">Level</span>] = <span class="defval" name="LogEventsWithJava.defaultInterruptedAction">...</span></span>, <span name="abortedAction">abortedAction: <a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<span class="extype" name="java.util.logging.Level">Level</span>] = <span class="defval" name="LogEventsWithJava.defaultAbortedAction">...</span></span>)</span><span class="result"> extends <a href="LogEvents.html" class="extype" name="atmos.monitor.LogEvents">LogEvents</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="LogEventsWithJava.html"><span class="name">LogEventsWithJava</span></a><span class="params">(<span name="logger">logger: <span class="extype" name="java.util.logging.Logger">Logger</span></span>, <span name="retryingAction">retryingAction: <a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<span class="extype" name="java.util.logging.Level">Level</span>] = <span class="defval" name='<span class="name"><a href="LogEventsWithJava$.html">LogEventsWithJava.defaultRetryingAction</a></span>'>...</span></span>, <span name="interruptedAction">interruptedAction: <a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<span class="extype" name="java.util.logging.Level">Level</span>] = <span class="defval" name='<span class="name"><a href="LogEventsWithJava$.html">LogEventsWithJava.defaultInterruptedAction</a></span>'>...</span></span>, <span name="abortedAction">abortedAction: <a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<span class="extype" name="java.util.logging.Level">Level</span>] = <span class="defval" name='<span class="name"><a href="LogEventsWithJava$.html">LogEventsWithJava.defaultAbortedAction</a></span>'>...</span></span>, <span name="retryingActionSelector">retryingActionSelector: <a href="#EventClassifier[T]=PartialFunction[scala.util.Try[Any],T]" class="extmbr" name="atmos.monitor.EventClassifier">EventClassifier</a>[<a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<span class="extype" name="java.util.logging.Level">Level</span>]] = <span class="symbol"><span class="name"><a href="package$$EventClassifier$.html">EventClassifier.empty</a></span></span></span>, <span name="interruptedActionSelector">interruptedActionSelector: <a href="#EventClassifier[T]=PartialFunction[scala.util.Try[Any],T]" class="extmbr" name="atmos.monitor.EventClassifier">EventClassifier</a>[<a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<span class="extype" name="java.util.logging.Level">Level</span>]] = <span class="symbol"><span class="name"><a href="package$$EventClassifier$.html">EventClassifier.empty</a></span></span></span>, <span name="abortedActionSelector">abortedActionSelector: <a href="#EventClassifier[T]=PartialFunction[scala.util.Try[Any],T]" class="extmbr" name="atmos.monitor.EventClassifier">EventClassifier</a>[<a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<span class="extype" name="java.util.logging.Level">Level</span>]] = <span class="symbol"><span class="name"><a href="package$$EventClassifier$.html">EventClassifier.empty</a></span></span></span>)</span><span class="result"> extends <a href="LogEvents.html" class="extype" name="atmos.monitor.LogEvents">LogEvents</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">An event monitor that formats and logs events using the <code>java.util.logging</code> framework.</p>
-    </li><li name="atmos.monitor.LogEventsWithSlf4j" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.package@LogEventsWithJavaextendsLogEventswithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">An event monitor that formats and logs events using the <code>java.util.logging</code> framework.</p><div class="fullcomment"><div class="comment cmt"><p>An event monitor that formats and logs events using the <code>java.util.logging</code> framework.
+</p></div><dl class="paramcmts block"><dt class="param">logger</dt><dd class="cmt"><p>The logger that this event monitor submits to.</p></dd><dt class="param">retryingAction</dt><dd class="cmt"><p>The action that is performed by default when a retrying event is received.</p></dd><dt class="param">interruptedAction</dt><dd class="cmt"><p>The action that is performed by default when an interrupted event is received.</p></dd><dt class="param">abortedAction</dt><dd class="cmt"><p>The action that is performed by default when an aborted event is received.</p></dd><dt class="param">retryingActionSelector</dt><dd class="cmt"><p>The strategy used to select an action to perform for a retrying event, defaulting to
+                              <code>retryingAction</code>.</p></dd><dt class="param">interruptedActionSelector</dt><dd class="cmt"><p>The strategy used to select an action to perform for an interrupted event,
+                                 defaulting to <code>interruptedAction</code>.</p></dd><dt class="param">abortedActionSelector</dt><dd class="cmt"><p>The strategy used to select an action to perform for an aborted event, defaulting to
+                             <code>abortedAction</code>.
+</p></dd></dl></div>
+    </li><li name="atmos.monitor.LogEventsWithSlf4j" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="LogEventsWithSlf4jextendsLogEventswithProductwithSerializable"></a>
       <a id="LogEventsWithSlf4j:LogEventsWithSlf4j"></a>
       <h4 class="signature">
@@ -156,10 +230,19 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="LogEventsWithSlf4j.html"><span class="name">LogEventsWithSlf4j</span></a><span class="params">(<span name="logger">logger: <span class="extype" name="org.slf4j.Logger">Logger</span></span>, <span name="retryingAction">retryingAction: <a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<a href="LogEventsWithSlf4j$$Slf4jLevel.html" class="extype" name="atmos.monitor.LogEventsWithSlf4j.Slf4jLevel">Slf4jLevel</a>] = <span class="defval" name="LogEventsWithSlf4j.defaultRetryingAction">...</span></span>, <span name="interruptedAction">interruptedAction: <a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<a href="LogEventsWithSlf4j$$Slf4jLevel.html" class="extype" name="atmos.monitor.LogEventsWithSlf4j.Slf4jLevel">Slf4jLevel</a>] = <span class="defval" name="LogEventsWithSlf4j.defaultInterruptedAction">...</span></span>, <span name="abortedAction">abortedAction: <a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<a href="LogEventsWithSlf4j$$Slf4jLevel.html" class="extype" name="atmos.monitor.LogEventsWithSlf4j.Slf4jLevel">Slf4jLevel</a>] = <span class="defval" name="LogEventsWithSlf4j.defaultAbortedAction">...</span></span>)</span><span class="result"> extends <a href="LogEvents.html" class="extype" name="atmos.monitor.LogEvents">LogEvents</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="LogEventsWithSlf4j.html"><span class="name">LogEventsWithSlf4j</span></a><span class="params">(<span name="logger">logger: <span class="extype" name="org.slf4j.Logger">Logger</span></span>, <span name="retryingAction">retryingAction: <a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<a href="LogEventsWithSlf4j$$Slf4jLevel.html" class="extype" name="atmos.monitor.LogEventsWithSlf4j.Slf4jLevel">Slf4jLevel</a>] = <span class="defval" name='<span class="name"><a href="LogEventsWithSlf4j$.html">LogEventsWithSlf4j.defaultRetryingAction</a></span>'>...</span></span>, <span name="interruptedAction">interruptedAction: <a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<a href="LogEventsWithSlf4j$$Slf4jLevel.html" class="extype" name="atmos.monitor.LogEventsWithSlf4j.Slf4jLevel">Slf4jLevel</a>] = <span class="defval" name='<span class="name"><a href="LogEventsWithSlf4j$.html">LogEventsWithSlf4j.defaultInterruptedAction</a></span>'>...</span></span>, <span name="abortedAction">abortedAction: <a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<a href="LogEventsWithSlf4j$$Slf4jLevel.html" class="extype" name="atmos.monitor.LogEventsWithSlf4j.Slf4jLevel">Slf4jLevel</a>] = <span class="defval" name='<span class="name"><a href="LogEventsWithSlf4j$.html">LogEventsWithSlf4j.defaultAbortedAction</a></span>'>...</span></span>, <span name="retryingActionSelector">retryingActionSelector: <a href="#EventClassifier[T]=PartialFunction[scala.util.Try[Any],T]" class="extmbr" name="atmos.monitor.EventClassifier">EventClassifier</a>[<a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<a href="LogEventsWithSlf4j$$Slf4jLevel.html" class="extype" name="atmos.monitor.LogEventsWithSlf4j.Slf4jLevel">Slf4jLevel</a>]] = <span class="symbol"><span class="name"><a href="package$$EventClassifier$.html">EventClassifier.empty</a></span></span></span>, <span name="interruptedActionSelector">interruptedActionSelector: <a href="#EventClassifier[T]=PartialFunction[scala.util.Try[Any],T]" class="extmbr" name="atmos.monitor.EventClassifier">EventClassifier</a>[<a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<a href="LogEventsWithSlf4j$$Slf4jLevel.html" class="extype" name="atmos.monitor.LogEventsWithSlf4j.Slf4jLevel">Slf4jLevel</a>]] = <span class="symbol"><span class="name"><a href="package$$EventClassifier$.html">EventClassifier.empty</a></span></span></span>, <span name="abortedActionSelector">abortedActionSelector: <a href="#EventClassifier[T]=PartialFunction[scala.util.Try[Any],T]" class="extmbr" name="atmos.monitor.EventClassifier">EventClassifier</a>[<a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<a href="LogEventsWithSlf4j$$Slf4jLevel.html" class="extype" name="atmos.monitor.LogEventsWithSlf4j.Slf4jLevel">Slf4jLevel</a>]] = <span class="symbol"><span class="name"><a href="package$$EventClassifier$.html">EventClassifier.empty</a></span></span></span>)</span><span class="result"> extends <a href="LogEvents.html" class="extype" name="atmos.monitor.LogEvents">LogEvents</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">An event monitor that formats and logs events using Slf4j.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.package@LogEventsWithSlf4jextendsLogEventswithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">An event monitor that formats and logs events using Slf4j.</p><div class="fullcomment"><div class="comment cmt"><p>An event monitor that formats and logs events using Slf4j.
+</p></div><dl class="paramcmts block"><dt class="param">logger</dt><dd class="cmt"><p>The logger that this event monitor submits to.</p></dd><dt class="param">retryingAction</dt><dd class="cmt"><p>The action that is performed by default when a retrying event is received.</p></dd><dt class="param">interruptedAction</dt><dd class="cmt"><p>The action that is performed by default when an interrupted event is received.</p></dd><dt class="param">abortedAction</dt><dd class="cmt"><p>The action that is performed by default when an aborted event is received.</p></dd><dt class="param">retryingActionSelector</dt><dd class="cmt"><p>The strategy used to select an action to perform for a retrying event, defaulting to
+                              <code>retryingAction</code>.</p></dd><dt class="param">interruptedActionSelector</dt><dd class="cmt"><p>The strategy used to select an action to perform for an interrupted event,
+                                 defaulting to <code>interruptedAction</code>.</p></dd><dt class="param">abortedActionSelector</dt><dd class="cmt"><p>The strategy used to select an action to perform for an aborted event, defaulting to
+                             <code>abortedAction</code>.
+</p></dd></dl></div>
     </li><li name="atmos.monitor.PrintAction" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="PrintActionextendsAnyRef"></a>
       <a id="PrintAction:PrintAction"></a>
@@ -171,8 +254,12 @@
       <span class="symbol">
         <a href="PrintAction.html"><span class="name">PrintAction</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Base type for printing-related actions that can be performed when a retry event is received.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.package@PrintActionextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Base type for printing-related actions that can be performed when a retry event is received.</p>
     </li><li name="atmos.monitor.PrintEvents" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="PrintEventsextendsEventMonitorwithFormatEvents"></a>
       <a id="PrintEvents:PrintEvents"></a>
@@ -184,9 +271,13 @@
       <span class="symbol">
         <a href="PrintEvents.html"><span class="name">PrintEvents</span></a><span class="result"> extends <a href="../EventMonitor.html" class="extype" name="atmos.EventMonitor">EventMonitor</a> with <a href="FormatEvents.html" class="extype" name="atmos.monitor.FormatEvents">FormatEvents</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">Base type for event monitors that print information about retry events as text.</p>
-    </li><li name="atmos.monitor.PrintEventsWithStream" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.package@PrintEventsextendsEventMonitorwithFormatEvents" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Base type for event monitors that print information about retry events as text.</p>
+    </li><li name="atmos.monitor.PrintEventsWithStream" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="PrintEventsWithStreamextendsPrintEventswithProductwithSerializable"></a>
       <a id="PrintEventsWithStream:PrintEventsWithStream"></a>
       <h4 class="signature">
@@ -195,11 +286,20 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="PrintEventsWithStream.html"><span class="name">PrintEventsWithStream</span></a><span class="params">(<span name="stream">stream: <span class="extype" name="java.io.PrintStream">PrintStream</span></span>, <span name="retryingAction">retryingAction: <a href="PrintAction.html" class="extype" name="atmos.monitor.PrintAction">PrintAction</a> = <span class="defval" name="PrintEventsWithStream.defaultRetryingAction">...</span></span>, <span name="interruptedAction">interruptedAction: <a href="PrintAction.html" class="extype" name="atmos.monitor.PrintAction">PrintAction</a> = <span class="defval" name="PrintEventsWithStream.defaultInterruptedAction">...</span></span>, <span name="abortedAction">abortedAction: <a href="PrintAction.html" class="extype" name="atmos.monitor.PrintAction">PrintAction</a> = <span class="defval" name="PrintEventsWithStream.defaultAbortedAction">...</span></span>)</span><span class="result"> extends <a href="PrintEvents.html" class="extype" name="atmos.monitor.PrintEvents">PrintEvents</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="PrintEventsWithStream.html"><span class="name">PrintEventsWithStream</span></a><span class="params">(<span name="stream">stream: <span class="extype" name="java.io.PrintStream">PrintStream</span></span>, <span name="retryingAction">retryingAction: <a href="PrintAction.html" class="extype" name="atmos.monitor.PrintAction">PrintAction</a> = <span class="defval" name='<span class="name"><a href="PrintEventsWithStream$.html">PrintEventsWithStream.defaultRetryingAction</a></span>'>...</span></span>, <span name="interruptedAction">interruptedAction: <a href="PrintAction.html" class="extype" name="atmos.monitor.PrintAction">PrintAction</a> = <span class="defval" name='<span class="name"><a href="PrintEventsWithStream$.html">PrintEventsWithStream.defaultInterruptedAction</a></span>'>...</span></span>, <span name="abortedAction">abortedAction: <a href="PrintAction.html" class="extype" name="atmos.monitor.PrintAction">PrintAction</a> = <span class="defval" name='<span class="name"><a href="PrintEventsWithStream$.html">PrintEventsWithStream.defaultAbortedAction</a></span>'>...</span></span>, <span name="retryingActionSelector">retryingActionSelector: <a href="#EventClassifier[T]=PartialFunction[scala.util.Try[Any],T]" class="extmbr" name="atmos.monitor.EventClassifier">EventClassifier</a>[<a href="PrintAction.html" class="extype" name="atmos.monitor.PrintAction">PrintAction</a>] = <span class="symbol"><span class="name"><a href="package$$EventClassifier$.html">EventClassifier.empty</a></span></span></span>, <span name="interruptedActionSelector">interruptedActionSelector: <a href="#EventClassifier[T]=PartialFunction[scala.util.Try[Any],T]" class="extmbr" name="atmos.monitor.EventClassifier">EventClassifier</a>[<a href="PrintAction.html" class="extype" name="atmos.monitor.PrintAction">PrintAction</a>] = <span class="symbol"><span class="name"><a href="package$$EventClassifier$.html">EventClassifier.empty</a></span></span></span>, <span name="abortedActionSelector">abortedActionSelector: <a href="#EventClassifier[T]=PartialFunction[scala.util.Try[Any],T]" class="extmbr" name="atmos.monitor.EventClassifier">EventClassifier</a>[<a href="PrintAction.html" class="extype" name="atmos.monitor.PrintAction">PrintAction</a>] = <span class="symbol"><span class="name"><a href="package$$EventClassifier$.html">EventClassifier.empty</a></span></span></span>)</span><span class="result"> extends <a href="PrintEvents.html" class="extype" name="atmos.monitor.PrintEvents">PrintEvents</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">An event monitor that prints information about retry events to a stream.</p>
-    </li><li name="atmos.monitor.PrintEventsWithWriter" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.package@PrintEventsWithStreamextendsPrintEventswithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">An event monitor that prints information about retry events to a stream.</p><div class="fullcomment"><div class="comment cmt"><p>An event monitor that prints information about retry events to a stream.
+</p></div><dl class="paramcmts block"><dt class="param">stream</dt><dd class="cmt"><p>The stream that this event monitor prints to.</p></dd><dt class="param">retryingAction</dt><dd class="cmt"><p>The action that is performed by default when a retrying event is received.</p></dd><dt class="param">interruptedAction</dt><dd class="cmt"><p>The action that is performed by default when an interrupted event is received.</p></dd><dt class="param">abortedAction</dt><dd class="cmt"><p>The action that is performed by default when an aborted event is received.</p></dd><dt class="param">retryingActionSelector</dt><dd class="cmt"><p>The strategy used to select an action to perform for a retrying event, defaulting to
+                              <code>retryingAction</code>.</p></dd><dt class="param">interruptedActionSelector</dt><dd class="cmt"><p>The strategy used to select an action to perform for an interrupted event,
+                                 defaulting to <code>interruptedAction</code>.</p></dd><dt class="param">abortedActionSelector</dt><dd class="cmt"><p>The strategy used to select an action to perform for an aborted event, defaulting to
+                             <code>abortedAction</code>.
+</p></dd></dl></div>
+    </li><li name="atmos.monitor.PrintEventsWithWriter" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="PrintEventsWithWriterextendsPrintEventswithProductwithSerializable"></a>
       <a id="PrintEventsWithWriter:PrintEventsWithWriter"></a>
       <h4 class="signature">
@@ -208,10 +308,19 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="PrintEventsWithWriter.html"><span class="name">PrintEventsWithWriter</span></a><span class="params">(<span name="writer">writer: <span class="extype" name="java.io.PrintWriter">PrintWriter</span></span>, <span name="retryingAction">retryingAction: <a href="PrintAction.html" class="extype" name="atmos.monitor.PrintAction">PrintAction</a> = <span class="defval" name="PrintEventsWithWriter.defaultRetryingAction">...</span></span>, <span name="interruptedAction">interruptedAction: <a href="PrintAction.html" class="extype" name="atmos.monitor.PrintAction">PrintAction</a> = <span class="defval" name="PrintEventsWithWriter.defaultInterruptedAction">...</span></span>, <span name="abortedAction">abortedAction: <a href="PrintAction.html" class="extype" name="atmos.monitor.PrintAction">PrintAction</a> = <span class="defval" name="PrintEventsWithWriter.defaultAbortedAction">...</span></span>)</span><span class="result"> extends <a href="PrintEvents.html" class="extype" name="atmos.monitor.PrintEvents">PrintEvents</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="PrintEventsWithWriter.html"><span class="name">PrintEventsWithWriter</span></a><span class="params">(<span name="writer">writer: <span class="extype" name="java.io.PrintWriter">PrintWriter</span></span>, <span name="retryingAction">retryingAction: <a href="PrintAction.html" class="extype" name="atmos.monitor.PrintAction">PrintAction</a> = <span class="defval" name='<span class="name"><a href="PrintEventsWithWriter$.html">PrintEventsWithWriter.defaultRetryingAction</a></span>'>...</span></span>, <span name="interruptedAction">interruptedAction: <a href="PrintAction.html" class="extype" name="atmos.monitor.PrintAction">PrintAction</a> = <span class="defval" name='<span class="name"><a href="PrintEventsWithWriter$.html">PrintEventsWithWriter.defaultInterruptedAction</a></span>'>...</span></span>, <span name="abortedAction">abortedAction: <a href="PrintAction.html" class="extype" name="atmos.monitor.PrintAction">PrintAction</a> = <span class="defval" name='<span class="name"><a href="PrintEventsWithWriter$.html">PrintEventsWithWriter.defaultAbortedAction</a></span>'>...</span></span>, <span name="retryingActionSelector">retryingActionSelector: <a href="#EventClassifier[T]=PartialFunction[scala.util.Try[Any],T]" class="extmbr" name="atmos.monitor.EventClassifier">EventClassifier</a>[<a href="PrintAction.html" class="extype" name="atmos.monitor.PrintAction">PrintAction</a>] = <span class="symbol"><span class="name"><a href="package$$EventClassifier$.html">EventClassifier.empty</a></span></span></span>, <span name="interruptedActionSelector">interruptedActionSelector: <a href="#EventClassifier[T]=PartialFunction[scala.util.Try[Any],T]" class="extmbr" name="atmos.monitor.EventClassifier">EventClassifier</a>[<a href="PrintAction.html" class="extype" name="atmos.monitor.PrintAction">PrintAction</a>] = <span class="symbol"><span class="name"><a href="package$$EventClassifier$.html">EventClassifier.empty</a></span></span></span>, <span name="abortedActionSelector">abortedActionSelector: <a href="#EventClassifier[T]=PartialFunction[scala.util.Try[Any],T]" class="extmbr" name="atmos.monitor.EventClassifier">EventClassifier</a>[<a href="PrintAction.html" class="extype" name="atmos.monitor.PrintAction">PrintAction</a>] = <span class="symbol"><span class="name"><a href="package$$EventClassifier$.html">EventClassifier.empty</a></span></span></span>)</span><span class="result"> extends <a href="PrintEvents.html" class="extype" name="atmos.monitor.PrintEvents">PrintEvents</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">An event monitor that prints information about retry events to a writer.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.package@PrintEventsWithWriterextendsPrintEventswithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">An event monitor that prints information about retry events to a writer.</p><div class="fullcomment"><div class="comment cmt"><p>An event monitor that prints information about retry events to a writer.
+</p></div><dl class="paramcmts block"><dt class="param">writer</dt><dd class="cmt"><p>The writer that this event monitor prints to.</p></dd><dt class="param">retryingAction</dt><dd class="cmt"><p>The action that is performed by default when a retrying event is received.</p></dd><dt class="param">interruptedAction</dt><dd class="cmt"><p>The action that is performed by default when an interrupted event is received.</p></dd><dt class="param">abortedAction</dt><dd class="cmt"><p>The action that is performed by default when an aborted event is received.</p></dd><dt class="param">retryingActionSelector</dt><dd class="cmt"><p>The strategy used to select an action to perform for a retrying event, defaulting to
+                              <code>retryingAction</code>.</p></dd><dt class="param">interruptedActionSelector</dt><dd class="cmt"><p>The strategy used to select an action to perform for an interrupted event,
+                                 defaulting to <code>interruptedAction</code>.</p></dd><dt class="param">abortedActionSelector</dt><dd class="cmt"><p>The strategy used to select an action to perform for an aborted event, defaulting to
+                             <code>abortedAction</code>.
+</p></dd></dl></div>
     </li></ol>
             </div>
 
@@ -219,7 +328,24 @@
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="atmos.monitor.IgnoreEvents" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="atmos.monitor.EventClassifier" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="EventClassifier"></a>
+      <a id="EventClassifier:EventClassifier"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="package$$EventClassifier$.html"><span class="name">EventClassifier</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.package@EventClassifier" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Common event classifiers.</p>
+    </li><li name="atmos.monitor.IgnoreEvents" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="IgnoreEvents"></a>
       <a id="IgnoreEvents:IgnoreEvents"></a>
       <h4 class="signature">
@@ -230,8 +356,12 @@
       <span class="symbol">
         <a href="IgnoreEvents$.html"><span class="name">IgnoreEvents</span></a><span class="result"> extends <a href="../EventMonitor.html" class="extype" name="atmos.EventMonitor">EventMonitor</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">A monitor that ignores all events.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.package@IgnoreEvents" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A monitor that ignores all events.</p>
     </li><li name="atmos.monitor.LogAction" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="LogAction"></a>
       <a id="LogAction:LogAction"></a>
@@ -243,8 +373,12 @@
       <span class="symbol">
         <a href="LogAction$.html"><span class="name">LogAction</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Definition of the logging-related actions that can be performed when a retry event is received.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.package@LogAction" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Definition of the logging-related actions that can be performed when a retry event is received.</p>
     </li><li name="atmos.monitor.LogEventsWithAkka" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="LogEventsWithAkka"></a>
       <a id="LogEventsWithAkka:LogEventsWithAkka"></a>
@@ -256,8 +390,12 @@
       <span class="symbol">
         <a href="LogEventsWithAkka$.html"><span class="name">LogEventsWithAkka</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Factory for event monitors that submit events to an Akka logging adapter.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.package@LogEventsWithAkka" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Factory for event monitors that submit events to an Akka logging adapter.</p>
     </li><li name="atmos.monitor.LogEventsWithJava" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="LogEventsWithJava"></a>
       <a id="LogEventsWithJava:LogEventsWithJava"></a>
@@ -269,8 +407,12 @@
       <span class="symbol">
         <a href="LogEventsWithJava$.html"><span class="name">LogEventsWithJava</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Factory for event monitors that format and log events using the <code>java.util.logging</code> framework.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.package@LogEventsWithJava" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Factory for event monitors that format and log events using the <code>java.util.logging</code> framework.</p>
     </li><li name="atmos.monitor.LogEventsWithSlf4j" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="LogEventsWithSlf4j"></a>
       <a id="LogEventsWithSlf4j:LogEventsWithSlf4j"></a>
@@ -282,8 +424,12 @@
       <span class="symbol">
         <a href="LogEventsWithSlf4j$.html"><span class="name">LogEventsWithSlf4j</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Factory for event monitors that submit events to a SLF4J logger.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.package@LogEventsWithSlf4j" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Factory for event monitors that submit events to a SLF4J logger.</p>
     </li><li name="atmos.monitor.PrintAction" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="PrintAction"></a>
       <a id="PrintAction:PrintAction"></a>
@@ -295,8 +441,12 @@
       <span class="symbol">
         <a href="PrintAction$.html"><span class="name">PrintAction</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Definition of the printing-related actions that can be performed when a retry event is received.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.package@PrintAction" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Definition of the printing-related actions that can be performed when a retry event is received.</p>
     </li><li name="atmos.monitor.PrintEventsWithStream" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="PrintEventsWithStream"></a>
       <a id="PrintEventsWithStream:PrintEventsWithStream"></a>
@@ -308,8 +458,12 @@
       <span class="symbol">
         <a href="PrintEventsWithStream$.html"><span class="name">PrintEventsWithStream</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Definitions associated with event monitors that print information about retry events as text.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.package@PrintEventsWithStream" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Definitions associated with event monitors that print information about retry events as text.</p>
     </li><li name="atmos.monitor.PrintEventsWithWriter" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="PrintEventsWithWriter"></a>
       <a id="PrintEventsWithWriter:PrintEventsWithWriter"></a>
@@ -321,8 +475,12 @@
       <span class="symbol">
         <a href="PrintEventsWithWriter$.html"><span class="name">PrintEventsWithWriter</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Definitions associated with event monitors that print information about retry events as text.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.package@PrintEventsWithWriter" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Definitions associated with event monitors that print information about retry events as text.</p>
     </li></ol>
             </div>
 
@@ -352,6 +510,7 @@
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-      <script defer="defer" type="text/javascript" id="jquery-js" src="../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../lib/template.js"></script>
+
+
     </body>
       </html>

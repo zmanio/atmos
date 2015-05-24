@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
           <title>LogEventsWithJavaExtensions - atmos.dsl.LogEventsWithJavaExtensions</title>
@@ -9,6 +8,11 @@
           
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+      
       <script type="text/javascript">
          if(top === self) {
             var url = '../../index.html';
@@ -26,23 +30,29 @@
       <div id="definition">
         <img src="../../lib/class_big.png" />
         <p id="owner"><a href="../package.html" class="extype" name="atmos">atmos</a>.<a href="package.html" class="extype" name="atmos.dsl">dsl</a></p>
-        <h1>LogEventsWithJavaExtensions</h1>
+        <h1>LogEventsWithJavaExtensions</h1><h3><span class="morelinks"><div>Related Doc:
+            <a href="package.html" class="extype" name="atmos.dsl">package dsl</a>
+          </div></span></h3><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
-        <span class="modifier">final </span>
+        <span class="modifier"></span>
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">LogEventsWithJavaExtensions</span><span class="params">(<span name="self">self: <a href="../monitor/LogEventsWithJava.html" class="extype" name="atmos.monitor.LogEventsWithJava">LogEventsWithJava</a></span>)</span><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <span class="name">LogEventsWithJavaExtensions</span><span class="params">(<span name="self">self: <a href="../monitor/LogEventsWithJava.html" class="extype" name="atmos.monitor.LogEventsWithJava">LogEventsWithJava</a></span>)</span><span class="result"> extends <a href="AbstractLogEventsExtensions.html" class="extype" name="atmos.dsl.AbstractLogEventsExtensions">AbstractLogEventsExtensions</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Exposes extensions on any instance of <code>monitor.LogEventsWithJava</code>.
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <span class="extype" name="scala.AnyVal">AnyVal</span>, <span class="extype" name="scala.NotNull">NotNull</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <a href="AbstractLogEventsExtensions.html" class="extype" name="atmos.dsl.AbstractLogEventsExtensions">AbstractLogEventsExtensions</a>, <a href="AbstractEventMonitorExtensions.html" class="extype" name="atmos.dsl.AbstractEventMonitorExtensions">AbstractEventMonitorExtensions</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -60,7 +70,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="atmos.dsl.LogEventsWithJavaExtensions"><span>LogEventsWithJavaExtensions</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="scala.AnyVal"><span>AnyVal</span></li><li class="in" name="scala.NotNull"><span>NotNull</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="atmos.dsl.LogEventsWithJavaExtensions"><span>LogEventsWithJavaExtensions</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="atmos.dsl.AbstractLogEventsExtensions"><span>AbstractLogEventsExtensions</span></li><li class="in" name="atmos.dsl.AbstractEventMonitorExtensions"><span>AbstractEventMonitorExtensions</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -91,18 +101,76 @@
       <span class="symbol">
         <span class="name">LogEventsWithJavaExtensions</span><span class="params">(<span name="self">self: <a href="../monitor/LogEventsWithJava.html" class="extype" name="atmos.monitor.LogEventsWithJava">LogEventsWithJava</a></span>)</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@&lt;init&gt;(self:atmos.monitor.LogEventsWithJava):atmos.dsl.LogEventsWithJavaExtensions" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       
+    </li></ol>
+            </div>
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="atmos.dsl.AbstractLogEventsExtensions.Action" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Action=atmos.monitor.LogAction[AbstractLogEventsExtensions.this.Level]"></a>
+      <a id="Action:Action"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Action</span><span class="result"> = <a href="../monitor/LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<a href="#Level=java.util.logging.Level" class="extmbr" name="atmos.dsl.LogEventsWithJavaExtensions.Level">Level</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@Action=atmos.monitor.LogAction[AbstractLogEventsExtensions.this.Level]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The type of action that controls the underlying event monitor.</p><div class="fullcomment"><div class="comment cmt"><p>The type of action that controls the underlying event monitor.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="AbstractLogEventsExtensions.html" class="extype" name="atmos.dsl.AbstractLogEventsExtensions">AbstractLogEventsExtensions</a> → <a href="AbstractEventMonitorExtensions.html" class="extype" name="atmos.dsl.AbstractEventMonitorExtensions">AbstractEventMonitorExtensions</a></dd></dl></div>
+    </li><li name="atmos.dsl.LogEventsWithJavaExtensions.Level" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Level=java.util.logging.Level"></a>
+      <a id="Level:Level"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Level</span><span class="result"> = <span class="extype" name="java.util.logging.Level">java.util.logging.Level</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@Level=java.util.logging.Level" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The type of the log levels used by the logging system.</p><div class="fullcomment"><div class="comment cmt"><p>The type of the log levels used by the logging system.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.dsl.LogEventsWithJavaExtensions">LogEventsWithJavaExtensions</a> → <a href="AbstractLogEventsExtensions.html" class="extype" name="atmos.dsl.AbstractLogEventsExtensions">AbstractLogEventsExtensions</a></dd></dl></div>
+    </li><li name="atmos.dsl.LogEventsWithJavaExtensions.Self" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Self=atmos.monitor.LogEventsWithJava"></a>
+      <a id="Self:Self"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Self</span><span class="result"> = <a href="../monitor/LogEventsWithJava.html" class="extype" name="atmos.monitor.LogEventsWithJava">LogEventsWithJava</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@Self=atmos.monitor.LogEventsWithJava" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The type of the underlying event monitor.</p><div class="fullcomment"><div class="comment cmt"><p>The type of the underlying event monitor.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.dsl.LogEventsWithJavaExtensions">LogEventsWithJavaExtensions</a> → <a href="AbstractLogEventsExtensions.html" class="extype" name="atmos.dsl.AbstractLogEventsExtensions">AbstractLogEventsExtensions</a> → <a href="AbstractEventMonitorExtensions.html" class="extype" name="atmos.dsl.AbstractEventMonitorExtensions">AbstractEventMonitorExtensions</a></dd></dl></div>
     </li></ol>
             </div>
 
         
 
-        
-
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="!=(x$1:Any):Boolean"></a>
       <a id="!=(Any):Boolean"></a>
       <h4 class="signature">
@@ -113,9 +181,13 @@
       <span class="symbol">
         <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.Any###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@!=(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="##():Int"></a>
       <a id="##():Int"></a>
       <h4 class="signature">
@@ -126,9 +198,13 @@
       <span class="symbol">
         <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@##():Int" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="==(x$1:Any):Boolean"></a>
       <a id="==(Any):Boolean"></a>
       <h4 class="signature">
@@ -139,8 +215,12 @@
       <span class="symbol">
         <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@==(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -152,21 +232,92 @@
       <span class="symbol">
         <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@asInstanceOf[T0]:T0" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.AnyVal#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="getClass():Class[_&lt;:AnyVal]"></a>
-      <a id="getClass():Class[_&lt;:AnyVal]"></a>
+    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a>
+      <a id="clone():AnyRef"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Predef.Class">Class</span>[_ &lt;: <span class="extype" name="scala.AnyVal">AnyVal</span>]</span>
+        <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyVal → Any</dd></dl></div>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@clone():Object" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a>
+      <a id="eq(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
+      <a id="finalize():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@finalize():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="symbol">classOf[java.lang.Throwable]</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getClass():Class[_]"></a>
+      <a id="getClass():Class[_]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@getClass():Class[_]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -178,10 +329,65 @@
       <span class="symbol">
         <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="atmos.dsl.LogEventsWithJavaExtensions#onAborted" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="onAborted(action:atmos.monitor.LogAction[java.util.logging.Level]):atmos.monitor.LogEventsWithJava"></a>
+    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a>
+      <a id="ne(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notify():Unit"></a>
+      <a id="notify():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@notify():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
+      <a id="notifyAll():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@notifyAll():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="atmos.dsl.LogEventsWithJavaExtensions#onAborted" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="onAborted(action:atmos.monitor.LogAction[LogEventsWithJavaExtensions.this.Level]):atmos.monitor.LogEventsWithJava"></a>
       <a id="onAborted(LogAction[Level]):LogEventsWithJava"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -189,12 +395,54 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">onAborted</span><span class="params">(<span name="action">action: <a href="../monitor/LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<span class="extype" name="java.util.logging.Level">Level</span>]</span>)</span><span class="result">: <a href="../monitor/LogEventsWithJava.html" class="extype" name="atmos.monitor.LogEventsWithJava">LogEventsWithJava</a></span>
+        <span class="name">onAborted</span><span class="params">(<span name="action">action: <a href="../monitor/LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<a href="#Level=java.util.logging.Level" class="extmbr" name="atmos.dsl.LogEventsWithJavaExtensions.Level">Level</a>]</span>)</span><span class="result">: <a href="../monitor/LogEventsWithJava.html" class="extype" name="atmos.monitor.LogEventsWithJava">LogEventsWithJava</a></span>
       </span>
-      </h4>
-      <p class="shortcomment cmt">Returns a copy of the underlying monitor that logs events at the specified aborting level.</p>
-    </li><li name="atmos.dsl.LogEventsWithJavaExtensions#onInterrupted" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="onInterrupted(action:atmos.monitor.LogAction[java.util.logging.Level]):atmos.monitor.LogEventsWithJava"></a>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@onAborted(action:atmos.monitor.LogAction[LogEventsWithJavaExtensions.this.Level]):atmos.monitor.LogEventsWithJava" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Returns a copy of the underlying monitor that prints events with the specified aborting strategy.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a copy of the underlying monitor that prints events with the specified aborting strategy.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.dsl.LogEventsWithJavaExtensions">LogEventsWithJavaExtensions</a> → <a href="AbstractEventMonitorExtensions.html" class="extype" name="atmos.dsl.AbstractEventMonitorExtensions">AbstractEventMonitorExtensions</a></dd></dl></div>
+    </li><li name="atmos.dsl.LogEventsWithJavaExtensions#onAbortedWhere" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="onAbortedWhere(classifier:atmos.monitor.EventClassifier[atmos.monitor.LogAction[LogEventsWithJavaExtensions.this.Level]]):atmos.monitor.LogEventsWithJava"></a>
+      <a id="onAbortedWhere(EventClassifier[LogAction[Level]]):LogEventsWithJava"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">onAbortedWhere</span><span class="params">(<span name="classifier">classifier: <a href="../monitor/package.html#EventClassifier[T]=PartialFunction[scala.util.Try[Any],T]" class="extmbr" name="atmos.monitor.EventClassifier">EventClassifier</a>[<a href="../monitor/LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<a href="#Level=java.util.logging.Level" class="extmbr" name="atmos.dsl.LogEventsWithJavaExtensions.Level">Level</a>]]</span>)</span><span class="result">: <a href="../monitor/LogEventsWithJava.html" class="extype" name="atmos.monitor.LogEventsWithJava">LogEventsWithJava</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@onAbortedWhere(classifier:atmos.monitor.EventClassifier[atmos.monitor.LogAction[LogEventsWithJavaExtensions.this.Level]]):atmos.monitor.LogEventsWithJava" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Returns a copy of the underlying monitor that prints events with the aborting strategy provided by the classifier.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a copy of the underlying monitor that prints events with the aborting strategy provided by the classifier.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.dsl.LogEventsWithJavaExtensions">LogEventsWithJavaExtensions</a> → <a href="AbstractEventMonitorExtensions.html" class="extype" name="atmos.dsl.AbstractEventMonitorExtensions">AbstractEventMonitorExtensions</a></dd></dl></div>
+    </li><li name="atmos.dsl.AbstractEventMonitorExtensions#onAbortedWith" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="onAbortedWith[T&lt;:Throwable](action:AbstractEventMonitorExtensions.this.Action)(implicitevidence$3:scala.reflect.ClassTag[T]):AbstractEventMonitorExtensions.this.Self"></a>
+      <a id="onAbortedWith[T&lt;:Throwable](Action)(ClassTag[T]):Self"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">onAbortedWith</span><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="scala.Throwable">Throwable</span></span>]</span><span class="params">(<span name="action">action: <a href="#Action=atmos.monitor.LogAction[AbstractLogEventsExtensions.this.Level]" class="extmbr" name="atmos.dsl.LogEventsWithJavaExtensions.Action">Action</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.reflect.ClassTag">ClassTag</span>[<span class="extype" name="atmos.dsl.AbstractEventMonitorExtensions.onAbortedWith.T">T</span>]</span>)</span><span class="result">: <a href="#Self=atmos.monitor.LogEventsWithJava" class="extmbr" name="atmos.dsl.LogEventsWithJavaExtensions.Self">Self</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@onAbortedWith[T&lt;:Throwable](action:AbstractEventMonitorExtensions.this.Action)(implicitevidence$3:scala.reflect.ClassTag[T]):AbstractEventMonitorExtensions.this.Self" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Returns a copy of the underlying monitor that prints events with the aborting strategy for the specified exception
+type.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a copy of the underlying monitor that prints events with the aborting strategy for the specified exception
+type.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="AbstractEventMonitorExtensions.html" class="extype" name="atmos.dsl.AbstractEventMonitorExtensions">AbstractEventMonitorExtensions</a></dd></dl></div>
+    </li><li name="atmos.dsl.LogEventsWithJavaExtensions#onInterrupted" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="onInterrupted(action:atmos.monitor.LogAction[LogEventsWithJavaExtensions.this.Level]):atmos.monitor.LogEventsWithJava"></a>
       <a id="onInterrupted(LogAction[Level]):LogEventsWithJava"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -202,12 +450,56 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">onInterrupted</span><span class="params">(<span name="action">action: <a href="../monitor/LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<span class="extype" name="java.util.logging.Level">Level</span>]</span>)</span><span class="result">: <a href="../monitor/LogEventsWithJava.html" class="extype" name="atmos.monitor.LogEventsWithJava">LogEventsWithJava</a></span>
+        <span class="name">onInterrupted</span><span class="params">(<span name="action">action: <a href="../monitor/LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<a href="#Level=java.util.logging.Level" class="extmbr" name="atmos.dsl.LogEventsWithJavaExtensions.Level">Level</a>]</span>)</span><span class="result">: <a href="../monitor/LogEventsWithJava.html" class="extype" name="atmos.monitor.LogEventsWithJava">LogEventsWithJava</a></span>
       </span>
-      </h4>
-      <p class="shortcomment cmt">Returns a copy of the underlying monitor that logs events at the specified interrupted level.</p>
-    </li><li name="atmos.dsl.LogEventsWithJavaExtensions#onRetrying" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="onRetrying(action:atmos.monitor.LogAction[java.util.logging.Level]):atmos.monitor.LogEventsWithJava"></a>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@onInterrupted(action:atmos.monitor.LogAction[LogEventsWithJavaExtensions.this.Level]):atmos.monitor.LogEventsWithJava" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Returns a copy of the underlying monitor that prints events with the specified interrupted strategy.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a copy of the underlying monitor that prints events with the specified interrupted strategy.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.dsl.LogEventsWithJavaExtensions">LogEventsWithJavaExtensions</a> → <a href="AbstractEventMonitorExtensions.html" class="extype" name="atmos.dsl.AbstractEventMonitorExtensions">AbstractEventMonitorExtensions</a></dd></dl></div>
+    </li><li name="atmos.dsl.LogEventsWithJavaExtensions#onInterruptedWhere" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="onInterruptedWhere(classifier:atmos.monitor.EventClassifier[atmos.monitor.LogAction[LogEventsWithJavaExtensions.this.Level]]):atmos.monitor.LogEventsWithJava"></a>
+      <a id="onInterruptedWhere(EventClassifier[LogAction[Level]]):LogEventsWithJava"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">onInterruptedWhere</span><span class="params">(<span name="classifier">classifier: <a href="../monitor/package.html#EventClassifier[T]=PartialFunction[scala.util.Try[Any],T]" class="extmbr" name="atmos.monitor.EventClassifier">EventClassifier</a>[<a href="../monitor/LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<a href="#Level=java.util.logging.Level" class="extmbr" name="atmos.dsl.LogEventsWithJavaExtensions.Level">Level</a>]]</span>)</span><span class="result">: <a href="../monitor/LogEventsWithJava.html" class="extype" name="atmos.monitor.LogEventsWithJava">LogEventsWithJava</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@onInterruptedWhere(classifier:atmos.monitor.EventClassifier[atmos.monitor.LogAction[LogEventsWithJavaExtensions.this.Level]]):atmos.monitor.LogEventsWithJava" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Returns a copy of the underlying monitor that prints events with the interrupted strategy provided by the
+classifier.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a copy of the underlying monitor that prints events with the interrupted strategy provided by the
+classifier.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.dsl.LogEventsWithJavaExtensions">LogEventsWithJavaExtensions</a> → <a href="AbstractEventMonitorExtensions.html" class="extype" name="atmos.dsl.AbstractEventMonitorExtensions">AbstractEventMonitorExtensions</a></dd></dl></div>
+    </li><li name="atmos.dsl.AbstractEventMonitorExtensions#onInterruptedWith" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="onInterruptedWith[T&lt;:Throwable](action:AbstractEventMonitorExtensions.this.Action)(implicitevidence$2:scala.reflect.ClassTag[T]):AbstractEventMonitorExtensions.this.Self"></a>
+      <a id="onInterruptedWith[T&lt;:Throwable](Action)(ClassTag[T]):Self"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">onInterruptedWith</span><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="scala.Throwable">Throwable</span></span>]</span><span class="params">(<span name="action">action: <a href="#Action=atmos.monitor.LogAction[AbstractLogEventsExtensions.this.Level]" class="extmbr" name="atmos.dsl.LogEventsWithJavaExtensions.Action">Action</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.reflect.ClassTag">ClassTag</span>[<span class="extype" name="atmos.dsl.AbstractEventMonitorExtensions.onInterruptedWith.T">T</span>]</span>)</span><span class="result">: <a href="#Self=atmos.monitor.LogEventsWithJava" class="extmbr" name="atmos.dsl.LogEventsWithJavaExtensions.Self">Self</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@onInterruptedWith[T&lt;:Throwable](action:AbstractEventMonitorExtensions.this.Action)(implicitevidence$2:scala.reflect.ClassTag[T]):AbstractEventMonitorExtensions.this.Self" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Returns a copy of the underlying monitor that prints events with the interrupted strategy for the specified
+exception type.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a copy of the underlying monitor that prints events with the interrupted strategy for the specified
+exception type.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="AbstractEventMonitorExtensions.html" class="extype" name="atmos.dsl.AbstractEventMonitorExtensions">AbstractEventMonitorExtensions</a></dd></dl></div>
+    </li><li name="atmos.dsl.LogEventsWithJavaExtensions#onRetrying" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="onRetrying(action:atmos.monitor.LogAction[LogEventsWithJavaExtensions.this.Level]):atmos.monitor.LogEventsWithJava"></a>
       <a id="onRetrying(LogAction[Level]):LogEventsWithJava"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -215,11 +507,173 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">onRetrying</span><span class="params">(<span name="action">action: <a href="../monitor/LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<span class="extype" name="java.util.logging.Level">Level</span>]</span>)</span><span class="result">: <a href="../monitor/LogEventsWithJava.html" class="extype" name="atmos.monitor.LogEventsWithJava">LogEventsWithJava</a></span>
+        <span class="name">onRetrying</span><span class="params">(<span name="action">action: <a href="../monitor/LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<a href="#Level=java.util.logging.Level" class="extmbr" name="atmos.dsl.LogEventsWithJavaExtensions.Level">Level</a>]</span>)</span><span class="result">: <a href="../monitor/LogEventsWithJava.html" class="extype" name="atmos.monitor.LogEventsWithJava">LogEventsWithJava</a></span>
       </span>
-      </h4>
-      <p class="shortcomment cmt">Returns a copy of the underlying monitor that logs events at the specified retrying level.</p>
-    </li><li name="atmos.dsl.LogEventsWithJavaExtensions#self" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@onRetrying(action:atmos.monitor.LogAction[LogEventsWithJavaExtensions.this.Level]):atmos.monitor.LogEventsWithJava" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Returns a copy of the underlying monitor that prints events with the specified retrying strategy.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a copy of the underlying monitor that prints events with the specified retrying strategy.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.dsl.LogEventsWithJavaExtensions">LogEventsWithJavaExtensions</a> → <a href="AbstractEventMonitorExtensions.html" class="extype" name="atmos.dsl.AbstractEventMonitorExtensions">AbstractEventMonitorExtensions</a></dd></dl></div>
+    </li><li name="atmos.dsl.LogEventsWithJavaExtensions#onRetryingWhere" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="onRetryingWhere(classifier:atmos.monitor.EventClassifier[atmos.monitor.LogAction[LogEventsWithJavaExtensions.this.Level]]):atmos.monitor.LogEventsWithJava"></a>
+      <a id="onRetryingWhere(EventClassifier[LogAction[Level]]):LogEventsWithJava"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">onRetryingWhere</span><span class="params">(<span name="classifier">classifier: <a href="../monitor/package.html#EventClassifier[T]=PartialFunction[scala.util.Try[Any],T]" class="extmbr" name="atmos.monitor.EventClassifier">EventClassifier</a>[<a href="../monitor/LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<a href="#Level=java.util.logging.Level" class="extmbr" name="atmos.dsl.LogEventsWithJavaExtensions.Level">Level</a>]]</span>)</span><span class="result">: <a href="../monitor/LogEventsWithJava.html" class="extype" name="atmos.monitor.LogEventsWithJava">LogEventsWithJava</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@onRetryingWhere(classifier:atmos.monitor.EventClassifier[atmos.monitor.LogAction[LogEventsWithJavaExtensions.this.Level]]):atmos.monitor.LogEventsWithJava" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Returns a copy of the underlying monitor that prints events with the retrying strategy provided by the classifier.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a copy of the underlying monitor that prints events with the retrying strategy provided by the classifier.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.dsl.LogEventsWithJavaExtensions">LogEventsWithJavaExtensions</a> → <a href="AbstractEventMonitorExtensions.html" class="extype" name="atmos.dsl.AbstractEventMonitorExtensions">AbstractEventMonitorExtensions</a></dd></dl></div>
+    </li><li name="atmos.dsl.AbstractEventMonitorExtensions#onRetryingWith" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="onRetryingWith[T&lt;:Throwable](action:AbstractEventMonitorExtensions.this.Action)(implicitevidence$1:scala.reflect.ClassTag[T]):AbstractEventMonitorExtensions.this.Self"></a>
+      <a id="onRetryingWith[T&lt;:Throwable](Action)(ClassTag[T]):Self"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">onRetryingWith</span><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="scala.Throwable">Throwable</span></span>]</span><span class="params">(<span name="action">action: <a href="#Action=atmos.monitor.LogAction[AbstractLogEventsExtensions.this.Level]" class="extmbr" name="atmos.dsl.LogEventsWithJavaExtensions.Action">Action</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.reflect.ClassTag">ClassTag</span>[<span class="extype" name="atmos.dsl.AbstractEventMonitorExtensions.onRetryingWith.T">T</span>]</span>)</span><span class="result">: <a href="#Self=atmos.monitor.LogEventsWithJava" class="extmbr" name="atmos.dsl.LogEventsWithJavaExtensions.Self">Self</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@onRetryingWith[T&lt;:Throwable](action:AbstractEventMonitorExtensions.this.Action)(implicitevidence$1:scala.reflect.ClassTag[T]):AbstractEventMonitorExtensions.this.Self" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Returns a copy of the underlying monitor that prints events with the retrying strategy for the specified exception
+type.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a copy of the underlying monitor that prints events with the retrying strategy for the specified exception
+type.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="AbstractEventMonitorExtensions.html" class="extype" name="atmos.dsl.AbstractEventMonitorExtensions">AbstractEventMonitorExtensions</a></dd></dl></div>
+    </li><li name="atmos.dsl.AbstractLogEventsExtensions#orOnAbortedWhere" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="orOnAbortedWhere(classifier:atmos.monitor.EventClassifier[atmos.monitor.LogAction[AbstractLogEventsExtensions.this.Level]]):AbstractLogEventsExtensions.this.Self"></a>
+      <a id="orOnAbortedWhere(EventClassifier[LogAction[Level]]):Self"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">orOnAbortedWhere</span><span class="params">(<span name="classifier">classifier: <a href="../monitor/package.html#EventClassifier[T]=PartialFunction[scala.util.Try[Any],T]" class="extmbr" name="atmos.monitor.EventClassifier">EventClassifier</a>[<a href="../monitor/LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<a href="#Level=java.util.logging.Level" class="extmbr" name="atmos.dsl.LogEventsWithJavaExtensions.Level">Level</a>]]</span>)</span><span class="result">: <a href="#Self=atmos.monitor.LogEventsWithJava" class="extmbr" name="atmos.dsl.LogEventsWithJavaExtensions.Self">Self</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@orOnAbortedWhere(classifier:atmos.monitor.EventClassifier[atmos.monitor.LogAction[AbstractLogEventsExtensions.this.Level]]):AbstractLogEventsExtensions.this.Self" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Returns a copy of the underlying monitor that prints events with the aborting strategy provided by the specified
+classifier chained to the underlying classifier.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a copy of the underlying monitor that prints events with the aborting strategy provided by the specified
+classifier chained to the underlying classifier.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="AbstractLogEventsExtensions.html" class="extype" name="atmos.dsl.AbstractLogEventsExtensions">AbstractLogEventsExtensions</a> → <a href="AbstractEventMonitorExtensions.html" class="extype" name="atmos.dsl.AbstractEventMonitorExtensions">AbstractEventMonitorExtensions</a></dd></dl></div>
+    </li><li name="atmos.dsl.AbstractEventMonitorExtensions#orOnAbortedWith" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="orOnAbortedWith[T&lt;:Throwable](action:AbstractEventMonitorExtensions.this.Action)(implicitevidence$6:scala.reflect.ClassTag[T]):AbstractEventMonitorExtensions.this.Self"></a>
+      <a id="orOnAbortedWith[T&lt;:Throwable](Action)(ClassTag[T]):Self"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">orOnAbortedWith</span><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="scala.Throwable">Throwable</span></span>]</span><span class="params">(<span name="action">action: <a href="#Action=atmos.monitor.LogAction[AbstractLogEventsExtensions.this.Level]" class="extmbr" name="atmos.dsl.LogEventsWithJavaExtensions.Action">Action</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.reflect.ClassTag">ClassTag</span>[<span class="extype" name="atmos.dsl.AbstractEventMonitorExtensions.orOnAbortedWith.T">T</span>]</span>)</span><span class="result">: <a href="#Self=atmos.monitor.LogEventsWithJava" class="extmbr" name="atmos.dsl.LogEventsWithJavaExtensions.Self">Self</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@orOnAbortedWith[T&lt;:Throwable](action:AbstractEventMonitorExtensions.this.Action)(implicitevidence$6:scala.reflect.ClassTag[T]):AbstractEventMonitorExtensions.this.Self" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Returns a copy of the underlying monitor that prints events with the aborting strategy for the specified exception
+type chained to the underlying classifier.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a copy of the underlying monitor that prints events with the aborting strategy for the specified exception
+type chained to the underlying classifier.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="AbstractEventMonitorExtensions.html" class="extype" name="atmos.dsl.AbstractEventMonitorExtensions">AbstractEventMonitorExtensions</a></dd></dl></div>
+    </li><li name="atmos.dsl.AbstractLogEventsExtensions#orOnInterruptedWhere" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="orOnInterruptedWhere(classifier:atmos.monitor.EventClassifier[atmos.monitor.LogAction[AbstractLogEventsExtensions.this.Level]]):AbstractLogEventsExtensions.this.Self"></a>
+      <a id="orOnInterruptedWhere(EventClassifier[LogAction[Level]]):Self"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">orOnInterruptedWhere</span><span class="params">(<span name="classifier">classifier: <a href="../monitor/package.html#EventClassifier[T]=PartialFunction[scala.util.Try[Any],T]" class="extmbr" name="atmos.monitor.EventClassifier">EventClassifier</a>[<a href="../monitor/LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<a href="#Level=java.util.logging.Level" class="extmbr" name="atmos.dsl.LogEventsWithJavaExtensions.Level">Level</a>]]</span>)</span><span class="result">: <a href="#Self=atmos.monitor.LogEventsWithJava" class="extmbr" name="atmos.dsl.LogEventsWithJavaExtensions.Self">Self</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@orOnInterruptedWhere(classifier:atmos.monitor.EventClassifier[atmos.monitor.LogAction[AbstractLogEventsExtensions.this.Level]]):AbstractLogEventsExtensions.this.Self" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Returns a copy of the underlying monitor that prints events with the interrupted strategy provided by the
+specified classifier chained to the underlying classifier.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a copy of the underlying monitor that prints events with the interrupted strategy provided by the
+specified classifier chained to the underlying classifier.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="AbstractLogEventsExtensions.html" class="extype" name="atmos.dsl.AbstractLogEventsExtensions">AbstractLogEventsExtensions</a> → <a href="AbstractEventMonitorExtensions.html" class="extype" name="atmos.dsl.AbstractEventMonitorExtensions">AbstractEventMonitorExtensions</a></dd></dl></div>
+    </li><li name="atmos.dsl.AbstractEventMonitorExtensions#orOnInterruptedWith" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="orOnInterruptedWith[T&lt;:Throwable](action:AbstractEventMonitorExtensions.this.Action)(implicitevidence$5:scala.reflect.ClassTag[T]):AbstractEventMonitorExtensions.this.Self"></a>
+      <a id="orOnInterruptedWith[T&lt;:Throwable](Action)(ClassTag[T]):Self"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">orOnInterruptedWith</span><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="scala.Throwable">Throwable</span></span>]</span><span class="params">(<span name="action">action: <a href="#Action=atmos.monitor.LogAction[AbstractLogEventsExtensions.this.Level]" class="extmbr" name="atmos.dsl.LogEventsWithJavaExtensions.Action">Action</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.reflect.ClassTag">ClassTag</span>[<span class="extype" name="atmos.dsl.AbstractEventMonitorExtensions.orOnInterruptedWith.T">T</span>]</span>)</span><span class="result">: <a href="#Self=atmos.monitor.LogEventsWithJava" class="extmbr" name="atmos.dsl.LogEventsWithJavaExtensions.Self">Self</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@orOnInterruptedWith[T&lt;:Throwable](action:AbstractEventMonitorExtensions.this.Action)(implicitevidence$5:scala.reflect.ClassTag[T]):AbstractEventMonitorExtensions.this.Self" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Returns a copy of the underlying monitor that prints events with the interrupted strategy for the specified
+exception type chained to the underlying classifier.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a copy of the underlying monitor that prints events with the interrupted strategy for the specified
+exception type chained to the underlying classifier.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="AbstractEventMonitorExtensions.html" class="extype" name="atmos.dsl.AbstractEventMonitorExtensions">AbstractEventMonitorExtensions</a></dd></dl></div>
+    </li><li name="atmos.dsl.AbstractLogEventsExtensions#orOnRetryingWhere" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="orOnRetryingWhere(classifier:atmos.monitor.EventClassifier[atmos.monitor.LogAction[AbstractLogEventsExtensions.this.Level]]):AbstractLogEventsExtensions.this.Self"></a>
+      <a id="orOnRetryingWhere(EventClassifier[LogAction[Level]]):Self"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">orOnRetryingWhere</span><span class="params">(<span name="classifier">classifier: <a href="../monitor/package.html#EventClassifier[T]=PartialFunction[scala.util.Try[Any],T]" class="extmbr" name="atmos.monitor.EventClassifier">EventClassifier</a>[<a href="../monitor/LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<a href="#Level=java.util.logging.Level" class="extmbr" name="atmos.dsl.LogEventsWithJavaExtensions.Level">Level</a>]]</span>)</span><span class="result">: <a href="#Self=atmos.monitor.LogEventsWithJava" class="extmbr" name="atmos.dsl.LogEventsWithJavaExtensions.Self">Self</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@orOnRetryingWhere(classifier:atmos.monitor.EventClassifier[atmos.monitor.LogAction[AbstractLogEventsExtensions.this.Level]]):AbstractLogEventsExtensions.this.Self" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Returns a copy of the underlying monitor that prints events with the retrying strategy provided by the specified
+classifier chained to the underlying classifier.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a copy of the underlying monitor that prints events with the retrying strategy provided by the specified
+classifier chained to the underlying classifier.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="AbstractLogEventsExtensions.html" class="extype" name="atmos.dsl.AbstractLogEventsExtensions">AbstractLogEventsExtensions</a> → <a href="AbstractEventMonitorExtensions.html" class="extype" name="atmos.dsl.AbstractEventMonitorExtensions">AbstractEventMonitorExtensions</a></dd></dl></div>
+    </li><li name="atmos.dsl.AbstractEventMonitorExtensions#orOnRetryingWith" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="orOnRetryingWith[T&lt;:Throwable](action:AbstractEventMonitorExtensions.this.Action)(implicitevidence$4:scala.reflect.ClassTag[T]):AbstractEventMonitorExtensions.this.Self"></a>
+      <a id="orOnRetryingWith[T&lt;:Throwable](Action)(ClassTag[T]):Self"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">orOnRetryingWith</span><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="scala.Throwable">Throwable</span></span>]</span><span class="params">(<span name="action">action: <a href="#Action=atmos.monitor.LogAction[AbstractLogEventsExtensions.this.Level]" class="extmbr" name="atmos.dsl.LogEventsWithJavaExtensions.Action">Action</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.reflect.ClassTag">ClassTag</span>[<span class="extype" name="atmos.dsl.AbstractEventMonitorExtensions.orOnRetryingWith.T">T</span>]</span>)</span><span class="result">: <a href="#Self=atmos.monitor.LogEventsWithJava" class="extmbr" name="atmos.dsl.LogEventsWithJavaExtensions.Self">Self</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@orOnRetryingWith[T&lt;:Throwable](action:AbstractEventMonitorExtensions.this.Action)(implicitevidence$4:scala.reflect.ClassTag[T]):AbstractEventMonitorExtensions.this.Self" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Returns a copy of the underlying monitor that prints events with the retrying strategy for the specified exception
+type chained to the underlying classifier.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a copy of the underlying monitor that prints events with the retrying strategy for the specified exception
+type chained to the underlying classifier.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="AbstractEventMonitorExtensions.html" class="extype" name="atmos.dsl.AbstractEventMonitorExtensions">AbstractEventMonitorExtensions</a></dd></dl></div>
+    </li><li name="atmos.dsl.LogEventsWithJavaExtensions#self" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="self:atmos.monitor.LogEventsWithJava"></a>
       <a id="self:LogEventsWithJava"></a>
       <h4 class="signature">
@@ -230,8 +684,98 @@
       <span class="symbol">
         <span class="name">self</span><span class="result">: <a href="../monitor/LogEventsWithJava.html" class="extype" name="atmos.monitor.LogEventsWithJava">LogEventsWithJava</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@self:atmos.monitor.LogEventsWithJava" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The underlying event monitor.</p><div class="fullcomment"><div class="comment cmt"><p>The underlying event monitor.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.dsl.LogEventsWithJavaExtensions">LogEventsWithJavaExtensions</a> → <a href="AbstractEventMonitorExtensions.html" class="extype" name="atmos.dsl.AbstractEventMonitorExtensions">AbstractEventMonitorExtensions</a></dd></dl></div>
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
+      <a id="synchronized[T0](⇒T0):T0"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait():Unit"></a>
+      <a id="wait():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@wait():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
       
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a>
+      <a id="wait(Long,Int):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a>
+      <a id="wait(Long):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.LogEventsWithJavaExtensions@wait(x$1:Long):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
     </li></ol>
             </div>
 
@@ -249,10 +793,12 @@
               <h3>Inherited from <span class="extype" name="scala.Product">Product</span></h3>
             </div><div class="parent" name="scala.Equals">
               <h3>Inherited from <span class="extype" name="scala.Equals">Equals</span></h3>
-            </div><div class="parent" name="scala.AnyVal">
-              <h3>Inherited from <span class="extype" name="scala.AnyVal">AnyVal</span></h3>
-            </div><div class="parent" name="scala.NotNull">
-              <h3>Inherited from <span class="extype" name="scala.NotNull">NotNull</span></h3>
+            </div><div class="parent" name="atmos.dsl.AbstractLogEventsExtensions">
+              <h3>Inherited from <a href="AbstractLogEventsExtensions.html" class="extype" name="atmos.dsl.AbstractLogEventsExtensions">AbstractLogEventsExtensions</a></h3>
+            </div><div class="parent" name="atmos.dsl.AbstractEventMonitorExtensions">
+              <h3>Inherited from <a href="AbstractEventMonitorExtensions.html" class="extype" name="atmos.dsl.AbstractEventMonitorExtensions">AbstractEventMonitorExtensions</a></h3>
+            </div><div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
               <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
             </div>
@@ -271,6 +817,7 @@
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-      <script defer="defer" type="text/javascript" id="jquery-js" src="../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../lib/template.js"></script>
+
+
     </body>
       </html>

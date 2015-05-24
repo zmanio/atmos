@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
           <title>root - _root_</title>
@@ -9,6 +8,11 @@
           
       <link href="lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="lib/template.js"></script>
+      <script type="text/javascript" src="lib/tools.tooltip.js"></script>
+      
       <script type="text/javascript">
          if(top === self) {
             var url = 'index.html';
@@ -26,7 +30,11 @@
       <div id="definition">
         <img src="lib/package_big.png" />
         
-        <h1>root package</h1>
+        <h1>root package</h1><span class="permalink">
+      <a href="index.html#package" title="Permalink" target="_top">
+        <img src="lib/permalink.png" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -62,7 +70,7 @@
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="_root_.atmos" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="_root_.atmos" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="atmos"></a>
       <a id="atmos:atmos"></a>
       <h4 class="signature">
@@ -73,8 +81,17 @@
       <span class="symbol">
         <a href="atmos/package.html"><span class="name">atmos</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">The <code>atmos</code> package aims to provide a concise mechanism for implementing retry-on-failure behavior.</p>
+      </h4><span class="permalink">
+      <a href="index.html#package@atmos" title="Permalink" target="_top">
+        <img src="lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The <code>atmos</code> package aims to provide a concise mechanism for implementing retry-on-failure behavior.</p><div class="fullcomment"><div class="comment cmt"><p>The <code>atmos</code> package aims to provide a concise mechanism for implementing retry-on-failure behavior.</p><p>Retry behavior is controlled by an instance of <a href="atmos/RetryPolicy.html" class="extype" name="atmos.RetryPolicy">atmos.RetryPolicy</a> configured with strategies for various
+components of the retry operation. The elements that define a retry policy are:</p><ul><li><a href="atmos/package.html#ResultClassifier=PartialFunction[Any,atmos.ResultClassification]" class="extmbr" name="atmos.ResultClassifier">atmos.ResultClassifier</a>: Defines what results are acceptable for a retry operation to return.</li><li><a href="atmos/package.html#ErrorClassifier=PartialFunction[Throwable,atmos.ErrorClassification]" class="extmbr" name="atmos.ErrorClassifier">atmos.ErrorClassifier</a>: Defines when a retry operation should be interrupted by a fatal error.</li><li><a href="atmos/BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">atmos.BackoffPolicy</a>: Defines how long to wait between successive retry attempts. The <a href="atmos/backoff/package.html" class="extype" name="atmos.backoff">atmos.backoff</a>
+   package provides a number of common backoff policy implementations.</li><li><a href="atmos/EventMonitor.html" class="extype" name="atmos.EventMonitor">atmos.EventMonitor</a>: An interface that is notified of events during a retry operation. The <a href="atmos/monitor/package.html" class="extype" name="atmos.monitor">atmos.monitor</a>
+   package provides a number of common event monitor implementations.</li><li><a href="atmos/TerminationPolicy.html" class="extype" name="atmos.TerminationPolicy">atmos.TerminationPolicy</a>: Defines when a retry operation should abort and make no further attempts. The
+   <a href="atmos/termination/package.html" class="extype" name="atmos.termination">atmos.termination</a> package provides a number of common termination policy implementations.</li></ul><p>Additionally, the <a href="atmos/dsl/package.html" class="extype" name="atmos.dsl">atmos.dsl</a> package provides a concise DSL for describing retry policies.</p><p>For more information about using the <code>atmos</code> library, see <a href="http://zman.io/atmos" target="_blank">http://zman.io/atmos</a>
+</p></div></div>
     </li></ol>
             </div>
 
@@ -100,6 +117,7 @@
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-      <script defer="defer" type="text/javascript" id="jquery-js" src="lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="lib/template.js"></script>
+
+
     </body>
       </html>

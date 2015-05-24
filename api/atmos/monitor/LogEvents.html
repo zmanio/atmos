@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
           <title>LogEvents - atmos.monitor.LogEvents</title>
@@ -9,6 +8,11 @@
           
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+      
       <script type="text/javascript">
          if(top === self) {
             var url = '../../index.html';
@@ -26,7 +30,13 @@
       <div id="definition">
         <img src="../../lib/trait_big.png" />
         <p id="owner"><a href="../package.html" class="extype" name="atmos">atmos</a>.<a href="package.html" class="extype" name="atmos.monitor">monitor</a></p>
-        <h1>LogEvents</h1>
+        <h1>LogEvents</h1><h3><span class="morelinks"><div>Related Doc:
+            <a href="package.html" class="extype" name="atmos.monitor">package monitor</a>
+          </div></span></h3><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -44,9 +54,9 @@
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="FormatEvents.html" class="extype" name="atmos.monitor.FormatEvents">FormatEvents</a>, <a href="../EventMonitor.html" class="extype" name="atmos.EventMonitor">EventMonitor</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div><div class="toggleContainer block">
-          <span class="toggle">Known Subclasses</span>
-          <div class="subClasses hiddenContent"><a href="LogEventsWithAkka.html" class="extype" name="atmos.monitor.LogEventsWithAkka">LogEventsWithAkka</a>, <a href="LogEventsWithJava.html" class="extype" name="atmos.monitor.LogEventsWithJava">LogEventsWithJava</a>, <a href="LogEventsWithSlf4j.html" class="extype" name="atmos.monitor.LogEventsWithSlf4j">LogEventsWithSlf4j</a></div>
-        </div></div>
+            <span class="toggle">Known Subclasses</span>
+            <div class="subClasses hiddenContent"><a href="LogEventsWithAkka.html" class="extype" name="atmos.monitor.LogEventsWithAkka">LogEventsWithAkka</a>, <a href="LogEventsWithJava.html" class="extype" name="atmos.monitor.LogEventsWithJava">LogEventsWithJava</a>, <a href="LogEventsWithSlf4j.html" class="extype" name="atmos.monitor.LogEventsWithSlf4j">LogEventsWithSlf4j</a></div>
+          </div></div>
         
 
       <div id="mbrsel">
@@ -96,7 +106,11 @@
       <span class="symbol">
         <span class="name">LevelType</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@LevelType" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">The type of level that this event monitor submits log entries with.</p>
     </li></ol>
             </div>
@@ -114,8 +128,29 @@
       <span class="symbol">
         <span class="name">abortedAction</span><span class="result">: <a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<a href="#LevelType" class="extmbr" name="atmos.monitor.LogEvents.LevelType">LevelType</a>]</span>
       </span>
-      </h4>
-      <p class="shortcomment cmt">The action that is performed when an aborted event is received.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@abortedAction:atmos.monitor.LogAction[LogEvents.this.LevelType]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The action that is performed by default when an aborted event is received.</p>
+    </li><li name="atmos.monitor.LogEvents#abortedActionSelector" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="abortedActionSelector:atmos.monitor.EventClassifier[atmos.monitor.LogAction[LogEvents.this.LevelType]]"></a>
+      <a id="abortedActionSelector:EventClassifier[LogAction[LevelType]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">abortedActionSelector</span><span class="result">: <a href="package.html#EventClassifier[T]=PartialFunction[scala.util.Try[Any],T]" class="extmbr" name="atmos.monitor.EventClassifier">EventClassifier</a>[<a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<a href="#LevelType" class="extmbr" name="atmos.monitor.LogEvents.LevelType">LevelType</a>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@abortedActionSelector:atmos.monitor.EventClassifier[atmos.monitor.LogAction[LogEvents.this.LevelType]]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The strategy used to select an action to perform for an aborted event, defaulting to <code>abortedAction</code>.</p>
     </li><li name="atmos.monitor.LogEvents#interruptedAction" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="interruptedAction:atmos.monitor.LogAction[LogEvents.this.LevelType]"></a>
       <a id="interruptedAction:LogAction[LevelType]"></a>
@@ -127,8 +162,29 @@
       <span class="symbol">
         <span class="name">interruptedAction</span><span class="result">: <a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<a href="#LevelType" class="extmbr" name="atmos.monitor.LogEvents.LevelType">LevelType</a>]</span>
       </span>
-      </h4>
-      <p class="shortcomment cmt">The action that is performed when an interrupted event is received.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@interruptedAction:atmos.monitor.LogAction[LogEvents.this.LevelType]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The action that is performed by default when an interrupted event is received.</p>
+    </li><li name="atmos.monitor.LogEvents#interruptedActionSelector" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="interruptedActionSelector:atmos.monitor.EventClassifier[atmos.monitor.LogAction[LogEvents.this.LevelType]]"></a>
+      <a id="interruptedActionSelector:EventClassifier[LogAction[LevelType]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">interruptedActionSelector</span><span class="result">: <a href="package.html#EventClassifier[T]=PartialFunction[scala.util.Try[Any],T]" class="extmbr" name="atmos.monitor.EventClassifier">EventClassifier</a>[<a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<a href="#LevelType" class="extmbr" name="atmos.monitor.LogEvents.LevelType">LevelType</a>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@interruptedActionSelector:atmos.monitor.EventClassifier[atmos.monitor.LogAction[LogEvents.this.LevelType]]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The strategy used to select an action to perform for an interrupted event, defaulting to <code>interruptedAction</code>.</p>
     </li><li name="atmos.monitor.LogEvents#isLoggable" visbl="prt" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="isLoggable(level:LogEvents.this.LevelType):Boolean"></a>
       <a id="isLoggable(LevelType):Boolean"></a>
@@ -140,20 +196,28 @@
       <span class="symbol">
         <span class="name">isLoggable</span><span class="params">(<span name="level">level: <a href="#LevelType" class="extmbr" name="atmos.monitor.LogEvents.LevelType">LevelType</a></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@isLoggable(level:LogEvents.this.LevelType):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Returns true if the specified level is currently loggable by the underlying logger.</p><div class="fullcomment"><div class="comment cmt"><p>Returns true if the specified level is currently loggable by the underlying logger.</p></div><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
     </li><li name="atmos.monitor.LogEvents#log" visbl="prt" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="log(level:LogEvents.this.LevelType,message:String,thrown:Throwable):Unit"></a>
-      <a id="log(LevelType,String,Throwable):Unit"></a>
+      <a id="log(level:LogEvents.this.LevelType,message:String,thrown:Option[Throwable]):Unit"></a>
+      <a id="log(LevelType,String,Option[Throwable]):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">abstract </span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">log</span><span class="params">(<span name="level">level: <a href="#LevelType" class="extmbr" name="atmos.monitor.LogEvents.LevelType">LevelType</a></span>, <span name="message">message: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="thrown">thrown: <span class="extype" name="scala.Throwable">Throwable</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">log</span><span class="params">(<span name="level">level: <a href="#LevelType" class="extmbr" name="atmos.monitor.LogEvents.LevelType">LevelType</a></span>, <span name="message">message: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="thrown">thrown: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Throwable">Throwable</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@log(level:LogEvents.this.LevelType,message:String,thrown:Option[Throwable]):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Logs information about an event to the underlying logger.</p><div class="fullcomment"><div class="comment cmt"><p>Logs information about an event to the underlying logger.</p></div><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
     </li><li name="atmos.monitor.LogEvents#retryingAction" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="retryingAction:atmos.monitor.LogAction[LogEvents.this.LevelType]"></a>
@@ -166,27 +230,35 @@
       <span class="symbol">
         <span class="name">retryingAction</span><span class="result">: <a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<a href="#LevelType" class="extmbr" name="atmos.monitor.LogEvents.LevelType">LevelType</a>]</span>
       </span>
-      </h4>
-      <p class="shortcomment cmt">The action that is performed when a retrying event is received.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@retryingAction:atmos.monitor.LogAction[LogEvents.this.LevelType]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The action that is performed by default when a retrying event is received.</p>
+    </li><li name="atmos.monitor.LogEvents#retryingActionSelector" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="retryingActionSelector:atmos.monitor.EventClassifier[atmos.monitor.LogAction[LogEvents.this.LevelType]]"></a>
+      <a id="retryingActionSelector:EventClassifier[LogAction[LevelType]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">retryingActionSelector</span><span class="result">: <a href="package.html#EventClassifier[T]=PartialFunction[scala.util.Try[Any],T]" class="extmbr" name="atmos.monitor.EventClassifier">EventClassifier</a>[<a href="LogAction.html" class="extype" name="atmos.monitor.LogAction">LogAction</a>[<a href="#LevelType" class="extmbr" name="atmos.monitor.LogEvents.LevelType">LevelType</a>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@retryingActionSelector:atmos.monitor.EventClassifier[atmos.monitor.LogAction[LogEvents.this.LevelType]]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The strategy used to select an action to perform for a retrying event, defaulting to <code>retryingAction</code>.</p>
     </li></ol>
             </div>
 
         <div id="values" class="values members">
               <h3>Concrete Value Members</h3>
               <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="!=(x$1:AnyRef):Boolean"></a>
-      <a id="!=(AnyRef):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="!=(x$1:Any):Boolean"></a>
       <a id="!=(Any):Boolean"></a>
       <h4 class="signature">
@@ -197,8 +269,12 @@
       <span class="symbol">
         <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@!=(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="##():Int"></a>
       <a id="##():Int"></a>
@@ -210,22 +286,13 @@
       <span class="symbol">
         <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@##():Int" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="==(x$1:AnyRef):Boolean"></a>
-      <a id="==(AnyRef):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="==(x$1:Any):Boolean"></a>
       <a id="==(Any):Boolean"></a>
       <h4 class="signature">
@@ -236,23 +303,31 @@
       <span class="symbol">
         <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@==(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="atmos.monitor.LogEvents#aborted" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="aborted(name:Option[String],thrown:Throwable,attempts:Int):Unit"></a>
-      <a id="aborted(Option[String],Throwable,Int):Unit"></a>
+      <a id="aborted(name:Option[String],outcome:scala.util.Try[Any],attempts:Int):Unit"></a>
+      <a id="aborted(Option[String],Try[Any],Int):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">aborted</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="thrown">thrown: <span class="extype" name="scala.Throwable">Throwable</span></span>, <span name="attempts">attempts: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">aborted</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="outcome">outcome: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Any">Any</span>]</span>, <span name="attempts">attempts: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
-      <p class="shortcomment cmt">Called when an operation has failed too many times and will not be retried.</p><div class="fullcomment"><div class="comment cmt"><p>Called when an operation has failed too many times and will not be retried.</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation that failed if one was provided.
-</p></dd><dt class="param">thrown</dt><dd class="cmt"><p>The exception that was thrown.
-</p></dd><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that were made.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.monitor.LogEvents">LogEvents</a> → <a href="../EventMonitor.html" class="extype" name="atmos.EventMonitor">EventMonitor</a></dd></dl></div>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@aborted(name:Option[String],outcome:scala.util.Try[Any],attempts:Int):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Called when an operation has failed too many times and will not be retried.</p><div class="fullcomment"><div class="comment cmt"><p>Called when an operation has failed too many times and will not be retried.
+</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation that failed if one was provided.</p></dd><dt class="param">outcome</dt><dd class="cmt"><p>The outcome of the most recent retry attempt.</p></dd><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that were made.
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.monitor.LogEvents">LogEvents</a> → <a href="../EventMonitor.html" class="extype" name="atmos.EventMonitor">EventMonitor</a></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -264,7 +339,11 @@
       <span class="symbol">
         <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@asInstanceOf[T0]:T0" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
@@ -277,7 +356,11 @@
       <span class="symbol">
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@clone():Object" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -296,7 +379,11 @@
       <span class="symbol">
         <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="equals(x$1:Any):Boolean"></a>
@@ -309,7 +396,11 @@
       <span class="symbol">
         <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@equals(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
@@ -322,7 +413,11 @@
       <span class="symbol">
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@finalize():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -331,49 +426,61 @@
               
         </dd></dl></div>
     </li><li name="atmos.monitor.FormatEvents#formatAborted" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="formatAborted(name:Option[String],thrown:Throwable,attempts:Int):String"></a>
-      <a id="formatAborted(Option[String],Throwable,Int):String"></a>
+      <a id="formatAborted(name:Option[String],outcome:scala.util.Try[Any],attempts:Int):String"></a>
+      <a id="formatAborted(Option[String],Try[Any],Int):String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">formatAborted</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="thrown">thrown: <span class="extype" name="scala.Throwable">Throwable</span></span>, <span name="attempts">attempts: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+        <span class="name">formatAborted</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="outcome">outcome: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Any">Any</span>]</span>, <span name="attempts">attempts: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@formatAborted(name:Option[String],outcome:scala.util.Try[Any],attempts:Int):String" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Formats a message for an aborted event.</p><div class="fullcomment"><div class="comment cmt"><p>Formats a message for an aborted event.
-</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation that failed if one was provided.</p></dd><dt class="param">thrown</dt><dd class="cmt"><p>The exception that was thrown.</p></dd><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that were made.
+</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation that failed if one was provided.</p></dd><dt class="param">outcome</dt><dd class="cmt"><p>The outcome of the most recent retry attempt.</p></dd><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that were made.
 </p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="FormatEvents.html" class="extype" name="atmos.monitor.FormatEvents">FormatEvents</a></dd></dl></div>
     </li><li name="atmos.monitor.FormatEvents#formatInterrupted" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="formatInterrupted(name:Option[String],thrown:Throwable,attempts:Int):String"></a>
-      <a id="formatInterrupted(Option[String],Throwable,Int):String"></a>
+      <a id="formatInterrupted(name:Option[String],outcome:scala.util.Try[Any],attempts:Int):String"></a>
+      <a id="formatInterrupted(Option[String],Try[Any],Int):String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">formatInterrupted</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="thrown">thrown: <span class="extype" name="scala.Throwable">Throwable</span></span>, <span name="attempts">attempts: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+        <span class="name">formatInterrupted</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="outcome">outcome: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Any">Any</span>]</span>, <span name="attempts">attempts: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@formatInterrupted(name:Option[String],outcome:scala.util.Try[Any],attempts:Int):String" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Formats a message for an interrupted event.</p><div class="fullcomment"><div class="comment cmt"><p>Formats a message for an interrupted event.
-</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation that failed if one was provided.</p></dd><dt class="param">thrown</dt><dd class="cmt"><p>The exception that was thrown.</p></dd><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that were made.
+</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation that failed if one was provided.</p></dd><dt class="param">outcome</dt><dd class="cmt"><p>The outcome of the most recent retry attempt.</p></dd><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that were made.
 </p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="FormatEvents.html" class="extype" name="atmos.monitor.FormatEvents">FormatEvents</a></dd></dl></div>
     </li><li name="atmos.monitor.FormatEvents#formatRetrying" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="formatRetrying(name:Option[String],thrown:Throwable,attempts:Int,backoff:scala.concurrent.duration.FiniteDuration):String"></a>
-      <a id="formatRetrying(Option[String],Throwable,Int,FiniteDuration):String"></a>
+      <a id="formatRetrying(name:Option[String],outcome:scala.util.Try[Any],attempts:Int,backoff:scala.concurrent.duration.FiniteDuration):String"></a>
+      <a id="formatRetrying(Option[String],Try[Any],Int,FiniteDuration):String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">formatRetrying</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="thrown">thrown: <span class="extype" name="scala.Throwable">Throwable</span></span>, <span name="attempts">attempts: <span class="extype" name="scala.Int">Int</span></span>, <span name="backoff">backoff: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+        <span class="name">formatRetrying</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="outcome">outcome: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Any">Any</span>]</span>, <span name="attempts">attempts: <span class="extype" name="scala.Int">Int</span></span>, <span name="backoff">backoff: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@formatRetrying(name:Option[String],outcome:scala.util.Try[Any],attempts:Int,backoff:scala.concurrent.duration.FiniteDuration):String" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Formats a message for a retrying event.</p><div class="fullcomment"><div class="comment cmt"><p>Formats a message for a retrying event.
-</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation that failed if one was provided.</p></dd><dt class="param">thrown</dt><dd class="cmt"><p>The exception that was thrown.</p></dd><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that have been made so far.</p></dd><dt class="param">backoff</dt><dd class="cmt"><p>The amount of time that will pass before another attempt is made.
+</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation that failed if one was provided.</p></dd><dt class="param">outcome</dt><dd class="cmt"><p>The outcome of the most recent retry attempt.</p></dd><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that have been made so far.</p></dd><dt class="param">backoff</dt><dd class="cmt"><p>The amount of time that will pass before another attempt is made.
 </p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="FormatEvents.html" class="extype" name="atmos.monitor.FormatEvents">FormatEvents</a></dd></dl></div>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
@@ -386,7 +493,11 @@
       <span class="symbol">
         <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@getClass():Class[_]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="hashCode():Int"></a>
@@ -399,23 +510,31 @@
       <span class="symbol">
         <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@hashCode():Int" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="atmos.monitor.LogEvents#interrupted" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="interrupted(name:Option[String],thrown:Throwable,attempts:Int):Unit"></a>
-      <a id="interrupted(Option[String],Throwable,Int):Unit"></a>
+      <a id="interrupted(name:Option[String],outcome:scala.util.Try[Any],attempts:Int):Unit"></a>
+      <a id="interrupted(Option[String],Try[Any],Int):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">interrupted</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="thrown">thrown: <span class="extype" name="scala.Throwable">Throwable</span></span>, <span name="attempts">attempts: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">interrupted</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="outcome">outcome: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Any">Any</span>]</span>, <span name="attempts">attempts: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
-      <p class="shortcomment cmt">Called when an operation has failed with a fatal error and will not be retried.</p><div class="fullcomment"><div class="comment cmt"><p>Called when an operation has failed with a fatal error and will not be retried.</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation that failed if one was provided.
-</p></dd><dt class="param">thrown</dt><dd class="cmt"><p>The exception that was thrown.
-</p></dd><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that were made.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.monitor.LogEvents">LogEvents</a> → <a href="../EventMonitor.html" class="extype" name="atmos.EventMonitor">EventMonitor</a></dd></dl></div>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@interrupted(name:Option[String],outcome:scala.util.Try[Any],attempts:Int):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Called when an operation has failed with a fatal error and will not be retried.</p><div class="fullcomment"><div class="comment cmt"><p>Called when an operation has failed with a fatal error and will not be retried.
+</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation that failed if one was provided.</p></dd><dt class="param">outcome</dt><dd class="cmt"><p>The outcome of the most recent retry attempt.</p></dd><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that were made.
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.monitor.LogEvents">LogEvents</a> → <a href="../EventMonitor.html" class="extype" name="atmos.EventMonitor">EventMonitor</a></dd></dl></div>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -427,7 +546,11 @@
       <span class="symbol">
         <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
@@ -440,7 +563,11 @@
       <span class="symbol">
         <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notify():Unit"></a>
@@ -453,7 +580,11 @@
       <span class="symbol">
         <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@notify():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notifyAll():Unit"></a>
@@ -466,25 +597,31 @@
       <span class="symbol">
         <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@notifyAll():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="atmos.monitor.LogEvents#retrying" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="retrying(name:Option[String],thrown:Throwable,attempts:Int,backoff:scala.concurrent.duration.FiniteDuration,silent:Boolean):Unit"></a>
-      <a id="retrying(Option[String],Throwable,Int,FiniteDuration,Boolean):Unit"></a>
+      <a id="retrying(name:Option[String],outcome:scala.util.Try[Any],attempts:Int,backoff:scala.concurrent.duration.FiniteDuration,silent:Boolean):Unit"></a>
+      <a id="retrying(Option[String],Try[Any],Int,FiniteDuration,Boolean):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">retrying</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="thrown">thrown: <span class="extype" name="scala.Throwable">Throwable</span></span>, <span name="attempts">attempts: <span class="extype" name="scala.Int">Int</span></span>, <span name="backoff">backoff: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>, <span name="silent">silent: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">retrying</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="outcome">outcome: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Any">Any</span>]</span>, <span name="attempts">attempts: <span class="extype" name="scala.Int">Int</span></span>, <span name="backoff">backoff: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>, <span name="silent">silent: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
-      <p class="shortcomment cmt">Called when an operation has failed with a non-fatal error and will be retried.</p><div class="fullcomment"><div class="comment cmt"><p>Called when an operation has failed with a non-fatal error and will be retried.</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation that failed if one was provided.
-</p></dd><dt class="param">thrown</dt><dd class="cmt"><p>The exception that was thrown.
-</p></dd><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that have been made so far.
-</p></dd><dt class="param">backoff</dt><dd class="cmt"><p>The amount of time that will pass before another attempt is made.
-</p></dd><dt class="param">silent</dt><dd class="cmt"><p>True if the exception was classified as silent.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.monitor.LogEvents">LogEvents</a> → <a href="../EventMonitor.html" class="extype" name="atmos.EventMonitor">EventMonitor</a></dd></dl></div>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@retrying(name:Option[String],outcome:scala.util.Try[Any],attempts:Int,backoff:scala.concurrent.duration.FiniteDuration,silent:Boolean):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Called when an operation has failed with a non-fatal error and will be retried.</p><div class="fullcomment"><div class="comment cmt"><p>Called when an operation has failed with a non-fatal error and will be retried.
+</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation that failed if one was provided.</p></dd><dt class="param">outcome</dt><dd class="cmt"><p>The outcome of the most recent retry attempt.</p></dd><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that have been made so far.</p></dd><dt class="param">backoff</dt><dd class="cmt"><p>The amount of time that will pass before another attempt is made.</p></dd><dt class="param">silent</dt><dd class="cmt"><p>True if the exception was classified as silent.
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.monitor.LogEvents">LogEvents</a> → <a href="../EventMonitor.html" class="extype" name="atmos.EventMonitor">EventMonitor</a></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -496,7 +633,11 @@
       <span class="symbol">
         <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toString():String"></a>
@@ -509,7 +650,11 @@
       <span class="symbol">
         <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@toString():String" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
@@ -522,7 +667,11 @@
       <span class="symbol">
         <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@wait():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -541,7 +690,11 @@
       <span class="symbol">
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -560,7 +713,11 @@
       <span class="symbol">
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@wait(x$1:Long):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -573,7 +730,76 @@
 
         
 
-        
+        <div id="values" class="values members">
+              <h3>Deprecated Value Members</h3>
+              <ol><li name="atmos.EventMonitor#aborted" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="aborted(name:Option[String],thrown:Throwable,attempts:Int):Unit"></a>
+      <a id="aborted(Option[String],Throwable,Int):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: (Since version 2.1) Use aborted(Option[String], Try[Any], Int)">aborted</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="thrown">thrown: <span class="extype" name="scala.Throwable">Throwable</span></span>, <span name="attempts">attempts: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@aborted(name:Option[String],thrown:Throwable,attempts:Int):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Called when an operation has failed too many times and will not be retried.</p><div class="fullcomment"><div class="comment cmt"><p>Called when an operation has failed too many times and will not be retried.
+</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation that failed if one was provided.</p></dd><dt class="param">thrown</dt><dd class="cmt"><p>The exception that was thrown.</p></dd><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that were made.
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../EventMonitor.html" class="extype" name="atmos.EventMonitor">EventMonitor</a></dd><dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.1)</i> Use aborted(Option[String], Try[Any], Int)</p></dd></dl></div>
+    </li><li name="atmos.EventMonitor#interrupted" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="interrupted(name:Option[String],thrown:Throwable,attempts:Int):Unit"></a>
+      <a id="interrupted(Option[String],Throwable,Int):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: (Since version 2.1) Use interrupted(Option[String], Try[Any], Int)">interrupted</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="thrown">thrown: <span class="extype" name="scala.Throwable">Throwable</span></span>, <span name="attempts">attempts: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@interrupted(name:Option[String],thrown:Throwable,attempts:Int):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Called when an operation has failed with a fatal error and will not be retried.</p><div class="fullcomment"><div class="comment cmt"><p>Called when an operation has failed with a fatal error and will not be retried.
+</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation that failed if one was provided.</p></dd><dt class="param">thrown</dt><dd class="cmt"><p>The exception that was thrown.</p></dd><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that were made.
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../EventMonitor.html" class="extype" name="atmos.EventMonitor">EventMonitor</a></dd><dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.1)</i> Use interrupted(Option[String], Try[Any], Int)</p></dd></dl></div>
+    </li><li name="atmos.EventMonitor#retrying" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="retrying(name:Option[String],thrown:Throwable,attempts:Int,backoff:scala.concurrent.duration.FiniteDuration,silent:Boolean):Unit"></a>
+      <a id="retrying(Option[String],Throwable,Int,FiniteDuration,Boolean):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: (Since version 2.1) Use retrying(Option[String], Try[Any], Int, FiniteDuration, Boolean)">retrying</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="thrown">thrown: <span class="extype" name="scala.Throwable">Throwable</span></span>, <span name="attempts">attempts: <span class="extype" name="scala.Int">Int</span></span>, <span name="backoff">backoff: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>, <span name="silent">silent: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.monitor.LogEvents@retrying(name:Option[String],thrown:Throwable,attempts:Int,backoff:scala.concurrent.duration.FiniteDuration,silent:Boolean):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Called when an operation has failed with a non-fatal error and will be retried.</p><div class="fullcomment"><div class="comment cmt"><p>Called when an operation has failed with a non-fatal error and will be retried.
+</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation that failed if one was provided.</p></dd><dt class="param">thrown</dt><dd class="cmt"><p>The exception that was thrown.</p></dd><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that have been made so far.</p></dd><dt class="param">backoff</dt><dd class="cmt"><p>The amount of time that will pass before another attempt is made.</p></dd><dt class="param">silent</dt><dd class="cmt"><p>True if the exception was classified as silent.
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../EventMonitor.html" class="extype" name="atmos.EventMonitor">EventMonitor</a></dd><dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.1)</i> Use retrying(Option[String], Try[Any], Int, FiniteDuration, Boolean)</p></dd></dl></div>
+    </li></ol>
+            </div>
         </div>
 
         <div id="inheritedMembers">
@@ -601,6 +827,7 @@
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-      <script defer="defer" type="text/javascript" id="jquery-js" src="../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../lib/template.js"></script>
+
+
     </body>
       </html>

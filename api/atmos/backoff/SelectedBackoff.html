@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
           <title>SelectedBackoff - atmos.backoff.SelectedBackoff</title>
@@ -9,6 +8,11 @@
           
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+      
       <script type="text/javascript">
          if(top === self) {
             var url = '../../index.html';
@@ -26,7 +30,13 @@
       <div id="definition">
         <img src="../../lib/class_big.png" />
         <p id="owner"><a href="../package.html" class="extype" name="atmos">atmos</a>.<a href="package.html" class="extype" name="atmos.backoff">backoff</a></p>
-        <h1>SelectedBackoff</h1>
+        <h1>SelectedBackoff</h1><h3><span class="morelinks"><div>Related Doc:
+            <a href="package.html" class="extype" name="atmos.backoff">package backoff</a>
+          </div></span></h3><span class="permalink">
+      <a href="../../index.html#atmos.backoff.SelectedBackoff" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -35,12 +45,12 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">SelectedBackoff</span><span class="params">(<span name="f">f: (<span class="extype" name="scala.Throwable">Throwable</span>) ⇒ <a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">BackoffPolicy</a></span>)</span><span class="result"> extends <a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">BackoffPolicy</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <span class="name">SelectedBackoff</span><span class="params">(<span name="f">f: (<span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Any">Any</span>]) ⇒ <a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">BackoffPolicy</a></span>)</span><span class="result"> extends <a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">BackoffPolicy</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A policy that delegates to another policy that is selected based on the most recently thrown exception.
-</p></div><dl class="paramcmts block"><dt class="param">f</dt><dd class="cmt"><p>The function that maps from exceptions to backoff policies.
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A policy that delegates to another policy that is selected based on the most recently evaluated outcome.
+</p></div><dl class="paramcmts block"><dt class="param">f</dt><dd class="cmt"><p>The function that maps from outcomes to backoff policies.
 </p></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">BackoffPolicy</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
@@ -82,7 +92,7 @@
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="atmos.backoff.SelectedBackoff#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="&lt;init&gt;(f:Throwable=&gt;atmos.BackoffPolicy):atmos.backoff.SelectedBackoff"></a>
+      <a id="&lt;init&gt;(f:scala.util.Try[Any]=&gt;atmos.BackoffPolicy):atmos.backoff.SelectedBackoff"></a>
       <a id="&lt;init&gt;:SelectedBackoff"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -90,10 +100,14 @@
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">SelectedBackoff</span><span class="params">(<span name="f">f: (<span class="extype" name="scala.Throwable">Throwable</span>) ⇒ <a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">BackoffPolicy</a></span>)</span>
+        <span class="name">SelectedBackoff</span><span class="params">(<span name="f">f: (<span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Any">Any</span>]) ⇒ <a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">BackoffPolicy</a></span>)</span>
       </span>
-      </h4>
-      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">f</dt><dd class="cmt"><p>The function that maps from exceptions to backoff policies.
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.backoff.SelectedBackoff@&lt;init&gt;(f:scala.util.Try[Any]=&gt;atmos.BackoffPolicy):atmos.backoff.SelectedBackoff" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">f</dt><dd class="cmt"><p>The function that maps from outcomes to backoff policies.
 </p></dd></dl></div>
     </li></ol>
             </div>
@@ -105,19 +119,6 @@
         <div id="values" class="values members">
               <h3>Value Members</h3>
               <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="!=(x$1:AnyRef):Boolean"></a>
-      <a id="!=(AnyRef):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="!=(x$1:Any):Boolean"></a>
       <a id="!=(Any):Boolean"></a>
       <h4 class="signature">
@@ -128,8 +129,12 @@
       <span class="symbol">
         <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.backoff.SelectedBackoff@!=(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="##():Int"></a>
       <a id="##():Int"></a>
@@ -141,22 +146,13 @@
       <span class="symbol">
         <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.backoff.SelectedBackoff@##():Int" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="==(x$1:AnyRef):Boolean"></a>
-      <a id="==(AnyRef):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="==(x$1:Any):Boolean"></a>
       <a id="==(Any):Boolean"></a>
       <h4 class="signature">
@@ -167,8 +163,12 @@
       <span class="symbol">
         <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.backoff.SelectedBackoff@==(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -180,7 +180,11 @@
       <span class="symbol">
         <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.backoff.SelectedBackoff@asInstanceOf[T0]:T0" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
@@ -193,7 +197,11 @@
       <span class="symbol">
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.backoff.SelectedBackoff@clone():Object" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -212,21 +220,29 @@
       <span class="symbol">
         <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.backoff.SelectedBackoff@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="atmos.backoff.SelectedBackoff#f" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="f:Throwable=&gt;atmos.BackoffPolicy"></a>
-      <a id="f:(Throwable)⇒BackoffPolicy"></a>
+      <a id="f:scala.util.Try[Any]=&gt;atmos.BackoffPolicy"></a>
+      <a id="f:(Try[Any])⇒BackoffPolicy"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">f</span><span class="result">: (<span class="extype" name="scala.Throwable">Throwable</span>) ⇒ <a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">BackoffPolicy</a></span>
+        <span class="name">f</span><span class="result">: (<span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Any">Any</span>]) ⇒ <a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">BackoffPolicy</a></span>
       </span>
-      </h4>
-      <p class="shortcomment cmt">The function that maps from exceptions to backoff policies.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.backoff.SelectedBackoff@f:scala.util.Try[Any]=&gt;atmos.BackoffPolicy" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The function that maps from outcomes to backoff policies.</p>
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
@@ -238,7 +254,11 @@
       <span class="symbol">
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.backoff.SelectedBackoff@finalize():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -257,7 +277,11 @@
       <span class="symbol">
         <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.backoff.SelectedBackoff@getClass():Class[_]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -270,7 +294,11 @@
       <span class="symbol">
         <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.backoff.SelectedBackoff@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
@@ -283,24 +311,33 @@
       <span class="symbol">
         <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.backoff.SelectedBackoff@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="atmos.backoff.SelectedBackoff#nextBackoff" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="nextBackoff(attempts:Int,previousError:Throwable):scala.concurrent.duration.FiniteDuration"></a>
-      <a id="nextBackoff(Int,Throwable):FiniteDuration"></a>
+      <a id="nextBackoff(attempts:Int,outcome:scala.util.Try[Any]):scala.concurrent.duration.FiniteDuration"></a>
+      <a id="nextBackoff(Int,Try[Any]):FiniteDuration"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">nextBackoff</span><span class="params">(<span name="attempts">attempts: <span class="extype" name="scala.Int">Int</span></span>, <span name="previousError">previousError: <span class="extype" name="scala.Throwable">Throwable</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>
+        <span class="name">nextBackoff</span><span class="params">(<span name="attempts">attempts: <span class="extype" name="scala.Int">Int</span></span>, <span name="outcome">outcome: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Any">Any</span>]</span>)</span><span class="result">: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>
       </span>
-      </h4>
-      <p class="shortcomment cmt">Computes the next backoff duration using the specified number of attempts and the error that caused this retry
-event to happen.</p><div class="fullcomment"><div class="comment cmt"><p>Computes the next backoff duration using the specified number of attempts and the error that caused this retry
-event to happen.</p></div><dl class="paramcmts block"><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that have been made so far.
-</p></dd><dt class="param">previousError</dt><dd class="cmt"><p>The error that caused this retry event to happen.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.backoff.SelectedBackoff">SelectedBackoff</a> → <a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">BackoffPolicy</a></dd></dl></div>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.backoff.SelectedBackoff@nextBackoff(attempts:Int,outcome:scala.util.Try[Any]):scala.concurrent.duration.FiniteDuration" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Computes the next backoff duration using the specified number of attempts and the outcome that caused the
+operation to consider another attempt.</p><div class="fullcomment"><div class="comment cmt"><p>Computes the next backoff duration using the specified number of attempts and the outcome that caused the
+operation to consider another attempt.
+</p></div><dl class="paramcmts block"><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that have been made so far.</p></dd><dt class="param">outcome</dt><dd class="cmt"><p>The outcome that caused the operation to consider another attempt.
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="atmos.backoff.SelectedBackoff">SelectedBackoff</a> → <a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">BackoffPolicy</a></dd></dl></div>
     </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notify():Unit"></a>
       <a id="notify():Unit"></a>
@@ -312,7 +349,11 @@ event to happen.</p></div><dl class="paramcmts block"><dt class="param">attempts
       <span class="symbol">
         <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.backoff.SelectedBackoff@notify():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notifyAll():Unit"></a>
@@ -325,7 +366,11 @@ event to happen.</p></div><dl class="paramcmts block"><dt class="param">attempts
       <span class="symbol">
         <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.backoff.SelectedBackoff@notifyAll():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
@@ -338,7 +383,11 @@ event to happen.</p></div><dl class="paramcmts block"><dt class="param">attempts
       <span class="symbol">
         <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.backoff.SelectedBackoff@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
@@ -351,7 +400,11 @@ event to happen.</p></div><dl class="paramcmts block"><dt class="param">attempts
       <span class="symbol">
         <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.backoff.SelectedBackoff@wait():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -370,7 +423,11 @@ event to happen.</p></div><dl class="paramcmts block"><dt class="param">attempts
       <span class="symbol">
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.backoff.SelectedBackoff@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -389,7 +446,11 @@ event to happen.</p></div><dl class="paramcmts block"><dt class="param">attempts
       <span class="symbol">
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.backoff.SelectedBackoff@wait(x$1:Long):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -402,7 +463,34 @@ event to happen.</p></div><dl class="paramcmts block"><dt class="param">attempts
 
         
 
-        
+        <div id="values" class="values members">
+              <h3>Deprecated Value Members</h3>
+              <ol><li name="atmos.BackoffPolicy#nextBackoff" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="nextBackoff(attempts:Int,previousError:Throwable):scala.concurrent.duration.FiniteDuration"></a>
+      <a id="nextBackoff(Int,Throwable):FiniteDuration"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: (Since version 2.1) Use nextBackoff(Int, Try[Any])">nextBackoff</span><span class="params">(<span name="attempts">attempts: <span class="extype" name="scala.Int">Int</span></span>, <span name="previousError">previousError: <span class="extype" name="scala.Throwable">Throwable</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.backoff.SelectedBackoff@nextBackoff(attempts:Int,previousError:Throwable):scala.concurrent.duration.FiniteDuration" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Computes the next backoff duration using the specified number of attempts and the error that caused the
+operation to consider another attempt.</p><div class="fullcomment"><div class="comment cmt"><p>Computes the next backoff duration using the specified number of attempts and the error that caused the
+operation to consider another attempt.
+</p></div><dl class="paramcmts block"><dt class="param">attempts</dt><dd class="cmt"><p>The number of attempts that have been made so far.</p></dd><dt class="param">previousError</dt><dd class="cmt"><p>The error that caused the operation to consider another attempt.
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">BackoffPolicy</a></dd><dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.1)</i> Use nextBackoff(Int, Try[Any])</p></dd></dl></div>
+    </li></ol>
+            </div>
         </div>
 
         <div id="inheritedMembers">
@@ -436,6 +524,7 @@ event to happen.</p></div><dl class="paramcmts block"><dt class="param">attempts
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-      <script defer="defer" type="text/javascript" id="jquery-js" src="../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../lib/template.js"></script>
+
+
     </body>
       </html>

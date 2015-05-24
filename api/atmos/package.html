@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
           <title>atmos - atmos</title>
@@ -9,6 +8,11 @@
           
       <link href="../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../lib/template.js"></script>
+      <script type="text/javascript" src="../lib/tools.tooltip.js"></script>
+      
       <script type="text/javascript">
          if(top === self) {
             var url = '../index.html';
@@ -26,7 +30,11 @@
       <div id="definition">
         <img src="../lib/package_big.png" />
         
-        <h1>atmos</h1>
+        <h1>atmos</h1><span class="permalink">
+      <a href="../index.html#atmos.package" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -40,7 +48,7 @@
       </h4>
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>The <code>atmos</code> package aims to provide a concise mechanism for implementing retry-on-failure behavior.</p><p>Retry behavior is controlled by an instance of <a href="RetryPolicy.html" class="extype" name="atmos.RetryPolicy">atmos.RetryPolicy</a> configured with strategies for various
-components of the retry operation. The elements that define a retry policy are:</p><ul><li><a href="#ErrorClassifier=PartialFunction[Throwable,atmos.ErrorClassification]" class="extmbr" name="atmos.ErrorClassifier">atmos.ErrorClassifier</a>: Defines when a retry operation should be interrupted by a fatal error.</li><li><a href="BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">atmos.BackoffPolicy</a>: Defines how long to wait between successive retry attempts. The <a href="backoff/package.html" class="extype" name="atmos.backoff">atmos.backoff</a>
+components of the retry operation. The elements that define a retry policy are:</p><ul><li><a href="#ResultClassifier=PartialFunction[Any,atmos.ResultClassification]" class="extmbr" name="atmos.ResultClassifier">atmos.ResultClassifier</a>: Defines what results are acceptable for a retry operation to return.</li><li><a href="#ErrorClassifier=PartialFunction[Throwable,atmos.ErrorClassification]" class="extmbr" name="atmos.ErrorClassifier">atmos.ErrorClassifier</a>: Defines when a retry operation should be interrupted by a fatal error.</li><li><a href="BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">atmos.BackoffPolicy</a>: Defines how long to wait between successive retry attempts. The <a href="backoff/package.html" class="extype" name="atmos.backoff">atmos.backoff</a>
    package provides a number of common backoff policy implementations.</li><li><a href="EventMonitor.html" class="extype" name="atmos.EventMonitor">atmos.EventMonitor</a>: An interface that is notified of events during a retry operation. The <a href="monitor/package.html" class="extype" name="atmos.monitor">atmos.monitor</a>
    package provides a number of common event monitor implementations.</li><li><a href="TerminationPolicy.html" class="extype" name="atmos.TerminationPolicy">atmos.TerminationPolicy</a>: Defines when a retry operation should abort and make no further attempts. The
    <a href="termination/package.html" class="extype" name="atmos.termination">atmos.termination</a> package provides a number of common termination policy implementations.</li></ul><p>Additionally, the <a href="dsl/package.html" class="extype" name="atmos.dsl">atmos.dsl</a> package provides a concise DSL for describing retry policies.</p><p>For more information about using the <code>atmos</code> library, see <a href="http://zman.io/atmos" target="_blank">http://zman.io/atmos</a>
@@ -97,8 +105,12 @@ components of the retry operation. The elements that define a retry policy are:<
       <span class="symbol">
         <a href="BackoffPolicy.html"><span class="name">BackoffPolicy</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">A strategy for computing a sequence of wait durations for use between retry attempts.</p>
+      </h4><span class="permalink">
+      <a href="../index.html#atmos.package@BackoffPolicyextendsAnyRef" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A strategy for computing a sequence of wait durations for use between retry attempts.</p>
     </li><li name="atmos.ErrorClassification" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="ErrorClassificationextendsAnyRef"></a>
       <a id="ErrorClassification:ErrorClassification"></a>
@@ -110,8 +122,12 @@ components of the retry operation. The elements that define a retry policy are:<
       <span class="symbol">
         <a href="ErrorClassification.html"><span class="name">ErrorClassification</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Base type for error classifications.</p>
+      </h4><span class="permalink">
+      <a href="../index.html#atmos.package@ErrorClassificationextendsAnyRef" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Base type for error classifications.</p>
     </li><li name="atmos.ErrorClassifier" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="ErrorClassifier=PartialFunction[Throwable,atmos.ErrorClassification]"></a>
       <a id="ErrorClassifier:ErrorClassifier"></a>
@@ -123,7 +139,11 @@ components of the retry operation. The elements that define a retry policy are:<
       <span class="symbol">
         <span class="name">ErrorClassifier</span><span class="result"> = <span class="extype" name="scala.PartialFunction">PartialFunction</span>[<span class="extype" name="scala.Throwable">Throwable</span>, <a href="ErrorClassification.html" class="extype" name="atmos.ErrorClassification">ErrorClassification</a>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../index.html#atmos.package@ErrorClassifier=PartialFunction[Throwable,atmos.ErrorClassification]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">The type of error classifier functions.</p>
     </li><li name="atmos.EventMonitor" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="EventMonitorextendsAnyRef"></a>
@@ -136,9 +156,47 @@ components of the retry operation. The elements that define a retry policy are:<
       <span class="symbol">
         <a href="EventMonitor.html"><span class="name">EventMonitor</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">A monitor that is notified of events that occur while a retry operation is in progress.</p>
-    </li><li name="atmos.RetryPolicy" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../index.html#atmos.package@EventMonitorextendsAnyRef" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A monitor that is notified of events that occur while a retry operation is in progress.</p>
+    </li><li name="atmos.ResultClassification" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="ResultClassificationextendsAnyRef"></a>
+      <a id="ResultClassification:ResultClassification"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed </span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="ResultClassification.html"><span class="name">ResultClassification</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#atmos.package@ResultClassificationextendsAnyRef" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Base type for result classifications.</p>
+    </li><li name="atmos.ResultClassifier" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ResultClassifier=PartialFunction[Any,atmos.ResultClassification]"></a>
+      <a id="ResultClassifier:ResultClassifier"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ResultClassifier</span><span class="result"> = <span class="extype" name="scala.PartialFunction">PartialFunction</span>[<span class="extype" name="scala.Any">Any</span>, <a href="ResultClassification.html" class="extype" name="atmos.ResultClassification">ResultClassification</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#atmos.package@ResultClassifier=PartialFunction[Any,atmos.ResultClassification]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The type of result classifier functions.</p>
+    </li><li name="atmos.RetryPolicy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="RetryPolicyextendsProductwithSerializable"></a>
       <a id="RetryPolicy:RetryPolicy"></a>
       <h4 class="signature">
@@ -147,10 +205,17 @@ components of the retry operation. The elements that define a retry policy are:<
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="RetryPolicy.html"><span class="name">RetryPolicy</span></a><span class="params">(<span name="termination">termination: <a href="TerminationPolicy.html" class="extype" name="atmos.TerminationPolicy">TerminationPolicy</a> = <span class="symbol">RetryPolicy.defaultTermination</span></span>, <span name="backoff">backoff: <a href="BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">BackoffPolicy</a> = <span class="symbol">RetryPolicy.defaultBackoff</span></span>, <span name="monitor">monitor: <a href="EventMonitor.html" class="extype" name="atmos.EventMonitor">EventMonitor</a> = <span class="symbol">RetryPolicy.defaultMonitor</span></span>, <span name="classifier">classifier: <a href="#ErrorClassifier=PartialFunction[Throwable,atmos.ErrorClassification]" class="extmbr" name="atmos.ErrorClassifier">ErrorClassifier</a> = <span class="symbol">RetryPolicy.defaultClassifier</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="RetryPolicy.html"><span class="name">RetryPolicy</span></a><span class="params">(<span name="termination">termination: <a href="TerminationPolicy.html" class="extype" name="atmos.TerminationPolicy">TerminationPolicy</a> = <span class="symbol"><span class="name"><a href="RetryPolicy$.html">RetryPolicy.defaultTermination</a></span></span></span>, <span name="backoff">backoff: <a href="BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">BackoffPolicy</a> = <span class="symbol"><span class="name"><a href="RetryPolicy$.html">RetryPolicy.defaultBackoff</a></span></span></span>, <span name="monitor">monitor: <a href="EventMonitor.html" class="extype" name="atmos.EventMonitor">EventMonitor</a> = <span class="symbol"><span class="name"><a href="RetryPolicy$.html">RetryPolicy.defaultMonitor</a></span></span></span>, <span name="classifier">classifier: <a href="#ErrorClassifier=PartialFunction[Throwable,atmos.ErrorClassification]" class="extmbr" name="atmos.ErrorClassifier">ErrorClassifier</a> = <span class="symbol"><span class="name"><a href="RetryPolicy$.html">RetryPolicy.defaultErrors</a></span></span></span>, <span name="results">results: <a href="#ResultClassifier=PartialFunction[Any,atmos.ResultClassification]" class="extmbr" name="atmos.ResultClassifier">ResultClassifier</a> = <span class="symbol"><span class="name"><a href="RetryPolicy$.html">RetryPolicy.defaultResults</a></span></span></span>, <span name="errors">errors: <a href="#ErrorClassifier=PartialFunction[Throwable,atmos.ErrorClassification]" class="extmbr" name="atmos.ErrorClassifier">ErrorClassifier</a> = <span class="symbol"><span class="name"><a href="RetryPolicy$.html">RetryPolicy.defaultErrors</a></span></span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">A policy that enables customizable retries for arbitrary operations.</p>
+      </h4><span class="permalink">
+      <a href="../index.html#atmos.package@RetryPolicyextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A policy that enables customizable retries for arbitrary operations.</p><div class="fullcomment"><div class="comment cmt"><p>A policy that enables customizable retries for arbitrary operations.
+</p></div><dl class="paramcmts block"><dt class="param">termination</dt><dd class="cmt"><p>The strategy for determining when to abort a retry operation.</p></dd><dt class="param">backoff</dt><dd class="cmt"><p>The strategy used to calculate delays between retries.</p></dd><dt class="param">monitor</dt><dd class="cmt"><p>The monitor that is notified of retry events.</p></dd><dt class="param">classifier</dt><dd class="cmt"><p>The classifier for errors raised during retry operations. This field is deprecated and will be
+                  used as a fallback for the <code>errors</code> classifier, which should be used instead.</p></dd><dt class="param">results</dt><dd class="cmt"><p>The classifier for results returned during retry operations.</p></dd><dt class="param">errors</dt><dd class="cmt"><p>The classifier for errors raised during retry operations.
+</p></dd></dl></div>
     </li><li name="atmos.TerminationPolicy" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="TerminationPolicyextendsAnyRef"></a>
       <a id="TerminationPolicy:TerminationPolicy"></a>
@@ -162,8 +227,12 @@ components of the retry operation. The elements that define a retry policy are:<
       <span class="symbol">
         <a href="TerminationPolicy.html"><span class="name">TerminationPolicy</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Strategy for determining when to abort a retry operation.</p>
+      </h4><span class="permalink">
+      <a href="../index.html#atmos.package@TerminationPolicyextendsAnyRef" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Strategy for determining when to abort a retry operation.</p>
     </li></ol>
             </div>
 
@@ -182,8 +251,12 @@ components of the retry operation. The elements that define a retry policy are:<
       <span class="symbol">
         <a href="ErrorClassification$.html"><span class="name">ErrorClassification</span></a><span class="result"> extends (<span class="extype" name="scala.Throwable">Throwable</span>) ⇒ <a href="ErrorClassification.html" class="extype" name="atmos.ErrorClassification">ErrorClassification</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">Definitions of the supported error classifications and the default classification function.</p>
+      </h4><span class="permalink">
+      <a href="../index.html#atmos.package@ErrorClassification" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Definitions of the supported error classifications and the default classification function.</p>
     </li><li name="atmos.ErrorClassifier" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="ErrorClassifier"></a>
       <a id="ErrorClassifier:ErrorClassifier"></a>
@@ -195,8 +268,46 @@ components of the retry operation. The elements that define a retry policy are:<
       <span class="symbol">
         <a href="package$$ErrorClassifier$.html"><span class="name">ErrorClassifier</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Common error classifiers.</p>
+      </h4><span class="permalink">
+      <a href="../index.html#atmos.package@ErrorClassifier" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Common error classifiers.</p>
+    </li><li name="atmos.ResultClassification" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ResultClassification"></a>
+      <a id="ResultClassification:ResultClassification"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="ResultClassification$.html"><span class="name">ResultClassification</span></a><span class="result"> extends (<span class="extype" name="scala.Any">Any</span>) ⇒ <a href="ResultClassification.html" class="extype" name="atmos.ResultClassification">ResultClassification</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#atmos.package@ResultClassification" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Definitions of the supported result classifications and the default classification function.</p>
+    </li><li name="atmos.ResultClassifier" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ResultClassifier"></a>
+      <a id="ResultClassifier:ResultClassifier"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="package$$ResultClassifier$.html"><span class="name">ResultClassifier</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#atmos.package@ResultClassifier" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Common result classifiers.</p>
     </li><li name="atmos.RetryPolicy" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="RetryPolicy"></a>
       <a id="RetryPolicy:RetryPolicy"></a>
@@ -208,8 +319,12 @@ components of the retry operation. The elements that define a retry policy are:<
       <span class="symbol">
         <a href="RetryPolicy$.html"><span class="name">RetryPolicy</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Factory for retry policies.</p>
+      </h4><span class="permalink">
+      <a href="../index.html#atmos.package@RetryPolicy" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Factory for retry policies.</p>
     </li><li name="atmos.backoff" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="backoff"></a>
       <a id="backoff:backoff"></a>
@@ -221,8 +336,12 @@ components of the retry operation. The elements that define a retry policy are:<
       <span class="symbol">
         <a href="backoff/package.html"><span class="name">backoff</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">The <code>atmos.backoff</code> package provides common implementations of the <a href="BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">atmos.BackoffPolicy</a> trait.</p>
+      </h4><span class="permalink">
+      <a href="../index.html#atmos.package@backoff" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The <code>atmos.backoff</code> package provides common implementations of the <a href="BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">atmos.BackoffPolicy</a> trait.</p>
     </li><li name="atmos.dsl" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="dsl"></a>
       <a id="dsl:dsl"></a>
@@ -234,8 +353,12 @@ components of the retry operation. The elements that define a retry policy are:<
       <span class="symbol">
         <a href="dsl/package.html"><span class="name">dsl</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">The <code>atmos.dsl</code> package defines a domain specific language for constructing and using retry policies.</p>
+      </h4><span class="permalink">
+      <a href="../index.html#atmos.package@dsl" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The <code>atmos.dsl</code> package defines a domain specific language for constructing and using retry policies.</p>
     </li><li name="atmos.monitor" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="monitor"></a>
       <a id="monitor:monitor"></a>
@@ -247,8 +370,12 @@ components of the retry operation. The elements that define a retry policy are:<
       <span class="symbol">
         <a href="monitor/package.html"><span class="name">monitor</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">The <code>atmos.monitor</code> package provides common implementations of the <a href="EventMonitor.html" class="extype" name="atmos.EventMonitor">atmos.EventMonitor</a> trait.</p>
+      </h4><span class="permalink">
+      <a href="../index.html#atmos.package@monitor" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The <code>atmos.monitor</code> package provides common implementations of the <a href="EventMonitor.html" class="extype" name="atmos.EventMonitor">atmos.EventMonitor</a> trait.</p>
     </li><li name="atmos.termination" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="termination"></a>
       <a id="termination:termination"></a>
@@ -260,8 +387,12 @@ components of the retry operation. The elements that define a retry policy are:<
       <span class="symbol">
         <a href="termination/package.html"><span class="name">termination</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">The <code>atmos.termination</code> package provides common implementations of the <a href="TerminationPolicy.html" class="extype" name="atmos.TerminationPolicy">atmos.TerminationPolicy</a> trait.</p>
+      </h4><span class="permalink">
+      <a href="../index.html#atmos.package@termination" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The <code>atmos.termination</code> package provides common implementations of the <a href="TerminationPolicy.html" class="extype" name="atmos.TerminationPolicy">atmos.TerminationPolicy</a> trait.</p>
     </li></ol>
             </div>
 
@@ -291,6 +422,7 @@ components of the retry operation. The elements that define a retry policy are:<
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-      <script defer="defer" type="text/javascript" id="jquery-js" src="../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../lib/template.js"></script>
+
+
     </body>
       </html>

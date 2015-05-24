@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
           <title>dsl - atmos.dsl</title>
@@ -9,6 +8,11 @@
           
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+      
       <script type="text/javascript">
          if(top === self) {
             var url = '../../index.html';
@@ -26,7 +30,11 @@
       <div id="definition">
         <img src="../../lib/package_big.png" />
         <p id="owner"><a href="../package.html" class="extype" name="atmos">atmos</a></p>
-        <h1>dsl</h1>
+        <h1>dsl</h1><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -42,7 +50,7 @@
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>The <code>atmos.dsl</code> package defines a domain specific language for constructing and using retry policies.
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="rummage.Deadlines">Deadlines</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -60,7 +68,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="atmos.dsl"><span>dsl</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="atmos.dsl"><span>dsl</span></li><li class="in" name="rummage.Deadlines"><span>Deadlines</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -82,7 +90,58 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="atmos.dsl.BackoffPolicy" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="atmos.dsl.AbstractEventMonitorExtensions" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="AbstractEventMonitorExtensionsextendsAnyRef"></a>
+      <a id="AbstractEventMonitorExtensions:AbstractEventMonitorExtensions"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="AbstractEventMonitorExtensions.html"><span class="name">AbstractEventMonitorExtensions</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@AbstractEventMonitorExtensionsextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A base class that adds DSL extension methods for the specified event monitors and actions.</p>
+    </li><li name="atmos.dsl.AbstractLogEventsExtensions" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="AbstractLogEventsExtensionsextendsAbstractEventMonitorExtensions"></a>
+      <a id="AbstractLogEventsExtensions:AbstractLogEventsExtensions"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="AbstractLogEventsExtensions.html"><span class="name">AbstractLogEventsExtensions</span></a><span class="result"> extends <a href="AbstractEventMonitorExtensions.html" class="extype" name="atmos.dsl.AbstractEventMonitorExtensions">AbstractEventMonitorExtensions</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@AbstractLogEventsExtensionsextendsAbstractEventMonitorExtensions" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A base class that implements DSL extension methods for all logging event monitors.</p>
+    </li><li name="atmos.dsl.AbstractPrintEventsExtensions" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="AbstractPrintEventsExtensionsextendsAbstractEventMonitorExtensions"></a>
+      <a id="AbstractPrintEventsExtensions:AbstractPrintEventsExtensions"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="AbstractPrintEventsExtensions.html"><span class="name">AbstractPrintEventsExtensions</span></a><span class="result"> extends <a href="AbstractEventMonitorExtensions.html" class="extype" name="atmos.dsl.AbstractEventMonitorExtensions">AbstractEventMonitorExtensions</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@AbstractPrintEventsExtensionsextendsAbstractEventMonitorExtensions" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A base class that implements DSL extension methods for all printing event monitors.</p>
+    </li><li name="atmos.dsl.BackoffPolicy" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="BackoffPolicy=atmos.BackoffPolicy"></a>
       <a id="BackoffPolicy:BackoffPolicy"></a>
       <h4 class="signature">
@@ -93,9 +152,13 @@
       <span class="symbol">
         <span class="name">BackoffPolicy</span><span class="result"> = <a href="../BackoffPolicy.html" class="extype" name="atmos.BackoffPolicy">atmos.BackoffPolicy</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@BackoffPolicy=atmos.BackoffPolicy" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">An alias to the <code>BackoffPolicy</code> type.</p>
-    </li><li name="atmos.dsl.BackoffPolicyExtensions" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="atmos.dsl.BackoffPolicyExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="BackoffPolicyExtensionsextendsAnyValwithProductwithSerializable"></a>
       <a id="BackoffPolicyExtensions:BackoffPolicyExtensions"></a>
       <h4 class="signature">
@@ -106,9 +169,15 @@
       <span class="symbol">
         <a href="BackoffPolicyExtensions.html"><span class="name">BackoffPolicyExtensions</span></a><span class="params">(<span name="self">self: <a href="#BackoffPolicy=atmos.BackoffPolicy" class="extmbr" name="atmos.dsl.BackoffPolicy">BackoffPolicy</a></span>)</span><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Adds DSL extension methods to the backoff policy interface.</p>
-    </li><li name="atmos.dsl.BackoffPolicyFactory" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@BackoffPolicyExtensionsextendsAnyValwithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Adds DSL extension methods to the backoff policy interface.</p><div class="fullcomment"><div class="comment cmt"><p>Adds DSL extension methods to the backoff policy interface.
+</p></div><dl class="paramcmts block"><dt class="param">self</dt><dd class="cmt"><p>The backoff policy to add the extension methods to.
+</p></dd></dl></div>
+    </li><li name="atmos.dsl.BackoffPolicyFactory" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="BackoffPolicyFactoryextendsProductwithSerializable"></a>
       <a id="BackoffPolicyFactory:BackoffPolicyFactory"></a>
       <h4 class="signature">
@@ -119,8 +188,31 @@
       <span class="symbol">
         <a href="BackoffPolicyFactory.html"><span class="name">BackoffPolicyFactory</span></a><span class="params">(<span name="self">self: (<span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span>) ⇒ <a href="#BackoffPolicy=atmos.BackoffPolicy" class="extmbr" name="atmos.dsl.BackoffPolicy">BackoffPolicy</a></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">A factory for duration-based backoff policies.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@BackoffPolicyFactoryextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A factory for duration-based backoff policies.</p><div class="fullcomment"><div class="comment cmt"><p>A factory for duration-based backoff policies.
+</p></div><dl class="paramcmts block"><dt class="param">self</dt><dd class="cmt"><p>The mapping from durations to backoff policies.
+</p></dd></dl></div>
+    </li><li name="rummage.Deadlines.DeadlineSupport" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="DeadlineSupport[T&lt;:&lt;?&gt;]extendsAnyRef"></a>
+      <a id="DeadlineSupport[T]:DeadlineSupport[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <span class="name">DeadlineSupport</span><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@DeadlineSupport[T]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Deadlines</dd></dl></div>
     </li><li name="atmos.dsl.ErrorClassification" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="ErrorClassification=atmos.ErrorClassification"></a>
       <a id="ErrorClassification:ErrorClassification"></a>
@@ -132,8 +224,12 @@
       <span class="symbol">
         <span class="name">ErrorClassification</span><span class="result"> = <a href="../ErrorClassification.html" class="extype" name="atmos.ErrorClassification">atmos.ErrorClassification</a></span>
       </span>
-      </h4>
-      <p class="shortcomment cmt">An alias to the <code>RetryPolicy</code> type.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@ErrorClassification=atmos.ErrorClassification" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">An alias to the <code>ErrorClassification</code> type.</p>
     </li><li name="atmos.dsl.ErrorClassifier" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="ErrorClassifier=atmos.ErrorClassifier"></a>
       <a id="ErrorClassifier:ErrorClassifier"></a>
@@ -145,7 +241,11 @@
       <span class="symbol">
         <span class="name">ErrorClassifier</span><span class="result"> = <span class="extype" name="scala.PartialFunction">PartialFunction</span>[<span class="extype" name="scala.Throwable">Throwable</span>, <a href="../ErrorClassification.html" class="extype" name="atmos.ErrorClassification">atmos.ErrorClassification</a>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@ErrorClassifier=atmos.ErrorClassifier" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">An alias to the <code>ErrorClassifier</code> type.</p>
     </li><li name="atmos.dsl.EventLogLevels" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="EventLogLevels[T]extendsAnyRef"></a>
@@ -158,8 +258,12 @@
       <span class="symbol">
         <a href="EventLogLevels.html"><span class="name">EventLogLevels</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">A tag for logging system specific level types, used to map generic action names to concrete logging levels.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@EventLogLevels[T]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A tag for logging system specific level types, used to map generic action names to concrete logging levels.</p>
     </li><li name="atmos.dsl.EventMonitor" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="EventMonitor=atmos.EventMonitor"></a>
       <a id="EventMonitor:EventMonitor"></a>
@@ -171,9 +275,13 @@
       <span class="symbol">
         <span class="name">EventMonitor</span><span class="result"> = <a href="../EventMonitor.html" class="extype" name="atmos.EventMonitor">atmos.EventMonitor</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@EventMonitor=atmos.EventMonitor" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">An alias to the <code>EventMonitor</code> type.</p>
-    </li><li name="atmos.dsl.LimitAttemptsTerminationFactory" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="atmos.dsl.LimitAttemptsTerminationFactory" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="LimitAttemptsTerminationFactoryextendsAnyValwithProductwithSerializable"></a>
       <a id="LimitAttemptsTerminationFactory:LimitAttemptsTerminationFactory"></a>
       <h4 class="signature">
@@ -184,73 +292,156 @@
       <span class="symbol">
         <a href="LimitAttemptsTerminationFactory.html"><span class="name">LimitAttemptsTerminationFactory</span></a><span class="params">(<span name="self">self: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Adds a termination policy factory named <code>attempts</code> to <code>Int</code>.</p>
-    </li><li name="atmos.dsl.LogEventsWithAkkaExtensions" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="LogEventsWithAkkaExtensionsextendsAnyValwithProductwithSerializable"></a>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@LimitAttemptsTerminationFactoryextendsAnyValwithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Adds a termination policy factory named <code>attempts</code> to <code>Int</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Adds a termination policy factory named <code>attempts</code> to <code>Int</code>.
+</p></div><dl class="paramcmts block"><dt class="param">self</dt><dd class="cmt"><p>The maximum number of attempts that the resulting termination policy will specify.
+</p></dd></dl></div>
+    </li><li name="atmos.dsl.LogEventsWithAkkaExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="LogEventsWithAkkaExtensionsextendsAbstractLogEventsExtensionswithProductwithSerializable"></a>
       <a id="LogEventsWithAkkaExtensions:LogEventsWithAkkaExtensions"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier">final </span>
+        <span class="modifier"></span>
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="LogEventsWithAkkaExtensions.html"><span class="name">LogEventsWithAkkaExtensions</span></a><span class="params">(<span name="self">self: <a href="../monitor/LogEventsWithAkka.html" class="extype" name="atmos.monitor.LogEventsWithAkka">LogEventsWithAkka</a></span>)</span><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="LogEventsWithAkkaExtensions.html"><span class="name">LogEventsWithAkkaExtensions</span></a><span class="params">(<span name="self">self: <a href="../monitor/LogEventsWithAkka.html" class="extype" name="atmos.monitor.LogEventsWithAkka">LogEventsWithAkka</a></span>)</span><span class="result"> extends <a href="AbstractLogEventsExtensions.html" class="extype" name="atmos.dsl.AbstractLogEventsExtensions">AbstractLogEventsExtensions</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Adds DSL extension methods to the <a href="../monitor/LogEventsWithAkka.html" class="extype" name="atmos.monitor.LogEventsWithAkka">atmos.monitor.LogEventsWithAkka</a> interface.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@LogEventsWithAkkaExtensionsextendsAbstractLogEventsExtensionswithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Adds DSL extension methods to the <a href="../monitor/LogEventsWithAkka.html" class="extype" name="atmos.monitor.LogEventsWithAkka">atmos.monitor.LogEventsWithAkka</a> interface.</p><div class="fullcomment"><div class="comment cmt"><p>Adds DSL extension methods to the <a href="../monitor/LogEventsWithAkka.html" class="extype" name="atmos.monitor.LogEventsWithAkka">atmos.monitor.LogEventsWithAkka</a> interface.
+</p></div><dl class="paramcmts block"><dt class="param">self</dt><dd class="cmt"><p>The Akka event monitor to add the extension methods to.
+</p></dd></dl></div>
     </li><li name="atmos.dsl.LogEventsWithJavaExtensions" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="LogEventsWithJavaExtensionsextendsAnyValwithProductwithSerializable"></a>
+      <a id="LogEventsWithJavaExtensionsextendsAbstractLogEventsExtensionswithProductwithSerializable"></a>
       <a id="LogEventsWithJavaExtensions:LogEventsWithJavaExtensions"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier">final </span>
+        <span class="modifier"></span>
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="LogEventsWithJavaExtensions.html"><span class="name">LogEventsWithJavaExtensions</span></a><span class="params">(<span name="self">self: <a href="../monitor/LogEventsWithJava.html" class="extype" name="atmos.monitor.LogEventsWithJava">LogEventsWithJava</a></span>)</span><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="LogEventsWithJavaExtensions.html"><span class="name">LogEventsWithJavaExtensions</span></a><span class="params">(<span name="self">self: <a href="../monitor/LogEventsWithJava.html" class="extype" name="atmos.monitor.LogEventsWithJava">LogEventsWithJava</a></span>)</span><span class="result"> extends <a href="AbstractLogEventsExtensions.html" class="extype" name="atmos.dsl.AbstractLogEventsExtensions">AbstractLogEventsExtensions</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Exposes extensions on any instance of <code>monitor.LogEventsWithJava</code>.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@LogEventsWithJavaExtensionsextendsAbstractLogEventsExtensionswithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Exposes extensions on any instance of <code>monitor.LogEventsWithJava</code>.</p>
     </li><li name="atmos.dsl.LogEventsWithSlf4jExtensions" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="LogEventsWithSlf4jExtensionsextendsAnyValwithProductwithSerializable"></a>
+      <a id="LogEventsWithSlf4jExtensionsextendsAbstractLogEventsExtensionswithProductwithSerializable"></a>
       <a id="LogEventsWithSlf4jExtensions:LogEventsWithSlf4jExtensions"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier">final </span>
+        <span class="modifier"></span>
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="LogEventsWithSlf4jExtensions.html"><span class="name">LogEventsWithSlf4jExtensions</span></a><span class="params">(<span name="self">self: <a href="../monitor/LogEventsWithSlf4j.html" class="extype" name="atmos.monitor.LogEventsWithSlf4j">LogEventsWithSlf4j</a></span>)</span><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="LogEventsWithSlf4jExtensions.html"><span class="name">LogEventsWithSlf4jExtensions</span></a><span class="params">(<span name="self">self: <a href="../monitor/LogEventsWithSlf4j.html" class="extype" name="atmos.monitor.LogEventsWithSlf4j">LogEventsWithSlf4j</a></span>)</span><span class="result"> extends <a href="AbstractLogEventsExtensions.html" class="extype" name="atmos.dsl.AbstractLogEventsExtensions">AbstractLogEventsExtensions</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Exposes extensions on any instance of <code>monitor.LogEventsWithSlf4j</code>.</p>
-    </li><li name="atmos.dsl.PrintEventsWithStreamExtensions" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="PrintEventsWithStreamExtensionsextendsAnyValwithProductwithSerializable"></a>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@LogEventsWithSlf4jExtensionsextendsAbstractLogEventsExtensionswithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Exposes extensions on any instance of <code>monitor.LogEventsWithSlf4j</code>.</p>
+    </li><li name="atmos.dsl.PrintEventsWithStreamExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="PrintEventsWithStreamExtensionsextendsAbstractPrintEventsExtensionswithProductwithSerializable"></a>
       <a id="PrintEventsWithStreamExtensions:PrintEventsWithStreamExtensions"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier">final </span>
+        <span class="modifier"></span>
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="PrintEventsWithStreamExtensions.html"><span class="name">PrintEventsWithStreamExtensions</span></a><span class="params">(<span name="self">self: <a href="../monitor/PrintEventsWithStream.html" class="extype" name="atmos.monitor.PrintEventsWithStream">PrintEventsWithStream</a></span>)</span><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="PrintEventsWithStreamExtensions.html"><span class="name">PrintEventsWithStreamExtensions</span></a><span class="params">(<span name="self">self: <a href="../monitor/PrintEventsWithStream.html" class="extype" name="atmos.monitor.PrintEventsWithStream">PrintEventsWithStream</a></span>)</span><span class="result"> extends <a href="AbstractPrintEventsExtensions.html" class="extype" name="atmos.dsl.AbstractPrintEventsExtensions">AbstractPrintEventsExtensions</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Adds DSL extension methods to the <a href="../monitor/PrintEventsWithStream.html" class="extype" name="atmos.monitor.PrintEventsWithStream">atmos.monitor.PrintEventsWithStream</a> interface.</p>
-    </li><li name="atmos.dsl.PrintEventsWithWriterExtensions" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="PrintEventsWithWriterExtensionsextendsAnyValwithProductwithSerializable"></a>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@PrintEventsWithStreamExtensionsextendsAbstractPrintEventsExtensionswithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Adds DSL extension methods to the <a href="../monitor/PrintEventsWithStream.html" class="extype" name="atmos.monitor.PrintEventsWithStream">atmos.monitor.PrintEventsWithStream</a> interface.</p><div class="fullcomment"><div class="comment cmt"><p>Adds DSL extension methods to the <a href="../monitor/PrintEventsWithStream.html" class="extype" name="atmos.monitor.PrintEventsWithStream">atmos.monitor.PrintEventsWithStream</a> interface.
+</p></div><dl class="paramcmts block"><dt class="param">self</dt><dd class="cmt"><p>The print stream event monitor to add the extension methods to.
+</p></dd></dl></div>
+    </li><li name="atmos.dsl.PrintEventsWithWriterExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="PrintEventsWithWriterExtensionsextendsAbstractPrintEventsExtensionswithProductwithSerializable"></a>
       <a id="PrintEventsWithWriterExtensions:PrintEventsWithWriterExtensions"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier">final </span>
+        <span class="modifier"></span>
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="PrintEventsWithWriterExtensions.html"><span class="name">PrintEventsWithWriterExtensions</span></a><span class="params">(<span name="self">self: <a href="../monitor/PrintEventsWithWriter.html" class="extype" name="atmos.monitor.PrintEventsWithWriter">PrintEventsWithWriter</a></span>)</span><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="PrintEventsWithWriterExtensions.html"><span class="name">PrintEventsWithWriterExtensions</span></a><span class="params">(<span name="self">self: <a href="../monitor/PrintEventsWithWriter.html" class="extype" name="atmos.monitor.PrintEventsWithWriter">PrintEventsWithWriter</a></span>)</span><span class="result"> extends <a href="AbstractPrintEventsExtensions.html" class="extype" name="atmos.dsl.AbstractPrintEventsExtensions">AbstractPrintEventsExtensions</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Adds DSL extension methods to the <a href="../monitor/PrintEventsWithWriter.html" class="extype" name="atmos.monitor.PrintEventsWithWriter">atmos.monitor.PrintEventsWithWriter</a> interface.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@PrintEventsWithWriterExtensionsextendsAbstractPrintEventsExtensionswithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Adds DSL extension methods to the <a href="../monitor/PrintEventsWithWriter.html" class="extype" name="atmos.monitor.PrintEventsWithWriter">atmos.monitor.PrintEventsWithWriter</a> interface.</p><div class="fullcomment"><div class="comment cmt"><p>Adds DSL extension methods to the <a href="../monitor/PrintEventsWithWriter.html" class="extype" name="atmos.monitor.PrintEventsWithWriter">atmos.monitor.PrintEventsWithWriter</a> interface.
+</p></div><dl class="paramcmts block"><dt class="param">self</dt><dd class="cmt"><p>The print writer event monitor to add the extension methods to.
+</p></dd></dl></div>
+    </li><li name="atmos.dsl.ResultClassification" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ResultClassification=atmos.ResultClassification"></a>
+      <a id="ResultClassification:ResultClassification"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ResultClassification</span><span class="result"> = <a href="../ResultClassification.html" class="extype" name="atmos.ResultClassification">atmos.ResultClassification</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@ResultClassification=atmos.ResultClassification" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">An alias to the <code>ResultClassification</code> type.</p>
+    </li><li name="atmos.dsl.ResultClassifier" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ResultClassifier=atmos.ResultClassifier"></a>
+      <a id="ResultClassifier:ResultClassifier"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ResultClassifier</span><span class="result"> = <span class="extype" name="scala.PartialFunction">PartialFunction</span>[<span class="extype" name="scala.Any">Any</span>, <a href="../ResultClassification.html" class="extype" name="atmos.ResultClassification">atmos.ResultClassification</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@ResultClassifier=atmos.ResultClassifier" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">An alias to the <code>ResultClassifier</code> type.</p>
+    </li><li name="atmos.dsl.ResultRejection" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="ResultRejectionextendsAnyRef"></a>
+      <a id="ResultRejection:ResultRejection"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed </span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="ResultRejection.html"><span class="name">ResultRejection</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@ResultRejectionextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      
     </li><li name="atmos.dsl.RetryPolicy" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="RetryPolicy=atmos.RetryPolicy"></a>
       <a id="RetryPolicy:RetryPolicy"></a>
@@ -262,9 +453,13 @@
       <span class="symbol">
         <span class="name">RetryPolicy</span><span class="result"> = <a href="../RetryPolicy.html" class="extype" name="atmos.RetryPolicy">atmos.RetryPolicy</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@RetryPolicy=atmos.RetryPolicy" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">An alias to the <code>RetryPolicy</code> type.</p>
-    </li><li name="atmos.dsl.RetryPolicyExtensions" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="atmos.dsl.RetryPolicyExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="RetryPolicyExtensionsextendsAnyValwithProductwithSerializable"></a>
       <a id="RetryPolicyExtensions:RetryPolicyExtensions"></a>
       <h4 class="signature">
@@ -275,8 +470,14 @@
       <span class="symbol">
         <a href="RetryPolicyExtensions.html"><span class="name">RetryPolicyExtensions</span></a><span class="params">(<span name="self">self: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>)</span><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Adds DSL extension methods to the retry policy interface.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@RetryPolicyExtensionsextendsAnyValwithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Adds DSL extension methods to the retry policy interface.</p><div class="fullcomment"><div class="comment cmt"><p>Adds DSL extension methods to the retry policy interface.
+</p></div><dl class="paramcmts block"><dt class="param">self</dt><dd class="cmt"><p>The retry policy to add the extension methods to.
+</p></dd></dl></div>
     </li><li name="atmos.dsl.TerminationPolicy" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="TerminationPolicy=atmos.TerminationPolicy"></a>
       <a id="TerminationPolicy:TerminationPolicy"></a>
@@ -288,9 +489,13 @@
       <span class="symbol">
         <span class="name">TerminationPolicy</span><span class="result"> = <a href="../TerminationPolicy.html" class="extype" name="atmos.TerminationPolicy">atmos.TerminationPolicy</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@TerminationPolicy=atmos.TerminationPolicy" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">An alias to the <code>TerminationPolicy</code> type.</p>
-    </li><li name="atmos.dsl.TerminationPolicyExtensions" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="atmos.dsl.TerminationPolicyExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="TerminationPolicyExtensionsextendsAnyValwithProductwithSerializable"></a>
       <a id="TerminationPolicyExtensions:TerminationPolicyExtensions"></a>
       <h4 class="signature">
@@ -301,8 +506,14 @@
       <span class="symbol">
         <a href="TerminationPolicyExtensions.html"><span class="name">TerminationPolicyExtensions</span></a><span class="params">(<span name="self">self: <a href="#TerminationPolicy=atmos.TerminationPolicy" class="extmbr" name="atmos.dsl.TerminationPolicy">TerminationPolicy</a></span>)</span><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Adds DSL extension methods to the termination policy interface.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@TerminationPolicyExtensionsextendsAnyValwithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Adds DSL extension methods to the termination policy interface.</p><div class="fullcomment"><div class="comment cmt"><p>Adds DSL extension methods to the termination policy interface.
+</p></div><dl class="paramcmts block"><dt class="param">self</dt><dd class="cmt"><p>The termination policy to add the extension methods to.
+</p></dd></dl></div>
     </li></ol>
             </div>
 
@@ -321,8 +532,12 @@
       <span class="symbol">
         <a href="AkkaSupport$.html"><span class="name">AkkaSupport</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Separate namespace for optional Akka support.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@AkkaSupport" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Separate namespace for optional Akka support.</p>
     </li><li name="atmos.dsl.BackoffPolicyFactory" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="BackoffPolicyFactory"></a>
       <a id="BackoffPolicyFactory:BackoffPolicyFactory"></a>
@@ -334,9 +549,13 @@
       <span class="symbol">
         <a href="BackoffPolicyFactory$.html"><span class="name">BackoffPolicyFactory</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Factory for backoff policy factories.</p>
-    </li><li name="atmos.dsl.package#ErrorClassification" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@BackoffPolicyFactory" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Factory for backoff policy factories.</p>
+    </li><li name="atmos.dsl#ErrorClassification" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="ErrorClassification:atmos.ErrorClassification.type"></a>
       <a id="ErrorClassification:atmos.ErrorClassification.type"></a>
       <h4 class="signature">
@@ -347,9 +566,13 @@
       <span class="symbol">
         <span class="name">ErrorClassification</span><span class="result">: <a href="../ErrorClassification$.html" class="extype" name="atmos.ErrorClassification">atmos.ErrorClassification</a>.type</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@ErrorClassification:atmos.ErrorClassification.type" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">An alias to the <code>ErrorClassification</code> companion.</p>
-    </li><li name="atmos.dsl.package#ErrorClassifier" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="atmos.dsl#ErrorClassifier" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="ErrorClassifier:atmos.ErrorClassifier.type"></a>
       <a id="ErrorClassifier:atmos.ErrorClassifier.type"></a>
       <h4 class="signature">
@@ -360,7 +583,11 @@
       <span class="symbol">
         <span class="name">ErrorClassifier</span><span class="result">: <a href="../package$$ErrorClassifier$.html" class="extype" name="atmos.ErrorClassifier">atmos.ErrorClassifier</a>.type</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@ErrorClassifier:atmos.ErrorClassifier.type" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">An alias to the <code>ErrorClassifier</code> companion.</p>
     </li><li name="atmos.dsl.EventLogLevels" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="EventLogLevels"></a>
@@ -373,9 +600,64 @@
       <span class="symbol">
         <a href="EventLogLevels$.html"><span class="name">EventLogLevels</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Declarations of the default logging level tags.</p>
-    </li><li name="atmos.dsl.package#RetryPolicy" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@EventLogLevels" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Declarations of the default logging level tags.</p>
+    </li><li name="atmos.dsl#ResultClassification" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ResultClassification:atmos.ResultClassification.type"></a>
+      <a id="ResultClassification:atmos.ResultClassification.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ResultClassification</span><span class="result">: <a href="../ResultClassification$.html" class="extype" name="atmos.ResultClassification">atmos.ResultClassification</a>.type</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@ResultClassification:atmos.ResultClassification.type" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">An alias to the <code>ResultClassification</code> companion.</p>
+    </li><li name="atmos.dsl#ResultClassifier" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ResultClassifier:atmos.ResultClassifier.type"></a>
+      <a id="ResultClassifier:atmos.ResultClassifier.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ResultClassifier</span><span class="result">: <a href="../package$$ResultClassifier$.html" class="extype" name="atmos.ResultClassifier">atmos.ResultClassifier</a>.type</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@ResultClassifier:atmos.ResultClassifier.type" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">An alias to the <code>ResultClassifier</code> companion.</p>
+    </li><li name="atmos.dsl.ResultRejection" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ResultRejection"></a>
+      <a id="ResultRejection:ResultRejection"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="ResultRejection$.html"><span class="name">ResultRejection</span></a><span class="result"> extends <a href="ResultRejection.html" class="extype" name="atmos.dsl.ResultRejection">ResultRejection</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@ResultRejection" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="atmos.dsl#RetryPolicy" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="RetryPolicy:atmos.RetryPolicy.type"></a>
       <a id="RetryPolicy:atmos.RetryPolicy.type"></a>
       <h4 class="signature">
@@ -386,7 +668,11 @@
       <span class="symbol">
         <span class="name">RetryPolicy</span><span class="result">: <a href="../RetryPolicy$.html" class="extype" name="atmos.RetryPolicy">atmos.RetryPolicy</a>.type</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@RetryPolicy:atmos.RetryPolicy.type" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">An alias to the <code>RetryPolicy</code> companion.</p>
     </li><li name="atmos.dsl.Slf4jSupport" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Slf4jSupport"></a>
@@ -399,9 +685,30 @@
       <span class="symbol">
         <a href="Slf4jSupport$.html"><span class="name">Slf4jSupport</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Separate namespace for optional SLF4J support.</p>
-    </li><li name="atmos.dsl.package#backoffPolicyToBackoffPolicyExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@Slf4jSupport" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Separate namespace for optional SLF4J support.</p>
+    </li><li name="atmos.dsl#acceptResult" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="acceptResult:atmos.dsl.package.ResultClassification"></a>
+      <a id="acceptResult:ResultClassification"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">acceptResult</span><span class="result">: <a href="#ResultClassification=atmos.ResultClassification" class="extmbr" name="atmos.dsl.ResultClassification">ResultClassification</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@acceptResult:atmos.dsl.package.ResultClassification" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Returns the <code>Acceptable</code> result classification.</p>
+    </li><li name="atmos.dsl#backoffPolicyToBackoffPolicyExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="backoffPolicyToBackoffPolicyExtensions(policy:atmos.dsl.package.BackoffPolicy):atmos.dsl.BackoffPolicyExtensions"></a>
       <a id="backoffPolicyToBackoffPolicyExtensions(BackoffPolicy):BackoffPolicyExtensions"></a>
       <h4 class="signature">
@@ -412,11 +719,15 @@
       <span class="symbol">
         <span class="name">backoffPolicyToBackoffPolicyExtensions</span><span class="params">(<span name="policy">policy: <a href="#BackoffPolicy=atmos.BackoffPolicy" class="extmbr" name="atmos.dsl.BackoffPolicy">BackoffPolicy</a></span>)</span><span class="result">: <a href="BackoffPolicyExtensions.html" class="extype" name="atmos.dsl.BackoffPolicyExtensions">BackoffPolicyExtensions</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@backoffPolicyToBackoffPolicyExtensions(policy:atmos.dsl.package.BackoffPolicy):atmos.dsl.BackoffPolicyExtensions" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Provides an implicit extension of the backoff policy interface.</p><div class="fullcomment"><div class="comment cmt"><p>Provides an implicit extension of the backoff policy interface.
 </p></div><dl class="paramcmts block"><dt class="param">policy</dt><dd class="cmt"><p>The backoff policy to extend the interface of.
 </p></dd></dl></div>
-    </li><li name="atmos.dsl.package#constantBackoff" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="atmos.dsl#constantBackoff" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="constantBackoff:atmos.dsl.BackoffPolicyFactory"></a>
       <a id="constantBackoff:BackoffPolicyFactory"></a>
       <h4 class="signature">
@@ -427,9 +738,13 @@
       <span class="symbol">
         <span class="name">constantBackoff</span><span class="result">: <a href="BackoffPolicyFactory.html" class="extype" name="atmos.dsl.BackoffPolicyFactory">BackoffPolicyFactory</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@constantBackoff:atmos.dsl.BackoffPolicyFactory" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Creates a backoff policy that uses the same backoff after every attempt.</p>
-    </li><li name="atmos.dsl.package#exponentialBackoff" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="atmos.dsl#exponentialBackoff" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="exponentialBackoff:atmos.dsl.BackoffPolicyFactory"></a>
       <a id="exponentialBackoff:BackoffPolicyFactory"></a>
       <h4 class="signature">
@@ -440,9 +755,13 @@
       <span class="symbol">
         <span class="name">exponentialBackoff</span><span class="result">: <a href="BackoffPolicyFactory.html" class="extype" name="atmos.dsl.BackoffPolicyFactory">BackoffPolicyFactory</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@exponentialBackoff:atmos.dsl.BackoffPolicyFactory" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Creates a backoff policy that increases the backoff duration exponentially after every attempt.</p>
-    </li><li name="atmos.dsl.package#fibonacciBackoff" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="atmos.dsl#fibonacciBackoff" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="fibonacciBackoff:atmos.dsl.BackoffPolicyFactory"></a>
       <a id="fibonacciBackoff:BackoffPolicyFactory"></a>
       <h4 class="signature">
@@ -453,10 +772,14 @@
       <span class="symbol">
         <span class="name">fibonacciBackoff</span><span class="result">: <a href="BackoffPolicyFactory.html" class="extype" name="atmos.dsl.BackoffPolicyFactory">BackoffPolicyFactory</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@fibonacciBackoff:atmos.dsl.BackoffPolicyFactory" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Creates a backoff policy that increases the backoff duration by repeatedly multiplying by the an approximation of
 the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
-    </li><li name="atmos.dsl.package#finiteDurationToTerminationPolicy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="atmos.dsl#finiteDurationToTerminationPolicy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finiteDurationToTerminationPolicy(duration:scala.concurrent.duration.FiniteDuration):atmos.dsl.package.TerminationPolicy"></a>
       <a id="finiteDurationToTerminationPolicy(FiniteDuration):TerminationPolicy"></a>
       <h4 class="signature">
@@ -467,13 +790,17 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">finiteDurationToTerminationPolicy</span><span class="params">(<span name="duration">duration: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>)</span><span class="result">: <a href="#TerminationPolicy=atmos.TerminationPolicy" class="extmbr" name="atmos.dsl.TerminationPolicy">TerminationPolicy</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@finiteDurationToTerminationPolicy(duration:scala.concurrent.duration.FiniteDuration):atmos.dsl.package.TerminationPolicy" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Creates a termination policy that limits a retry operation to the specified time frame for use in expressions like
 <code>retryFor { 5.minutes }</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a termination policy that limits a retry operation to the specified time frame for use in expressions like
 <code>retryFor { 5.minutes }</code>.
 </p></div><dl class="paramcmts block"><dt class="param">duration</dt><dd class="cmt"><p>The maximum duration that the resulting termination policy will specify.
 </p></dd></dl></div>
-    </li><li name="atmos.dsl.package#finiteDurationToTerminationPolicyExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="atmos.dsl#finiteDurationToTerminationPolicyExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finiteDurationToTerminationPolicyExtensions(duration:scala.concurrent.duration.FiniteDuration):atmos.dsl.TerminationPolicyExtensions"></a>
       <a id="finiteDurationToTerminationPolicyExtensions(FiniteDuration):TerminationPolicyExtensions"></a>
       <h4 class="signature">
@@ -484,11 +811,15 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">finiteDurationToTerminationPolicyExtensions</span><span class="params">(<span name="duration">duration: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>)</span><span class="result">: <a href="TerminationPolicyExtensions.html" class="extype" name="atmos.dsl.TerminationPolicyExtensions">TerminationPolicyExtensions</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@finiteDurationToTerminationPolicyExtensions(duration:scala.concurrent.duration.FiniteDuration):atmos.dsl.TerminationPolicyExtensions" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Adds logical and and or operators to durations for use in expressions like <code>retryFor { 5.minutes || 5.attempts }</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Adds logical and and or operators to durations for use in expressions like <code>retryFor { 5.minutes || 5.attempts }</code>.
 </p></div><dl class="paramcmts block"><dt class="param">duration</dt><dd class="cmt"><p>The maximum duration that the resulting termination policy will specify.
 </p></dd></dl></div>
-    </li><li name="atmos.dsl.package#intToLimitAttemptsTerminationPolicyFactory" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="atmos.dsl#intToLimitAttemptsTerminationPolicyFactory" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="intToLimitAttemptsTerminationPolicyFactory(attempts:Int):atmos.dsl.LimitAttemptsTerminationFactory"></a>
       <a id="intToLimitAttemptsTerminationPolicyFactory(Int):LimitAttemptsTerminationFactory"></a>
       <h4 class="signature">
@@ -499,11 +830,15 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">intToLimitAttemptsTerminationPolicyFactory</span><span class="params">(<span name="attempts">attempts: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="LimitAttemptsTerminationFactory.html" class="extype" name="atmos.dsl.LimitAttemptsTerminationFactory">LimitAttemptsTerminationFactory</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@intToLimitAttemptsTerminationPolicyFactory(attempts:Int):atmos.dsl.LimitAttemptsTerminationFactory" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Provides an implicit factory named <code>attempts</code> to <code>Int</code> for use in expressions like <code>retryFor { 5.attempts }</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Provides an implicit factory named <code>attempts</code> to <code>Int</code> for use in expressions like <code>retryFor { 5.attempts }</code>.
 </p></div><dl class="paramcmts block"><dt class="param">attempts</dt><dd class="cmt"><p>The maximum number of attempts that resulting termination policies will specify.
 </p></dd></dl></div>
-    </li><li name="atmos.dsl.package#keepRetrying" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="atmos.dsl#keepRetrying" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="keepRetrying:atmos.dsl.package.ErrorClassification"></a>
       <a id="keepRetrying:ErrorClassification"></a>
       <h4 class="signature">
@@ -514,9 +849,13 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">keepRetrying</span><span class="result">: <a href="#ErrorClassification=atmos.ErrorClassification" class="extmbr" name="atmos.dsl.ErrorClassification">ErrorClassification</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@keepRetrying:atmos.dsl.package.ErrorClassification" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Returns the <code>Recoverable</code> error classification.</p>
-    </li><li name="atmos.dsl.package#keepRetryingSilently" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="atmos.dsl#keepRetryingSilently" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="keepRetryingSilently:atmos.dsl.package.ErrorClassification"></a>
       <a id="keepRetryingSilently:ErrorClassification"></a>
       <h4 class="signature">
@@ -527,9 +866,13 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">keepRetryingSilently</span><span class="result">: <a href="#ErrorClassification=atmos.ErrorClassification" class="extmbr" name="atmos.dsl.ErrorClassification">ErrorClassification</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@keepRetryingSilently:atmos.dsl.package.ErrorClassification" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Returns the <code>SilentlyRecoverable</code> error classification.</p>
-    </li><li name="atmos.dsl.package#linearBackoff" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="atmos.dsl#linearBackoff" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="linearBackoff:atmos.dsl.BackoffPolicyFactory"></a>
       <a id="linearBackoff:BackoffPolicyFactory"></a>
       <h4 class="signature">
@@ -540,9 +883,13 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">linearBackoff</span><span class="result">: <a href="BackoffPolicyFactory.html" class="extype" name="atmos.dsl.BackoffPolicyFactory">BackoffPolicyFactory</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@linearBackoff:atmos.dsl.BackoffPolicyFactory" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Creates a backoff policy that increases the backoff duration linearly after every attempt.</p>
-    </li><li name="atmos.dsl.package#logDebug" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="atmos.dsl#logDebug" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="logDebug[T](implicitevidence$4:atmos.dsl.EventLogLevels[T]):atmos.monitor.LogAction.LogAt[T]"></a>
       <a id="logDebug[T](EventLogLevels[T]):LogAt[T]"></a>
       <h4 class="signature">
@@ -553,9 +900,13 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">logDebug</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="EventLogLevels.html" class="extype" name="atmos.dsl.EventLogLevels">EventLogLevels</a>[<span class="extype" name="atmos.dsl.logDebug.T">T</span>]</span>)</span><span class="result">: <a href="../monitor/LogAction$$LogAt.html" class="extype" name="atmos.monitor.LogAction.LogAt">LogAt</a>[<span class="extype" name="atmos.dsl.logDebug.T">T</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@logDebug[T](implicitevidence$4:atmos.dsl.EventLogLevels[T]):atmos.monitor.LogAction.LogAt[T]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Returns a log action that will submit a log entry at a debug-equivalent level.</p>
-    </li><li name="atmos.dsl.package#logError" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="atmos.dsl#logError" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="logError[T](implicitevidence$1:atmos.dsl.EventLogLevels[T]):atmos.monitor.LogAction.LogAt[T]"></a>
       <a id="logError[T](EventLogLevels[T]):LogAt[T]"></a>
       <h4 class="signature">
@@ -566,9 +917,13 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">logError</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="EventLogLevels.html" class="extype" name="atmos.dsl.EventLogLevels">EventLogLevels</a>[<span class="extype" name="atmos.dsl.logError.T">T</span>]</span>)</span><span class="result">: <a href="../monitor/LogAction$$LogAt.html" class="extype" name="atmos.monitor.LogAction.LogAt">LogAt</a>[<span class="extype" name="atmos.dsl.logError.T">T</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@logError[T](implicitevidence$1:atmos.dsl.EventLogLevels[T]):atmos.monitor.LogAction.LogAt[T]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Returns a log action that will submit a log entry at an error-equivalent level.</p>
-    </li><li name="atmos.dsl.package#logEventsWithJavaToLogEventsWithJavaExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="atmos.dsl#logEventsWithJavaToLogEventsWithJavaExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="logEventsWithJavaToLogEventsWithJavaExtensions(policy:atmos.monitor.LogEventsWithJava):atmos.dsl.LogEventsWithJavaExtensions"></a>
       <a id="logEventsWithJavaToLogEventsWithJavaExtensions(LogEventsWithJava):LogEventsWithJavaExtensions"></a>
       <h4 class="signature">
@@ -579,11 +934,15 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">logEventsWithJavaToLogEventsWithJavaExtensions</span><span class="params">(<span name="policy">policy: <a href="../monitor/LogEventsWithJava.html" class="extype" name="atmos.monitor.LogEventsWithJava">LogEventsWithJava</a></span>)</span><span class="result">: <a href="LogEventsWithJavaExtensions.html" class="extype" name="atmos.dsl.LogEventsWithJavaExtensions">LogEventsWithJavaExtensions</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@logEventsWithJavaToLogEventsWithJavaExtensions(policy:atmos.monitor.LogEventsWithJava):atmos.dsl.LogEventsWithJavaExtensions" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Provides an implicit extension of the <a href="../monitor/LogEventsWithJava.html" class="extype" name="atmos.monitor.LogEventsWithJava">atmos.monitor.LogEventsWithJava</a> interface.</p><div class="fullcomment"><div class="comment cmt"><p>Provides an implicit extension of the <a href="../monitor/LogEventsWithJava.html" class="extype" name="atmos.monitor.LogEventsWithJava">atmos.monitor.LogEventsWithJava</a> interface.
 </p></div><dl class="paramcmts block"><dt class="param">policy</dt><dd class="cmt"><p>The java logging event monitor to extend the interface of.
 </p></dd></dl></div>
-    </li><li name="atmos.dsl.package#logInfo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="atmos.dsl#logInfo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="logInfo[T](implicitevidence$3:atmos.dsl.EventLogLevels[T]):atmos.monitor.LogAction.LogAt[T]"></a>
       <a id="logInfo[T](EventLogLevels[T]):LogAt[T]"></a>
       <h4 class="signature">
@@ -594,9 +953,13 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">logInfo</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="EventLogLevels.html" class="extype" name="atmos.dsl.EventLogLevels">EventLogLevels</a>[<span class="extype" name="atmos.dsl.logInfo.T">T</span>]</span>)</span><span class="result">: <a href="../monitor/LogAction$$LogAt.html" class="extype" name="atmos.monitor.LogAction.LogAt">LogAt</a>[<span class="extype" name="atmos.dsl.logInfo.T">T</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@logInfo[T](implicitevidence$3:atmos.dsl.EventLogLevels[T]):atmos.monitor.LogAction.LogAt[T]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Returns a log action that will submit a log entry at an info-equivalent level.</p>
-    </li><li name="atmos.dsl.package#logNothing" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="atmos.dsl#logNothing" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="logNothing:atmos.monitor.LogAction.LogNothing.type"></a>
       <a id="logNothing:LogNothing.type"></a>
       <h4 class="signature">
@@ -607,9 +970,13 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">logNothing</span><span class="result">: <a href="../monitor/LogAction$$LogNothing$.html" class="extype" name="atmos.monitor.LogAction.LogNothing">LogNothing</a>.type</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@logNothing:atmos.monitor.LogAction.LogNothing.type" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Returns a log action that will not log anything.</p>
-    </li><li name="atmos.dsl.package#logWarning" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="atmos.dsl#logWarning" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="logWarning[T](implicitevidence$2:atmos.dsl.EventLogLevels[T]):atmos.monitor.LogAction.LogAt[T]"></a>
       <a id="logWarning[T](EventLogLevels[T]):LogAt[T]"></a>
       <h4 class="signature">
@@ -620,9 +987,13 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">logWarning</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="EventLogLevels.html" class="extype" name="atmos.dsl.EventLogLevels">EventLogLevels</a>[<span class="extype" name="atmos.dsl.logWarning.T">T</span>]</span>)</span><span class="result">: <a href="../monitor/LogAction$$LogAt.html" class="extype" name="atmos.monitor.LogAction.LogAt">LogAt</a>[<span class="extype" name="atmos.dsl.logWarning.T">T</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@logWarning[T](implicitevidence$2:atmos.dsl.EventLogLevels[T]):atmos.monitor.LogAction.LogAt[T]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Returns a log action that will submit a log entry at a warning-equivalent level.</p>
-    </li><li name="atmos.dsl.package#loggerToLogEventsWithJava" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="atmos.dsl#loggerToLogEventsWithJava" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="loggerToLogEventsWithJava(logger:java.util.logging.Logger):atmos.monitor.LogEventsWithJava"></a>
       <a id="loggerToLogEventsWithJava(Logger):LogEventsWithJava"></a>
       <h4 class="signature">
@@ -633,11 +1004,15 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">loggerToLogEventsWithJava</span><span class="params">(<span name="logger">logger: <span class="extype" name="java.util.logging.Logger">Logger</span></span>)</span><span class="result">: <a href="../monitor/LogEventsWithJava.html" class="extype" name="atmos.monitor.LogEventsWithJava">LogEventsWithJava</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@loggerToLogEventsWithJava(logger:java.util.logging.Logger):atmos.monitor.LogEventsWithJava" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Creates a new event monitor that submits events to a logger.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new event monitor that submits events to a logger.
 </p></div><dl class="paramcmts block"><dt class="param">logger</dt><dd class="cmt"><p>The logger to supply with event messages.
 </p></dd></dl></div>
-    </li><li name="atmos.dsl.package#loggerToLogEventsWithJavaExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="atmos.dsl#loggerToLogEventsWithJavaExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="loggerToLogEventsWithJavaExtensions(logger:java.util.logging.Logger):atmos.dsl.LogEventsWithJavaExtensions"></a>
       <a id="loggerToLogEventsWithJavaExtensions(Logger):LogEventsWithJavaExtensions"></a>
       <h4 class="signature">
@@ -648,11 +1023,15 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">loggerToLogEventsWithJavaExtensions</span><span class="params">(<span name="logger">logger: <span class="extype" name="java.util.logging.Logger">Logger</span></span>)</span><span class="result">: <a href="LogEventsWithJavaExtensions.html" class="extype" name="atmos.dsl.LogEventsWithJavaExtensions">LogEventsWithJavaExtensions</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@loggerToLogEventsWithJavaExtensions(logger:java.util.logging.Logger):atmos.dsl.LogEventsWithJavaExtensions" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Creates a new event monitor extension interface for a logger.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new event monitor extension interface for a logger.
 </p></div><dl class="paramcmts block"><dt class="param">logger</dt><dd class="cmt"><p>The logger to create a new event monitor extension interface for.
 </p></dd></dl></div>
-    </li><li name="atmos.dsl.package#neverRetry" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="atmos.dsl#neverRetry" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="neverRetry:atmos.dsl.package.RetryPolicy"></a>
       <a id="neverRetry:RetryPolicy"></a>
       <h4 class="signature">
@@ -663,9 +1042,13 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">neverRetry</span><span class="result">: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@neverRetry:atmos.dsl.package.RetryPolicy" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Creates a new retry policy that immediately terminates.</p>
-    </li><li name="atmos.dsl.package#printEventsWithStreamToPrintEventsWithStreamExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="atmos.dsl#printEventsWithStreamToPrintEventsWithStreamExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="printEventsWithStreamToPrintEventsWithStreamExtensions(policy:atmos.monitor.PrintEventsWithStream):atmos.dsl.PrintEventsWithStreamExtensions"></a>
       <a id="printEventsWithStreamToPrintEventsWithStreamExtensions(PrintEventsWithStream):PrintEventsWithStreamExtensions"></a>
       <h4 class="signature">
@@ -676,11 +1059,15 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">printEventsWithStreamToPrintEventsWithStreamExtensions</span><span class="params">(<span name="policy">policy: <a href="../monitor/PrintEventsWithStream.html" class="extype" name="atmos.monitor.PrintEventsWithStream">PrintEventsWithStream</a></span>)</span><span class="result">: <a href="PrintEventsWithStreamExtensions.html" class="extype" name="atmos.dsl.PrintEventsWithStreamExtensions">PrintEventsWithStreamExtensions</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@printEventsWithStreamToPrintEventsWithStreamExtensions(policy:atmos.monitor.PrintEventsWithStream):atmos.dsl.PrintEventsWithStreamExtensions" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Provides an implicit extension of the <a href="../monitor/PrintEventsWithStream.html" class="extype" name="atmos.monitor.PrintEventsWithStream">atmos.monitor.PrintEventsWithStream</a> interface.</p><div class="fullcomment"><div class="comment cmt"><p>Provides an implicit extension of the <a href="../monitor/PrintEventsWithStream.html" class="extype" name="atmos.monitor.PrintEventsWithStream">atmos.monitor.PrintEventsWithStream</a> interface.
 </p></div><dl class="paramcmts block"><dt class="param">policy</dt><dd class="cmt"><p>The print stream event monitor to extend the interface of.
 </p></dd></dl></div>
-    </li><li name="atmos.dsl.package#printEventsWithWriterToPrintEventsWithWriterExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="atmos.dsl#printEventsWithWriterToPrintEventsWithWriterExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="printEventsWithWriterToPrintEventsWithWriterExtensions(policy:atmos.monitor.PrintEventsWithWriter):atmos.dsl.PrintEventsWithWriterExtensions"></a>
       <a id="printEventsWithWriterToPrintEventsWithWriterExtensions(PrintEventsWithWriter):PrintEventsWithWriterExtensions"></a>
       <h4 class="signature">
@@ -691,11 +1078,15 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">printEventsWithWriterToPrintEventsWithWriterExtensions</span><span class="params">(<span name="policy">policy: <a href="../monitor/PrintEventsWithWriter.html" class="extype" name="atmos.monitor.PrintEventsWithWriter">PrintEventsWithWriter</a></span>)</span><span class="result">: <a href="PrintEventsWithWriterExtensions.html" class="extype" name="atmos.dsl.PrintEventsWithWriterExtensions">PrintEventsWithWriterExtensions</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@printEventsWithWriterToPrintEventsWithWriterExtensions(policy:atmos.monitor.PrintEventsWithWriter):atmos.dsl.PrintEventsWithWriterExtensions" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Provides an implicit extension of the <a href="../monitor/PrintEventsWithWriter.html" class="extype" name="atmos.monitor.PrintEventsWithWriter">atmos.monitor.PrintEventsWithWriter</a> interface.</p><div class="fullcomment"><div class="comment cmt"><p>Provides an implicit extension of the <a href="../monitor/PrintEventsWithWriter.html" class="extype" name="atmos.monitor.PrintEventsWithWriter">atmos.monitor.PrintEventsWithWriter</a> interface.
 </p></div><dl class="paramcmts block"><dt class="param">policy</dt><dd class="cmt"><p>The print writer event monitor to extend the interface of.
 </p></dd></dl></div>
-    </li><li name="atmos.dsl.package#printMessage" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="atmos.dsl#printMessage" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="printMessage:atmos.monitor.PrintAction"></a>
       <a id="printMessage:PrintAction"></a>
       <h4 class="signature">
@@ -706,9 +1097,13 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">printMessage</span><span class="result">: <a href="../monitor/PrintAction.html" class="extype" name="atmos.monitor.PrintAction">PrintAction</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@printMessage:atmos.monitor.PrintAction" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Returns a print action that will print only an event message.</p>
-    </li><li name="atmos.dsl.package#printMessageAndStackTrace" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="atmos.dsl#printMessageAndStackTrace" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="printMessageAndStackTrace:atmos.monitor.PrintAction"></a>
       <a id="printMessageAndStackTrace:PrintAction"></a>
       <h4 class="signature">
@@ -719,9 +1114,13 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">printMessageAndStackTrace</span><span class="result">: <a href="../monitor/PrintAction.html" class="extype" name="atmos.monitor.PrintAction">PrintAction</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@printMessageAndStackTrace:atmos.monitor.PrintAction" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Returns a print action that will print an event message and stack trace.</p>
-    </li><li name="atmos.dsl.package#printNothing" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="atmos.dsl#printNothing" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="printNothing:atmos.monitor.PrintAction"></a>
       <a id="printNothing:PrintAction"></a>
       <h4 class="signature">
@@ -732,9 +1131,13 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">printNothing</span><span class="result">: <a href="../monitor/PrintAction.html" class="extype" name="atmos.monitor.PrintAction">PrintAction</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@printNothing:atmos.monitor.PrintAction" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Returns a print action that will print no text.</p>
-    </li><li name="atmos.dsl.package#printStreamToPrintEventsWithStream" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="atmos.dsl#printStreamToPrintEventsWithStream" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="printStreamToPrintEventsWithStream(stream:java.io.PrintStream):atmos.monitor.PrintEventsWithStream"></a>
       <a id="printStreamToPrintEventsWithStream(PrintStream):PrintEventsWithStream"></a>
       <h4 class="signature">
@@ -745,11 +1148,15 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">printStreamToPrintEventsWithStream</span><span class="params">(<span name="stream">stream: <span class="extype" name="java.io.PrintStream">PrintStream</span></span>)</span><span class="result">: <a href="../monitor/PrintEventsWithStream.html" class="extype" name="atmos.monitor.PrintEventsWithStream">PrintEventsWithStream</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@printStreamToPrintEventsWithStream(stream:java.io.PrintStream):atmos.monitor.PrintEventsWithStream" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Creates a new event monitor that prints messages to a stream.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new event monitor that prints messages to a stream.
 </p></div><dl class="paramcmts block"><dt class="param">stream</dt><dd class="cmt"><p>The stream to print events to.
 </p></dd></dl></div>
-    </li><li name="atmos.dsl.package#printStreamToPrintEventsWithStreamExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="atmos.dsl#printStreamToPrintEventsWithStreamExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="printStreamToPrintEventsWithStreamExtensions(stream:java.io.PrintStream):atmos.dsl.PrintEventsWithStreamExtensions"></a>
       <a id="printStreamToPrintEventsWithStreamExtensions(PrintStream):PrintEventsWithStreamExtensions"></a>
       <h4 class="signature">
@@ -760,11 +1167,15 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">printStreamToPrintEventsWithStreamExtensions</span><span class="params">(<span name="stream">stream: <span class="extype" name="java.io.PrintStream">PrintStream</span></span>)</span><span class="result">: <a href="PrintEventsWithStreamExtensions.html" class="extype" name="atmos.dsl.PrintEventsWithStreamExtensions">PrintEventsWithStreamExtensions</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@printStreamToPrintEventsWithStreamExtensions(stream:java.io.PrintStream):atmos.dsl.PrintEventsWithStreamExtensions" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Creates a new event monitor extension interface for a print stream.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new event monitor extension interface for a print stream.
 </p></div><dl class="paramcmts block"><dt class="param">stream</dt><dd class="cmt"><p>The print stream to create a new event monitor extension interface for.
 </p></dd></dl></div>
-    </li><li name="atmos.dsl.package#printWriterToPrintEventsWithWriter" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="atmos.dsl#printWriterToPrintEventsWithWriter" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="printWriterToPrintEventsWithWriter(writer:java.io.PrintWriter):atmos.monitor.PrintEventsWithWriter"></a>
       <a id="printWriterToPrintEventsWithWriter(PrintWriter):PrintEventsWithWriter"></a>
       <h4 class="signature">
@@ -775,11 +1186,15 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">printWriterToPrintEventsWithWriter</span><span class="params">(<span name="writer">writer: <span class="extype" name="java.io.PrintWriter">PrintWriter</span></span>)</span><span class="result">: <a href="../monitor/PrintEventsWithWriter.html" class="extype" name="atmos.monitor.PrintEventsWithWriter">PrintEventsWithWriter</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@printWriterToPrintEventsWithWriter(writer:java.io.PrintWriter):atmos.monitor.PrintEventsWithWriter" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Creates a new event monitor that prints messages to a writer.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new event monitor that prints messages to a writer.
 </p></div><dl class="paramcmts block"><dt class="param">writer</dt><dd class="cmt"><p>The writer to print events to.
 </p></dd></dl></div>
-    </li><li name="atmos.dsl.package#printWriterToPrintEventsWithWriterExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="atmos.dsl#printWriterToPrintEventsWithWriterExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="printWriterToPrintEventsWithWriterExtensions(writer:java.io.PrintWriter):atmos.dsl.PrintEventsWithWriterExtensions"></a>
       <a id="printWriterToPrintEventsWithWriterExtensions(PrintWriter):PrintEventsWithWriterExtensions"></a>
       <h4 class="signature">
@@ -790,101 +1205,146 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">printWriterToPrintEventsWithWriterExtensions</span><span class="params">(<span name="writer">writer: <span class="extype" name="java.io.PrintWriter">PrintWriter</span></span>)</span><span class="result">: <a href="PrintEventsWithWriterExtensions.html" class="extype" name="atmos.dsl.PrintEventsWithWriterExtensions">PrintEventsWithWriterExtensions</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@printWriterToPrintEventsWithWriterExtensions(writer:java.io.PrintWriter):atmos.dsl.PrintEventsWithWriterExtensions" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Creates a new event monitor extension interface for a print writer.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new event monitor extension interface for a print writer.
 </p></div><dl class="paramcmts block"><dt class="param">writer</dt><dd class="cmt"><p>The print writer to create a new event monitor extension interface for.
 </p></dd></dl></div>
-    </li><li name="atmos.dsl.package#retry" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="retry[T](name:Option[String])(operation:=&gt;T)(implicitpolicy:atmos.dsl.package.RetryPolicy):T"></a>
-      <a id="retry[T](Option[String])(⇒T)(RetryPolicy):T"></a>
+    </li><li name="atmos.dsl#rejectResult" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="rejectResult:atmos.dsl.ResultRejection"></a>
+      <a id="rejectResult:ResultRejection"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">retry</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="atmos.dsl.retry.T">T</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>)</span><span class="result">: <span class="extype" name="atmos.dsl.retry.T">T</span></span>
+        <span class="name">rejectResult</span><span class="result">: <a href="ResultRejection.html" class="extype" name="atmos.dsl.ResultRejection">ResultRejection</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@rejectResult:atmos.dsl.ResultRejection" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Returns a factory for an <code>Unacceptable</code> result classification with an optional status.</p>
+    </li><li name="atmos.dsl#retry" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="retry[T](name:Option[String])(operation:=&gt;T)(implicitpolicy:atmos.dsl.package.RetryPolicy,implicitclock:rummage.Clock):T"></a>
+      <a id="retry[T](Option[String])(⇒T)(RetryPolicy,Clock):T"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">retry</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="atmos.dsl.retry.T">T</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>, <span name="clock">clock: <span class="extype" name="rummage.Clock">Clock</span></span>)</span><span class="result">: <span class="extype" name="atmos.dsl.retry.T">T</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@retry[T](name:Option[String])(operation:=&gt;T)(implicitpolicy:atmos.dsl.package.RetryPolicy,implicitclock:rummage.Clock):T" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Performs the specified optionally named operation synchronously, retrying according to the implicit retry policy.</p><div class="fullcomment"><div class="comment cmt"><p>Performs the specified optionally named operation synchronously, retrying according to the implicit retry policy.
-</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The optional name of the operation.</p></dd><dt class="param">operation</dt><dd class="cmt"><p>The operation to repeatedly perform.</p></dd><dt class="param">policy</dt><dd class="cmt"><p>The retry policy to execute with.
+</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The optional name of the operation.</p></dd><dt class="param">operation</dt><dd class="cmt"><p>The operation to repeatedly perform.</p></dd><dt class="param">policy</dt><dd class="cmt"><p>The retry policy to execute with.</p></dd><dt class="param">clock</dt><dd class="cmt"><p>The clock used to track time and wait out backoff delays.
 </p></dd></dl></div>
-    </li><li name="atmos.dsl.package#retry" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="retry[T](name:String)(operation:=&gt;T)(implicitpolicy:atmos.dsl.package.RetryPolicy):T"></a>
-      <a id="retry[T](String)(⇒T)(RetryPolicy):T"></a>
+    </li><li name="atmos.dsl#retry" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="retry[T](name:String)(operation:=&gt;T)(implicitpolicy:atmos.dsl.package.RetryPolicy,implicitclock:rummage.Clock):T"></a>
+      <a id="retry[T](String)(⇒T)(RetryPolicy,Clock):T"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">retry</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="atmos.dsl.retry.T">T</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>)</span><span class="result">: <span class="extype" name="atmos.dsl.retry.T">T</span></span>
+        <span class="name">retry</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="atmos.dsl.retry.T">T</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>, <span name="clock">clock: <span class="extype" name="rummage.Clock">Clock</span></span>)</span><span class="result">: <span class="extype" name="atmos.dsl.retry.T">T</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@retry[T](name:String)(operation:=&gt;T)(implicitpolicy:atmos.dsl.package.RetryPolicy,implicitclock:rummage.Clock):T" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Performs the specified named operation synchronously, retrying according to the implicit retry policy.</p><div class="fullcomment"><div class="comment cmt"><p>Performs the specified named operation synchronously, retrying according to the implicit retry policy.
-</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation.</p></dd><dt class="param">operation</dt><dd class="cmt"><p>The operation to repeatedly perform.</p></dd><dt class="param">policy</dt><dd class="cmt"><p>The retry policy to execute with.
+</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation.</p></dd><dt class="param">operation</dt><dd class="cmt"><p>The operation to repeatedly perform.</p></dd><dt class="param">policy</dt><dd class="cmt"><p>The retry policy to execute with.</p></dd><dt class="param">clock</dt><dd class="cmt"><p>The clock used to track time and wait out backoff delays.
 </p></dd></dl></div>
-    </li><li name="atmos.dsl.package#retry" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="retry[T]()(operation:=&gt;T)(implicitpolicy:atmos.dsl.package.RetryPolicy):T"></a>
-      <a id="retry[T]()(⇒T)(RetryPolicy):T"></a>
+    </li><li name="atmos.dsl#retry" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="retry[T]()(operation:=&gt;T)(implicitpolicy:atmos.dsl.package.RetryPolicy,implicitclock:rummage.Clock):T"></a>
+      <a id="retry[T]()(⇒T)(RetryPolicy,Clock):T"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">retry</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">()</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="atmos.dsl.retry.T">T</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>)</span><span class="result">: <span class="extype" name="atmos.dsl.retry.T">T</span></span>
+        <span class="name">retry</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">()</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="atmos.dsl.retry.T">T</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>, <span name="clock">clock: <span class="extype" name="rummage.Clock">Clock</span></span>)</span><span class="result">: <span class="extype" name="atmos.dsl.retry.T">T</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@retry[T]()(operation:=&gt;T)(implicitpolicy:atmos.dsl.package.RetryPolicy,implicitclock:rummage.Clock):T" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Performs the specified operation synchronously, retrying according to the implicit retry policy.</p><div class="fullcomment"><div class="comment cmt"><p>Performs the specified operation synchronously, retrying according to the implicit retry policy.
-</p></div><dl class="paramcmts block"><dt class="param">operation</dt><dd class="cmt"><p>The operation to repeatedly perform.</p></dd><dt class="param">policy</dt><dd class="cmt"><p>The retry policy to execute with.
+</p></div><dl class="paramcmts block"><dt class="param">operation</dt><dd class="cmt"><p>The operation to repeatedly perform.</p></dd><dt class="param">policy</dt><dd class="cmt"><p>The retry policy to execute with.</p></dd><dt class="param">clock</dt><dd class="cmt"><p>The clock used to track time and wait out backoff delays.
 </p></dd></dl></div>
-    </li><li name="atmos.dsl.package#retryAsync" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="retryAsync[T](name:Option[String])(operation:=&gt;scala.concurrent.Future[T])(implicitpolicy:atmos.dsl.package.RetryPolicy,implicitcontext:scala.concurrent.ExecutionContext,implicittimer:rummage.Timer):scala.concurrent.Future[T]"></a>
-      <a id="retryAsync[T](Option[String])(⇒Future[T])(RetryPolicy,ExecutionContext,Timer):Future[T]"></a>
+    </li><li name="atmos.dsl#retryAsync" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="retryAsync[T](name:Option[String])(operation:=&gt;scala.concurrent.Future[T])(implicitpolicy:atmos.dsl.package.RetryPolicy,implicitcontext:scala.concurrent.ExecutionContext,implicitclock:rummage.Clock):scala.concurrent.Future[T]"></a>
+      <a id="retryAsync[T](Option[String])(⇒Future[T])(RetryPolicy,ExecutionContext,Clock):Future[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">retryAsync</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.dsl.retryAsync.T">T</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>, <span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>, <span name="timer">timer: <span class="extype" name="rummage.Timer">Timer</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.dsl.retryAsync.T">T</span>]</span>
+        <span class="name">retryAsync</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.dsl.retryAsync.T">T</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>, <span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>, <span name="clock">clock: <span class="extype" name="rummage.Clock">Clock</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.dsl.retryAsync.T">T</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@retryAsync[T](name:Option[String])(operation:=&gt;scala.concurrent.Future[T])(implicitpolicy:atmos.dsl.package.RetryPolicy,implicitcontext:scala.concurrent.ExecutionContext,implicitclock:rummage.Clock):scala.concurrent.Future[T]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Performs the specified optionally named operation asynchronously, retrying according to the implicit retry policy.</p><div class="fullcomment"><div class="comment cmt"><p>Performs the specified optionally named operation asynchronously, retrying according to the implicit retry policy.
-</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The optional name of the operation.</p></dd><dt class="param">operation</dt><dd class="cmt"><p>The operation to repeatedly perform.</p></dd><dt class="param">policy</dt><dd class="cmt"><p>The retry policy to execute with.</p></dd><dt class="param">context</dt><dd class="cmt"><p>The execution context to retry on.</p></dd><dt class="param">timer</dt><dd class="cmt"><p>The timer to schedule backoff notifications on.
+</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The optional name of the operation.</p></dd><dt class="param">operation</dt><dd class="cmt"><p>The operation to repeatedly perform.</p></dd><dt class="param">policy</dt><dd class="cmt"><p>The retry policy to execute with.</p></dd><dt class="param">context</dt><dd class="cmt"><p>The execution context to retry on.</p></dd><dt class="param">clock</dt><dd class="cmt"><p>The clock used to track time and schedule backoff notifications.
 </p></dd></dl></div>
-    </li><li name="atmos.dsl.package#retryAsync" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="retryAsync[T](name:String)(operation:=&gt;scala.concurrent.Future[T])(implicitpolicy:atmos.dsl.package.RetryPolicy,implicitcontext:scala.concurrent.ExecutionContext,implicittimer:rummage.Timer):scala.concurrent.Future[T]"></a>
-      <a id="retryAsync[T](String)(⇒Future[T])(RetryPolicy,ExecutionContext,Timer):Future[T]"></a>
+    </li><li name="atmos.dsl#retryAsync" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="retryAsync[T](name:String)(operation:=&gt;scala.concurrent.Future[T])(implicitpolicy:atmos.dsl.package.RetryPolicy,implicitcontext:scala.concurrent.ExecutionContext,implicitclock:rummage.Clock):scala.concurrent.Future[T]"></a>
+      <a id="retryAsync[T](String)(⇒Future[T])(RetryPolicy,ExecutionContext,Clock):Future[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">retryAsync</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.dsl.retryAsync.T">T</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>, <span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>, <span name="timer">timer: <span class="extype" name="rummage.Timer">Timer</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.dsl.retryAsync.T">T</span>]</span>
+        <span class="name">retryAsync</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.dsl.retryAsync.T">T</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>, <span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>, <span name="clock">clock: <span class="extype" name="rummage.Clock">Clock</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.dsl.retryAsync.T">T</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@retryAsync[T](name:String)(operation:=&gt;scala.concurrent.Future[T])(implicitpolicy:atmos.dsl.package.RetryPolicy,implicitcontext:scala.concurrent.ExecutionContext,implicitclock:rummage.Clock):scala.concurrent.Future[T]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Performs the specified optionally named operation asynchronously, retrying according to the implicit retry policy.</p><div class="fullcomment"><div class="comment cmt"><p>Performs the specified optionally named operation asynchronously, retrying according to the implicit retry policy.
-</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation.</p></dd><dt class="param">operation</dt><dd class="cmt"><p>The operation to repeatedly perform.</p></dd><dt class="param">policy</dt><dd class="cmt"><p>The retry policy to execute with.</p></dd><dt class="param">context</dt><dd class="cmt"><p>The execution context to retry on.</p></dd><dt class="param">timer</dt><dd class="cmt"><p>The timer to schedule backoff notifications on.
+</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The name of the operation.</p></dd><dt class="param">operation</dt><dd class="cmt"><p>The operation to repeatedly perform.</p></dd><dt class="param">policy</dt><dd class="cmt"><p>The retry policy to execute with.</p></dd><dt class="param">context</dt><dd class="cmt"><p>The execution context to retry on.</p></dd><dt class="param">clock</dt><dd class="cmt"><p>The clock used to track time and schedule backoff notifications.
 </p></dd></dl></div>
-    </li><li name="atmos.dsl.package#retryAsync" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="retryAsync[T]()(operation:=&gt;scala.concurrent.Future[T])(implicitpolicy:atmos.dsl.package.RetryPolicy,implicitcontext:scala.concurrent.ExecutionContext,implicittimer:rummage.Timer):scala.concurrent.Future[T]"></a>
-      <a id="retryAsync[T]()(⇒Future[T])(RetryPolicy,ExecutionContext,Timer):Future[T]"></a>
+    </li><li name="atmos.dsl#retryAsync" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="retryAsync[T]()(operation:=&gt;scala.concurrent.Future[T])(implicitpolicy:atmos.dsl.package.RetryPolicy,implicitcontext:scala.concurrent.ExecutionContext,implicitclock:rummage.Clock):scala.concurrent.Future[T]"></a>
+      <a id="retryAsync[T]()(⇒Future[T])(RetryPolicy,ExecutionContext,Clock):Future[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">retryAsync</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">()</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.dsl.retryAsync.T">T</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>, <span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>, <span name="timer">timer: <span class="extype" name="rummage.Timer">Timer</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.dsl.retryAsync.T">T</span>]</span>
+        <span class="name">retryAsync</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">()</span><span class="params">(<span name="operation">operation: ⇒ <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.dsl.retryAsync.T">T</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="policy">policy: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>, <span name="context">context: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>, <span name="clock">clock: <span class="extype" name="rummage.Clock">Clock</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="atmos.dsl.retryAsync.T">T</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@retryAsync[T]()(operation:=&gt;scala.concurrent.Future[T])(implicitpolicy:atmos.dsl.package.RetryPolicy,implicitcontext:scala.concurrent.ExecutionContext,implicitclock:rummage.Clock):scala.concurrent.Future[T]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Performs the specified operation asynchronously, retrying according to the implicit retry policy.</p><div class="fullcomment"><div class="comment cmt"><p>Performs the specified operation asynchronously, retrying according to the implicit retry policy.
-</p></div><dl class="paramcmts block"><dt class="param">operation</dt><dd class="cmt"><p>The operation to repeatedly perform.</p></dd><dt class="param">policy</dt><dd class="cmt"><p>The retry policy to execute with.</p></dd><dt class="param">context</dt><dd class="cmt"><p>The execution context to retry on.</p></dd><dt class="param">timer</dt><dd class="cmt"><p>The timer to schedule backoff notifications on.
+</p></div><dl class="paramcmts block"><dt class="param">operation</dt><dd class="cmt"><p>The operation to repeatedly perform.</p></dd><dt class="param">policy</dt><dd class="cmt"><p>The retry policy to execute with.</p></dd><dt class="param">context</dt><dd class="cmt"><p>The execution context to retry on.</p></dd><dt class="param">clock</dt><dd class="cmt"><p>The clock used to track time and schedule backoff notifications.
 </p></dd></dl></div>
-    </li><li name="atmos.dsl.package#retryFor" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="atmos.dsl#retryFor" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="retryFor(termination:atmos.dsl.package.TerminationPolicy):atmos.dsl.package.RetryPolicy"></a>
       <a id="retryFor(TerminationPolicy):RetryPolicy"></a>
       <h4 class="signature">
@@ -895,11 +1355,15 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">retryFor</span><span class="params">(<span name="termination">termination: <a href="#TerminationPolicy=atmos.TerminationPolicy" class="extmbr" name="atmos.dsl.TerminationPolicy">TerminationPolicy</a></span>)</span><span class="result">: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@retryFor(termination:atmos.dsl.package.TerminationPolicy):atmos.dsl.package.RetryPolicy" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Creates a new retry policy based on the specified termination policy.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new retry policy based on the specified termination policy.
 </p></div><dl class="paramcmts block"><dt class="param">termination</dt><dd class="cmt"><p>The termination policy that will be used by the new retry policy.
 </p></dd></dl></div>
-    </li><li name="atmos.dsl.package#retryForever" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="atmos.dsl#retryForever" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="retryForever:atmos.dsl.package.RetryPolicy"></a>
       <a id="retryForever:RetryPolicy"></a>
       <h4 class="signature">
@@ -910,9 +1374,13 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">retryForever</span><span class="result">: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@retryForever:atmos.dsl.package.RetryPolicy" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Creates a new retry policy that never terminates.</p>
-    </li><li name="atmos.dsl.package#retryPolicyToRetryPolicyExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="atmos.dsl#retryPolicyToRetryPolicyExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="retryPolicyToRetryPolicyExtensions(policy:atmos.dsl.package.RetryPolicy):atmos.dsl.RetryPolicyExtensions"></a>
       <a id="retryPolicyToRetryPolicyExtensions(RetryPolicy):RetryPolicyExtensions"></a>
       <h4 class="signature">
@@ -923,11 +1391,15 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">retryPolicyToRetryPolicyExtensions</span><span class="params">(<span name="policy">policy: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>)</span><span class="result">: <a href="RetryPolicyExtensions.html" class="extype" name="atmos.dsl.RetryPolicyExtensions">RetryPolicyExtensions</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@retryPolicyToRetryPolicyExtensions(policy:atmos.dsl.package.RetryPolicy):atmos.dsl.RetryPolicyExtensions" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Provides an implicit extension of the retry policy interface.</p><div class="fullcomment"><div class="comment cmt"><p>Provides an implicit extension of the retry policy interface.
 </p></div><dl class="paramcmts block"><dt class="param">policy</dt><dd class="cmt"><p>The retry policy to extend the interface of.
 </p></dd></dl></div>
-    </li><li name="atmos.dsl.package#retrying" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="atmos.dsl#retrying" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="retrying:atmos.dsl.package.RetryPolicy"></a>
       <a id="retrying:RetryPolicy"></a>
       <h4 class="signature">
@@ -938,24 +1410,32 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">retrying</span><span class="result">: <a href="#RetryPolicy=atmos.RetryPolicy" class="extmbr" name="atmos.dsl.RetryPolicy">RetryPolicy</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@retrying:atmos.dsl.package.RetryPolicy" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Creates a new default retry policy.</p>
-    </li><li name="atmos.dsl.package#selectedBackoff" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="selectedBackoff(f:Throwable=&gt;atmos.dsl.package.BackoffPolicy):atmos.dsl.package.BackoffPolicy"></a>
-      <a id="selectedBackoff((Throwable)⇒BackoffPolicy):BackoffPolicy"></a>
+    </li><li name="atmos.dsl#selectedBackoff" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="selectedBackoff(f:scala.util.Try[Any]=&gt;atmos.dsl.package.BackoffPolicy):atmos.dsl.package.BackoffPolicy"></a>
+      <a id="selectedBackoff((Try[Any])⇒BackoffPolicy):BackoffPolicy"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">selectedBackoff</span><span class="params">(<span name="f">f: (<span class="extype" name="scala.Throwable">Throwable</span>) ⇒ <a href="#BackoffPolicy=atmos.BackoffPolicy" class="extmbr" name="atmos.dsl.BackoffPolicy">BackoffPolicy</a></span>)</span><span class="result">: <a href="#BackoffPolicy=atmos.BackoffPolicy" class="extmbr" name="atmos.dsl.BackoffPolicy">BackoffPolicy</a></span>
+        <span class="name">selectedBackoff</span><span class="params">(<span name="f">f: (<span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Any">Any</span>]) ⇒ <a href="#BackoffPolicy=atmos.BackoffPolicy" class="extmbr" name="atmos.dsl.BackoffPolicy">BackoffPolicy</a></span>)</span><span class="result">: <a href="#BackoffPolicy=atmos.BackoffPolicy" class="extmbr" name="atmos.dsl.BackoffPolicy">BackoffPolicy</a></span>
       </span>
-      </h4>
-      <p class="shortcomment cmt">Creates a backoff policy selects another policy based on the most recently thrown exception.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a backoff policy selects another policy based on the most recently thrown exception.
-</p></div><dl class="paramcmts block"><dt class="param">f</dt><dd class="cmt"><p>The function that maps from exceptions to backoff policies.
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@selectedBackoff(f:scala.util.Try[Any]=&gt;atmos.dsl.package.BackoffPolicy):atmos.dsl.package.BackoffPolicy" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Creates a backoff policy selects another policy based on the most recently evaluated outcome.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a backoff policy selects another policy based on the most recently evaluated outcome.
+</p></div><dl class="paramcmts block"><dt class="param">f</dt><dd class="cmt"><p>The function that maps from outcomes to backoff policies.
 </p></dd></dl></div>
-    </li><li name="atmos.dsl.package#stopRetrying" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="atmos.dsl#stopRetrying" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="stopRetrying:atmos.dsl.package.ErrorClassification"></a>
       <a id="stopRetrying:ErrorClassification"></a>
       <h4 class="signature">
@@ -966,9 +1446,13 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">stopRetrying</span><span class="result">: <a href="#ErrorClassification=atmos.ErrorClassification" class="extmbr" name="atmos.dsl.ErrorClassification">ErrorClassification</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@stopRetrying:atmos.dsl.package.ErrorClassification" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Returns the <code>Fatal</code> error classification.</p>
-    </li><li name="atmos.dsl.package#terminationPolicyToTerminationPolicyExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="atmos.dsl#terminationPolicyToTerminationPolicyExtensions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="terminationPolicyToTerminationPolicyExtensions(policy:atmos.dsl.package.TerminationPolicy):atmos.dsl.TerminationPolicyExtensions"></a>
       <a id="terminationPolicyToTerminationPolicyExtensions(TerminationPolicy):TerminationPolicyExtensions"></a>
       <h4 class="signature">
@@ -979,7 +1463,11 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <span class="symbol">
         <span class="name">terminationPolicyToTerminationPolicyExtensions</span><span class="params">(<span name="policy">policy: <a href="#TerminationPolicy=atmos.TerminationPolicy" class="extmbr" name="atmos.dsl.TerminationPolicy">TerminationPolicy</a></span>)</span><span class="result">: <a href="TerminationPolicyExtensions.html" class="extype" name="atmos.dsl.TerminationPolicyExtensions">TerminationPolicyExtensions</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.dsl.package@terminationPolicyToTerminationPolicyExtensions(policy:atmos.dsl.package.TerminationPolicy):atmos.dsl.TerminationPolicyExtensions" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Provides an implicit extension of the termination policy interface.</p><div class="fullcomment"><div class="comment cmt"><p>Provides an implicit extension of the termination policy interface.
 </p></div><dl class="paramcmts block"><dt class="param">policy</dt><dd class="cmt"><p>The termination policy to extend the interface of.
 </p></dd></dl></div>
@@ -992,7 +1480,9 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scala.AnyRef">
+        <div class="parent" name="rummage.Deadlines">
+              <h3>Inherited from <span class="extype" name="rummage.Deadlines">Deadlines</span></h3>
+            </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
               <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
@@ -1012,6 +1502,7 @@ the golden ratio (8 / 5, the sixth and fifth fibonacci numbers).</p>
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-      <script defer="defer" type="text/javascript" id="jquery-js" src="../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../lib/template.js"></script>
+
+
     </body>
       </html>

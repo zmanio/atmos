@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
           <title>termination - atmos.termination</title>
@@ -9,6 +8,11 @@
           
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+      
       <script type="text/javascript">
          if(top === self) {
             var url = '../../index.html';
@@ -26,7 +30,11 @@
       <div id="definition">
         <img src="../../lib/package_big.png" />
         <p id="owner"><a href="../package.html" class="extype" name="atmos">atmos</a></p>
-        <h1>termination</h1>
+        <h1>termination</h1><span class="permalink">
+      <a href="../../index.html#atmos.termination.package" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -82,7 +90,7 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="atmos.termination.LimitAttempts" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="atmos.termination.LimitAttempts" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="LimitAttemptsextendsTerminationPolicywithProductwithSerializable"></a>
       <a id="LimitAttempts:LimitAttempts"></a>
       <h4 class="signature">
@@ -91,11 +99,17 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="LimitAttempts.html"><span class="name">LimitAttempts</span></a><span class="params">(<span name="maxAttempts">maxAttempts: <span class="extype" name="scala.Int">Int</span> = <span class="defval" name="termination.this.`package`.defaultMaxAttempts">...</span></span>)</span><span class="result"> extends <a href="../TerminationPolicy.html" class="extype" name="atmos.TerminationPolicy">TerminationPolicy</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="LimitAttempts.html"><span class="name">LimitAttempts</span></a><span class="params">(<span name="maxAttempts">maxAttempts: <span class="extype" name="scala.Int">Int</span> = <span class="symbol"><span class="name"><a href="#defaultMaxAttempts:Int">defaultMaxAttempts</a></span></span></span>)</span><span class="result"> extends <a href="../TerminationPolicy.html" class="extype" name="atmos.TerminationPolicy">TerminationPolicy</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">A termination policy that limits the number of attempts made.</p>
-    </li><li name="atmos.termination.LimitDuration" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.termination.package@LimitAttemptsextendsTerminationPolicywithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A termination policy that limits the number of attempts made.</p><div class="fullcomment"><div class="comment cmt"><p>A termination policy that limits the number of attempts made.
+</p></div><dl class="paramcmts block"><dt class="param">maxAttempts</dt><dd class="cmt"><p>The maximum number of attempts that can be performed.
+</p></dd></dl></div>
+    </li><li name="atmos.termination.LimitDuration" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="LimitDurationextendsTerminationPolicywithProductwithSerializable"></a>
       <a id="LimitDuration:LimitDuration"></a>
       <h4 class="signature">
@@ -104,11 +118,17 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="LimitDuration.html"><span class="name">LimitDuration</span></a><span class="params">(<span name="maxDuration">maxDuration: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span> = <span class="defval" name="termination.this.`package`.defaultMaxDuration">...</span></span>)</span><span class="result"> extends <a href="../TerminationPolicy.html" class="extype" name="atmos.TerminationPolicy">TerminationPolicy</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="LimitDuration.html"><span class="name">LimitDuration</span></a><span class="params">(<span name="maxDuration">maxDuration: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span> = <span class="symbol"><span class="name"><a href="#defaultMaxDuration:scala.concurrent.duration.FiniteDuration">defaultMaxDuration</a></span></span></span>)</span><span class="result"> extends <a href="../TerminationPolicy.html" class="extype" name="atmos.TerminationPolicy">TerminationPolicy</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">A termination policy that limits the amount of time spent retrying.</p>
-    </li><li name="atmos.termination.RequireBoth" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.termination.package@LimitDurationextendsTerminationPolicywithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A termination policy that limits the amount of time spent retrying.</p><div class="fullcomment"><div class="comment cmt"><p>A termination policy that limits the amount of time spent retrying.
+</p></div><dl class="paramcmts block"><dt class="param">maxDuration</dt><dd class="cmt"><p>The maximum duration that a retry operation should not exceed.
+</p></dd></dl></div>
+    </li><li name="atmos.termination.RequireBoth" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="RequireBothextendsTerminationPolicywithProductwithSerializable"></a>
       <a id="RequireBoth:RequireBoth"></a>
       <h4 class="signature">
@@ -119,9 +139,15 @@
       <span class="symbol">
         <a href="RequireBoth.html"><span class="name">RequireBoth</span></a><span class="params">(<span name="first">first: <a href="../TerminationPolicy.html" class="extype" name="atmos.TerminationPolicy">TerminationPolicy</a></span>, <span name="second">second: <a href="../TerminationPolicy.html" class="extype" name="atmos.TerminationPolicy">TerminationPolicy</a></span>)</span><span class="result"> extends <a href="../TerminationPolicy.html" class="extype" name="atmos.TerminationPolicy">TerminationPolicy</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">A termination policy that signals for termination after both of the specified policies terminate.</p>
-    </li><li name="atmos.termination.RequireEither" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.termination.package@RequireBothextendsTerminationPolicywithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A termination policy that signals for termination after both of the specified policies terminate.</p><div class="fullcomment"><div class="comment cmt"><p>A termination policy that signals for termination after both of the specified policies terminate.
+</p></div><dl class="paramcmts block"><dt class="param">first</dt><dd class="cmt"><p>The first of the two policies that must signal for termination.</p></dd><dt class="param">second</dt><dd class="cmt"><p>The second of the two policies that must signal for termination.
+</p></dd></dl></div>
+    </li><li name="atmos.termination.RequireEither" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="RequireEitherextendsTerminationPolicywithProductwithSerializable"></a>
       <a id="RequireEither:RequireEither"></a>
       <h4 class="signature">
@@ -132,8 +158,14 @@
       <span class="symbol">
         <a href="RequireEither.html"><span class="name">RequireEither</span></a><span class="params">(<span name="first">first: <a href="../TerminationPolicy.html" class="extype" name="atmos.TerminationPolicy">TerminationPolicy</a></span>, <span name="second">second: <a href="../TerminationPolicy.html" class="extype" name="atmos.TerminationPolicy">TerminationPolicy</a></span>)</span><span class="result"> extends <a href="../TerminationPolicy.html" class="extype" name="atmos.TerminationPolicy">TerminationPolicy</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">A termination policy that signals for termination after either of the specified policies terminate.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.termination.package@RequireEitherextendsTerminationPolicywithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A termination policy that signals for termination after either of the specified policies terminate.</p><div class="fullcomment"><div class="comment cmt"><p>A termination policy that signals for termination after either of the specified policies terminate.
+</p></div><dl class="paramcmts block"><dt class="param">first</dt><dd class="cmt"><p>The first of the two policies that may signal for termination.</p></dd><dt class="param">second</dt><dd class="cmt"><p>The second of the two policies that may signal for termination.
+</p></dd></dl></div>
     </li></ol>
             </div>
 
@@ -152,8 +184,12 @@
       <span class="symbol">
         <a href="AlwaysTerminate$.html"><span class="name">AlwaysTerminate</span></a><span class="result"> extends <a href="../TerminationPolicy.html" class="extype" name="atmos.TerminationPolicy">TerminationPolicy</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">A termination policy that always signals for termination.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.termination.package@AlwaysTerminate" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A termination policy that always signals for termination.</p>
     </li><li name="atmos.termination.NeverTerminate" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="NeverTerminate"></a>
       <a id="NeverTerminate:NeverTerminate"></a>
@@ -165,9 +201,13 @@
       <span class="symbol">
         <a href="NeverTerminate$.html"><span class="name">NeverTerminate</span></a><span class="result"> extends <a href="../TerminationPolicy.html" class="extype" name="atmos.TerminationPolicy">TerminationPolicy</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">A termination policy that never signals for termination.</p>
-    </li><li name="atmos.termination.package#defaultMaxAttempts" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.termination.package@NeverTerminate" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A termination policy that never signals for termination.</p>
+    </li><li name="atmos.termination#defaultMaxAttempts" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="defaultMaxAttempts:Int"></a>
       <a id="defaultMaxAttempts:Int"></a>
       <h4 class="signature">
@@ -178,9 +218,13 @@
       <span class="symbol">
         <span class="name">defaultMaxAttempts</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.termination.package@defaultMaxAttempts:Int" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">The default maximum number of attempts that can be performed.</p>
-    </li><li name="atmos.termination.package#defaultMaxDuration" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="atmos.termination#defaultMaxDuration" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="defaultMaxDuration:scala.concurrent.duration.FiniteDuration"></a>
       <a id="defaultMaxDuration:FiniteDuration"></a>
       <h4 class="signature">
@@ -191,7 +235,11 @@
       <span class="symbol">
         <span class="name">defaultMaxDuration</span><span class="result">: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#atmos.termination.package@defaultMaxDuration:scala.concurrent.duration.FiniteDuration" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">The default maximum duration that a retry operation should not exceed.</p>
     </li></ol>
             </div>
@@ -222,6 +270,7 @@
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-      <script defer="defer" type="text/javascript" id="jquery-js" src="../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../lib/template.js"></script>
+
+
     </body>
       </html>
