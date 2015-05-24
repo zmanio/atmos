@@ -89,7 +89,7 @@ class EventMonitorConfigSpec extends FlatSpec with Matchers with MockFactory {
     new TestCase[Slf4jLogger, LogEventsWithSlf4j, LogAction[Slf4jLevel]] {
       override def expect(action: LogAction[Slf4jLevel]) = action match {
         case LogAction.LogAt(Slf4jLevel.Info) => (target.info(_: String, _: Throwable)).expects(*, *) once
-        case LogAction.LogAt(Slf4jLevel.Warn) => (target.warn(_: String, _: Throwable))expects(*, *) once
+        case LogAction.LogAt(Slf4jLevel.Warn) => (target.warn(_: String, _: Throwable)) expects (*, *) once
         case _ =>
       }
     } run (target, LogAction.LogNothing, LogAction.LogAt(Slf4jLevel.Info), LogAction.LogAt(Slf4jLevel.Warn))
@@ -109,15 +109,15 @@ class EventMonitorConfigSpec extends FlatSpec with Matchers with MockFactory {
 
   /** A utility for testing the various events handled by monitor DSL methods. */
   trait TestCase[T, Monitor <: EventMonitor, MonitorAction] {
-    
+
     val name = None: Option[String]
     val attempt = 1
     val backoff = 1 second
     val silent = false
-    
+
     /** Sets an expectation for this test case. */
     def expect(action: MonitorAction): Unit
-    
+
     /** Runs this test case. */
     def run(
       target: T,
@@ -132,9 +132,9 @@ class EventMonitorConfigSpec extends FlatSpec with Matchers with MockFactory {
       val monitor: Monitor = target
       locally {
         val test = (monitor
-          onRetrying onSuccess
-          onRetryingWith[Exception] onException 
-          orOnRetryingWith[Error] onError)
+          .onRetrying(onSuccess)
+          .onRetryingWith[Exception](onException)
+          .orOnRetryingWith[Error](onError))
         expect(onSuccess)
         test.retrying(name, success, attempt, backoff, silent)
         expect(onException)
@@ -144,9 +144,9 @@ class EventMonitorConfigSpec extends FlatSpec with Matchers with MockFactory {
       }
       locally {
         val test = (monitor
-          onInterrupted onSuccess
-          onInterruptedWith[Exception] onException
-          orOnInterruptedWith[Error] onError)
+          .onInterrupted(onSuccess)
+          .onInterruptedWith[Exception](onException)
+          .orOnInterruptedWith[Error](onError))
         expect(onSuccess)
         test.interrupted(name, success, attempt)
         expect(onException)
@@ -156,9 +156,9 @@ class EventMonitorConfigSpec extends FlatSpec with Matchers with MockFactory {
       }
       locally {
         val test = (monitor
-          onAborted onSuccess
-          onAbortedWith[Exception] onException
-          orOnAbortedWith[Error] onError)
+          .onAborted(onSuccess)
+          .onAbortedWith[Exception](onException)
+          .orOnAbortedWith[Error](onError))
         expect(onSuccess)
         test.aborted(name, success, attempt)
         expect(onException)
@@ -167,7 +167,7 @@ class EventMonitorConfigSpec extends FlatSpec with Matchers with MockFactory {
         test.aborted(name, error, attempt)
       }
     }
-    
+
   }
 
   /** A trait that presents a narrow view of Akka loggers to help ScalaMock resolve the correct overloaded method. */
