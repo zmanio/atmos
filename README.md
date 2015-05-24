@@ -351,6 +351,13 @@ val loggingRetryPolicy = retryForever monitorWith {
     case Failure(e: Error) => logWarning
   }
 }
+
+// NOTE: In Scala 2.10 the `onXxxWith[Throwable]` methods require chaining method invocations with `.`, `(` and `)`.
+val sameLoggingRetryPolicy = retryForever monitorWith {
+  Logger.getLogger("log").onRetrying(logDebug).onRetryingWith[RuntimeException](logInfo).orOnRetryingWhere {
+    case Failure(e: Error) => logWarning
+  }
+}
 ```
 
 Finally, multiple event monitors can be chained together and each monitor will be notified of every event:
