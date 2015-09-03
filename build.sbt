@@ -28,6 +28,7 @@ libraryDependencies ++= Seq(
   "io.zman" %% "rummage" % "1.3",
   "com.typesafe.akka" %% "akka-actor" % "2.3.2" % "provided",
   "org.slf4j" % "slf4j-api" % "1.7.5" % "provided",
+  "com.typesafe.scala-logging" %% "scala-logging" % "3.1.0" % "provided",
   "org.scalatest" %% "scalatest" % "2.2.4" % "test",
   "org.scalamock" %% "scalamock-scalatest-support" % "3.2" % "test"
 )
