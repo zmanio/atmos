@@ -17,9 +17,9 @@
  */
 package atmos.monitor
 
-import akka.event.{ Logging, LoggingAdapter }
-import org.scalatest._
+import akka.event.{Logging, LoggingAdapter}
 import org.scalamock.scalatest.MockFactory
+import org.scalatest._
 
 /**
  * Test suite for [[atmos.monitor.LogEventsWithAkka]].
@@ -44,21 +44,32 @@ class LogEventsWithAkkaSpec extends FlatSpec with Matchers with MockFactory {
     }
   }
 
-  class LoggerFixture { self =>
+  class LoggerFixture {
+    self =>
     val isEnabled = mockFunction[Logging.LogLevel, Boolean]
     val error = mockFunction[Throwable, String, Unit]
     val log = mockFunction[Logging.LogLevel, String, Unit]
     val mock = new LoggingAdapter {
       def isErrorEnabled = self.isEnabled(Logging.ErrorLevel)
+
       def isWarningEnabled = self.isEnabled(Logging.WarningLevel)
+
       def isInfoEnabled = self.isEnabled(Logging.InfoLevel)
+
       def isDebugEnabled = self.isEnabled(Logging.DebugLevel)
+
       def notifyError(message: String) = ???
+
       def notifyError(cause: Throwable, message: String) = ???
+
       def notifyWarning(message: String) = ???
+
       def notifyInfo(message: String) = ???
+
       def notifyDebug(message: String) = ???
+
       override def error(thrown: Throwable, message: String) = self.error(thrown, message)
+
       override def log(level: Logging.LogLevel, message: String) = self.log(level, message)
     }
   }

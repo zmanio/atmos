@@ -16,10 +16,10 @@
  */
 package atmos
 
-import scala.concurrent.duration._
-import scala.util.{ Failure, Try }
-import org.scalatest._
 import org.scalamock.scalatest.MockFactory
+import org.scalatest._
+import scala.concurrent.duration._
+import scala.util.{Failure, Try}
 
 /**
  * Test suite for [[atmos.BackoffPolicy]].
@@ -34,7 +34,8 @@ class BackoffPolicySpec extends FlatSpec with Matchers with MockFactory {
     fixture.mock.nextBackoff(1, thrown)
   }
 
-  class BackoffPolicyFixture { self =>
+  class BackoffPolicyFixture {
+    self =>
     val nextBackoff = mockFunction[Int, Try[Any], FiniteDuration]
     val mock = new BackoffPolicy {
       override def nextBackoff(attempts: Int, outcome: Try[Any]) = self.nextBackoff(attempts, outcome)

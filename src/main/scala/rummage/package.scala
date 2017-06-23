@@ -1,7 +1,7 @@
-/* AlwaysTerminateSpec.scala
+/* package.scala
  * 
- * Copyright (c) 2013-2014 linkedin.com
- * Copyright (c) 2013-2014 zman.io
+ * Copyright (c) 2013-2015 linkedin.com
+ * Copyright (c) 2013-2015 zman.io
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,21 +15,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package atmos.termination
-
-import org.scalatest._
-import scala.concurrent.duration._
 
 /**
- * Test suite for [[atmos.termination.AlwaysTerminate]].
+ * The `rummage` package is a collection of small Scala utilities.
+ *
+ * This package consists of self-contained utilities that are too small and general to warrant their own package and/or
+ * artifact, but are too large, nuanced or handy to have around to be re-implemented over and over again.
  */
-class AlwaysTerminateSpec extends FlatSpec with Matchers {
-
-  "AlwaysTerminate" should "signal for termination on any combination of inputs" in {
-    for {
-      nextAttemptAt <- 1L to 100L map (100.millis * _)
-      attempt <- 1 to 10
-    } AlwaysTerminate.shouldTerminate(attempt, nextAttemptAt) shouldEqual true
-  }
-
-}
+package object rummage

@@ -47,7 +47,7 @@ object ErrorClassification extends (Throwable => ErrorClassification) {
   /**
    * The classification of errors that will interrupt the retry operation.
    */
-  case object Fatal extends ErrorClassification { override def isFatal = true }
+  case object Fatal extends ErrorClassification {override def isFatal = true}
 
   /**
    * The classification of errors that will not interrupt the retry operation.
@@ -57,6 +57,6 @@ object ErrorClassification extends (Throwable => ErrorClassification) {
   /**
    * The classification of errors that will not interrupt the retry operation or record information about the failure.
    */
-  case object SilentlyRecoverable extends ErrorClassification { override def isSilent = true }
+  case object SilentlyRecoverable extends ErrorClassification {override def isSilent = true}
 
 }

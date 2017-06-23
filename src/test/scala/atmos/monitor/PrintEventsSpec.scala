@@ -17,10 +17,10 @@
  */
 package atmos.monitor
 
-import scala.concurrent.duration._
-import scala.util.{ Failure, Success, Try }
-import org.scalatest._
 import org.scalamock.scalatest.MockFactory
+import org.scalatest._
+import scala.concurrent.duration._
+import scala.util.{Failure, Success, Try}
 
 /**
  * Test suite for [[atmos.monitor.PrintEvents]].
@@ -60,7 +60,8 @@ class PrintEventsSpec extends FlatSpec with Matchers with MockFactory {
     }
   }
 
-  class PrintEventsFixture(action: PrintAction, selector: EventClassifier[PrintAction]) { self =>
+  class PrintEventsFixture(action: PrintAction, selector: EventClassifier[PrintAction]) {
+    self =>
     val printMessage = mockFunction[String, Unit]
     val printMessageAndStackTrace = mockFunction[String, Throwable, Unit]
     val mock = new PrintEvents {
@@ -70,10 +71,13 @@ class PrintEventsSpec extends FlatSpec with Matchers with MockFactory {
       val retryingActionSelector = selector
       val interruptedActionSelector = selector
       val abortedActionSelector = selector
+
       def printMessage(message: String) = self.printMessage(message)
+
       def printMessageAndStackTrace(message: String, thrown: Throwable) =
         self.printMessageAndStackTrace(message, thrown)
     }
+
     def expectsOnce(outcome: Try[String]) = selector.applyOrElse(outcome, (_: Try[Any]) => action) match {
       case PrintMessageAndStackTrace if outcome isFailure =>
         printMessageAndStackTrace.expects(*, thrown).once

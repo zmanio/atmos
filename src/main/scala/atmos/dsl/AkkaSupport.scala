@@ -17,9 +17,9 @@
  */
 package atmos.dsl
 
-import scala.language.implicitConversions
-import akka.event.{ Logging, LoggingAdapter }
+import akka.event.{Logging, LoggingAdapter}
 import atmos.monitor
+import scala.language.implicitConversions
 
 /**
  * Separate namespace for optional Akka support.
@@ -56,8 +56,11 @@ object AkkaSupport {
    */
   implicit object AkkaEventLogLevels extends EventLogLevels[Logging.LogLevel] {
     override def errorLevel = Logging.ErrorLevel
+
     override def warningLevel = Logging.WarningLevel
+
     override def infoLevel = Logging.InfoLevel
+
     override def debugLevel = Logging.DebugLevel
   }
 

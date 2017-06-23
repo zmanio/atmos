@@ -16,10 +16,10 @@
  */
 package atmos
 
-import scala.concurrent.duration._
-import scala.util.{ Failure, Try }
-import org.scalatest._
 import org.scalamock.scalatest.MockFactory
+import org.scalatest._
+import scala.concurrent.duration._
+import scala.util.{Failure, Try}
 
 /**
  * Test suite for [[atmos.EventMonitor]].
@@ -38,15 +38,18 @@ class EventMonitorSpec extends FlatSpec with Matchers with MockFactory {
     fixture.mock.aborted(None, thrown, 3)
   }
 
-  class EventMonitorFixture { self =>
+  class EventMonitorFixture {
+    self =>
     val retrying = mockFunction[Option[String], Try[Any], Int, FiniteDuration, Boolean, Unit]
     val interrupted = mockFunction[Option[String], Try[Any], Int, Unit]
     val aborted = mockFunction[Option[String], Try[Any], Int, Unit]
     val mock = new EventMonitor {
       override def retrying(name: Option[String], outcome: Try[Any], attempts: Int, backoff: FiniteDuration, silent: Boolean) =
         self.retrying(name, outcome, attempts, backoff, silent)
+
       override def interrupted(name: Option[String], outcome: Try[Any], attempts: Int) =
         self.interrupted(name, outcome, attempts)
+
       override def aborted(name: Option[String], outcome: Try[Any], attempts: Int) =
         self.aborted(name, outcome, attempts)
     }

@@ -19,15 +19,15 @@
  */
 package atmos.dsl
 
-import akka.event.{ Logging => AkkaLogging, LoggingAdapter => AkkaLogger }
+import akka.event.{Logging => AkkaLogging, LoggingAdapter => AkkaLogger}
 import atmos.monitor._
-import java.io.{ ByteArrayOutputStream, PrintStream, PrintWriter }
-import java.util.logging.{ Level => JLevel, Logger => JLogger }
-import org.scalatest._
+import java.io.{ByteArrayOutputStream, PrintStream, PrintWriter}
+import java.util.logging.{Level => JLevel, Logger => JLogger}
 import org.scalamock.scalatest.MockFactory
-import org.slf4j.{ Logger => Slf4jLogger }
+import org.scalatest._
+import org.slf4j.{Logger => Slf4jLogger}
 import scala.concurrent.duration._
-import scala.util.{ Failure, Success }
+import scala.util.{Failure, Success}
 
 /**
  * Test suite for the various ways to configure an [[atmos.EventMonitor]].
@@ -49,7 +49,7 @@ class EventMonitorConfigSpec extends FlatSpec with Matchers with MockFactory {
         case PrintAction.PrintMessageAndStackTrace => mockPrinln expects * anyNumberOfTimes
         case _ =>
       }
-    } run (target, PrintAction.PrintNothing, PrintAction.PrintMessage, PrintAction.PrintMessageAndStackTrace)
+    } run(target, PrintAction.PrintNothing, PrintAction.PrintMessage, PrintAction.PrintMessageAndStackTrace)
   }
 
   "Print writers" should "allow for fine-grained configuration" in {
@@ -63,13 +63,14 @@ class EventMonitorConfigSpec extends FlatSpec with Matchers with MockFactory {
         case PrintAction.PrintMessageAndStackTrace => mockPrinln expects * anyNumberOfTimes
         case _ =>
       }
-    } run (target, PrintAction.PrintNothing, PrintAction.PrintMessage, PrintAction.PrintMessageAndStackTrace)
+    } run(target, PrintAction.PrintNothing, PrintAction.PrintMessage, PrintAction.PrintMessageAndStackTrace)
   }
 
   "Java loggers" should "allow for fine-grained configuration" in {
     val mockLogThrown = mockFunction[JLevel, String, Throwable, Unit]
     val target = new JLogger(null, null) {
       override def isLoggable(level: JLevel) = true
+
       override def log(level: JLevel, message: String, thrown: Throwable) = mockLogThrown(level, message, thrown)
     }
     new TestCase[JLogger, LogEventsWithJava, LogAction[JLevel]] {
@@ -77,22 +78,22 @@ class EventMonitorConfigSpec extends FlatSpec with Matchers with MockFactory {
         case LogAction.LogAt(JLevel.INFO | JLevel.WARNING) => mockLogThrown.expects(*, *, *) once
         case _ =>
       }
-    } run (target, LogAction.LogNothing, LogAction.LogAt(JLevel.INFO), LogAction.LogAt(JLevel.WARNING))
+    } run(target, LogAction.LogNothing, LogAction.LogAt(JLevel.INFO), LogAction.LogAt(JLevel.WARNING))
   }
 
   "Slf4j loggers" should "allow for fine-grained configuration" in {
-    import Slf4jSupport._
     import LogEventsWithSlf4j.Slf4jLevel
+    import Slf4jSupport._
     val target = mock[MockSlf4jLogger]
     (target.isInfoEnabled _).expects().returns(true).anyNumberOfTimes
     (target.isWarnEnabled _).expects().returns(true).anyNumberOfTimes
     new TestCase[Slf4jLogger, LogEventsWithSlf4j, LogAction[Slf4jLevel]] {
       override def expect(action: LogAction[Slf4jLevel]) = action match {
         case LogAction.LogAt(Slf4jLevel.Info) => (target.info(_: String, _: Throwable)).expects(*, *) once
-        case LogAction.LogAt(Slf4jLevel.Warn) => (target.warn(_: String, _: Throwable)) expects (*, *) once
+        case LogAction.LogAt(Slf4jLevel.Warn) => (target.warn(_: String, _: Throwable)) expects(*, *) once
         case _ =>
       }
-    } run (target, LogAction.LogNothing, LogAction.LogAt(Slf4jLevel.Info), LogAction.LogAt(Slf4jLevel.Warn))
+    } run(target, LogAction.LogNothing, LogAction.LogAt(Slf4jLevel.Info), LogAction.LogAt(Slf4jLevel.Warn))
   }
 
   "Akka loggers" should "allow for fine-grained configuration" in {
@@ -104,7 +105,7 @@ class EventMonitorConfigSpec extends FlatSpec with Matchers with MockFactory {
         case LogAction.LogAt(AkkaLogging.WarningLevel) => target.log.expects(AkkaLogging.WarningLevel, *) once
         case _ =>
       }
-    } run (target.mock, LogAction.LogNothing, LogAction.LogAt(AkkaLogging.InfoLevel), LogAction.LogAt(AkkaLogging.WarningLevel))
+    } run(target.mock, LogAction.LogNothing, LogAction.LogAt(AkkaLogging.InfoLevel), LogAction.LogAt(AkkaLogging.WarningLevel))
   }
 
   /** A utility for testing the various events handled by monitor DSL methods. */
@@ -124,11 +125,11 @@ class EventMonitorConfigSpec extends FlatSpec with Matchers with MockFactory {
       onSuccess: MonitorAction,
       onException: MonitorAction,
       onError: MonitorAction)(
-        implicit ev: T => Monitor,
-        evx: Monitor => AbstractEventMonitorExtensions {
-          type Self = Monitor
-          type Action = MonitorAction
-        }) = {
+      implicit ev: T => Monitor,
+      evx: Monitor => AbstractEventMonitorExtensions {
+        type Self = Monitor
+        type Action = MonitorAction
+      }) = {
       val monitor: Monitor = target
       locally {
         val test = (monitor
@@ -173,22 +174,33 @@ class EventMonitorConfigSpec extends FlatSpec with Matchers with MockFactory {
   /** A trait that presents a narrow view of Akka loggers to help ScalaMock resolve the correct overloaded method. */
   trait MockSlf4jLogger extends Slf4jLogger {
     def info(s: String, t: Throwable): Unit
+
     def warn(s: String, t: Throwable): Unit
   }
 
   /** A class that presents a narrow view of Akka loggers to enable Akka DSL testing. */
-  class AkkaLoggerFixture { self =>
+  class AkkaLoggerFixture {
+    self =>
     val log = mockFunction[AkkaLogging.LogLevel, String, Unit]
     val mock = new AkkaLogger {
       def isErrorEnabled = ???
+
       def isWarningEnabled = true
+
       def isInfoEnabled = true
+
       def isDebugEnabled = ???
+
       def notifyError(message: String) = ???
+
       def notifyError(cause: Throwable, message: String) = ???
+
       def notifyWarning(message: String) = ???
+
       def notifyInfo(message: String) = ???
+
       def notifyDebug(message: String) = ???
+
       override def log(level: AkkaLogging.LogLevel, message: String) = self.log(level, message)
     }
   }

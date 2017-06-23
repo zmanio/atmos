@@ -19,36 +19,35 @@
  */
 package atmos.dsl
 
-import java.io.{ PrintWriter, StringWriter }
-import java.util.logging.{ Logger, Level }
+import akka.event.{Logging, LoggingAdapter}
+import java.io.{PrintWriter, StringWriter}
+import java.util.logging.{Level, Logger}
+import org.scalamock.scalatest.MockFactory
+import org.scalatest._
+import org.slf4j.LoggerFactory
 import scala.concurrent.duration._
 import scala.util.Try
-import akka.event.{ Logging, LoggingAdapter }
-import org.slf4j.LoggerFactory
-import org.scalatest._
-import scala.util.{ Failure, Success }
-import org.scalamock.scalatest.MockFactory
 
 /**
  * Test suite for [[atmos.retries.RetryDSL]].
  */
 class RetryDSLSpec extends FlatSpec with Matchers with MockFactory {
 
+  import ErrorClassification._
+  import ResultClassification._
   import atmos.backoff._
   import atmos.monitor._
   import atmos.termination._
-  import ResultClassification._
-  import ErrorClassification._
 
   "RetryDSL" should "create retry policies by describing termination policies" in {
     neverRetry shouldEqual RetryPolicy(AlwaysTerminate)
     retrying shouldEqual RetryPolicy()
-    retryFor { 5.attempts } shouldEqual RetryPolicy(LimitAttempts(5))
-    retryFor { 5.minutes } shouldEqual RetryPolicy(LimitDuration(5.minutes))
-    retryFor { 5.attempts && 5.minutes } shouldEqual
-      RetryPolicy(RequireBoth(LimitAttempts(5), LimitDuration(5.minutes)))
-    retryFor { 5.attempts || 5.minutes } shouldEqual
-      RetryPolicy(RequireEither(LimitAttempts(5), LimitDuration(5.minutes)))
+    retryFor {5.attempts} shouldEqual RetryPolicy(LimitAttempts(5))
+    retryFor {5.minutes} shouldEqual RetryPolicy(LimitDuration(5.minutes))
+    retryFor {5.attempts && 5.minutes} shouldEqual
+    RetryPolicy(RequireBoth(LimitAttempts(5), LimitDuration(5.minutes)))
+    retryFor {5.attempts || 5.minutes} shouldEqual
+    RetryPolicy(RequireEither(LimitAttempts(5), LimitDuration(5.minutes)))
     retryForever shouldEqual RetryPolicy(NeverTerminate)
   }
 
@@ -61,7 +60,7 @@ class RetryDSLSpec extends FlatSpec with Matchers with MockFactory {
     retrying using exponentialBackoff(1.second) shouldEqual RetryPolicy(backoff = ExponentialBackoff(1.second))
     retrying using fibonacciBackoff shouldEqual RetryPolicy(backoff = FibonacciBackoff())
     retrying using fibonacciBackoff(1.second) shouldEqual RetryPolicy(backoff = FibonacciBackoff(1.second))
-    val selector: Try[Any] => BackoffPolicy = { case _ => LinearBackoff() }
+    val selector: Try[Any] => BackoffPolicy = {case _ => LinearBackoff()}
     retrying using selectedBackoff(selector) shouldEqual RetryPolicy(backoff = SelectedBackoff(selector))
     val zero = Duration.Zero
     val min = -10.millis
@@ -94,8 +93,8 @@ class RetryDSLSpec extends FlatSpec with Matchers with MockFactory {
         akka, LogAction.LogNothing, LogAction.LogAt(Logging.InfoLevel), LogAction.LogAt(Logging.ErrorLevel)))
     }
     locally {
-      import Slf4jSupport._
       import LogEventsWithSlf4j.Slf4jLevel
+      import Slf4jSupport._
       val slf4j = LoggerFactory.getLogger(this.getClass)
       retrying monitorWith {
         slf4j onRetrying logNothing onInterrupted logInfo onAborted logError
@@ -117,13 +116,13 @@ class RetryDSLSpec extends FlatSpec with Matchers with MockFactory {
     acceptResult shouldEqual Acceptable
     (rejectResult: ResultClassification) shouldEqual Unacceptable(ResultClassification.defaultUnacceptableStatus)
     rejectResult() shouldEqual Unacceptable(ResultClassification.defaultUnacceptableStatus)
-    rejectResult { keepRetryingSilently } shouldEqual Unacceptable(SilentlyRecoverable)
+    rejectResult {keepRetryingSilently} shouldEqual Unacceptable(SilentlyRecoverable)
     val results = ResultClassifier {
       case Some(_) => acceptResult
     }
     retrying onResult results shouldEqual RetryPolicy(results = results)
     val orResults = ResultClassifier {
-      case None => rejectResult { stopRetrying }
+      case None => rejectResult {stopRetrying}
     }
     val chained = retrying onResult results orOnResult orResults
     chained.results(Some("data")) shouldBe Acceptable

@@ -64,8 +64,11 @@ object EventLogLevels {
    */
   implicit object JavaLogLevels extends EventLogLevels[Level] {
     override def errorLevel = Level.SEVERE
+
     override def warningLevel = Level.WARNING
+
     override def infoLevel = Level.INFO
+
     override def debugLevel = Level.CONFIG
   }
 

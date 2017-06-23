@@ -17,10 +17,9 @@
  */
 package atmos.dsl
 
-import scala.concurrent.duration._
-import akka.event.{ Logging, LoggingAdapter }
+import akka.event.{Logging, LoggingAdapter}
+import atmos.dsl.AkkaSupport._
 import atmos.monitor._
-import AkkaSupport._
 import org.scalatest._
 
 /**
@@ -45,13 +44,21 @@ class AkkaSupportSpec extends FlatSpec with Matchers {
 
   object MockAdapter extends LoggingAdapter {
     def isDebugEnabled = ???
+
     def isErrorEnabled = ???
+
     def isInfoEnabled = ???
+
     def isWarningEnabled = ???
+
     def notifyDebug(message: String) = ???
+
     def notifyError(cause: Throwable, message: String) = ???
+
     def notifyError(message: String) = ???
+
     def notifyInfo(message: String) = ???
+
     def notifyWarning(message: String) = ???
   }
 

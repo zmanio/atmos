@@ -16,7 +16,7 @@
  */
 package atmos.dsl
 
-import atmos.monitor.{ EventClassifier, PrintAction, PrintEvents }
+import atmos.monitor.{EventClassifier, PrintAction, PrintEvents}
 
 /**
  * A base class that implements DSL extension methods for all printing event monitors.

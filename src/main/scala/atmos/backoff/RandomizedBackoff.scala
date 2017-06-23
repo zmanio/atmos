@@ -17,16 +17,15 @@
  */
 package atmos.backoff
 
-import scala.concurrent.duration._
-import scala.util.Random
 import atmos.BackoffPolicy
-import scala.util.Try
+import scala.concurrent.duration._
+import scala.util.{Random, Try}
 
 /**
  * A policy that randomizes the result of another policy by adding a random duration in the specified range.
  *
  * @param policy The base policy to randomize the result of.
- * @param range The range of values that may be used to modify the result of the base policy.
+ * @param range  The range of values that may be used to modify the result of the base policy.
  */
 case class RandomizedBackoff(policy: BackoffPolicy, range: (FiniteDuration, FiniteDuration)) extends BackoffPolicy {
 

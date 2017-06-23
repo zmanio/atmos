@@ -17,7 +17,7 @@
  */
 package atmos.monitor
 
-import java.io.{ ByteArrayOutputStream, OutputStreamWriter, PrintWriter }
+import java.io.{ByteArrayOutputStream, OutputStreamWriter, PrintWriter}
 import org.scalatest._
 
 /**
@@ -41,15 +41,18 @@ class PrintEventsWithWriterSpec extends FlatSpec with Matchers {
   class WriterFixture {
     val baos = new ByteArrayOutputStream
     val writer = new PrintWriter(new OutputStreamWriter(baos, encoding))
+
     def message(msg: String) = {
       writer.println(msg)
       recover()
     }
+
     def messageAndStackTrace(msg: String, thrown: Throwable) = {
       writer.println(msg)
       thrown.printStackTrace(writer)
       recover()
     }
+
     def recover() = {
       writer.flush()
       val result = baos.toString(encoding)

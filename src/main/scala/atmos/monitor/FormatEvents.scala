@@ -18,7 +18,7 @@
 package atmos.monitor
 
 import scala.concurrent.duration.FiniteDuration
-import scala.util.{ Failure, Success, Try }
+import scala.util.{Failure, Success, Try}
 
 /**
  * A mix-in that formats messages for retry events.
@@ -28,10 +28,10 @@ trait FormatEvents {
   /**
    * Formats a message for a retrying event.
    *
-   * @param name The name of the operation that failed if one was provided.
-   * @param outcome The outcome of the most recent retry attempt.
+   * @param name     The name of the operation that failed if one was provided.
+   * @param outcome  The outcome of the most recent retry attempt.
    * @param attempts The number of attempts that have been made so far.
-   * @param backoff The amount of time that will pass before another attempt is made.
+   * @param backoff  The amount of time that will pass before another attempt is made.
    */
   def formatRetrying(name: Option[String], outcome: Try[Any], attempts: Int, backoff: FiniteDuration): String = {
     val op = name getOrElse "operation"
@@ -43,8 +43,8 @@ trait FormatEvents {
   /**
    * Formats a message for an interrupted event.
    *
-   * @param name The name of the operation that failed if one was provided.
-   * @param outcome The outcome of the most recent retry attempt.
+   * @param name     The name of the operation that failed if one was provided.
+   * @param outcome  The outcome of the most recent retry attempt.
    * @param attempts The number of attempts that were made.
    */
   def formatInterrupted(name: Option[String], outcome: Try[Any], attempts: Int): String = {
@@ -56,8 +56,8 @@ trait FormatEvents {
   /**
    * Formats a message for an aborted event.
    *
-   * @param name The name of the operation that failed if one was provided.
-   * @param outcome The outcome of the most recent retry attempt.
+   * @param name     The name of the operation that failed if one was provided.
+   * @param outcome  The outcome of the most recent retry attempt.
    * @param attempts The number of attempts that were made.
    */
   def formatAborted(name: Option[String], outcome: Try[Any], attempts: Int): String = {
@@ -75,7 +75,7 @@ trait FormatEvents {
     case Success(result) =>
       String valueOf result
     case Failure(thrown) =>
-      thrown.getClass.getName + { Option(thrown getMessage) filter { _ nonEmpty } map { msg => ": " + msg } getOrElse "" }
+      thrown.getClass.getName + {Option(thrown getMessage) filter {_ nonEmpty} map { msg => ": " + msg } getOrElse ""}
   }
 
 }

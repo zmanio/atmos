@@ -17,9 +17,9 @@
  */
 package atmos.monitor
 
+import org.scalatest._
 import scala.concurrent.duration._
 import scala.util.Failure
-import org.scalatest._
 
 /**
  * Test suite for [[atmos.monitor.FormatEvents]].

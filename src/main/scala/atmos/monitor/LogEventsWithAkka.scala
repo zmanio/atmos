@@ -17,21 +17,21 @@
  */
 package atmos.monitor
 
-import akka.event.{ Logging, LoggingAdapter }
+import akka.event.{Logging, LoggingAdapter}
 
 /**
  * An event monitor that formats and logs events using the `akka.event.LoggingAdapter` framework.
  *
- * @param adapter The logging adapter that this event monitor submits to.
- * @param retryingAction The action that is performed by default when a retrying event is received.
- * @param interruptedAction The action that is performed by default when an interrupted event is received.
- * @param abortedAction The action that is performed by default when an aborted event is received.
- * @param retryingActionSelector The strategy used to select an action to perform for a retrying event, defaulting to
- *                               `retryingAction`.
+ * @param adapter                   The logging adapter that this event monitor submits to.
+ * @param retryingAction            The action that is performed by default when a retrying event is received.
+ * @param interruptedAction         The action that is performed by default when an interrupted event is received.
+ * @param abortedAction             The action that is performed by default when an aborted event is received.
+ * @param retryingActionSelector    The strategy used to select an action to perform for a retrying event, defaulting to
+ *                                  `retryingAction`.
  * @param interruptedActionSelector The strategy used to select an action to perform for an interrupted event,
  *                                  defaulting to `interruptedAction`.
- * @param abortedActionSelector The strategy used to select an action to perform for an aborted event, defaulting to
- *                              `abortedAction`.
+ * @param abortedActionSelector     The strategy used to select an action to perform for an aborted event, defaulting to
+ *                                  `abortedAction`.
  */
 case class LogEventsWithAkka(
   adapter: LoggingAdapter,

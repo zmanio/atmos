@@ -17,8 +17,8 @@
  */
 package atmos.dsl
 
-import atmos.monitor.{ EventClassifier, LogAction, LogEventsWithSlf4j }
 import atmos.monitor.LogEventsWithSlf4j.Slf4jLevel
+import atmos.monitor.{EventClassifier, LogAction, LogEventsWithSlf4j}
 
 /**
  * Exposes extensions on any instance of `monitor.LogEventsWithSlf4j`.

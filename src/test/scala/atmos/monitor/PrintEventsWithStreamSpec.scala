@@ -17,7 +17,7 @@
  */
 package atmos.monitor
 
-import java.io.{ ByteArrayOutputStream, PrintStream }
+import java.io.{ByteArrayOutputStream, PrintStream}
 import org.scalatest._
 
 /**
@@ -41,15 +41,18 @@ class PrintEventsWithStreamSpec extends FlatSpec with Matchers {
   class StreamFixture {
     val baos = new ByteArrayOutputStream
     val stream = new PrintStream(baos, false, encoding)
+
     def message(msg: String) = {
       stream.println(msg)
       recover()
     }
+
     def messageAndStackTrace(msg: String, thrown: Throwable) = {
       stream.println(msg)
       thrown.printStackTrace(stream)
       recover()
     }
+
     def recover() = {
       stream.flush()
       val result = baos.toString(encoding)

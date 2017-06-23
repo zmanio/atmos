@@ -17,7 +17,7 @@
  */
 package atmos.dsl
 
-import atmos.monitor.{ EventClassifier, PrintAction, PrintEventsWithStream }
+import atmos.monitor.{EventClassifier, PrintAction, PrintEventsWithStream}
 
 /**
  * Adds DSL extension methods to the [[atmos.monitor.PrintEventsWithStream]] interface.
