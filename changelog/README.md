@@ -1,6 +1,6 @@
 # 2.2 (2017-06-23) 
 
-- Forked to support scala 2.12. Pulled in rummage namespace to simplify deployment
+- Forked to support scala 2.12. Pulled in rummage namespace to simplify deployment. Dropping 2.10 and 2.11 support
 
 # 2.1 (2015-05-23)
 
