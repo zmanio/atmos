@@ -18,7 +18,7 @@
 package atmos
 
 import scala.concurrent.duration.FiniteDuration
-import scala.util.{ Failure, Try }
+import scala.util.{Failure, Try}
 
 /**
  * A strategy for computing a sequence of wait durations for use between retry attempts.
@@ -30,7 +30,7 @@ trait BackoffPolicy {
    * operation to consider another attempt.
    *
    * @param attempts The number of attempts that have been made so far.
-   * @param outcome The outcome that caused the operation to consider another attempt.
+   * @param outcome  The outcome that caused the operation to consider another attempt.
    */
   def nextBackoff(attempts: Int, outcome: Try[Any]): FiniteDuration
 
@@ -38,11 +38,11 @@ trait BackoffPolicy {
    * Computes the next backoff duration using the specified number of attempts and the error that caused the
    * operation to consider another attempt.
    *
-   * @param attempts The number of attempts that have been made so far.
+   * @param attempts      The number of attempts that have been made so far.
    * @param previousError The error that caused the operation to consider another attempt.
    */
   @deprecated("Use nextBackoff(Int, Try[Any])", "2.1")
   final def nextBackoff(attempts: Int, previousError: Throwable): FiniteDuration =
-    nextBackoff(attempts, Failure(previousError))
+  nextBackoff(attempts, Failure(previousError))
 
 }

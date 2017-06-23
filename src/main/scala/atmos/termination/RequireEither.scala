@@ -17,13 +17,13 @@
  */
 package atmos.termination
 
-import scala.concurrent.duration.FiniteDuration
 import atmos.TerminationPolicy
+import scala.concurrent.duration.FiniteDuration
 
 /**
  * A termination policy that signals for termination after either of the specified policies terminate.
  *
- * @param first The first of the two policies that may signal for termination.
+ * @param first  The first of the two policies that may signal for termination.
  * @param second The second of the two policies that may signal for termination.
  */
 case class RequireEither(first: TerminationPolicy, second: TerminationPolicy) extends TerminationPolicy {

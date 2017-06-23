@@ -17,8 +17,8 @@
  */
 package atmos.termination
 
-import scala.concurrent.duration._
 import org.scalatest._
+import scala.concurrent.duration._
 
 /**
  * Test suite for [[atmos.termination.RequireEither]].

@@ -17,12 +17,11 @@
  */
 package atmos.dsl
 
-import scala.concurrent.duration._
-import org.slf4j.Logger
+import atmos.dsl.Slf4jSupport._
 import atmos.monitor._
-import Slf4jSupport._
-import org.scalatest._
 import org.scalamock.scalatest.MockFactory
+import org.scalatest._
+import org.slf4j.Logger
 
 /**
  * Test suite for [[atmos.dsl.Slf4jSupport]].
@@ -38,7 +37,6 @@ class Slf4jSupportSpec extends FlatSpec with Matchers with MockFactory {
   }
 
   it should "return Slf4j log levels in response to generic level queries" in {
-    import LogEventsWithSlf4j.Slf4jLevel
     Slf4jEventLogLevels.errorLevel shouldBe LogEventsWithSlf4j.Slf4jLevel.Error
     Slf4jEventLogLevels.warningLevel shouldBe LogEventsWithSlf4j.Slf4jLevel.Warn
     Slf4jEventLogLevels.infoLevel shouldBe LogEventsWithSlf4j.Slf4jLevel.Info

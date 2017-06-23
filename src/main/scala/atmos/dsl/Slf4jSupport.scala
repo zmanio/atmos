@@ -17,10 +17,10 @@
  */
 package atmos.dsl
 
-import scala.language.implicitConversions
-import org.slf4j.Logger
 import atmos.monitor
-import monitor.LogEventsWithSlf4j.Slf4jLevel
+import atmos.monitor.LogEventsWithSlf4j.Slf4jLevel
+import org.slf4j.Logger
+import scala.language.implicitConversions
 
 /**
  * Separate namespace for optional SLF4J support.
@@ -57,8 +57,11 @@ object Slf4jSupport {
    */
   implicit object Slf4jEventLogLevels extends EventLogLevels[Slf4jLevel] {
     override def errorLevel = Slf4jLevel.Error
+
     override def warningLevel = Slf4jLevel.Warn
+
     override def infoLevel = Slf4jLevel.Info
+
     override def debugLevel = Slf4jLevel.Debug
   }
 

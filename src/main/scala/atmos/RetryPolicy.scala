@@ -17,21 +17,21 @@
  */
 package atmos
 
-import scala.concurrent.{ blocking, ExecutionContext, Future, Promise }
-import scala.concurrent.duration._
-import scala.util.{ Try, Success, Failure }
 import rummage.Clock
+import scala.concurrent.duration._
+import scala.concurrent.{ExecutionContext, Future, Promise}
+import scala.util.{Failure, Success, Try}
 
 /**
  * A policy that enables customizable retries for arbitrary operations.
  *
  * @param termination The strategy for determining when to abort a retry operation.
- * @param backoff The strategy used to calculate delays between retries.
- * @param monitor The monitor that is notified of retry events.
- * @param classifier The classifier for errors raised during retry operations. This field is deprecated and will be
- *                   used as a fallback for the `errors` classifier, which should be used instead.
- * @param results The classifier for results returned during retry operations.
- * @param errors The classifier for errors raised during retry operations.
+ * @param backoff     The strategy used to calculate delays between retries.
+ * @param monitor     The monitor that is notified of retry events.
+ * @param classifier  The classifier for errors raised during retry operations. This field is deprecated and will be
+ *                    used as a fallback for the `errors` classifier, which should be used instead.
+ * @param results     The classifier for results returned during retry operations.
+ * @param errors      The classifier for errors raised during retry operations.
  */
 case class RetryPolicy(
   termination: TerminationPolicy = RetryPolicy.defaultTermination,
@@ -48,7 +48,7 @@ case class RetryPolicy(
    *
    * @tparam T The return type of the operation being retried.
    * @param operation The operation to repeatedly perform.
-   * @param clock The clock used to track time and wait out backoff delays.
+   * @param clock     The clock used to track time and wait out backoff delays.
    */
   def retry[T]()(operation: => T)(implicit clock: Clock): T =
     new SyncRetryOperation(None, operation _).run()
@@ -57,9 +57,9 @@ case class RetryPolicy(
    * Performs the specified named operation synchronously, retrying according to this policy.
    *
    * @tparam T The return type of the operation being retried.
-   * @param name The name of the operation.
+   * @param name      The name of the operation.
    * @param operation The operation to repeatedly perform.
-   * @param clock The clock used to track time and wait out backoff delays.
+   * @param clock     The clock used to track time and wait out backoff delays.
    */
   def retry[T](name: String)(operation: => T)(implicit clock: Clock): T =
     new SyncRetryOperation(Some(name), operation _).run()
@@ -68,9 +68,9 @@ case class RetryPolicy(
    * Performs the specified optionally named operation synchronously, retrying according to this policy.
    *
    * @tparam T The return type of the operation being retried.
-   * @param name The optional name of the operation.
+   * @param name      The optional name of the operation.
    * @param operation The operation to repeatedly perform.
-   * @param clock The clock used to track time and wait out backoff delays.
+   * @param clock     The clock used to track time and wait out backoff delays.
    */
   def retry[T](name: Option[String])(operation: => T)(implicit clock: Clock): T =
     new SyncRetryOperation(name, operation _).run()
@@ -80,8 +80,8 @@ case class RetryPolicy(
    *
    * @tparam T The return type of the operation being retried.
    * @param operation The operation to repeatedly perform.
-   * @param ec The execution context to retry on.
-   * @param clock The clock used to track time and schedule backoff notifications.
+   * @param ec        The execution context to retry on.
+   * @param clock     The clock used to track time and schedule backoff notifications.
    */
   def retryAsync[T]()(operation: => Future[T])(implicit ec: ExecutionContext, clock: Clock): Future[T] =
     new AsyncRetryOperation(None, operation _).run()
@@ -90,10 +90,10 @@ case class RetryPolicy(
    * Performs the specified optionally named operation asynchronously, retrying according to this policy.
    *
    * @tparam T The return type of the operation being retried.
-   * @param name The name of the operation.
+   * @param name      The name of the operation.
    * @param operation The operation to repeatedly perform.
-   * @param ec The execution context to retry on.
-   * @param clock The clock used to track time and schedule backoff notifications.
+   * @param ec        The execution context to retry on.
+   * @param clock     The clock used to track time and schedule backoff notifications.
    */
   def retryAsync[T](name: String)(operation: => Future[T])(implicit ec: ExecutionContext, clock: Clock): Future[T] =
     new AsyncRetryOperation(Some(name), operation _).run()
@@ -102,10 +102,10 @@ case class RetryPolicy(
    * Performs the specified optionally named operation asynchronously, retrying according to this policy.
    *
    * @tparam T The return type of the operation being retried.
-   * @param name The optional name of the operation.
+   * @param name      The optional name of the operation.
    * @param operation The operation to repeatedly perform.
-   * @param ec The execution context to retry on.
-   * @param clock The clock used to track time and schedule backoff notifications.
+   * @param ec        The execution context to retry on.
+   * @param clock     The clock used to track time and schedule backoff notifications.
    */
   def retryAsync[T](name: Option[String])(operation: => Future[T])(implicit ec: ExecutionContext, clock: Clock): Future[T] =
     new AsyncRetryOperation(name, operation _).run()
@@ -150,9 +150,9 @@ case class RetryPolicy(
      * Analyzes the outcome of a failed attempt and determines the next step to take.
      *
      * @tparam T The return type of the operation being retried.
-     * @param outcome The outcome of the most recent attempt.
+     * @param outcome   The outcome of the most recent attempt.
      * @param terminate The result to return if the retry operation should terminate.
-     * @param status The classification of the failed attempt.
+     * @param status    The classification of the failed attempt.
      */
     private def afterAttemptFailed[T](outcome: Try[T], terminate: Outcome[T], status: ErrorClassification): Outcome[T] = {
       failedAttempts += 1
@@ -178,9 +178,9 @@ case class RetryPolicy(
    * A retry operation that runs entirely on the calling thread.
    *
    * @tparam T The return type of the operation being retried.
-   * @param name The name of this operation.
+   * @param name      The name of this operation.
    * @param operation The operation to repeatedly perform.
-   * @param c The clock used to track time and wait out backoff delays.
+   * @param c         The clock used to track time and wait out backoff delays.
    */
   private final class SyncRetryOperation[T](name: Option[String], operation: () => T)(implicit c: Clock)
     extends RetryOperation(name) {
@@ -190,7 +190,7 @@ case class RetryPolicy(
     /** Repeatedly performs this operation synchronously until interrupted or aborted. */
     @annotation.tailrec
     def run(): T = afterAttempt {
-      try Success(operation()) catch { case thrown: Throwable => Failure(thrown) }
+      try Success(operation()) catch {case thrown: Throwable => Failure(thrown)}
     } match {
       case Outcome.Continue(backoffDuration) =>
         clock.syncWait(backoffDuration)
@@ -207,10 +207,10 @@ case class RetryPolicy(
    * A retry operation that runs entirely on the provided execution context.
    *
    * @tparam T The return type of the operation being retried.
-   * @param name The name of this operation.
+   * @param name      The name of this operation.
    * @param operation The operation to repeatedly perform.
-   * @param ec The execution context to retry on.
-   * @param c The clock used to track time and schedule backoff notifications.
+   * @param ec        The execution context to retry on.
+   * @param c         The clock used to track time and schedule backoff notifications.
    */
   private final class AsyncRetryOperation[T](name: Option[String], operation: () => Future[T])(
     implicit ec: ExecutionContext, c: Clock) extends RetryOperation(name) with (Try[T] => Unit) {
@@ -222,7 +222,7 @@ case class RetryPolicy(
 
     /** Repeatedly performs this operation asynchronously until interrupted or aborted. */
     def run(): Future[T] = {
-      try spawn() onComplete this catch { case thrown: Throwable => promise.failure(thrown) }
+      try spawn() onComplete this catch {case thrown: Throwable => promise.failure(thrown)}
       promise.future
     }
 
@@ -257,7 +257,7 @@ case class RetryPolicy(
 
     /** Runs the user-supplied function and spawns an asynchronous operation. */
     private def spawn(): Future[T] =
-      try operation() catch { case thrown: Throwable => Future.failed(thrown) }
+      try operation() catch {case thrown: Throwable => Future.failed(thrown)}
 
   }
 

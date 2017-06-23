@@ -17,8 +17,8 @@
  */
 package atmos.dsl
 
-import scala.concurrent.duration._
 import atmos.backoff
+import scala.concurrent.duration._
 
 /**
  * Adds DSL extension methods to the backoff policy interface.
@@ -31,7 +31,7 @@ case class BackoffPolicyExtensions(self: BackoffPolicy) extends AnyVal {
    * Creates a backoff policy that randomizes the result of `self`.
    *
    * @param bound The minimum (if negative) or maximum (if positive) value in the range that may be used to modify the
-   * result of `self`.
+   *              result of `self`.
    */
   def randomized(bound: FiniteDuration): BackoffPolicy = backoff.RandomizedBackoff(self, Duration.Zero -> bound)
 

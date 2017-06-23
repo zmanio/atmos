@@ -17,7 +17,7 @@
  */
 package atmos.dsl
 
-import atmos.monitor.{ EventClassifier, LogAction, LogEventsWithJava }
+import atmos.monitor.{EventClassifier, LogAction, LogEventsWithJava}
 
 /**
  * Exposes extensions on any instance of `monitor.LogEventsWithJava`.

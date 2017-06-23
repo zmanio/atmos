@@ -17,9 +17,9 @@
  */
 package atmos.monitor
 
-import scala.concurrent.duration._
-import scala.util.{ Failure, Success }
 import org.scalatest._
+import scala.concurrent.duration._
+import scala.util.{Failure, Success}
 
 /**
  * Test suite for [[atmos.monitor.IgnoreEvents]].
@@ -37,7 +37,7 @@ class IgnoreEventsSpec extends FlatSpec with Matchers {
       outcome <- Seq(Success(result), Failure(thrown))
     } {
       for {
-        backoff <- 1L to 100L map { 100.millis * _ }
+        backoff <- 1L to 100L map {100.millis * _}
         silent <- Seq(true, false)
       } IgnoreEvents.retrying(name, outcome, attempt, backoff, silent)
       IgnoreEvents.interrupted(name, outcome, attempt)

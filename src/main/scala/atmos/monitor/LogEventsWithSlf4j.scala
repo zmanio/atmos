@@ -22,16 +22,16 @@ import org.slf4j.Logger
 /**
  * An event monitor that formats and logs events using Slf4j.
  *
- * @param logger The logger that this event monitor submits to.
- * @param retryingAction The action that is performed by default when a retrying event is received.
- * @param interruptedAction The action that is performed by default when an interrupted event is received.
- * @param abortedAction The action that is performed by default when an aborted event is received.
- * @param retryingActionSelector The strategy used to select an action to perform for a retrying event, defaulting to
- *                               `retryingAction`.
+ * @param logger                    The logger that this event monitor submits to.
+ * @param retryingAction            The action that is performed by default when a retrying event is received.
+ * @param interruptedAction         The action that is performed by default when an interrupted event is received.
+ * @param abortedAction             The action that is performed by default when an aborted event is received.
+ * @param retryingActionSelector    The strategy used to select an action to perform for a retrying event, defaulting to
+ *                                  `retryingAction`.
  * @param interruptedActionSelector The strategy used to select an action to perform for an interrupted event,
  *                                  defaulting to `interruptedAction`.
- * @param abortedActionSelector The strategy used to select an action to perform for an aborted event, defaulting to
- *                              `abortedAction`.
+ * @param abortedActionSelector     The strategy used to select an action to perform for an aborted event, defaulting to
+ *                                  `abortedAction`.
  */
 case class LogEventsWithSlf4j(
   logger: Logger,

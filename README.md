@@ -1,3 +1,11 @@
+# Forked version of Atmos
+
+![](https://travis-ci.org/paradoxical-io/atmos.svg?branch=master)
+
+Original repo located at: https://github.com/zmanio/atmos
+
+---
+
 A [Scala](http://www.scala-lang.org/) library for describing retry-on-failure behavior using a concise, literate [embedded DSL](http://c2.com/cgi/wiki?EmbeddedDomainSpecificLanguage).
 
 There are places in most modern software where small, intermittent errors can occur and disrupt the normal flow of execution. Traditionally, a *retry loop* is used in these situations, with constraints on the number of attempts that can be made and how certain results and errors are handled. A naive retry loop that would make up to three attempts, waiting 100 milliseconds between each attempt and accepting only non-empty results could look like this:

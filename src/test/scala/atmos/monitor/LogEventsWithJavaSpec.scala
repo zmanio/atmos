@@ -17,9 +17,9 @@
  */
 package atmos.monitor
 
-import java.util.logging.{ Logger, Level }
-import org.scalatest._
+import java.util.logging.{Level, Logger}
 import org.scalamock.scalatest.MockFactory
+import org.scalatest._
 
 /**
  * Test suite for [[atmos.monitor.LogEventsWithJava]].
@@ -46,13 +46,16 @@ class LogEventsWithJavaSpec extends FlatSpec with Matchers with MockFactory {
     }
   }
 
-  class LoggerFixture { self =>
+  class LoggerFixture {
+    self =>
     val isLoggable = mockFunction[Level, Boolean]
     val log = mockFunction[Level, String, Unit]
     val logThrown = mockFunction[Level, String, Throwable, Unit]
     val mock = new Logger(null, null) {
       override def isLoggable(level: Level) = self.isLoggable(level)
+
       override def log(level: Level, message: String) = self.log(level, message)
+
       override def log(level: Level, message: String, thrown: Throwable) = self.logThrown(level, message, thrown)
     }
   }

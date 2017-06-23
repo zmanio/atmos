@@ -31,13 +31,13 @@ case class TerminationPolicyExtensions(self: TerminationPolicy) extends AnyVal {
    *
    * @param that The other termination policy to combine with.
    */
-  def &&(that: TerminationPolicy): TerminationPolicy = termination.RequireBoth(self, that)
+  def && (that: TerminationPolicy): TerminationPolicy = termination.RequireBoth(self, that)
 
   /**
    * Creates a termination policy that signals for termination after either `self` or `that` terminate.
    *
    * @param that The other termination policy to combine with.
    */
-  def ||(that: TerminationPolicy): TerminationPolicy = termination.RequireEither(self, that)
+  def || (that: TerminationPolicy): TerminationPolicy = termination.RequireEither(self, that)
 
 }

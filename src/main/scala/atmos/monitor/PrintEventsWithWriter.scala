@@ -22,16 +22,16 @@ import java.io.PrintWriter
 /**
  * An event monitor that prints information about retry events to a writer.
  *
- * @param writer The writer that this event monitor prints to.
- * @param retryingAction The action that is performed by default when a retrying event is received.
- * @param interruptedAction The action that is performed by default when an interrupted event is received.
- * @param abortedAction The action that is performed by default when an aborted event is received.
- * @param retryingActionSelector The strategy used to select an action to perform for a retrying event, defaulting to
- *                               `retryingAction`.
+ * @param writer                    The writer that this event monitor prints to.
+ * @param retryingAction            The action that is performed by default when a retrying event is received.
+ * @param interruptedAction         The action that is performed by default when an interrupted event is received.
+ * @param abortedAction             The action that is performed by default when an aborted event is received.
+ * @param retryingActionSelector    The strategy used to select an action to perform for a retrying event, defaulting to
+ *                                  `retryingAction`.
  * @param interruptedActionSelector The strategy used to select an action to perform for an interrupted event,
  *                                  defaulting to `interruptedAction`.
- * @param abortedActionSelector The strategy used to select an action to perform for an aborted event, defaulting to
- *                              `abortedAction`.
+ * @param abortedActionSelector     The strategy used to select an action to perform for an aborted event, defaulting to
+ *                                  `abortedAction`.
  */
 case class PrintEventsWithWriter(
   writer: PrintWriter,

@@ -27,13 +27,13 @@
  *  - [[atmos.ErrorClassifier]]: Defines when a retry operation should be interrupted by a fatal error.
  *
  *  - [[atmos.BackoffPolicy]]: Defines how long to wait between successive retry attempts. The [[atmos.backoff]]
- *    package provides a number of common backoff policy implementations.
+ * package provides a number of common backoff policy implementations.
  *
  *  - [[atmos.EventMonitor]]: An interface that is notified of events during a retry operation. The [[atmos.monitor]]
- *    package provides a number of common event monitor implementations.
+ * package provides a number of common event monitor implementations.
  *
  *  - [[atmos.TerminationPolicy]]: Defines when a retry operation should abort and make no further attempts. The
- *    [[atmos.termination]] package provides a number of common termination policy implementations.
+ * [[atmos.termination]] package provides a number of common termination policy implementations.
  *
  * Additionally, the [[atmos.dsl]] package provides a concise DSL for describing retry policies.
  *

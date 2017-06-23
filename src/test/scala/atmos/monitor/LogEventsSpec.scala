@@ -17,10 +17,10 @@
  */
 package atmos.monitor
 
-import scala.concurrent.duration._
-import scala.util.{ Failure, Success, Try }
-import org.scalatest._
 import org.scalamock.scalatest.MockFactory
+import org.scalatest._
+import scala.concurrent.duration._
+import scala.util.{Failure, Success, Try}
 
 /**
  * Test suite for [[atmos.monitor.LogEvents]].
@@ -61,7 +61,8 @@ class LogEventsSpec extends FlatSpec with Matchers with MockFactory {
     }
   }
 
-  class LogEventsFixture(action: LogAction[Lvl], selector: EventClassifier[LogAction[Lvl]]) { self =>
+  class LogEventsFixture(action: LogAction[Lvl], selector: EventClassifier[LogAction[Lvl]]) {
+    self =>
     val isLoggable = mockFunction[Lvl, Boolean]
     val log = mockFunction[Lvl, String, Option[Throwable], Unit]
     val mock = new LogEvents {
@@ -72,9 +73,12 @@ class LogEventsSpec extends FlatSpec with Matchers with MockFactory {
       val retryingActionSelector = selector
       val interruptedActionSelector = selector
       val abortedActionSelector = selector
+
       def isLoggable(level: Lvl) = self.isLoggable(level)
+
       def log(level: Lvl, message: String, thrown: Option[Throwable]) = self.log(level, message, thrown)
     }
+
     def expectsOnce(enabled: Boolean, outcome: Try[String]) =
       selector.applyOrElse(outcome, (_: Try[Any]) => action) match {
         case LogAt(lvl) =>

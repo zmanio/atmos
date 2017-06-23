@@ -17,21 +17,21 @@
  */
 package atmos
 
-import rummage.Clock
-import scala.concurrent.{ ExecutionContext, Future, Await }
-import scala.concurrent.duration._
-import scala.util.{ Failure, Success, Try }
-import org.scalatest._
 import org.scalamock.scalatest.MockFactory
+import org.scalatest._
+import rummage.Clock
+import scala.concurrent.duration._
+import scala.concurrent.{Await, ExecutionContext, Future}
+import scala.util.{Failure, Try}
 
 /**
  * Test suite for [[atmos.RetryPolicy]].
  */
-class RetryPolicySpec extends FlatSpec with Matchers with MockFactory {
+class RetryPolicySpec211 extends FlatSpec with Matchers with MockFactory {
 
   import ExecutionContext.Implicits._
-  import termination._
   import dsl._
+  import termination._
 
   "RetryPolicy" should "synchronously retry until complete" in {
     implicit val policy = RetryPolicy(LimitAttempts(2))
@@ -173,14 +173,14 @@ class RetryPolicySpec extends FlatSpec with Matchers with MockFactory {
         counter
       }
     }
-    a[TestException] should be thrownBy { Await.result(future, Duration.Inf) }
+    a[TestException] should be thrownBy {Await.result(future, Duration.Inf)}
     counter shouldEqual 2
   }
 
   it should "asynchronously retry until encountering a fatal error" in {
     implicit val policy = RetryPolicy(LimitAttempts(1), classifier = {
       case _: TestException => ErrorClassification.Fatal
-    }) retryFor { 2 attempts }
+    }) retryFor {2 attempts}
     @volatile var counter = 0
     val future = retryAsync(None) {
       Future {
@@ -189,7 +189,7 @@ class RetryPolicySpec extends FlatSpec with Matchers with MockFactory {
         counter
       }
     }
-    a[TestException] should be thrownBy { Await.result(future, Duration.Inf) }
+    a[TestException] should be thrownBy {Await.result(future, Duration.Inf)}
     counter shouldEqual 1
   }
 
@@ -215,22 +215,26 @@ class RetryPolicySpec extends FlatSpec with Matchers with MockFactory {
     @volatile var counter = 0
     val mockFuture = new Future[Int] {
       def value = ???
+
       def isCompleted = ???
+
       def ready(atMost: Duration)(implicit permit: scala.concurrent.CanAwait) = ???
+
       def result(atMost: Duration)(implicit permit: scala.concurrent.CanAwait) = ???
+
       def onComplete[U](f: Try[Int] => U)(implicit executor: ExecutionContext) = {
         counter += 1
         if (counter >= limit)
           throw new TestException
         else
-          executor.execute(new Runnable { override def run() = { f(Failure(new TestException)) } })
+          executor.execute(new Runnable {override def run() = {f(Failure(new TestException))}})
       }
     }
-    val future1 = retryAsync() { mockFuture }
+    val future1 = retryAsync() {mockFuture}
     a[TestException] should be thrownBy Await.result(future1, Duration.Inf)
     limit = 2
     counter = 0
-    val future2 = retryAsync("test") { mockFuture }
+    val future2 = retryAsync("test") {mockFuture}
     a[TestException] should be thrownBy Await.result(future2, Duration.Inf)
   }
 
@@ -240,8 +244,11 @@ class RetryPolicySpec extends FlatSpec with Matchers with MockFactory {
     @volatile var counter = 0
     implicit val mockClock = new Clock {
       def now: FiniteDuration = Clock.Default.now
+
       def tick: FiniteDuration = Clock.Default.tick
+
       def syncWait(timeout: FiniteDuration): FiniteDuration = Clock.Default.syncWait(timeout)
+
       def asyncWait(timeout: FiniteDuration)(implicit ec: ExecutionContext): Future[FiniteDuration] = {
         counter += 1
         if (counter >= limit)
@@ -250,11 +257,11 @@ class RetryPolicySpec extends FlatSpec with Matchers with MockFactory {
           Future.failed(new TestException)
       }
     }
-    val future1 = retryAsync() { Future { throw new RuntimeException } }
+    val future1 = retryAsync() {Future {throw new RuntimeException}}
     a[TestException] should be thrownBy Await.result(future1, Duration.Inf)
     limit = 2
     counter = 0
-    val future2 = retryAsync("test") { Future { throw new RuntimeException } }
+    val future2 = retryAsync("test") {Future {throw new RuntimeException}}
     a[TestException] should be thrownBy Await.result(future2, Duration.Inf)
   }
 

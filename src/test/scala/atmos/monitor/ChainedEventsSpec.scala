@@ -16,10 +16,10 @@
  */
 package atmos.monitor
 
-import scala.concurrent.duration._
-import scala.util.{ Failure, Success, Try }
-import org.scalatest._
 import org.scalamock.scalatest.MockFactory
+import org.scalatest._
+import scala.concurrent.duration._
+import scala.util.{Failure, Success, Try}
 
 /**
  * Test suite for [[atmos.monitor.FormatEvents]].
@@ -71,16 +71,16 @@ class ChainedEventsSpec extends FlatSpec with Matchers with MockFactory {
           .expects(name, outcome, attempt, backoff, silent).throws(thrownWithMsg)
         (monitor2.retrying(_: Option[String], _: Try[Any], _: Int, _: FiniteDuration, _: Boolean))
           .expects(name, outcome, attempt, backoff, silent)
-        an[IllegalArgumentException] should be thrownBy { chained.retrying(name, outcome, attempt, backoff, silent) }
+        an[IllegalArgumentException] should be thrownBy {chained.retrying(name, outcome, attempt, backoff, silent)}
       }
       (monitor1.interrupted(_: Option[String], _: Try[Any], _: Int)).expects(name, outcome, attempt)
         .throws(thrownWithMsg)
       (monitor2.interrupted(_: Option[String], _: Try[Any], _: Int)).expects(name, outcome, attempt)
-      an[IllegalArgumentException] should be thrownBy { chained.interrupted(name, outcome, attempt) }
+      an[IllegalArgumentException] should be thrownBy {chained.interrupted(name, outcome, attempt)}
       (monitor1.aborted(_: Option[String], _: Try[Any], _: Int)).expects(name, outcome, attempt)
         .throws(thrownWithMsg)
       (monitor2.aborted(_: Option[String], _: Try[Any], _: Int)).expects(name, outcome, attempt)
-      an[IllegalArgumentException] should be thrownBy { chained.aborted(name, outcome, attempt) }
+      an[IllegalArgumentException] should be thrownBy {chained.aborted(name, outcome, attempt)}
     }
   }
 
@@ -98,16 +98,16 @@ class ChainedEventsSpec extends FlatSpec with Matchers with MockFactory {
           .expects(name, outcome, attempt, backoff, silent)
         (monitor2.retrying(_: Option[String], _: Try[Any], _: Int, _: FiniteDuration, _: Boolean))
           .expects(name, outcome, attempt, backoff, silent).throws(thrownWithoutMsg)
-        an[IllegalStateException] should be thrownBy { chained.retrying(name, outcome, attempt, backoff, silent) }
+        an[IllegalStateException] should be thrownBy {chained.retrying(name, outcome, attempt, backoff, silent)}
       }
       (monitor1.interrupted(_: Option[String], _: Try[Any], _: Int)).expects(name, outcome, attempt)
       (monitor2.interrupted(_: Option[String], _: Try[Any], _: Int)).expects(name, outcome, attempt)
         .throws(thrownWithoutMsg)
-      an[IllegalStateException] should be thrownBy { chained.interrupted(name, outcome, attempt) }
+      an[IllegalStateException] should be thrownBy {chained.interrupted(name, outcome, attempt)}
       (monitor1.aborted(_: Option[String], _: Try[Any], _: Int)).expects(name, outcome, attempt)
       (monitor2.aborted(_: Option[String], _: Try[Any], _: Int)).expects(name, outcome, attempt)
         .throws(thrownWithoutMsg)
-      an[IllegalStateException] should be thrownBy { chained.aborted(name, outcome, attempt) }
+      an[IllegalStateException] should be thrownBy {chained.aborted(name, outcome, attempt)}
     }
   }
 
@@ -125,18 +125,18 @@ class ChainedEventsSpec extends FlatSpec with Matchers with MockFactory {
           .expects(name, outcome, attempt, backoff, silent).throws(thrownWithMsg)
         (monitor2.retrying(_: Option[String], _: Try[Any], _: Int, _: FiniteDuration, _: Boolean))
           .expects(name, outcome, attempt, backoff, silent).throws(thrownWithoutMsg)
-        an[IllegalArgumentException] should be thrownBy { chained.retrying(name, outcome, attempt, backoff, silent) }
+        an[IllegalArgumentException] should be thrownBy {chained.retrying(name, outcome, attempt, backoff, silent)}
       }
       (monitor1.interrupted(_: Option[String], _: Try[Any], _: Int)).expects(name, outcome, attempt)
         .throws(thrownWithMsg)
       (monitor2.interrupted(_: Option[String], _: Try[Any], _: Int)).expects(name, outcome, attempt)
         .throws(thrownWithoutMsg)
-      an[IllegalArgumentException] should be thrownBy { chained.interrupted(name, outcome, attempt) }
+      an[IllegalArgumentException] should be thrownBy {chained.interrupted(name, outcome, attempt)}
       (monitor1.aborted(_: Option[String], _: Try[Any], _: Int)).expects(name, outcome, attempt)
         .throws(thrownWithMsg)
       (monitor2.aborted(_: Option[String], _: Try[Any], _: Int)).expects(name, outcome, attempt)
         .throws(thrownWithoutMsg)
-      an[IllegalArgumentException] should be thrownBy { chained.aborted(name, outcome, attempt) }
+      an[IllegalArgumentException] should be thrownBy {chained.aborted(name, outcome, attempt)}
     }
   }
 

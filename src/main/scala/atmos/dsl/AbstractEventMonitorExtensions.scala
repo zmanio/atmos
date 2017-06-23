@@ -81,46 +81,46 @@ trait AbstractEventMonitorExtensions {
    * Returns a copy of the underlying monitor that prints events with the retrying strategy for the specified exception
    * type.
    */
-  def onRetryingWith[T <: Throwable: ClassTag](action: Action): Self =
+  def onRetryingWith[T <: Throwable : ClassTag](action: Action): Self =
     onRetryingWhere(newWithClassifier[T](action))
 
   /**
    * Returns a copy of the underlying monitor that prints events with the interrupted strategy for the specified
    * exception type.
    */
-  def onInterruptedWith[T <: Throwable: ClassTag](action: Action): Self =
+  def onInterruptedWith[T <: Throwable : ClassTag](action: Action): Self =
     onInterruptedWhere(newWithClassifier[T](action))
 
   /**
    * Returns a copy of the underlying monitor that prints events with the aborting strategy for the specified exception
    * type.
    */
-  def onAbortedWith[T <: Throwable: ClassTag](action: Action): Self =
+  def onAbortedWith[T <: Throwable : ClassTag](action: Action): Self =
     onAbortedWhere(newWithClassifier[T](action))
 
   /**
    * Returns a copy of the underlying monitor that prints events with the retrying strategy for the specified exception
    * type chained to the underlying classifier.
    */
-  def orOnRetryingWith[T <: Throwable: ClassTag](action: Action): Self =
+  def orOnRetryingWith[T <: Throwable : ClassTag](action: Action): Self =
     orOnRetryingWhere(newWithClassifier[T](action))
 
   /**
    * Returns a copy of the underlying monitor that prints events with the interrupted strategy for the specified
    * exception type chained to the underlying classifier.
    */
-  def orOnInterruptedWith[T <: Throwable: ClassTag](action: Action): Self =
+  def orOnInterruptedWith[T <: Throwable : ClassTag](action: Action): Self =
     orOnInterruptedWhere(newWithClassifier[T](action))
 
   /**
    * Returns a copy of the underlying monitor that prints events with the aborting strategy for the specified exception
    * type chained to the underlying classifier.
    */
-  def orOnAbortedWith[T <: Throwable: ClassTag](action: Action): Self =
+  def orOnAbortedWith[T <: Throwable : ClassTag](action: Action): Self =
     orOnAbortedWhere(newWithClassifier[T](action))
 
   /** Creates a classifier that associates an action with an exception type. */
-  private def newWithClassifier[T <: Throwable: ClassTag](action: Action) = EventClassifier {
+  private def newWithClassifier[T <: Throwable : ClassTag](action: Action) = EventClassifier {
     case Failure(t) if implicitly[ClassTag[T]].runtimeClass isInstance t => action
   }
 

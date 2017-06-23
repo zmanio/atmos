@@ -27,7 +27,7 @@ trait TerminationPolicy {
   /**
    * Returns true if the retry operation with the specified properties should terminate.
    *
-   * @param attempts The number of attempts that have been made so far.
+   * @param attempts      The number of attempts that have been made so far.
    * @param nextAttemptAt The duration between when the retry operation began and when the next attempt will occur.
    */
   def shouldTerminate(attempts: Int, nextAttemptAt: FiniteDuration): Boolean

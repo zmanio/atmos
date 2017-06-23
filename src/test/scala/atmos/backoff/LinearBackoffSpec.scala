@@ -17,9 +17,9 @@
  */
 package atmos.backoff
 
-import scala.concurrent.duration._
-import scala.util.{ Failure, Success }
 import org.scalatest._
+import scala.concurrent.duration._
+import scala.util.{Failure, Success}
 
 /**
  * Test suite for [[atmos.backoff.LinearBackoff]].

@@ -16,7 +16,7 @@
  */
 package atmos.dsl
 
-import atmos.monitor.{ EventClassifier, LogAction, LogEvents }
+import atmos.monitor.{EventClassifier, LogAction, LogEvents}
 
 /**
  * A base class that implements DSL extension methods for all logging event monitors.
@@ -27,7 +27,7 @@ trait AbstractLogEventsExtensions extends AbstractEventMonitorExtensions {
   type Level
 
   /* Supported types all extend `LogEvents`. */
-  override type Self <: LogEvents { type LevelType = Level }
+  override type Self <: LogEvents {type LevelType = Level}
 
   /* Always use `LogAction`. */
   override type Action = LogAction[Level]

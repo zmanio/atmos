@@ -17,9 +17,9 @@
  */
 package atmos.monitor
 
-import org.slf4j.Logger
-import org.scalatest._
 import org.scalamock.scalatest.MockFactory
+import org.scalatest._
+import org.slf4j.Logger
 
 /**
  * Test suite for [[atmos.monitor.LogEventsWithSlf4j]].
@@ -47,6 +47,7 @@ class LogEventsWithSlf4jSpec extends FlatSpec with Matchers with MockFactory {
 
   class LoggerFixture(level: Slf4jLevel) {
     val logger = mock[MockLogger]
+
     def expectIsEnabledOnce(enabled: Boolean) = level match {
       case Slf4jLevel.Error => (logger.isErrorEnabled _).expects().returns(enabled).once
       case Slf4jLevel.Warn => (logger.isWarnEnabled _).expects().returns(enabled).once
@@ -54,6 +55,7 @@ class LogEventsWithSlf4jSpec extends FlatSpec with Matchers with MockFactory {
       case Slf4jLevel.Debug => (logger.isDebugEnabled _).expects().returns(enabled).once
       case Slf4jLevel.Trace => (logger.isTraceEnabled _).expects().returns(enabled).once
     }
+
     def expectLogOnce(message: String, thrown: Option[Throwable]) = thrown match {
       case Some(t) => level match {
         case Slf4jLevel.Error => (logger.error(_: String, _: Throwable)).expects(message, t).once
@@ -75,14 +77,23 @@ class LogEventsWithSlf4jSpec extends FlatSpec with Matchers with MockFactory {
   // A trait that presents a narrow view of Slf4j loggers to help ScalaMock resolve the correct overloaded method.
   trait MockLogger extends Logger {
     def trace(s: String): Unit
+
     def debug(s: String): Unit
+
     def info(s: String): Unit
+
     def warn(s: String): Unit
+
     def error(s: String): Unit
+
     def trace(s: String, t: Throwable): Unit
+
     def debug(s: String, t: Throwable): Unit
+
     def info(s: String, t: Throwable): Unit
+
     def warn(s: String, t: Throwable): Unit
+
     def error(s: String, t: Throwable): Unit
   }
 

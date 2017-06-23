@@ -18,7 +18,7 @@
 package atmos.monitor
 
 import scala.concurrent.duration.FiniteDuration
-import scala.util.{ Failure, Success, Try }
+import scala.util.{Failure, Success, Try}
 
 /**
  * Base type for event monitors that submit log entries for retry events.
