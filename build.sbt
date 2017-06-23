@@ -37,7 +37,7 @@ organizationHomepage := Some(url("http://github.com/paradoxical-io/"))
 
 scalaVersion := "2.12.2"
 
-crossScalaVersions := Seq("2.12.2")
+crossScalaVersions := Seq("2.11.6", "2.12.2")
 
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor" % "2.5.3" % "provided",
